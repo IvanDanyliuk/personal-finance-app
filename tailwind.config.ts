@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-export default {
+const config: Config = {
     darkMode: ["class"],
     content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -12,44 +12,42 @@ export default {
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
-  			card: {
-  				DEFAULT: 'hsl(var(--card))',
-  				foreground: 'hsl(var(--card-foreground))'
-  			},
-  			popover: {
-  				DEFAULT: 'hsl(var(--popover))',
-  				foreground: 'hsl(var(--popover-foreground))'
-  			},
-  			primary: {
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
-  			},
-  			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			muted: {
-  				DEFAULT: 'hsl(var(--muted))',
-  				foreground: 'hsl(var(--muted-foreground))'
-  			},
-  			accent: {
-  				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
-  			},
-  			destructive: {
-  				DEFAULT: 'hsl(var(--destructive))',
-  				foreground: 'hsl(var(--destructive-foreground))'
-  			},
+				primary: {
+					'9': 'hsl(var(--primary-9))',
+					'8': 'hsl(var(--primary-8))',
+					'7': 'hsl(var(--primary-7))',
+					'6': 'hsl(var(--primary-6))',
+					'5': 'hsl(var(--primary-5))',
+					'4': 'hsl(var(--primary-4))',
+					'3': 'hsl(var(--primary-3))',
+					'2': 'hsl(var(--primary-2))',
+					'1': 'hsl(var(--primary-1))'
+				},
+				secondary: {
+					'9': 'hsl(var(--secondary-9))',
+					'8': 'hsl(var(--secondary-8))',
+					'7': 'hsl(var(--secondary-7))',
+					'6': 'hsl(var(--secondary-6))',
+					'5': 'hsl(var(--secondary-5))',
+					'4': 'hsl(var(--secondary-4))',
+					'3': 'hsl(var(--secondary-3))',
+					'2': 'hsl(var(--secondary-2))',
+					'1': 'hsl(var(--secondary-1))'
+				},
+				warning: {
+					'2': 'hsl(var(--warning-2))',
+					'1': 'hsl(var(--warning-1))'
+				},
+				danger: {
+					'2': 'hsl(var(--danger-2))',
+					'1': 'hsl(var(--danger-1))'
+				},
+				success: {
+					'2': 'hsl(var(--success-2))',
+					'1': 'hsl(var(--success-1))',
+				},
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
-  			ring: 'hsl(var(--ring))',
-  			chart: {
-  				'1': 'hsl(var(--chart-1))',
-  				'2': 'hsl(var(--chart-2))',
-  				'3': 'hsl(var(--chart-3))',
-  				'4': 'hsl(var(--chart-4))',
-  				'5': 'hsl(var(--chart-5))'
-  			}
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
@@ -59,4 +57,5 @@ export default {
   	}
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+};
+export default config;
