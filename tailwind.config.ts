@@ -11,6 +11,7 @@ const config: Config = {
   	extend: {
   		colors: {
   			background: 'hsl(var(--background))',
+				'background-secondary': 'hsl(var(--background-secondary))',
   			foreground: 'hsl(var(--foreground))',
 				primary: {
 					'9': 'hsl(var(--primary-9))',
@@ -53,7 +54,10 @@ const config: Config = {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+			margin: {
+				'center': '0 auto'
+			}
   	}
   },
   plugins: [require("tailwindcss-animate")],

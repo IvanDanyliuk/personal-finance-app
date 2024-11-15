@@ -18,7 +18,9 @@ interface INavbarItem {
 };
 
 
-export const NavbarItem: React.FC<INavbarItem> = ({ label, icon, path, isActive, isSidebarExpanded }) => {
+export const NavbarItem: React.FC<INavbarItem> = ({ 
+  label, 
+  icon, path, isActive, isSidebarExpanded }) => {
   return (
     <>
       {isSidebarExpanded ? (
