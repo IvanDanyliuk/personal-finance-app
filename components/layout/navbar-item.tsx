@@ -20,7 +20,11 @@ interface INavbarItem {
 
 export const NavbarItem: React.FC<INavbarItem> = ({ 
   label, 
-  icon, path, isActive, isSidebarExpanded }) => {
+  icon, 
+  path, 
+  isActive, 
+  isSidebarExpanded 
+}) => {
   return (
     <>
       {isSidebarExpanded ? (
@@ -28,7 +32,7 @@ export const NavbarItem: React.FC<INavbarItem> = ({
           href={path} 
           className={cn(
             isActive ? 'bg-primary-7 text-white' : 'bg-transparent hover:bg-primary-3 text-black', 
-            'w-full px-4 py-3 rounded-full'
+            'w-full px-4 py-3 rounded-full text-md'
           )}
         >
           <div className='flex items-center gap-1'>
@@ -42,7 +46,7 @@ export const NavbarItem: React.FC<INavbarItem> = ({
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger>
-              <Link href={path}>
+              <Link href={path} className='text-md'>
                 <div>
                   {icon}
                 </div>

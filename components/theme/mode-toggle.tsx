@@ -36,9 +36,10 @@ export const ModeToggle: React.FC<IModeToggle> = ({ isExpanded }) => {
   return (
     <>
       {isExpanded ? (
-        <div className='w-full'>
-          <Switch checked={isLightModeActive} onCheckedChange={handleSwitchMode} />
-        </div>
+        <Switch 
+          checked={isLightModeActive} 
+          onCheckedChange={handleSwitchMode} 
+        />
       ) : (
         <Button 
           type='button' 
