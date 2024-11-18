@@ -1,8 +1,8 @@
-import { ChangeEvent } from "react";
-import { Label } from "../ui/label"
-import { Input } from "../ui/input";
-import { CircleAlert } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { ChangeEvent } from 'react';
+import { Label } from '../ui/label'
+import { Input } from '../ui/input';
+import { CircleAlert } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 
 interface ITextField {
@@ -16,7 +16,7 @@ interface ITextField {
   required?: boolean;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   error?: string[];
-}
+};
 
 
 export const TextField: React.FC<ITextField> = ({
@@ -69,4 +69,4 @@ export const TextField: React.FC<ITextField> = ({
       </div>
     </div>
   );
-}
+};

@@ -8,6 +8,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import { signInWithProvider } from '@/lib/actions/auth.actions';
 
 
 interface ISignInWithProvider {
@@ -15,7 +16,7 @@ interface ISignInWithProvider {
   tooltipSide?: 'left' | 'top' | 'right' | 'bottom';
   icon: StaticImport | string;
   iconAltText?: string;
-  onSignIn: () => void;
+  provider: string;
 };
 
 
@@ -24,14 +25,18 @@ export const SignInWithProvider: React.FC<ISignInWithProvider> = ({
   tooltipSide = 'top',
   icon,
   iconAltText,
-  onSignIn
+  provider
 }) => {
+  const handleSignIn = async () => {
+    await signInWithProvider(provider);
+  };
+
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger>
         <div 
-          onClick={onSignIn}
+          onClick={handleSignIn}
           className='p-4 rounded-full bg-background border border-secondary-2'
         >
           <Image 
