@@ -39,7 +39,7 @@ export const TextField: React.FC<ITextField> = ({
       {label && (
         <Label 
           htmlFor={name}
-          className='w-32 text-md'
+          className='w-32 text-sm text-foreground font-semibold'
         >
           {label}
         </Label>
