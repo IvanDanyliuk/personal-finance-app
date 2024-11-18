@@ -9,6 +9,7 @@ import Link from 'next/link';
 
 export const SignInForm = () => {
   // const [] = useFormState()
+
   return (
     <form 
       action='' 
@@ -26,11 +27,10 @@ export const SignInForm = () => {
       />
       <Button 
         type='submit' 
-        className='w-full py-6 bg-primary-7 hover:bg-primary-6 rounded-full text-white'
+        className='w-full py-6 mt-3 bg-primary-7 hover:bg-primary-6 rounded-full text-white font-semibold'
       >
         Sign In
       </Button>
-
       <div className='py-3 w-full flex justify-between items-center'>
         <CheckboxField 
           name='rememberMe'

@@ -1,16 +1,11 @@
-'use client';
-
-import { signInWithProvider } from '@/lib/actions/user.action';
+import Link from 'next/link';
 import GoogleIcon from '../../../public/images/google.svg';
 import { Separator } from '@/components/ui/separator';
-import { SignInForm } from '../_components/signin-form';
-import { SignInWithProvider } from '../_components/signin-with-provider';
+import { SignInForm, SignInWithProvider } from '../_components';
 
 
 export default function SignInPage() {
-  const signInWithGoogle = async () => {
-    await signInWithProvider('google');
-  };
+  
 
   return (
     <div className='relative w-full h-screen flex'>
@@ -36,8 +31,14 @@ export default function SignInPage() {
           tooltipSide='bottom'
           icon={GoogleIcon}
           iconAltText='Google'
-          onSignIn={signInWithGoogle}
+          provider='google'
         />
+        <div>
+          Do not have an account?
+          <Link href='/sign-up' className='ml-1 text-primary-7 font-semibold'>
+            Sign up
+          </Link>
+        </div>
       </div>
       <div className='w-1/2 h-full hidden md:flex bg-slate-400'>
 

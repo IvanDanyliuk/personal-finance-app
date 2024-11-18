@@ -28,7 +28,6 @@ model User {
   sessions      Session[]
   role          UserRole?       @default(USER)
   bankAccounts  BankAccount[]
-  photoUrl      String?
   incomes       Income?
   expenses      Expense?
   // Optional for WebAuthn support
