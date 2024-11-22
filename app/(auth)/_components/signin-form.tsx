@@ -1,5 +1,6 @@
 'use client';
 
+import { SubmitButton } from '@/components/common/submit-btn';
 import { CheckboxField } from '@/components/inputs/Checkbox';
 import { TextField } from '@/components/inputs/TextField';
 import { Button } from '@/components/ui/button';
@@ -25,12 +26,7 @@ export const SignInForm = () => {
         name='password'
         
       />
-      <Button 
-        type='submit' 
-        className='w-full py-6 mt-3 bg-primary-7 hover:bg-primary-6 rounded-full text-white font-semibold'
-      >
-        Sign In
-      </Button>
+      <SubmitButton label='Sign in' />
       <div className='py-3 w-full flex justify-between items-center'>
         <CheckboxField 
           name='rememberMe'
