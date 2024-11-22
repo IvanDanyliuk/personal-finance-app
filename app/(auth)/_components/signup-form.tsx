@@ -6,8 +6,9 @@ import { CheckboxField } from '@/components/inputs/Checkbox';
 import FileInput from '@/components/inputs/FileInput';
 import { TextField } from '@/components/inputs/TextField';
 import { Button } from '@/components/ui/button';
-import { signup } from '@/lib/actions/user.actions';
+import { signup } from '@/lib/actions/auth.actions';
 import { useState } from 'react';
+import { SubmitButton } from '@/components/common/submit-btn';
 
 
 const initialState = {
@@ -55,13 +56,7 @@ export const SignUpForm = () => {
       <FileInput 
         name='image'
       />
-      <Button 
-        type='submit' 
-        disabled={!isAgreementConfirmed}
-        className='w-full py-6 mt-3 bg-primary-7 hover:bg-primary-6 rounded-full text-white font-semibold'
-      >
-        Sign In
-      </Button>
+      <SubmitButton label='Sign up' />
       <div className='py-3 w-full flex justify-start items-center gap-1'>
         <CheckboxField 
           name='agreement'
