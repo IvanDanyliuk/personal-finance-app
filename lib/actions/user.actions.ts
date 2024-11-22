@@ -39,8 +39,7 @@ export const signup = async (prevState: any, formData: FormData) => {
 
   const imageFile = rawImage ? await fetch(rawImage) : '';
   const imageBlob = imageFile ? await imageFile.blob() : new Blob();
-  const imageToUpload = new utFile([imageBlob!], `${name}-avatar.png`, { customId: `${name}-avatar` })
-
+  const imageToUpload = new utFile([imageBlob!], `${name}-avatar.png`, { customId: `${name}-avatar` });
   const image = imageToUpload && imageToUpload.size > 0 ? (await utapi.uploadFiles([imageToUpload]))[0].data?.url : '';
 
   console.log('REGISTER: Image url', image)

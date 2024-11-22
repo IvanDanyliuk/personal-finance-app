@@ -34,10 +34,10 @@ export default function SignUpPage() {
         <div>
           Do not have an account?
           <Link 
-            href='/sign-up' 
+            href='/sign-in' 
             className='ml-1 text-primary-7 font-semibold'
           >
-            Sign up
+            Sign in
           </Link>
         </div>
       </div>
