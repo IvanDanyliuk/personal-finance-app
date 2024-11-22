@@ -1,8 +1,7 @@
-import { Separator } from '@/components/ui/separator';
-import { SignUpForm } from '../_components/signup-form';
-import { SignInWithProvider } from '../_components';
-import GoogleIcon from '../../../public/images/google.svg';
 import Link from 'next/link';
+import { Separator } from '@/components/ui/separator';
+import { SignInWithProvider, SignUpForm } from '../_components';
+import GoogleIcon from '../../../public/images/google.svg';
 
 
 export default function SignUpPage() {
@@ -34,7 +33,10 @@ export default function SignUpPage() {
         />
         <div>
           Do not have an account?
-          <Link href='/sign-up' className='ml-1 text-primary-7 font-semibold'>
+          <Link 
+            href='/sign-up' 
+            className='ml-1 text-primary-7 font-semibold'
+          >
             Sign up
           </Link>
         </div>

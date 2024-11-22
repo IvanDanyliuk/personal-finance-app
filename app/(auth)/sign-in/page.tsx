@@ -35,7 +35,10 @@ export default function SignInPage() {
         />
         <div>
           Do not have an account?
-          <Link href='/sign-up' className='ml-1 text-primary-7 font-semibold'>
+          <Link 
+            href='/sign-up' 
+            className='ml-1 text-primary-7 font-semibold'
+          >
             Sign up
           </Link>
         </div>
