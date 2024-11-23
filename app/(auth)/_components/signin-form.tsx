@@ -18,7 +18,7 @@ const initialState = {
 
 export const SignInForm = () => {
   const [state, formAction] = useFormState<any, any>(signin, initialState);
-  const { toast } = useToast()
+  const { toast } = useToast();
 
   useEffect(() => {
     if(state.error) {
@@ -44,6 +44,7 @@ export const SignInForm = () => {
       <TextField 
         label='Password'
         name='password'
+        type='password'
         error={state && state.fieldError && state.fieldError['password']}
       />
       <SubmitButton label='Sign in' />

@@ -13,7 +13,7 @@ const signUpData = zod.object({
   name: zod.string().min(1, 'Name is required!'),
   email: zod.string().min(1, 'Email is required!').email('Invalid email!'),
   password: zod.string().min(1, 'Password is required!').min(6, 'Password should have 6 characters at least'),
-  confirmPassword: zod.string().min(1, 'Password is required!').min(6, 'Password should have 6 characters at least'),
+  confirmPassword: zod.string().min(1, 'Password confirmation is required!').min(6, 'Password should have 6 characters at least'),
 }).refine((data) => data.password === data.confirmPassword, {
   path: ['confirmPassword'],
   message: 'Passwords do not match',
@@ -108,7 +108,7 @@ export const signup = async (prevState: any, formData: FormData) => {
 
     if(!validatedFields.success) {
       return {
-        validationError: validatedFields.error.flatten().fieldErrors,
+        fieldError: validatedFields.error.flatten().fieldErrors,
       };
     }
 
