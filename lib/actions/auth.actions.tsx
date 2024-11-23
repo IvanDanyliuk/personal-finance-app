@@ -65,7 +65,7 @@ export const signin = async (prevState: any, formData: FormData) => {
       
         if(userAccount) {
           return {
-            error: `You have signed up using your ${userAccount.provider} account. Sign in using your ${userAccount.provider} account and set the password via Settings`
+            error: `You created your account using your ${userAccount.provider} account. Sign in using your ${userAccount.provider} account and set the password via Settings`
           };
         }
       } else {
