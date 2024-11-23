@@ -2,10 +2,16 @@ import Link from 'next/link';
 import GoogleIcon from '../../../public/images/google.svg';
 import { Separator } from '@/components/ui/separator';
 import { SignInForm, SignInWithProvider } from '../_components';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
 
 
-export default function SignInPage() {
-  
+export default async function SignInPage() {
+  const session = await auth();
+
+  if(session && session.user) {
+    redirect('/');
+  }
 
   return (
     <div className='relative w-full h-screen flex'>

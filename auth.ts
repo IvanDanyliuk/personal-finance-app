@@ -44,7 +44,7 @@ export const {
               email,
               password: hash
             }
-          })
+          });
         } else {
           const isMatch = bcrypt.compareSync(credentials.password as string, user.password);
           

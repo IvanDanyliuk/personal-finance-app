@@ -26,7 +26,7 @@ export const SignInForm = () => {
         description: state.error
       });
     }
-  }, [state]);
+  }, [state, formAction]);
 
   return (
     <form 

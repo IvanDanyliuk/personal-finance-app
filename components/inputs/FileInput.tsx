@@ -9,16 +9,18 @@ interface IFileInput {
   label?: string;
   name: string;
   required?: boolean;
+  disabled?: boolean;
   multiple?: boolean;
   defaultValue?: string;
   error?: string[]
-}
+};
 
 
 const FileInput: React.FC<IFileInput> = ({ 
   name, 
   label, 
   required, 
+  disabled, 
   multiple = false, 
   defaultValue,
   error 
@@ -72,6 +74,7 @@ const FileInput: React.FC<IFileInput> = ({
         <div className={`w-full flex gap-1 items-center ${!label ? 'justify-center' : ''}`}>
           <button 
             type='button'
+            disabled={disabled}
             className='w-36 h-10 bg-slate-500 text-sm text-white uppercase rounded'
             onClick={handleClick}
           >
