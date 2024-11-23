@@ -15,6 +15,7 @@ const initialState = {
   password: ''
 };
 
+
 export const SignInForm = () => {
   const [state, formAction] = useFormState<any, any>(signin, initialState);
   const { toast } = useToast()
@@ -23,7 +24,9 @@ export const SignInForm = () => {
     if(state.error) {
       toast({
         title: 'Oops! Something wet wrong!',
-        description: state.error
+        description: state.error,
+        variant: 'destructive',
+        className: 'bg-danger-1 text-danger-2'
       });
     }
   }, [state, formAction]);
