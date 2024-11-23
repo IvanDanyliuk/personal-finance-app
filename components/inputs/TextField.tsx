@@ -56,10 +56,10 @@ export const TextField: React.FC<ITextField> = ({
           required={required}
           className='w-full px-5 py-6 rounded-full'
         />
-        <p>
+        <p className='mt-1 flex items-center gap-1 text-sm text-danger-2'>
           {error && (
             <>
-              <CircleAlert />
+              <CircleAlert className='w-4 h-4' />
               <span>
                 {error.join('. ').trim()}
               </span>
