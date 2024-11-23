@@ -40,14 +40,11 @@ export const signin = async (prevState: any, formData: FormData) => {
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
 
-    console.log('SIGN IN: Data', { email, password })
-
     const validatedFields = signInData.safeParse({
       email, password
     });
   
     if(!validatedFields.success) {
-      console.log('SIGN IN: Validation error')
       return {
         fieldError: validatedFields.error.flatten().fieldErrors,
       };
@@ -57,7 +54,6 @@ export const signin = async (prevState: any, formData: FormData) => {
     const existingPassword = existingUser?.password || null;
 
     if(existingUser && existingPassword) {
-      console.log('SIGN IN ERROR', existingPassword)
       await signIn('credentials', {
         email,
         password,
@@ -68,13 +64,11 @@ export const signin = async (prevState: any, formData: FormData) => {
         const userAccount = await db.account.findUnique({ where: { userId: existingUser!.id! } });
       
         if(userAccount) {
-          console.log('SIGN IN ERROR: User account exists')
           return {
             error: `You have signed up using your ${userAccount.provider} account. Sign in using your ${userAccount.provider} account and set the password via Settings`
           };
         }
       } else {
-        console.log('SIGN IN ERROR: User account does not exist')
         return {
           error: 'Account does not exist. There are np accounts with such email'
         };
@@ -101,30 +95,60 @@ export const signin = async (prevState: any, formData: FormData) => {
 };
 
 export const signup = async (prevState: any, formData: FormData) => {
-  const name = formData.get('name') as string;
-  const email = formData.get('email') as string;
-  const password = formData.get('password') as string;
-  const confirmPassword = formData.get('confirmPassword') as string;
-  const rawImage = formData.get('image') as string;
+  try {
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+    const confirmPassword = formData.get('confirmPassword') as string;
+    const rawImage = formData.get('image') as string;
 
-  const validatedFields = signUpData.safeParse({
-    name, email, password, confirmPassword
-  });
+    const validatedFields = signUpData.safeParse({
+      name, email, password, confirmPassword
+    });
 
-  if(!validatedFields.success) {
+    if(!validatedFields.success) {
+      return {
+        validationError: validatedFields.error.flatten().fieldErrors,
+      };
+    }
+
+    const existingUser = await db.user.findUnique({ where: { email } });
+
+    if(existingUser) {
+      return {
+        error: 'The user with such email already exists'
+      };
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const imageFile = rawImage ? await fetch(rawImage) : '';
+    const imageBlob = imageFile ? await imageFile.blob() : new Blob();
+    const imageToUpload = new utFile([imageBlob!], `${name}-avatar`, { customId: `${name}-avatar` });
+    const image = imageToUpload && imageToUpload.size > 0 ? (await utapi.uploadFiles([imageToUpload]))[0].data?.url : '';
+
+    const newUser = await db.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+        image,
+        role: 'USER',
+      }
+    });
+
+    if(newUser) {
+      await signIn('credentials', {
+        email,
+        password,
+        redirectTo: '/'
+      });
+    }
+  } catch (error: any) {
     return {
-      error: validatedFields.error.flatten().fieldErrors,
+      error: error.message
     };
   }
 
-  // TODO: Check if the user exist
-
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  const imageFile = rawImage ? await fetch(rawImage) : '';
-  const imageBlob = imageFile ? await imageFile.blob() : new Blob();
-  const imageToUpload = new utFile([imageBlob!], `${name}-avatar.png`, { customId: `${name}-avatar` });
-  const image = imageToUpload && imageToUpload.size > 0 ? (await utapi.uploadFiles([imageToUpload]))[0].data?.url : '';
-
-  console.log('REGISTER: Image url', image)
+  revalidatePath('/');
 };  
