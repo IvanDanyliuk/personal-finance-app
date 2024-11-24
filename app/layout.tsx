@@ -2,8 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme/theme-provider';
-import { Sidebar } from '@/components/layout/sidebar';
-import { Header } from '@/components/layout/header';
+import { Toaster } from '@/components/ui/toaster';
 
 
 const geistSans = localFont({
@@ -39,19 +38,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className='flex'>
-            <Sidebar />
-            <div className='w-full overflow-x-auto'>
-              <div className='overflow-auto'>
-                <Header />
-                <main>
-                  {children}
-                </main>
-              </div>
-            </div>
-          </div>
+          {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
   );
-}
+};
