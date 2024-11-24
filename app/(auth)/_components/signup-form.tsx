@@ -31,7 +31,7 @@ export const SignUpForm = () => {
 
   useEffect(() => {
     console.log('SIGN IN STATE', state)
-    if(state.error) {
+    if(state && state.error) {
       toast({
         title: 'Oops! Something wet wrong!',
         description: state.error,
