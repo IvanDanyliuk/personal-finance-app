@@ -70,11 +70,12 @@ export const signin = async (prevState: any, formData: FormData) => {
         }
       } else {
         return {
-          error: 'Account does not exist. There are np accounts with such email'
+          error: 'Account does not exist. There are no accounts with such email'
         };
       }
     }
   } catch (error: any) {
+    console.log('SIGN IN ERROR', error)
     if(error instanceof AuthError) {
       switch(error.type) {
         case 'CredentialsSignin':
@@ -83,7 +84,7 @@ export const signin = async (prevState: any, formData: FormData) => {
           };
         default:
           return {
-            error: 'Something went wrong'
+            error: error.cause?.err?.message
           };
       }
     }
@@ -127,7 +128,7 @@ export const signup = async (prevState: any, formData: FormData) => {
     const imageToUpload = new utFile([imageBlob!], `${name}-avatar`, { customId: `${name}-avatar` });
     const image = imageToUpload && imageToUpload.size > 0 ? (await utapi.uploadFiles([imageToUpload]))[0].data?.url : '';
 
-    const newUser = await db.user.create({
+    await db.user.create({
       data: {
         name,
         email,
@@ -137,17 +138,26 @@ export const signup = async (prevState: any, formData: FormData) => {
       }
     });
 
-    if(newUser) {
-      await signIn('credentials', {
-        email,
-        password,
-        redirectTo: '/'
-      });
-    }
+    await signIn('credentials', {
+      email,
+      password,
+      redirectTo: '/'
+    })
   } catch (error: any) {
-    return {
-      error: error.message
-    };
+    if(error instanceof AuthError) {
+      switch(error.type) {
+        case 'CredentialsSignin':
+          return {
+            error: 'Invalid credentials'
+          };
+        default:
+          return {
+            error: 'Something went wrong'
+          };
+      }
+    }
+
+    throw error;
   }
 
   revalidatePath('/');

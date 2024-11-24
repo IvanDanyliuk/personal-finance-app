@@ -1,5 +1,3 @@
-// export { auth as middleware } from "@/auth"
-
 import { NextRequest, NextResponse } from 'next/server';
 import { auth } from './auth';
 
@@ -13,7 +11,6 @@ export default async function middleware(request: NextRequest) {
 
   if(!session && !notProtected) {
     const absoluteUrl = new URL('/sign-in', request.nextUrl.origin);
-    console.log('ABSOLUTE URL', absoluteUrl)
     return NextResponse.redirect(absoluteUrl.toString())
   }
 
