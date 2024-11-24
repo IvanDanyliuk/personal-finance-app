@@ -75,7 +75,6 @@ export const signin = async (prevState: any, formData: FormData) => {
       }
     }
   } catch (error: any) {
-    console.log('SIGN IN ERROR', error)
     if(error instanceof AuthError) {
       switch(error.type) {
         case 'CredentialsSignin':

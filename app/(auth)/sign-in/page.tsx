@@ -1,9 +1,9 @@
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import GoogleIcon from '../../../public/images/google.svg';
 import { Separator } from '@/components/ui/separator';
 import { SignInForm, SignInWithProvider } from '../_components';
 import { auth } from '@/auth';
-import { redirect } from 'next/navigation';
 
 
 export default async function SignInPage() {
@@ -15,7 +15,7 @@ export default async function SignInPage() {
 
   return (
     <div className='relative w-full h-screen flex'>
-      <div className='px-6 md:px-72 w-1/2 h-full flex flex-col justify-center items-center gap-8 bg-background'>
+      <div className='px-6 md:px-72 w-full md:w-1/2 h-full flex flex-col justify-center items-center gap-8 bg-background'>
         <div>
           <h1 className='text-center text-3xl text-foreground font-semibold'>
             Sign In
