@@ -15,8 +15,9 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
-import { NavbarItem } from './navbar-item';
+import { NavbarItem } from './';
 import { ModeToggle } from '../theme/mode-toggle';
+import { logout } from '@/lib/actions/auth.actions';
 
 
 export const Sidebar = () => {
@@ -71,8 +72,8 @@ export const Sidebar = () => {
     localStorage.setItem('isSidebarExpanded', `${!isExpanded}`);
   };
 
-  const handleSignOut = () => {
-    console.log('SIGN OUT');
+  const handleSignOut = async () => {
+    await logout();
   };
 
   return (

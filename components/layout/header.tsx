@@ -1,5 +1,5 @@
-import { auth } from "@/auth";
-import { UserMenu } from "./user-menu";
+import { auth } from '@/auth';
+import { UserMenu } from './';
 
 export const Header = async () => {
   const session = await auth();

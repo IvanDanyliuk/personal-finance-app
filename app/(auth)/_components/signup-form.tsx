@@ -3,9 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
 import Link from 'next/link';
-import { CheckboxField } from '@/components/inputs/Checkbox';
-import FileInput from '@/components/inputs/FileInput';
-import { TextField } from '@/components/inputs/TextField';
+import { CheckboxField, FileInput, TextField} from '@/components/inputs';
 import { SubmitButton } from '@/components/common/submit-btn';
 import { signup } from '@/lib/actions/auth.actions';
 import { useToast } from '@/hooks/use-toast';

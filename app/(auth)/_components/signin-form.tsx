@@ -4,8 +4,7 @@ import { useEffect } from 'react';
 import { useFormState } from 'react-dom';
 import Link from 'next/link';
 import { SubmitButton } from '@/components/common/submit-btn';
-import { CheckboxField } from '@/components/inputs/Checkbox';
-import { TextField } from '@/components/inputs/TextField';
+import { CheckboxField, TextField } from '@/components/inputs';
 import { useToast } from "@/hooks/use-toast"
 import { signin } from '@/lib/actions/auth.actions';
 

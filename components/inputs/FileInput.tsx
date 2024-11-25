@@ -16,7 +16,7 @@ interface IFileInput {
 };
 
 
-const FileInput: React.FC<IFileInput> = ({ 
+export const FileInput: React.FC<IFileInput> = ({ 
   name, 
   label, 
   required, 
@@ -121,5 +121,3 @@ const FileInput: React.FC<IFileInput> = ({
     </div>
   );
 };
-
-export default FileInput;

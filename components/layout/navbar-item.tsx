@@ -31,7 +31,7 @@ export const NavbarItem: React.FC<INavbarItem> = ({
         <Link 
           href={path} 
           className={cn(
-            isActive ? 'bg-primary-7 text-white' : 'bg-transparent hover:bg-primary-3 text-black', 
+            isActive ? 'bg-primary-7 text-white' : 'bg-transparent hover:bg-primary-3 text-foreground', 
             'w-full px-4 py-3 rounded-full text-md'
           )}
         >
