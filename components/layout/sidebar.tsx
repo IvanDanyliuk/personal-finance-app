@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
-import { NavbarItem } from './';
+import { MenuLinks, NavbarItem } from './';
 import { ModeToggle } from '../theme/mode-toggle';
 import { logout } from '@/lib/actions/auth.actions';
 
@@ -24,48 +24,8 @@ export const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState<boolean>(
     Boolean(localStorage.getItem('isSidebarExpanded')) || false
   );
-  const pathname = usePathname();
 
   const user = true;
-
-  const links = [
-    {
-      label: 'Dashboard',
-      path: '/',
-      icon: <LayoutDashboard />,
-      active: pathname === '/'
-    },
-    {
-      label: 'Expenses',
-      path: '/expenses',
-      icon: <BadgeDollarSign />,
-      active: pathname.includes('/expenses')
-    },
-    {
-      label: 'Incomes',
-      path: '/incomes',
-      icon: <Banknote />,
-      active: pathname.includes('/incomes')
-    },
-    {
-      label: 'Savings',
-      path: '/savings',
-      icon: <Wallet />,
-      active: pathname.includes('/savings')
-    },
-    {
-      label: 'Analytics',
-      path: '/analytics',
-      icon: <ChartNoAxesCombined />,
-      active: pathname.includes('/analytics')
-    },
-    {
-      label: 'Settings',
-      path: '/settings',
-      icon: <Settings />,
-      active: pathname.includes('/settings')
-    },
-  ];
 
   const handleSidebarExpand = () => {
     setIsExpanded(!isExpanded);
@@ -79,7 +39,7 @@ export const Sidebar = () => {
   return (
     <div className={cn(
       isExpanded ? 'w-[300px]' : 'w-[70px]',
-      'relative p-3 h-screen border-r transition-all duration-300 ease-in-out transform flex flex-col justify-between bg-background-secondary'
+      'relative p-3 h-screen border-r transition-all duration-300 ease-in-out transform hidden md:flex flex-col justify-between bg-background-secondary'
     )}>
       <div>
         <div>LOGO</div>
@@ -94,18 +54,9 @@ export const Sidebar = () => {
             <ChevronRight className='w-4 h-4' />
           )}
         </Button>
-        <nav className={cn(isExpanded ? 'items-start' : 'items-center', 'mt-12 w-full flex flex-col gap-3')}>
-          {links.map(link => (
-            <NavbarItem 
-              key={crypto.randomUUID()} 
-              label={link.label} 
-              path={link.path} 
-              icon={link.icon} 
-              isActive={link.active} 
-              isSidebarExpanded={isExpanded} 
-            />
-          ))}
-        </nav>
+        <div className='mt-12'>
+          <MenuLinks isExpanded={isExpanded} />
+        </div>
       </div>
       
       <div className='mb-3 flex flex-col items-center gap-6'>

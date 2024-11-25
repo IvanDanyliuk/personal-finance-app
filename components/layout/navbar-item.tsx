@@ -14,7 +14,7 @@ interface INavbarItem {
   icon: ReactNode;
   path: string;
   isActive: boolean;
-  isSidebarExpanded: boolean;
+  isSidebarExpanded?: boolean;
 };
 
 
