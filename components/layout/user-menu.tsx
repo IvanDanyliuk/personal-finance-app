@@ -47,7 +47,7 @@ export const UserMenu: React.FC<IUserMenu> = ({ userId, name, email, imageUrl })
             {email}
           </p>
         </div>
-        <Separator className='mt-2' />
+        <Separator className='block md:hidden mt-2' />
         <DropdownMenuItem onClick={() => logout()}>
           <LogOut className='mr-1' />
           Logout

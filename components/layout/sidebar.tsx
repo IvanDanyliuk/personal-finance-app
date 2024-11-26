@@ -1,23 +1,16 @@
 'use client';
 
 import { useState } from 'react';
-import { usePathname } from 'next/navigation';
 import { 
-  BadgeDollarSign, 
-  Banknote, 
-  ChartNoAxesCombined, 
   ChevronLeft, 
   ChevronRight, 
-  LayoutDashboard, 
-  LogOut, 
-  Settings, 
-  Wallet 
+  LogOut
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Button } from '../ui/button';
-import { MenuLinks, NavbarItem } from './';
-import { ModeToggle } from '../theme/mode-toggle';
 import { logout } from '@/lib/actions/auth.actions';
+import { Button } from '../ui/button';
+import { MenuLinks } from './';
+import { ModeToggle } from '../theme/mode-toggle';
 
 
 export const Sidebar = () => {

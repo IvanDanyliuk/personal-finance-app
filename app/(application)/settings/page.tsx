@@ -1,7 +1,12 @@
+import {useTranslations} from 'next-intl';
+
+
 export default function SettingsPage() {
+  const t = useTranslations('SettingsPage');
+
   return (
     <div>
-      Settings
+      {t('title')}
     </div>
   );
 };

@@ -12,6 +12,7 @@ import {
 import { NavbarItem } from './'
 import { cn } from '@/lib/utils';
 
+
 export const MenuLinks = ({ isExpanded }: { isExpanded?: boolean }) => {
   const pathname = usePathname();
 
@@ -67,5 +68,5 @@ export const MenuLinks = ({ isExpanded }: { isExpanded?: boolean }) => {
         />
       ))}
     </nav>
-  )
-}
+  );
+};
