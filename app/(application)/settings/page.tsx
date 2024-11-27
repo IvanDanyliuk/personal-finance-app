@@ -7,7 +7,7 @@ export default function SettingsPage() {
 
   return (
     <div>
-      <h1 className='text-xl'>
+      <h1 className='text-3xl font-semibold'>
         {t('title')}
       </h1>
       <div>

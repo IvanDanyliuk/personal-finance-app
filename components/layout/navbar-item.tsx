@@ -32,10 +32,10 @@ export const NavbarItem: React.FC<INavbarItem> = ({
           href={path} 
           className={cn(
             isActive ? 'bg-primary-7 text-white' : 'bg-transparent hover:bg-primary-3 text-foreground', 
-            'w-full px-4 py-3 rounded-full text-md'
+            'w-full px-4 py-3 rounded-full text-md font-semibold'
           )}
         >
-          <div className='flex items-center gap-1'>
+          <div className='flex items-center gap-3 '>
             {icon}
             <span>
               {label}
@@ -47,12 +47,15 @@ export const NavbarItem: React.FC<INavbarItem> = ({
           <Tooltip>
             <TooltipTrigger>
               <Link href={path} className='text-md'>
-                <div>
+                <div className={cn(
+                  isActive ? 'bg-primary-7 text-white' : 'bg-transparent hover:bg-primary-3 text-foreground', 
+                  'p-3 rounded-full'
+                  )}>
                   {icon}
                 </div>
               </Link>
             </TooltipTrigger>
-            <TooltipContent>
+            <TooltipContent className='text-secondary-9 bg-white' side='right'>
               <span>
                 {label}
               </span>
