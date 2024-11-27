@@ -13,6 +13,7 @@ import { Separator } from '../ui/separator';
 import { MenuLinks } from './menu-links';
 import { logout } from '@/lib/actions/auth.actions';
 import { ModeToggle } from '../theme/mode-toggle';
+import { useTranslations } from 'next-intl';
 
 
 interface INavMenuMobile {
@@ -23,6 +24,7 @@ interface INavMenuMobile {
 
 
 export const NavMenuMobile: React.FC<INavMenuMobile> = ({ userName, email, userImage }) => {
+  const t = useTranslations('Layout')
   const handleSignOut = async () => {
     await logout();
   };
@@ -67,7 +69,9 @@ export const NavMenuMobile: React.FC<INavMenuMobile> = ({ userName, email, userI
                   className='w-fit flex items-center gap-1 bg-transparent p-0 border-none shadow-none text-foreground text-md'
                 >
                   <LogOut className='w-5 h-5' />
-                  <span>Log out</span>
+                  <span>
+                    {t('logoutBtn')}
+                  </span>
                 </button>
               )}
               <ModeToggle isExpanded={true} />

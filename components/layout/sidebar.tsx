@@ -15,7 +15,7 @@ import { ModeToggle } from '../theme/mode-toggle';
 
 
 export const Sidebar = () => {
-  const t = useTranslations('Navigation');
+  const t = useTranslations('Layout');
   const [isExpanded, setIsExpanded] = useState<boolean>(
     Boolean(localStorage.getItem('isSidebarExpanded')) || false
   );

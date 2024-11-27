@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Separator } from '../ui/separator';
+import { useTranslations } from 'next-intl';
 
 
 interface IUserMenu {
@@ -21,6 +22,8 @@ interface IUserMenu {
 
 
 export const UserMenu: React.FC<IUserMenu> = ({ userId, name, email, imageUrl }) => {
+  const t = useTranslations('Layout')
+
   console.log(userId);
 
   return (
@@ -50,7 +53,7 @@ export const UserMenu: React.FC<IUserMenu> = ({ userId, name, email, imageUrl })
         <Separator className='block md:hidden mt-2' />
         <DropdownMenuItem onClick={() => logout()}>
           <LogOut className='mr-1' />
-          Logout
+          {t('logoutBtn')}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

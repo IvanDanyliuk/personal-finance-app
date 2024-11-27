@@ -23,16 +23,16 @@
       "email": "Эл. почта",
       "password": "Пароль",
       "confirmPassword": "Подтвердить пароль",
-      "image": "Фото",
+      "image": "Добавить фото",
       "signupBtn": "Зарегистрироваться",
       "agreeText": "Я принимаю",
       "termsAndPrivacyLink": "условия политики и приватности",
       "googleBtnTooltip": "Зарегистрироваться через Google"
     }
   },
-  "Navigation": {
-    "links": {
-      "dashboard": "Панель управления",
+  "Layout": {
+    "navLinks": {
+      "dashboard": "Главная",
       "incomes": "Доходы",
       "expenses": "Затраты",
       "savings": "Сбережения",

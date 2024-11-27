@@ -18,37 +18,37 @@ export const MenuLinks = ({ isExpanded }: { isExpanded?: boolean }) => {
 
   const links = [
     {
-      label: 'links.dashboard',
+      label: 'navLinks.dashboard',
       path: '/',
       icon: <LayoutDashboard />,
       active: pathname === '/'
     },
     {
-      label: 'links.expenses',
+      label: 'navLinks.expenses',
       path: '/expenses',
       icon: <BadgeDollarSign />,
       active: pathname.includes('/expenses')
     },
     {
-      label: 'links.incomes',
+      label: 'navLinks.incomes',
       path: '/incomes',
       icon: <Banknote />,
       active: pathname.includes('/incomes')
     },
     {
-      label: 'links.savings',
+      label: 'navLinks.savings',
       path: '/savings',
       icon: <Wallet />,
       active: pathname.includes('/savings')
     },
     {
-      label: 'links.analytics',
+      label: 'navLinks.analytics',
       path: '/analytics',
       icon: <ChartNoAxesCombined />,
       active: pathname.includes('/analytics')
     },
     {
-      label: 'links.settings',
+      label: 'navLinks.settings',
       path: '/settings',
       icon: <Settings />,
       active: pathname.includes('/settings')

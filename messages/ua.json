@@ -23,16 +23,16 @@
       "email": "Ел. пошта",
       "password": "Пароль",
       "confirmPassword": "Підтвердити пароль",
-      "image": "Фото",
+      "image": "Додати фото",
       "signupBtn": "Зареєструватися",
       "agreeText": "Я згоден з",
       "termsAndPrivacyLink": "умовами політики та приватності",
       "googleBtnTooltip": "Заруєструватися через Google"
     }
   },
-  "Navigation": {
-    "links": {
-      "dashboard": "Панель управління",
+  "Layout": {
+    "navLinks": {
+      "dashboard": "Головна",
       "incomes": "Доходи",
       "expenses": "Витрати",
       "savings": "Збереження",

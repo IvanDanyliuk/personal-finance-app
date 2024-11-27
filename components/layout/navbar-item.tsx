@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import {
   Tooltip,
   TooltipContent,
@@ -7,7 +8,6 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils';
-import { useTranslations } from 'next-intl';
 
 
 interface INavbarItem {
@@ -26,7 +26,7 @@ export const NavbarItem: React.FC<INavbarItem> = ({
   isActive, 
   isSidebarExpanded 
 }) => {
-  const t = useTranslations('Navigation');
+  const t = useTranslations('Layout');
 
   return (
     <>

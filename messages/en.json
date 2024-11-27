@@ -23,15 +23,15 @@
       "email": "Email",
       "password": "Password",
       "confirmPassword": "Confirm password",
-      "image": "Photo",
+      "image": "Add photo",
       "signupBtn": "Sign up",
       "agreeText": "I agree with",
       "termsAndPrivacyLink": "Terms & Privacy",
       "googleBtnTooltip": "Sign up with Google"
     }
   },
-  "Navigation": {
-    "links": {
+  "Layout": {
+    "navLinks": {
       "dashboard": "Dashboard",
       "incomes": "Incomes",
       "expenses": "Expenses",

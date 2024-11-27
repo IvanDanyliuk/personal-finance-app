@@ -1,5 +1,4 @@
 import {useTranslations} from 'next-intl';
-import { headers } from 'next/headers';
 
 
 export default function SettingsPage() {
