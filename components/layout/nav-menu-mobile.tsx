@@ -1,19 +1,19 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { LogOut, Menu } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
+  SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import { DialogTitle } from '@radix-ui/react-dialog';
 import { Logo } from './logo';
 import { Separator } from '../ui/separator';
 import { MenuLinks } from './menu-links';
 import { logout } from '@/lib/actions/auth.actions';
 import { ModeToggle } from '../theme/mode-toggle';
-import { useTranslations } from 'next-intl';
 
 
 interface INavMenuMobile {
@@ -37,30 +37,32 @@ export const NavMenuMobile: React.FC<INavMenuMobile> = ({ userName, email, userI
             <Menu className='size-8' />
           </button>
         </SheetTrigger>
-        <SheetContent className='bg-background'>
-          <DialogTitle>
+        <SheetContent className='py-10'>
+          <SheetTitle>
             <Logo />
-          </DialogTitle>
-          <div className='mt-3 flex items-center gap-3'>
-            <Image 
-              src={userImage} 
-              alt={userName} 
-              width={40} 
-              height={40} 
-              className='rounded-full' 
-            />
+          </SheetTitle>
+          <div className='h-full flex flex-1 flex-col justify-between bg-background'>
             <div>
-              <p className='text-foreground text-sm font-semibold'>
-                {userName}
-              </p>
-              <p className='text-secondary-3 text-xs'>
-                {email}
-              </p>
+              <div className='mt-3 flex items-center gap-3'>
+                <Image 
+                  src={userImage} 
+                  alt={userName} 
+                  width={40} 
+                  height={40} 
+                  className='rounded-full' 
+                />
+                <div>
+                  <p className='text-foreground text-sm font-semibold'>
+                    {userName}
+                  </p>
+                  <p className='text-secondary-3 text-xs'>
+                    {email}
+                  </p>
+                </div>
+              </div>
+              <Separator className='my-3' />
+              <MenuLinks isExpanded={true} />
             </div>
-          </div>
-          <Separator className='my-3' />
-          <div className='py-3 w-full h-full flex flex-col justify-between'>
-            <MenuLinks isExpanded={true} />
             <div className='mb-3 flex flex-col items-center gap-6'>
               {userName && email && (
                 <button 

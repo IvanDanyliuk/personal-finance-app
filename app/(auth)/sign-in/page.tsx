@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
 import GoogleIcon from '../../../public/images/google.svg';
 import { Separator } from '@/components/ui/separator';
 import { SignInForm, SignInWithProvider } from '../_components';
 import { auth } from '@/auth';
-import { getTranslations } from 'next-intl/server';
 
 
 export default async function SignInPage() {
