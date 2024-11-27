@@ -7,6 +7,7 @@ import { SubmitButton } from '@/components/common/submit-btn';
 import { CheckboxField, TextField } from '@/components/inputs';
 import { useToast } from "@/hooks/use-toast"
 import { signin } from '@/lib/actions/auth.actions';
+import { useTranslations } from 'next-intl';
 
 
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
 export const SignInForm = () => {
   const [state, formAction] = useFormState<any, any>(signin, initialState);
   const { toast } = useToast();
+  const t = useTranslations('Auth.signinPage');
 
   useEffect(() => {
     if(state.error) {
@@ -36,27 +38,27 @@ export const SignInForm = () => {
       className='w-full flex flex-col justify-center gap-3'
     >
       <TextField 
-        label='Email'
+        label={t('email')}
         name='email'
         error={state && state.fieldError && state.fieldError['email']}
       />
       <TextField 
-        label='Password'
+        label={t('password')}
         name='password'
         type='password'
         error={state && state.fieldError && state.fieldError['password']}
       />
-      <SubmitButton label='Sign in' />
+      <SubmitButton label={t('signinBtn')} />
       <div className='py-3 w-full flex justify-between items-center'>
         <CheckboxField 
           name='rememberMe'
-          label='Keep me logged in'
+          label={t('rememberMeCheckboxLabel')}
         />
         <Link 
           href='/' 
           className='text-sm text-primary-8 font-semibold'
         >
-          Forgot password?
+          {t('forgotPasswordLinkLabel')}
         </Link>
       </div>
     </form>

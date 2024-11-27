@@ -1,4 +1,46 @@
 {
+  "Auth": {
+    "signinPage": {
+      "title": "Sign In",
+      "titleMessage": "Hi! Please, sign in to your account to continue using an application.",
+      "continueText": "or continue with",
+      "noAccountText": "Do not have an account?",
+      "signupLinkLabel": "Sign up",
+      "email": "Email",
+      "password": "Password",
+      "signinBtn": "Sign in",
+      "rememberMeCheckboxLabel": "Keep me logged in",
+      "forgotPasswordLinkLabel": "Forgot password?",
+      "googleBtnTooltip": "Sign in with Google"
+    },
+    "signupPage": {
+      "title": "Sign Up",
+      "titleMessage": "Hi! Please, create your account to continue using an application.",
+      "continueText": "or continue with",
+      "haveAccountText": "Already have an account?",
+      "signinLinkLabel": "Sign in",
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "image": "Photo",
+      "signupBtn": "Sign up",
+      "agreeText": "I agree with",
+      "termsAndPrivacyLink": "Terms & Privacy",
+      "googleBtnTooltip": "Sign up with Google"
+    }
+  },
+  "Navigation": {
+    "links": {
+      "dashboard": "Dashboard",
+      "incomes": "Incomes",
+      "expenses": "Expenses",
+      "savings": "Savings",
+      "analytics": "Analytics",
+      "settings": "Settings"
+    },
+    "logoutBtn": "Log out"
+  },
   "SettingsPage": {
     "title": "Settings"
   }

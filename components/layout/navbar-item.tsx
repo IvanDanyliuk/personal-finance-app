@@ -7,6 +7,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 
 interface INavbarItem {
@@ -25,6 +26,8 @@ export const NavbarItem: React.FC<INavbarItem> = ({
   isActive, 
   isSidebarExpanded 
 }) => {
+  const t = useTranslations('Navigation');
+
   return (
     <>
       {isSidebarExpanded ? (
@@ -38,7 +41,7 @@ export const NavbarItem: React.FC<INavbarItem> = ({
           <div className='flex items-center gap-3 '>
             {icon}
             <span>
-              {label}
+              {t(label)}
             </span>
           </div>
         </Link>
@@ -55,10 +58,10 @@ export const NavbarItem: React.FC<INavbarItem> = ({
                 </div>
               </Link>
             </TooltipTrigger>
-            <TooltipContent className='text-secondary-9 bg-white' side='right'>
-              <span>
-                {label}
-              </span>
+            <TooltipContent side='right'>
+              <div className='px-3 py-2 text-white bg-primary-7 rounded-full'>
+                {t(label)}
+              </div>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>

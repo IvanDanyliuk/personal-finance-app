@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { 
   ChevronLeft, 
   ChevronRight, 
@@ -14,6 +15,7 @@ import { ModeToggle } from '../theme/mode-toggle';
 
 
 export const Sidebar = () => {
+  const t = useTranslations('Navigation');
   const [isExpanded, setIsExpanded] = useState<boolean>(
     Boolean(localStorage.getItem('isSidebarExpanded')) || false
   );
@@ -60,7 +62,11 @@ export const Sidebar = () => {
             className='w-fit flex items-center gap-1 bg-transparent p-0 border-none shadow-none text-foreground text-md'
           >
             <LogOut className='w-5 h-5' />
-            {isExpanded && <span>Log out</span>}
+            {isExpanded && (
+              <span>
+                {t('logoutBtn')}
+              </span>
+            )}
           </button>
         )}
         <ModeToggle isExpanded={isExpanded} />

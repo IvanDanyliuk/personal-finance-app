@@ -1,4 +1,46 @@
 {
+  "Auth": {
+    "signinPage": {
+      "title": "Увійти",
+      "titleMessage": "Привіт! Будь ласка, увійдіть у свій обліковий запис щоб продовжити користуватися додатком",
+      "continueText": "або продовжити з",
+      "noAccountText": "Ще не маєте облікового запису?",
+      "signupLinkLabel": "Зареєструватися",
+      "email": "Ел. пошта",
+      "password": "Пароль",
+      "signinBtn": "Увійти",
+      "rememberMeCheckboxLabel": "Запам'ятати мене",
+      "forgotPasswordLinkLabel": "Забули пароль?",
+      "googleBtnTooltip": "Увійти через Google"
+    },
+    "signupPage": {
+      "title": "Зареєструватися",
+      "titleMessage": "Привіт! Будь ласка, створіть свій обліковий запис щоб продовжити користуватися додатком",
+      "continueText": "або продовжити з",
+      "haveAccountText": "Вже заруєструвалися?",
+      "signinLinkLabel": "Увійти",
+      "name": "Ім'я",
+      "email": "Ел. пошта",
+      "password": "Пароль",
+      "confirmPassword": "Підтвердити пароль",
+      "image": "Фото",
+      "signupBtn": "Зареєструватися",
+      "agreeText": "Я згоден з",
+      "termsAndPrivacyLink": "умовами політики та приватності",
+      "googleBtnTooltip": "Заруєструватися через Google"
+    }
+  },
+  "Navigation": {
+    "links": {
+      "dashboard": "Панель управління",
+      "incomes": "Доходи",
+      "expenses": "Витрати",
+      "savings": "Збереження",
+      "analytics": "Аналітика",
+      "settings": "Налаштування"
+    },
+    "logoutBtn": "Вийти"
+  },
   "SettingsPage": {
     "title": "Налаштування"
   }

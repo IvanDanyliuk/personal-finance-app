@@ -1,4 +1,46 @@
 {
+  "Auth": {
+    "signinPage": {
+      "title": "Войти",
+      "titleMessage": "Привет! Пожалуйста, войдите в свою учетную запись чтобы продолжить пользоваться приложением",
+      "continueText": "или продолжить через",
+      "noAccountText": "Еще не зарегистрировались?",
+      "signupLinkLabel": "Зарегистрироваться",
+      "email": "Эл. почта",
+      "password": "Пароль",
+      "signinBtn": "Войти",
+      "rememberMeCheckboxLabel": "Запомнить меня",
+      "forgotPasswordLinkLabel": "Забыли пароль?",
+      "googleBtnTooltip": "Войти через Google"
+    },
+    "signupPage": {
+      "title": "Зарегистрироваться",
+      "titleMessage": "Привет! Пожалуйста, создайте свою учетнуюзапись чтобы продолжить пользоваться приложением",
+      "continueText": "или продолжить через",
+      "haveAccountText": "Уже зарегистрированы?",
+      "signinLinkLabel": "Войти",
+      "name": "Имя",
+      "email": "Эл. почта",
+      "password": "Пароль",
+      "confirmPassword": "Подтвердить пароль",
+      "image": "Фото",
+      "signupBtn": "Зарегистрироваться",
+      "agreeText": "Я принимаю",
+      "termsAndPrivacyLink": "условия политики и приватности",
+      "googleBtnTooltip": "Зарегистрироваться через Google"
+    }
+  },
+  "Navigation": {
+    "links": {
+      "dashboard": "Панель управления",
+      "incomes": "Доходы",
+      "expenses": "Затраты",
+      "savings": "Сбережения",
+      "analytics": "Аналитика",
+      "settings": "Настройки"
+    },
+    "logoutBtn": "Выйти"
+  },
   "SettingsPage": {
     "title": "Настройки"
   }

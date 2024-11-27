@@ -7,6 +7,7 @@ import { CircleAlert, X } from 'lucide-react';
 
 interface IFileInput {
   label?: string;
+  btnTitle: string;
   name: string;
   required?: boolean;
   disabled?: boolean;
@@ -18,7 +19,8 @@ interface IFileInput {
 
 export const FileInput: React.FC<IFileInput> = ({ 
   name, 
-  label, 
+  label,
+  btnTitle, 
   required, 
   disabled, 
   multiple = false, 
@@ -78,7 +80,7 @@ export const FileInput: React.FC<IFileInput> = ({
             className='w-36 h-10 bg-slate-500 text-sm text-white uppercase rounded'
             onClick={handleClick}
           >
-            Upload
+            {btnTitle}
           </button>
           <ul className='flex gap-3 text-xs'>
             {selectedFiles.map((url: any) => (

@@ -7,6 +7,7 @@ import { CheckboxField, FileInput, TextField} from '@/components/inputs';
 import { SubmitButton } from '@/components/common/submit-btn';
 import { signup } from '@/lib/actions/auth.actions';
 import { useToast } from '@/hooks/use-toast';
+import { useTranslations } from 'next-intl';
 
 
 const initialState = {
@@ -22,13 +23,13 @@ export const SignUpForm = () => {
   const [state, formAction] = useFormState<any, any>(signup, initialState);
   const [isAgreementConfirmed, setIsAgreementConfirmed] = useState<boolean>(false);
   const { toast } = useToast();
+  const t = useTranslations('Auth.signupPage');
 
   const handleAgreementConfirm = () => {
     setIsAgreementConfirmed(!isAgreementConfirmed);
   };
 
   useEffect(() => {
-    console.log('SIGN IN STATE', state)
     if(state && state.error) {
       toast({
         title: 'Oops! Something wet wrong!',
@@ -45,39 +46,40 @@ export const SignUpForm = () => {
       className='w-full flex flex-col justify-center gap-3'
     >
       <TextField 
-        label='Name'
+        label={t('name')}
         name='name'
         error={state && state.fieldError && state.fieldError['name']}
       />
       <TextField 
-        label='Email'
+        label={t('email')}
         name='email'
         type='email'
         error={state && state.fieldError && state.fieldError['email']}
       />
       <TextField 
-        label='Password'
+        label={t('password')}
         name='password'
         type='password'
         error={state && state.fieldError && state.fieldError['password']}
       />
       <TextField 
-        label='Confirm Password'
+        label={t('confirmPassword')}
         name='confirmPassword'
         type='password'
         error={state && state.fieldError && state.fieldError['confirmPassword']}
       />
       <FileInput 
         name='image'
+        btnTitle={t('image')}
       />
       <SubmitButton 
-        label='Sign up' 
+        label={t('signupBtn')} 
         disabled={!isAgreementConfirmed} 
       />
       <div className='py-3 w-full flex justify-start items-center gap-1'>
         <CheckboxField 
           name='agreement'
-          label='I agree with'
+          label={t('agreeText')}
           checked={isAgreementConfirmed}
           onChange={handleAgreementConfirm}
         />
@@ -85,7 +87,7 @@ export const SignUpForm = () => {
           href='/privacy-policy' 
           className='text-sm text-primary-8 font-semibold'
         >
-          Terms & Privacy
+          {t('termsAndPrivacyLink')}
         </Link>
       </div>
     </form>
