@@ -1,21 +1,14 @@
 import type { Metadata } from 'next';
 import {NextIntlClientProvider} from 'next-intl';
 import {getLocale, getMessages} from 'next-intl/server';
-import localFont from 'next/font/local';
+import { Montserrat } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
 
 
-const geistSans = localFont({
-  src: './fonts/GeistVF.woff',
-  variable: '--font-geist-sans',
-  weight: '100 900',
-});
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
+const montserrat = Montserrat({
+  subsets: ['latin']
 });
 
 export const metadata: Metadata = {
@@ -35,7 +28,7 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${montserrat.className} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider

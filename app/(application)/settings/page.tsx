@@ -1,4 +1,5 @@
 import {useTranslations} from 'next-intl';
+import { headers } from 'next/headers';
 
 
 export default function SettingsPage() {
@@ -6,7 +7,12 @@ export default function SettingsPage() {
 
   return (
     <div>
-      {t('title')}
+      <h1 className='text-xl'>
+        {t('title')}
+      </h1>
+      <div>
+
+      </div>
     </div>
   );
 };
