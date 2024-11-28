@@ -42,6 +42,17 @@
     "logoutBtn": "Выйти"
   },
   "SettingsPage": {
-    "title": "Настройки"
+    "title": "Настройки",
+    "manageUserPhotoForm": {
+      "triggerBtnLabel": "Изменить фото",
+      "formTitle": "Обновить фото профиля",
+      "addBtnLabel": "Добавить фото",
+      "submitBtnLabel": "Подтвердить",
+      "deleteBtnLabel": "Удалить фото"
+    },
+    "updateUserNameForm": {
+      "updateUserNameLabel": "Имя / Фамилия",
+      "updateUserNameTitle": "Выберите фото"
+    }
   }
 }

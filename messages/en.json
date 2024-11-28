@@ -42,6 +42,17 @@
     "logoutBtn": "Log out"
   },
   "SettingsPage": {
-    "title": "Settings"
+    "title": "Settings",
+    "manageUserPhotoForm": {
+      "triggerBtnLabel": "Update photo",
+      "formTitle": "Update user name",
+      "addBtnLabel": "Add photo",
+      "submitBtnLabel": "Submit",
+      "deleteBtnLabel": "Delete photo"
+    },
+    "updateUserNameForm": {
+      "updateUserNameLabel": "First and Last Name",
+      "updateUserNameTitle": "Update your name"
+    }
   }
 }

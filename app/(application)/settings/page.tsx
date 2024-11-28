@@ -2,6 +2,8 @@ import { auth } from '@/auth';
 import { getUser } from '@/lib/actions/user.actions';
 import {useTranslations} from 'next-intl';
 import { getTranslations } from 'next-intl/server';
+import Image from 'next/image';
+import { ManageProfilePhoto } from './_components';
 
 
 export default async function SettingsPage() {
@@ -15,12 +17,27 @@ export default async function SettingsPage() {
   })
 
   return (
-    <div>
-      <h1 className='text-3xl font-semibold'>
+    <div className='w-full h-full'>
+      <h1 className='mb-3 text-3xl font-semibold'>
         {t('title')}
       </h1>
-      <div>
-        
+      <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-3'>
+        <div className='w-full flex justify-between items-center'>
+          <Image 
+            src={user?.image!} 
+            alt={user?.name!} 
+            width={150} 
+            height={150} 
+            className='rounded-full'
+          />
+          <ManageProfilePhoto />
+        </div>
+        <div className=' bg-slate-400'>
+          Finance
+        </div>
+        <div className=' bg-slate-400'>
+          Profile
+        </div>
       </div>
     </div>
   );

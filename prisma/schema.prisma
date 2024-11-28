@@ -28,7 +28,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   role          UserRole?       @default(USER)
-  bankAccounts  BankAccount[]
+  bankAccounts  BankAccount[]   
   incomes       Income?
   expenses      Expense?
   weekStartDay  Int?            @default(1)
