@@ -8,6 +8,9 @@ export interface IUser {
   bankAccounts?: string[];
   incomes?: string[];
   expenses?: string[];
+  weekStartDay?: number;
+  currency?: string;
+  language?: string;
   createdAt?: string;
   updatedAt?: string;
 };

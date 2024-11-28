@@ -31,6 +31,9 @@ model User {
   bankAccounts  BankAccount[]
   incomes       Income?
   expenses      Expense?
+  weekStartDay  Int?            @default(1)
+  currency      String?         @default("usd")
+  language      String?         @default("en")   
   // Optional for WebAuthn support
   Authenticator Authenticator[]
  

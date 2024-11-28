@@ -134,6 +134,9 @@ export const signup = async (prevState: any, formData: FormData) => {
         password: hashedPassword,
         image,
         role: 'USER',
+        weekStartDay: 1,
+        currency: 'usd',
+        language: 'en',
       }
     });
 

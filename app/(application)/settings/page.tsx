@@ -1,8 +1,18 @@
+import { auth } from '@/auth';
+import { getUser } from '@/lib/actions/user.actions';
 import {useTranslations} from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 
 
-export default function SettingsPage() {
-  const t = useTranslations('SettingsPage');
+export default async function SettingsPage() {
+  const t = await getTranslations('SettingsPage');
+  const session = await auth();
+  const user = await getUser(session?.user?.email!);
+
+  console.log('SETTINGS', {
+    session: session?.user,
+    user
+  })
 
   return (
     <div>
@@ -10,7 +20,7 @@ export default function SettingsPage() {
         {t('title')}
       </h1>
       <div>
-
+        
       </div>
     </div>
   );
