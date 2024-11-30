@@ -50,9 +50,11 @@
       "submitBtnLabel": "Submit",
       "deleteBtnLabel": "Delete photo"
     },
-    "updateUserNameForm": {
-      "updateUserNameLabel": "First and Last Name",
-      "updateUserNameTitle": "Update your name"
+    "managePersonalData": {
+      "editNameFormLabel": "First and Last Name",
+      "editEmailFormLabel": "Email",
+      "submitBtnLabel": "Submit",
+      "cancelBtnLabel": "Cancel"
     }
   }
 }

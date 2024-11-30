@@ -50,9 +50,11 @@
       "submitBtnLabel": "Подтвердить",
       "deleteBtnLabel": "Удалить фото"
     },
-    "updateUserNameForm": {
-      "updateUserNameLabel": "Имя / Фамилия",
-      "updateUserNameTitle": "Выберите фото"
+    "managePersonalData": {
+      "editNameFormLabel": "Имя / Фамилия",
+      "editEmailFormLabel": "Эл. почта",
+      "submitBtnLabel": "Подтвердить",
+      "cancelBtnLabel": "Отмена"
     }
   }
 }

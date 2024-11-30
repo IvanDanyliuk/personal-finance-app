@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 
 
 interface ITextField {
-  label: string;
+  label?: string;
   name: string;
   type?: string;
   placeholder?: string;

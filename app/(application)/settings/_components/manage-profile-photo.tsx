@@ -9,11 +9,16 @@ import {
   DialogHeader,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Pencil } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 
-export const ManageProfilePhoto: React.FC = () => {
+interface IManageProfilePhoto {
+  userId: string;
+  currentUserImageUrl: string;
+};
+
+
+export const ManageProfilePhoto: React.FC<IManageProfilePhoto> = ({ userId, currentUserImageUrl }) => {
   const t = useTranslations('SettingsPage');
 
   const handlePhotoDelete = () => {
