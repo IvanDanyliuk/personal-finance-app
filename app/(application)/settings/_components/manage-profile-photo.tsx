@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { SubmitButton } from '@/components/common/submit-btn';
 import { FileInput } from '@/components/inputs';
 import { Button } from '@/components/ui/button';
@@ -9,7 +10,6 @@ import {
   DialogHeader,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { useTranslations } from 'next-intl';
 
 
 interface IManageProfilePhoto {

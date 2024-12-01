@@ -1,27 +1,27 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { AuthError } from 'next-auth';
 import { z as zod } from 'zod';
 import bcrypt from 'bcryptjs';
 import { signIn, signOut } from '@/auth';
 import { utapi, utFile } from '../uploadthing/utapi';
 import { db } from '@/db';
-import { AuthError } from 'next-auth';
 
 
 const signUpData = zod.object({
-  name: zod.string().min(1, 'Name is required!'),
-  email: zod.string().min(1, 'Email is required!').email('Invalid email!'),
-  password: zod.string().min(1, 'Password is required!').min(6, 'Password should have 6 characters at least'),
-  confirmPassword: zod.string().min(1, 'Password confirmation is required!').min(6, 'Password should have 6 characters at least'),
+  name: zod.string().min(1, 'Auth.errors.auth.fieldsValidation.requiredName'),
+  email: zod.string().min(1, 'Auth.errors.auth.fieldsValidation.requiredEmail').email('Auth.errors.auth.fieldsValidation.invalidEmail'),
+  password: zod.string().min(1, 'Auth.errors.auth.fieldsValidation.requiredPassword').min(6, 'Auth.errors.auth.fieldsValidation.invalidPassword'),
+  confirmPassword: zod.string().min(1, 'Auth.errors.auth.fieldsValidation.requiredConfirmPassword').min(6, 'Auth.errors.auth.fieldsValidation.invalidConfirmPassword'),
 }).refine((data) => data.password === data.confirmPassword, {
   path: ['confirmPassword'],
-  message: 'Passwords do not match',
+  message: 'Auth.errors.auth.fieldsValidation.passwordNotMatch',
 });
 
 const signInData = zod.object({
-  email: zod.string().min(1, 'Email is required!').email('Invalid email!'),
-  password: zod.string().min(1, 'Password is required!').min(6, 'Password should have 6 characters at least'),
+  email: zod.string().min(1, 'Auth.errors.auth.fieldsValidation.requiredEmail').email('Auth.errors.auth.fieldsValidation.invalidEmail'),
+  password: zod.string().min(1, 'Auth.errors.auth.fieldsValidation.requiredPassword').min(6, 'Auth.errors.auth.fieldsValidation.invalidPassword'),
 });
 
 
@@ -65,12 +65,16 @@ export const signin = async (prevState: any, formData: FormData) => {
       
         if(userAccount) {
           return {
-            error: `You created your account using your ${userAccount.provider} account. Sign in using your ${userAccount.provider} account and set the password via Settings`
+            error: userAccount.provider === 'google' ? 
+              'errors.auth.fieldsValidation.wrongProviderGoogle' : 
+              userAccount.provider === 'facebook' ? 
+                'errors.auth.fieldsValidation.wrongProviderFacebook' : 
+                'errors.auth.fieldsValidation.wrongCredentials'
           };
         }
       } else {
         return {
-          error: 'Account does not exist. There are no accounts with such email'
+          error: 'errors.auth.fieldsValidation.accountNotExist'
         };
       }
     }
@@ -79,7 +83,7 @@ export const signin = async (prevState: any, formData: FormData) => {
       switch(error.type) {
         case 'CredentialsSignin':
           return {
-            error: 'Invalid credentials'
+            error: 'errors.auth.fieldsValidation.invalidCredentials'
           };
         default:
           return {
@@ -116,7 +120,7 @@ export const signup = async (prevState: any, formData: FormData) => {
 
     if(existingUser) {
       return {
-        error: 'The user with such email already exists'
+        error: 'errors.auth.fieldsValidation.userAlreadyExists'
       };
     }
 
@@ -144,17 +148,17 @@ export const signup = async (prevState: any, formData: FormData) => {
       email,
       password,
       redirectTo: '/'
-    })
+    });
   } catch (error: any) {
     if(error instanceof AuthError) {
       switch(error.type) {
         case 'CredentialsSignin':
           return {
-            error: 'Invalid credentials'
+            error: 'auth.fieldsValidation.invalidCredentials'
           };
         default:
           return {
-            error: 'Something went wrong'
+            error: 'auth.fieldsValidation.wrongCredentials'
           };
       }
     }

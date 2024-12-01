@@ -3,11 +3,11 @@
 import { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { CheckboxField, FileInput, TextField} from '@/components/inputs';
 import { SubmitButton } from '@/components/common/submit-btn';
 import { signup } from '@/lib/actions/auth.actions';
 import { useToast } from '@/hooks/use-toast';
-import { useTranslations } from 'next-intl';
 
 
 const initialState = {

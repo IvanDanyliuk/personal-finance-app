@@ -28,6 +28,29 @@
       "agreeText": "I agree with",
       "termsAndPrivacyLink": "Terms & Privacy",
       "googleBtnTooltip": "Sign up with Google"
+    },
+    "errors": {
+      "general": {
+        "title": "Oops! Something wet wrong!"
+      },
+      "auth": {
+        "fieldsValidation": {
+          "requiredName": "Name is required!",
+          "requiredEmail": "Email is required!",
+          "invalidEmail": "Invalid email!",
+          "requiredPassword": "Password is required!",
+          "invalidPassword": "Password should have 6 characters at least",
+          "requiredConfirmPassword": "Password confirmation is required!",
+          "invalidConfirmPassword": "Password should have 6 characters at least",
+          "passwordNotMatch": "Passwords do not match",
+          "wrongProviderGoogle": "You created your account using your Google account. Sign in using your Google account and set the password via Settings",
+          "wrongProviderFacebook": "You created your account using your Facebook account. Sign in using your Facebook account and set the password via Settings",
+          "wrongCredentials": "Something went wrong!",
+          "accountNotExist": "Account does not exist. There are no accounts with such email",
+          "invalidCredentials": "Invalid credentials",
+          "userAlreadyExists": "The user with such email already exists"
+        }
+      }
     }
   },
   "Layout": {

@@ -28,6 +28,29 @@
       "agreeText": "Я згоден з",
       "termsAndPrivacyLink": "умовами політики та приватності",
       "googleBtnTooltip": "Заруєструватися через Google"
+    },
+    "errors": {
+      "general": {
+        "title": "Отакої! Щось пішло не так!"
+      },
+      "auth": {
+        "fieldsValidation": {
+          "requiredName": "Введіть ім'я!",
+          "requiredEmail": "Введіть адресу ел. пошти!",
+          "invalidEmail": "Неправильна адреса ел. пошти!",
+          "requiredPassword": "Введіть пароль!",
+          "invalidPassword": "Пароль має включати щонайменше 6 символів",
+          "requiredConfirmPassword": "Підтвердіть пароль!",
+          "invalidConfirmPassword": "Пароль має включати щонайменше 6 символів",
+          "passwordNotMatch": "Паролі не співпадають",
+          "wrongProviderGoogle": "Ви створили обліковий запис через Google Account. Увійдіть використовуючи Ваш Google Account та встановіть пароль в розділі Налаштування",
+          "wrongProviderFacebook": "Ви створили обліковий запис через Facebook Account. Увійдіть використовуючи Ваш Facebook Account та встановіть пароль в розділі Налаштування",
+          "wrongCredentials": "Щось пішло не так!",
+          "accountNotExist": "Облікового запису з такою адресою ел. пошти не існує",
+          "invalidCredentials": "Невірні дані для входу в обліковий запис",
+          "userAlreadyExists": "Користувач з такою адресою ел. пошти вже існує"
+        }
+      }
     }
   },
   "Layout": {

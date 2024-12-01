@@ -15,3 +15,7 @@ export const updateUserPhoto = async (prevState: any, formData: FormData) => {
 
   console.log('UPDATE USER PHOTO', rawNewImage);
 };
+
+export const updateUserData = async (prevState: any, formData: FormData) => {
+
+};

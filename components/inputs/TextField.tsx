@@ -3,6 +3,7 @@ import { CircleAlert } from 'lucide-react';
 import { Label } from '../ui/label'
 import { Input } from '../ui/input';
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 
 interface ITextField {
@@ -33,6 +34,8 @@ export const TextField: React.FC<ITextField> = ({
   onChange,
   error
 }) => {
+  const t = useTranslations();
+  
   return (
     <div className={cn(
       variant === 'vertical' ? 'flex-col' : 'flex-row items-center', 
@@ -67,7 +70,7 @@ export const TextField: React.FC<ITextField> = ({
             <>
               <CircleAlert className='w-4 h-4' />
               <span>
-                {error.join('. ').trim()}
+                {error.map(err => t(err)).join('. ').trim()}
               </span>
             </>
           )}

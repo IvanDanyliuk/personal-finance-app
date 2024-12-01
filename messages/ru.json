@@ -28,6 +28,29 @@
       "agreeText": "Я принимаю",
       "termsAndPrivacyLink": "условия политики и приватности",
       "googleBtnTooltip": "Зарегистрироваться через Google"
+    },
+    "errors": {
+      "general": {
+        "title": "Ой! Что-то пошло не так!"
+      },
+      "auth": {
+        "fieldsValidation": {
+          "requiredName": "Введите имя!",
+          "requiredEmail": "Введите адрес эл. почты!",
+          "invalidEmail": "Неправильный адрес эл. почты!",
+          "requiredPassword": "Введите пароль!",
+          "invalidPassword": "Пароль должен включать минимум 6 символов",
+          "requiredConfirmPassword": "Подтвердите пароль!",
+          "invalidConfirmPassword": "Пароль должен включать минимум 6 символов",
+          "passwordNotMatch": "Пароли не совпадают",
+          "wrongProviderGoogle": "Вы создали учетную запись используя ваш Google Account. Войдите через Вашу учетную запись Google и установите пароль в разделе Настройки",
+          "wrongProviderFacebook": "Вы создали учетную запись используя ваш Facebook Account. Войдите через Вашу учетную запись Facebook и установите пароль в разделе Настройки",
+          "wrongCredentials": "Что-то пошло не так!",
+          "accountNotExist": "Учетной записи с таким адресом эл. почты не существует",
+          "invalidCredentials": "Неверные данные для входа в учетную запись",
+          "userAlreadyExists": "Пользователь с таким адресом эл. почты уже существует"
+        }
+      }
     }
   },
   "Layout": {
