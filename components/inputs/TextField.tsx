@@ -1,9 +1,9 @@
 import { ChangeEvent } from 'react';
+import { useTranslations } from 'next-intl';
 import { CircleAlert } from 'lucide-react';
 import { Label } from '../ui/label'
 import { Input } from '../ui/input';
 import { cn } from '@/lib/utils';
-import { useTranslations } from 'next-intl';
 
 
 interface ITextField {

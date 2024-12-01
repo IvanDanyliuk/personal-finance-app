@@ -17,5 +17,14 @@ export const updateUserPhoto = async (prevState: any, formData: FormData) => {
 };
 
 export const updateUserData = async (prevState: any, formData: FormData) => {
+  try {
+    const name = formData.get('name');
+    const email = formData.get('email');
 
+    console.log('UPDATE USER DATA', { name, email })
+  } catch (error: any) {
+    return {
+      error: 'Something went wrong!'
+    }
+  }
 };

@@ -30,10 +30,10 @@ export const SignUpForm = () => {
   };
 
   useEffect(() => {
-    if(state && state.error) {
+    if(state.error) {
       toast({
-        title: 'Oops! Something wet wrong!',
-        description: state.error,
+        title: t('errors.general.title'),
+        description: t(state.error),
         variant: 'destructive',
         className: 'bg-danger-1 text-danger-2'
       });
