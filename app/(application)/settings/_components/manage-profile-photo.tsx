@@ -40,7 +40,9 @@ export const ManageProfilePhoto: React.FC<IManageProfilePhoto> = ({ userId, curr
               name='image'
               btnTitle={t('manageUserPhotoForm.addBtnLabel')}
             />
-            <SubmitButton label={t('manageUserPhotoForm.submitBtnLabel')} />
+            <SubmitButton>
+              {t('manageUserPhotoForm.submitBtnLabel')}
+            </SubmitButton>
           </form>
         </DialogContent>
       </Dialog>

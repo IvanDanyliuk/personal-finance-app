@@ -72,10 +72,9 @@ export const SignUpForm = () => {
         name='image'
         btnTitle={t('image')}
       />
-      <SubmitButton 
-        label={t('signupBtn')} 
-        disabled={!isAgreementConfirmed} 
-      />
+      <SubmitButton disabled={!isAgreementConfirmed}>
+        {t('signupBtn')}
+      </SubmitButton>
       <div className='py-3 w-full flex justify-start items-center gap-1'>
         <CheckboxField 
           name='agreement'

@@ -1,10 +1,19 @@
 'use client';
 
+import { useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { Pencil } from 'lucide-react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { TextField } from '@/components/inputs';
 import { Button } from '@/components/ui/button';
-import { Pencil } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { SubmitButton } from '@/components/common/submit-btn';
 
 
 interface IManagePersonalData {
@@ -25,7 +34,7 @@ export const ManagePersonalData: React.FC<IManagePersonalData> = ({ variant, cur
       <p>
         {t(variant === 'name' ? 'editNameFormLabel' : 'editEmailFormLabel')}
       </p>
-      <>
+      {/* <>
         {isEditModeActive ? (
           <form action='' className='flex items-center gap-3'>
             <TextField name='name' />
@@ -48,7 +57,34 @@ export const ManagePersonalData: React.FC<IManagePersonalData> = ({ variant, cur
             </Button>
           </div>
         )}
-      </>
+      </> */}
+      <Dialog>
+        <DialogTrigger>
+          <Pencil />
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>
+              {t(variant === 'name' ? 'updateNameFormTitle' : 'updateEmailFormTitle')}
+            </DialogTitle>
+          </DialogHeader>
+          <form action='' className=''>
+            <TextField name='name' />
+            <div className='flex items-center gap-3'>
+              {/* <button type='submit'>
+                {t('submitBtnLabel')}
+              </button> */}
+              <SubmitButton>
+                {t('submitBtnLabel')}
+              </SubmitButton>
+              {/* <button type='button' onClick={handleEditMode}>
+                {t('cancelBtnLabel')}
+              </button> */}
+
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

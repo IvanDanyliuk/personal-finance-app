@@ -48,7 +48,9 @@ export const SignInForm = () => {
         type='password'
         error={state && state.fieldError && state.fieldError['password']}
       />
-      <SubmitButton label={t('signinBtn')} />
+      <SubmitButton>
+        {t('signinBtn')}
+      </SubmitButton>
       <div className='py-3 w-full flex justify-between items-center'>
         <CheckboxField 
           name='rememberMe'

@@ -53,6 +53,8 @@
     "managePersonalData": {
       "editNameFormLabel": "Имя / Фамилия",
       "editEmailFormLabel": "Эл. почта",
+      "updateNameFormTitle": "Обновите имя пользователя",
+      "updateEmailFormTitle": "Обновите адрес эл. почты",
       "submitBtnLabel": "Подтвердить",
       "cancelBtnLabel": "Отмена"
     }

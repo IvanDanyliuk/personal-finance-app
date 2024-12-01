@@ -53,6 +53,8 @@
     "managePersonalData": {
       "editNameFormLabel": "First and Last Name",
       "editEmailFormLabel": "Email",
+      "updateNameFormTitle": "Update your name",
+      "updateEmailFormTitle": "Update your email",
       "submitBtnLabel": "Submit",
       "cancelBtnLabel": "Cancel"
     }

@@ -53,6 +53,8 @@
     "managePersonalData": {
       "editNameFormLabel": "Ім'я / Прізвище",
       "editEmailFormLabel": "Ел. пошта",
+      "updateNameFormTitle": "Оновіть ім'я користувача",
+      "updateEmailFormTitle": "Оновіть адресу ел. пошти",
       "submitBtnLabel": "Підтвердити",
       "cancelBtnLabel": "Відхилити"
     }

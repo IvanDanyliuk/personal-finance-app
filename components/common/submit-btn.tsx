@@ -2,15 +2,16 @@ import { useFormStatus } from 'react-dom';
 import Image from 'next/image';
 import { Button } from '../ui/button';
 import Spinner from '../../public/images/tube-spinner.svg';
+import { ReactNode } from 'react';
 
 
 interface ISubmitButton {
-  label: string;
   disabled?: boolean;
+  children: ReactNode;
 }
 
 export const SubmitButton: React.FC<ISubmitButton> = ({
-  label, disabled
+  disabled, children
 }) => {
   const { pending } = useFormStatus();
 
@@ -28,7 +29,9 @@ export const SubmitButton: React.FC<ISubmitButton> = ({
             width={20} 
             height={20} 
           /> : 
-          label
+          <>
+            {children}
+          </>
       }
     </Button>
   );
