@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+import { utapi, utFile } from './uploadthing/utapi';
 
 export const saltAndHashPassword = (password: any) => {
   const saltRounds = 10;

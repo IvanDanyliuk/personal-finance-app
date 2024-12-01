@@ -127,9 +127,16 @@ export const signup = async (prevState: any, formData: FormData) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const imageFile = rawImage ? await fetch(rawImage) : '';
+    console.log('SIGN IN: imageFile', imageFile)
+
     const imageBlob = imageFile ? await imageFile.blob() : new Blob();
-    const imageToUpload = new utFile([imageBlob!], `${name}-avatar`, { customId: `${name}-avatar` });
+    console.log('SIGN IN: imageBlob', imageBlob)
+
+    const imageToUpload = new File([imageBlob!], `${name}-avatar`);
+    console.log('SIGN IN: imageToUpload', imageToUpload)
+
     const image = imageToUpload && imageToUpload.size > 0 ? (await utapi.uploadFiles([imageToUpload]))[0].data?.url : '';
+    console.log('SIGN IN: image', image)
 
     await db.user.create({
       data: {

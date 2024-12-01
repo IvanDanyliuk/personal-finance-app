@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useFormState } from 'react-dom';
+import { useFormState, useFormStatus } from 'react-dom';
 import { useTranslations } from 'next-intl';
 import { Pencil } from 'lucide-react';
 import {
@@ -30,6 +30,7 @@ export const ManagePersonalData: React.FC<IManagePersonalData> = ({ variant, cur
   const { toast } = useToast();
 
   const [state, formAction] = useFormState<any, any>(updateUserData, { name: '', email: '' });
+  const { pending } = useFormStatus();
 
   useEffect(() => {
     if(state && state.error) {
