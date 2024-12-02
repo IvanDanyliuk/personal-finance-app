@@ -80,6 +80,9 @@
       "updateEmailFormTitle": "Обновите адрес эл. почты",
       "submitBtnLabel": "Подтвердить",
       "cancelBtnLabel": "Отмена"
+    },
+    "errors": {
+      "uploadImageFailed": "При обновлении фото профиля произошла ошибка"
     }
   }
 }

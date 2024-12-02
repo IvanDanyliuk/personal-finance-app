@@ -80,6 +80,9 @@
       "updateEmailFormTitle": "Оновіть адресу ел. пошти",
       "submitBtnLabel": "Підтвердити",
       "cancelBtnLabel": "Відхилити"
+    },
+    "errors": {
+      "uploadImageFailed": "При оновленні фото профілю виникла помилка"
     }
   }
 }

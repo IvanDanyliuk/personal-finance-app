@@ -80,6 +80,9 @@
       "updateEmailFormTitle": "Update your email",
       "submitBtnLabel": "Submit",
       "cancelBtnLabel": "Cancel"
+    },
+    "errors": {
+      "uploadImageFailed": "Cannot update a profile photo"
     }
   }
 }
