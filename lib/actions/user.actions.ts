@@ -23,9 +23,7 @@ export const updateUserPhoto = async (data: any, prevState: any, formData: FormD
     const image = imageToUpload && imageToUpload.size > 0 ? (await utapi.uploadFiles([imageToUpload]))[0].data?.url : '';
 
     const session = await auth();
-    if(!session) throw new Error('User is not authenticated!')
-
-    console.log('UPDATE USER PHOTO', { imageFile, imageBlob, imageToUpload, image });
+    if(!session) throw new Error('User is not authenticated!');
 
     if(image) {
       await db.user.update({
@@ -39,14 +37,13 @@ export const updateUserPhoto = async (data: any, prevState: any, formData: FormD
 
       if(data.currentUserImageUrl) {
         const imageToDeleteId = data.currentUserImageUrl.substring(data.currentUserImageUrl.lastIndexOf('/') + 1);
-        console.log('IMAGE TO DELETE', imageToDeleteId);
+        // console.log('IMAGE TO DELETE', imageToDeleteId);
         // await utapi.deleteFiles(imageToDeleteId);
       }
     } else {
-      throw new Error('errors.')
+      throw new Error('errors.');
     }
 
-    revalidatePath('/');
     
     return {
       status: ActionStatus.Success,

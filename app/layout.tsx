@@ -5,6 +5,8 @@ import { Montserrat } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
+import { SessionProvider } from 'next-auth/react';
+import { auth } from '@/auth';
 
 
 const montserrat = Montserrat({
@@ -22,25 +24,30 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
   const locale = await getLocale();
   const messages = await getMessages();
+
+  // console.log('LAYOUT SESSION DATA', session?.user)
 
   return (
     <html lang={locale}>
       <body
         className={`${montserrat.className} antialiased`}
       >
-        <NextIntlClientProvider messages={messages}>
-          <ThemeProvider
-            attribute='class'
-            defaultTheme='system'
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-            <Toaster />
-          </ThemeProvider>
-        </NextIntlClientProvider>
+        <SessionProvider session={session}>
+          <NextIntlClientProvider messages={messages}>
+            <ThemeProvider
+              attribute='class'
+              defaultTheme='system'
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+              <Toaster />
+            </ThemeProvider>
+          </NextIntlClientProvider>
+        </SessionProvider>
       </body>
     </html>
   );

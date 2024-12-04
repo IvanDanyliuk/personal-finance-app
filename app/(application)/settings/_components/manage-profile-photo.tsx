@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
-import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { SubmitButton } from '@/components/common/submit-btn';
 import { FileInput } from '@/components/inputs';
@@ -25,7 +24,6 @@ interface IManageProfilePhoto {
 
 export const ManageProfilePhoto: React.FC<IManageProfilePhoto> = ({ userId, currentUserImageUrl }) => {
   const t = useTranslations('SettingsPage');
-  const { update, data } = useSession()
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -42,8 +40,6 @@ export const ManageProfilePhoto: React.FC<IManageProfilePhoto> = ({ userId, curr
     if(isOpen && state && state.status === ActionStatus.Success) {
       setIsOpen(false);
     }
-    
-    update({ image: state.updatedImageUrl }).then(res => console.log('STATE', { state, session: res?.user! }))
   }, [state, formAction])
 
   return (
