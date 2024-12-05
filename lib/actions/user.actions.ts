@@ -1,11 +1,8 @@
 'use server';
 
-import { z as zod } from 'zod';
-import bcrypt from 'bcryptjs';
-import { utapi, utFile } from '../uploadthing/utapi';
+import { utapi } from '../uploadthing/utapi';
 import { db } from '@/db';
 import { ActionStatus } from '../types/common.types';
-import { revalidatePath } from 'next/cache';
 import { auth, unstable_update } from '@/auth';
 
 
@@ -37,14 +34,11 @@ export const updateUserPhoto = async (data: any, prevState: any, formData: FormD
 
       if(data.currentUserImageUrl) {
         const imageToDeleteId = data.currentUserImageUrl.substring(data.currentUserImageUrl.lastIndexOf('/') + 1);
-        // console.log('IMAGE TO DELETE', imageToDeleteId);
-        // await utapi.deleteFiles(imageToDeleteId);
+        await utapi.deleteFiles(imageToDeleteId);
       }
     } else {
       throw new Error('errors.');
     }
-
-    console.log('UPDATED SESSION', session.user)
     return {
       status: ActionStatus.Success,
       updatedImageUrl: image,
@@ -63,7 +57,6 @@ export const updateUserData = async (prevState: any, formData: FormData) => {
     const name = formData.get('name');
     const email = formData.get('email');
 
-    console.log('UPDATE USER DATA', { name, email })
   } catch (error: any) {
     return {
       status: ActionStatus.Failed,
