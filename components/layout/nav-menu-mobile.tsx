@@ -15,11 +15,14 @@ import { Separator } from '../ui/separator';
 import { MenuLinks } from './menu-links';
 import { logout } from '@/lib/actions/auth.actions';
 import { ModeToggle } from '../theme/mode-toggle';
+import UserImagePlaceholder from '@/public/images/user-placeholder.png';
 
 
 export const NavMenuMobile: React.FC = () => {
   const { data: session } = useSession();
-  const t = useTranslations('Layout')
+  const t = useTranslations('Layout');
+
+  const userImage = session && session.user && session.user.image ? session.user.image : UserImagePlaceholder;
 
   const handleSignOut = async () => {
     await logout();
@@ -41,7 +44,7 @@ export const NavMenuMobile: React.FC = () => {
             <div>
               <div className='mt-3 flex items-center gap-3'>
                 <Image 
-                  src={session?.user?.image!} 
+                  src={userImage} 
                   alt={session?.user?.name!} 
                   width={40} 
                   height={40} 

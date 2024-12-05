@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { useFormState } from 'react-dom';
+import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { SubmitButton } from '@/components/common/submit-btn';
@@ -13,9 +14,10 @@ import {
   DialogHeader,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { updateUserPhoto } from '@/lib/actions/user.actions';
+import { deleteUserPhoto, updateUserPhoto } from '@/lib/actions/user.actions';
 import { ActionStatus } from '@/lib/types/common.types';
 import { useToast } from '@/hooks/use-toast';
+import Spinner from '@/public/images/tube-spinner.svg';
 
 
 interface IManageProfilePhoto {
@@ -30,17 +32,32 @@ export const ManageProfilePhoto: React.FC<IManageProfilePhoto> = ({ userId, curr
   const { toast } = useToast();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isPending, startTransition] = useTransition();
 
   const action = updateUserPhoto.bind(null, { userId, currentUserImageUrl });
   const [state, formAction] = useFormState<any, any>(action, {});
 
   const handleModalOpen = () => setIsOpen(!isOpen);
 
-  const handlePhotoDelete = () => {
-    console.log('REMOVE PHOTO')
+  const handlePhotoDelete = async () => {
+    startTransition(async () => {
+      const actionResponse = await deleteUserPhoto(userId, currentUserImageUrl);
+      toast({
+        description: t(actionResponse.status === ActionStatus.Success ? 
+          'actionMessages.profileImageDeleted' : 
+          'errors.deleteImageFailed'),
+        variant: actionResponse.status === ActionStatus.Success ? 
+          'default' : 
+          'destructive',
+        className: actionResponse.status === ActionStatus.Success ? 
+          'bg-success-1 text-success-2' : 
+          'bg-danger-1 text-danger-2'
+      });
+    });
   };
 
   useEffect(() => {
+    console.log('MANAGE PROFILE FORM', currentUserImageUrl)
     if(isOpen && state && state.status === ActionStatus.Success) {
       if(state && state.updatedImageUrl) {
         update({ image: state.updatedImageUrl }).then(res => toast({
@@ -83,9 +100,23 @@ export const ManageProfilePhoto: React.FC<IManageProfilePhoto> = ({ userId, curr
       </Dialog>
       <Button 
         type='button' 
+        disabled={Boolean(!currentUserImageUrl) || isPending}
         onClick={handlePhotoDelete}
-        className='w-52 py-6 bg-primary-7 hover:bg-primary-6 rounded-full text-white font-semibold'>
-        {t('manageUserPhotoForm.deleteBtnLabel')}
+        className='w-52 py-6 bg-primary-7 hover:bg-primary-6 rounded-full text-white font-semibold'
+      >
+        {
+          isPending ? 
+          <Image 
+            src={Spinner} 
+            alt='Loading' 
+            width={20} 
+            height={20} 
+          /> : 
+          <>
+            {t('manageUserPhotoForm.deleteBtnLabel')}
+          </>
+      }
+        
       </Button>
     </div>
   );

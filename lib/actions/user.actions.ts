@@ -1,5 +1,6 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { utapi } from '../uploadthing/utapi';
 import { db } from '@/db';
 import { ActionStatus } from '../types/common.types';
@@ -44,6 +45,38 @@ export const updateUserPhoto = async (data: any, prevState: any, formData: FormD
       updatedImageUrl: image,
       error: null
     };
+  } catch (error: any) {
+    return {
+      status: ActionStatus.Failed,
+      error: error.message
+    };
+  }
+};
+
+export const deleteUserPhoto = async (userId: string, imageUrl: string) => {
+  try {
+    const session = await auth();
+
+    if(!session) throw new Error('User is not authenticated!');
+
+    await db.user.update({
+      where: { id: userId },
+      data: {
+        image: ''
+      }
+    });
+
+    await unstable_update({ user: { ...session.user, image: '' } });
+
+    const imageToDeleteId = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
+    await utapi.deleteFiles(imageToDeleteId);
+
+    revalidatePath('/', 'layout');
+
+    return {
+      status: ActionStatus.Success,
+      error: null
+    }
   } catch (error: any) {
     return {
       status: ActionStatus.Failed,

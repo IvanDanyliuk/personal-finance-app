@@ -82,10 +82,12 @@
       "cancelBtnLabel": "Cancel"
     },
     "actionMessages": {
-      "profilePhotoUpdated": "Image has been updated!"
+      "profilePhotoUpdated": "Image has been updated!",
+      "profileImageDeleted": "Image successfully deleted!"
     },
     "errors": {
-      "uploadImageFailed": "Cannot update a profile photo"
+      "uploadImageFailed": "Cannot update a profile photo",
+      "deleteImageFailed": "Cannot delete a profile photo"
     }
   }
 }

@@ -82,10 +82,12 @@
       "cancelBtnLabel": "Отмена"
     },
     "actionMessages": {
-      "profilePhotoUpdated": "Фото профиля обновлено успешно!"
+      "profilePhotoUpdated": "Фото профиля обновлено успешно!",
+      "profileImageDeleted": "Фото успешно удалено!"
     },
     "errors": {
-      "uploadImageFailed": "При обновлении фото профиля произошла ошибка"
+      "uploadImageFailed": "При обновлении фото профиля произошла ошибка",
+      "deleteImageFailed": "Не удалось удалить фото профиля"
     }
   }
 }

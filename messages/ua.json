@@ -82,10 +82,12 @@
       "cancelBtnLabel": "Відхилити"
     },
     "actionMessages": {
-      "profilePhotoUpdated": "Фото профілю оновлено успішно!"
+      "profilePhotoUpdated": "Фото профілю оновлено успішно!",
+      "profileImageDeleted": "Фото успішно видалено!"
     },
     "errors": {
-      "uploadImageFailed": "При оновленні фото профілю виникла помилка"
+      "uploadImageFailed": "При оновленні фото профілю виникла помилка",
+      "deleteImageFailed": "Не вдалося видалити фото профілю"
     }
   }
 }

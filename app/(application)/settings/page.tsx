@@ -4,12 +4,14 @@ import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import { ManageProfilePhoto } from './_components';
 import { ManagePersonalData } from './_components/manage-personal-data';
+import UserImagePlaceholder from '@/public/images/user-placeholder.png';
 
 
 export default async function SettingsPage() {
   const t = await getTranslations('SettingsPage');
   const session = await auth();
   const user = await getUser(session?.user?.email!);
+  const userImage = user && user.image ? user.image : UserImagePlaceholder
 
   return (
     <div className='w-full h-full'>
@@ -20,7 +22,7 @@ export default async function SettingsPage() {
         <div className='flex flex-col gap-3'>
           <div className='w-full flex justify-between items-center'>
             <Image 
-              src={user?.image!} 
+              src={userImage} 
               alt={user?.name!} 
               width={150} 
               height={150} 
