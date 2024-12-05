@@ -44,14 +44,13 @@ export const updateUserPhoto = async (data: any, prevState: any, formData: FormD
       throw new Error('errors.');
     }
 
-    
+    console.log('UPDATED SESSION', session.user)
     return {
       status: ActionStatus.Success,
       updatedImageUrl: image,
       error: null
     };
   } catch (error: any) {
-    console.log('UPDATE USER IMAGE ERROR', error)
     return {
       status: ActionStatus.Failed,
       error: error.message

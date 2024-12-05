@@ -81,6 +81,9 @@
       "submitBtnLabel": "Подтвердить",
       "cancelBtnLabel": "Отмена"
     },
+    "actionMessages": {
+      "profilePhotoUpdated": "Фото профиля обновлено успешно!"
+    },
     "errors": {
       "uploadImageFailed": "При обновлении фото профиля произошла ошибка"
     }

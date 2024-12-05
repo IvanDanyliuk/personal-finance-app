@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
+import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { SubmitButton } from '@/components/common/submit-btn';
 import { FileInput } from '@/components/inputs';
@@ -14,6 +15,7 @@ import {
 } from '@/components/ui/dialog';
 import { updateUserPhoto } from '@/lib/actions/user.actions';
 import { ActionStatus } from '@/lib/types/common.types';
+import { useToast } from '@/hooks/use-toast';
 
 
 interface IManageProfilePhoto {
@@ -24,6 +26,8 @@ interface IManageProfilePhoto {
 
 export const ManageProfilePhoto: React.FC<IManageProfilePhoto> = ({ userId, currentUserImageUrl }) => {
   const t = useTranslations('SettingsPage');
+  const { update } = useSession();
+  const { toast } = useToast();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -38,7 +42,21 @@ export const ManageProfilePhoto: React.FC<IManageProfilePhoto> = ({ userId, curr
 
   useEffect(() => {
     if(isOpen && state && state.status === ActionStatus.Success) {
+      if(state && state.updatedImageUrl) {
+        update({ image: state.updatedImageUrl }).then(res => toast({
+          description: t('actionMessages.profilePhotoUpdated'),
+          variant: 'default',
+          className: 'bg-success-1 text-success-2'
+        }));
+      }
       setIsOpen(false);
+    }
+    if(isOpen && state && state.error) {
+      toast({
+        description: t('errors.uploadImageFailed'),
+        variant: 'destructive',
+        className: 'bg-danger-1 text-danger-2'
+      })
     }
   }, [state, formAction])
 

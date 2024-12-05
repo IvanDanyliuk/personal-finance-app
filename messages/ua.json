@@ -81,6 +81,9 @@
       "submitBtnLabel": "Підтвердити",
       "cancelBtnLabel": "Відхилити"
     },
+    "actionMessages": {
+      "profilePhotoUpdated": "Фото профілю оновлено успішно!"
+    },
     "errors": {
       "uploadImageFailed": "При оновленні фото профілю виникла помилка"
     }

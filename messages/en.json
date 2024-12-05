@@ -81,6 +81,9 @@
       "submitBtnLabel": "Submit",
       "cancelBtnLabel": "Cancel"
     },
+    "actionMessages": {
+      "profilePhotoUpdated": "Image has been updated!"
+    },
     "errors": {
       "uploadImageFailed": "Cannot update a profile photo"
     }

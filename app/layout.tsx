@@ -28,8 +28,6 @@ export default async function RootLayout({
   const locale = await getLocale();
   const messages = await getMessages();
 
-  // console.log('LAYOUT SESSION DATA', session?.user)
-
   return (
     <html lang={locale}>
       <body

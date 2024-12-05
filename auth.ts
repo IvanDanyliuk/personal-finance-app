@@ -60,22 +60,18 @@ export const {
   ],
   callbacks: {
     jwt({ token, user, trigger, session }) {
-      console.log('JWT: START')
       if(user) {
-        token = { ...token, ...user }
+        token = { ...token, ...user };
       }
 
       if(trigger === 'update') {
-        console.log('JWT: UPDATE', user)
-        token = { ...token, ...session.user }
+        token = { ...token, ...session.user };
       }
-      console.log('JWT: END', token)
+
       return token;
     },
-    session({ session, token, trigger, newSession }) {
+    session({ session, token }) {
       let user = token as any;
-
-      console.log('SESSION: START', { session, token })
 
       if(token.user) {
         user = token.user
@@ -89,14 +85,6 @@ export const {
           image: user.image,
         };
       }
-
-
-      if(trigger === 'update') {
-        // session.user.name = newSession.name
-        console.log('SESSION: UPDATE', { session, newSession })
-
-      }
-      console.log('SESSION: END', { session, token })
 
       return session;
     }

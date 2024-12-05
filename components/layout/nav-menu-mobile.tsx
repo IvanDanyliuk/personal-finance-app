@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { LogOut, Menu } from 'lucide-react';
 import {
@@ -16,15 +17,10 @@ import { logout } from '@/lib/actions/auth.actions';
 import { ModeToggle } from '../theme/mode-toggle';
 
 
-interface INavMenuMobile {
-  userName: string;
-  email: string;
-  userImage: string;
-};
-
-
-export const NavMenuMobile: React.FC<INavMenuMobile> = ({ userName, email, userImage }) => {
+export const NavMenuMobile: React.FC = () => {
+  const { data: session } = useSession();
   const t = useTranslations('Layout')
+
   const handleSignOut = async () => {
     await logout();
   };
@@ -45,18 +41,18 @@ export const NavMenuMobile: React.FC<INavMenuMobile> = ({ userName, email, userI
             <div>
               <div className='mt-3 flex items-center gap-3'>
                 <Image 
-                  src={userImage} 
-                  alt={userName} 
+                  src={session?.user?.image!} 
+                  alt={session?.user?.name!} 
                   width={40} 
                   height={40} 
                   className='rounded-full' 
                 />
                 <div>
                   <p className='text-foreground text-sm font-semibold'>
-                    {userName}
+                    {session?.user?.name!}
                   </p>
                   <p className='text-secondary-3 text-xs'>
-                    {email}
+                    {session?.user?.email!}
                   </p>
                 </div>
               </div>
@@ -64,7 +60,7 @@ export const NavMenuMobile: React.FC<INavMenuMobile> = ({ userName, email, userI
               <MenuLinks isExpanded={true} />
             </div>
             <div className='mb-3 flex flex-col items-center gap-6'>
-              {userName && email && (
+              {session && session.user && (
                 <button 
                   type='button' 
                   onClick={handleSignOut} 
