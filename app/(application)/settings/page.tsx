@@ -1,7 +1,7 @@
+import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 import { auth } from '@/auth';
 import { getUser } from '@/lib/actions/user.actions';
-import { getTranslations } from 'next-intl/server';
-import Image from 'next/image';
 import { ManageProfilePhoto } from './_components';
 import { ManagePersonalData } from './_components/manage-personal-data';
 import UserImagePlaceholder from '@/public/images/user-placeholder.png';

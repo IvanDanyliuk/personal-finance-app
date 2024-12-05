@@ -22,7 +22,9 @@ export const NavMenuMobile: React.FC = () => {
   const { data: session } = useSession();
   const t = useTranslations('Layout');
 
-  const userImage = session && session.user && session.user.image ? session.user.image : UserImagePlaceholder;
+  const userImage = session && session.user && session.user.image ? 
+    session.user.image : 
+    UserImagePlaceholder;
 
   const handleSignOut = async () => {
     await logout();
