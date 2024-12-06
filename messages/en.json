@@ -83,11 +83,16 @@
     },
     "actionMessages": {
       "profilePhotoUpdated": "Image has been updated!",
-      "profileImageDeleted": "Image successfully deleted!"
+      "profileImageDeleted": "Image successfully deleted!",
+      "userNameUpdated": "User name successfully updated!",
+      "userEmailUpdated": "Email address successfully updated!"
     },
     "errors": {
+      "general": "Something went wrong!",
       "uploadImageFailed": "Cannot update a profile photo",
-      "deleteImageFailed": "Cannot delete a profile photo"
+      "deleteImageFailed": "Cannot delete a profile photo",
+      "updateUserNameFailed": "Cannot update user name",
+      "updateUserEmailFailed": "Cannot update user email"
     }
   }
 }

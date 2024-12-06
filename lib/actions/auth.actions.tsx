@@ -5,7 +5,7 @@ import { AuthError } from 'next-auth';
 import { z as zod } from 'zod';
 import bcrypt from 'bcryptjs';
 import { signIn, signOut } from '@/auth';
-import { utapi, utFile } from '../uploadthing/utapi';
+import { utapi } from '../uploadthing/utapi';
 import { db } from '@/db';
 
 

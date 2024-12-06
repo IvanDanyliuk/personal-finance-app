@@ -83,11 +83,15 @@
     },
     "actionMessages": {
       "profilePhotoUpdated": "Фото профілю оновлено успішно!",
-      "profileImageDeleted": "Фото успішно видалено!"
+      "profileImageDeleted": "Фото успішно видалено!",
+      "userNameUpdated": "Ім'я користувача успішно оновлено!",
+      "userEmailUpdated": "Адресу ел. пошти успішно оновлено!"
     },
     "errors": {
       "uploadImageFailed": "При оновленні фото профілю виникла помилка",
-      "deleteImageFailed": "Не вдалося видалити фото профілю"
+      "deleteImageFailed": "Не вдалося видалити фото профілю",
+      "updateUserNameFailed": "Не вдалося змінити ім'я користувача",
+      "updateUserEmailFailed": "Не вдалося змінити адресу ел. пошти"
     }
   }
 }

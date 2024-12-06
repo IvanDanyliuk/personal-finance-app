@@ -11,13 +11,13 @@ export const getUser = async (email: string) => {
   return await db.user.findUnique({ where: { email } });
 };
 
-export const updateUserPhoto = async (data: any, prevState: any, formData: FormData) => {  
+export const updateUserPhoto = async (prevState: any, formData: FormData) => {  
   try {
     const rawNewImage = formData.get('image') as string;
 
     const imageFile = rawNewImage ? await fetch(rawNewImage) : '';
     const imageBlob = imageFile ? await imageFile.blob() : new Blob();
-    const imageToUpload = new File([imageBlob!], `${data.userId}-avatar`)
+    const imageToUpload = new File([imageBlob!], `${crypto.randomUUID()}-avatar`)
     const image = imageToUpload && imageToUpload.size > 0 ? (await utapi.uploadFiles([imageToUpload]))[0].data?.url : '';
 
     const session = await auth();
@@ -25,7 +25,7 @@ export const updateUserPhoto = async (data: any, prevState: any, formData: FormD
 
     if(image) {
       await db.user.update({
-        where: { id: data.userId },
+        where: { email: session.user?.email! },
         data: {
           image
         }
@@ -33,8 +33,8 @@ export const updateUserPhoto = async (data: any, prevState: any, formData: FormD
 
       await unstable_update({ user: { ...session.user, image } });
 
-      if(data.currentUserImageUrl) {
-        const imageToDeleteId = data.currentUserImageUrl.substring(data.currentUserImageUrl.lastIndexOf('/') + 1);
+      if(session && session.user && session.user.image) {
+        const imageToDeleteId = session.user.image.substring(session.user.image.lastIndexOf('/') + 1);
         await utapi.deleteFiles(imageToDeleteId);
       }
     } else {
@@ -53,23 +53,24 @@ export const updateUserPhoto = async (data: any, prevState: any, formData: FormD
   }
 };
 
-export const deleteUserPhoto = async (userId: string, imageUrl: string) => {
+export const deleteUserPhoto = async () => {
   try {
     const session = await auth();
 
     if(!session) throw new Error('User is not authenticated!');
 
     await db.user.update({
-      where: { id: userId },
+      where: { email: session.user?.email! },
       data: {
         image: ''
       }
     });
 
-    await unstable_update({ user: { ...session.user, image: '' } });
+    const imageToDeleteId = session.user?.image!.substring(session.user?.image!.lastIndexOf('/') + 1);
+    await utapi.deleteFiles(imageToDeleteId!);
 
-    const imageToDeleteId = imageUrl.substring(imageUrl.lastIndexOf('/') + 1);
-    await utapi.deleteFiles(imageToDeleteId);
+    await unstable_update({ user: { ...session.user, image: '' } });
+  
 
     revalidatePath('/', 'layout');
 
@@ -87,9 +88,44 @@ export const deleteUserPhoto = async (userId: string, imageUrl: string) => {
 
 export const updateUserData = async (prevState: any, formData: FormData) => {
   try {
-    const name = formData.get('name');
-    const email = formData.get('email');
+    const session = await auth();
 
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+
+    if(session && session.user && name) {
+
+      await db.user.update({
+        where: { email: session.user.email! },
+        data: { name }
+      });
+
+
+      await unstable_update({ user: { ...session.user, name } });
+
+      return {
+        status: ActionStatus.Success,
+        updatedName: name,
+        error: null
+      };
+    };
+
+    if(session && session.user && email) {
+      await db.user.update({
+        where: { id: session.user?.id },
+        data: { email }
+      });
+
+      await unstable_update({ user: { ...session.user, email} });
+
+      return {
+        status: ActionStatus.Success,
+        updatedEmail: email,
+        error: null
+      };
+    }
+
+    throw new Error('errors.general');
   } catch (error: any) {
     return {
       status: ActionStatus.Failed,

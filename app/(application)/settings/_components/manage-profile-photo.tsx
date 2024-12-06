@@ -20,28 +20,21 @@ import { useToast } from '@/hooks/use-toast';
 import Spinner from '@/public/images/tube-spinner.svg';
 
 
-interface IManageProfilePhoto {
-  userId: string;
-  currentUserImageUrl: string;
-};
-
-
-export const ManageProfilePhoto: React.FC<IManageProfilePhoto> = ({ userId, currentUserImageUrl }) => {
+export const ManageProfilePhoto: React.FC = () => {
   const t = useTranslations('SettingsPage');
-  const { update } = useSession();
+  const { data: session, update } = useSession();
   const { toast } = useToast();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isPending, startTransition] = useTransition();
 
-  const action = updateUserPhoto.bind(null, { userId, currentUserImageUrl });
-  const [state, formAction] = useFormState<any, any>(action, {});
+  const [state, formAction] = useFormState<any, any>(updateUserPhoto, {});
 
   const handleModalOpen = () => setIsOpen(!isOpen);
 
   const handlePhotoDelete = async () => {
     startTransition(async () => {
-      const actionResponse = await deleteUserPhoto(userId, currentUserImageUrl);
+      const actionResponse = await deleteUserPhoto();
       toast({
         description: t(actionResponse.status === ActionStatus.Success ? 
           'actionMessages.profileImageDeleted' : 
@@ -57,7 +50,6 @@ export const ManageProfilePhoto: React.FC<IManageProfilePhoto> = ({ userId, curr
   };
 
   useEffect(() => {
-    console.log('MANAGE PROFILE FORM', currentUserImageUrl)
     if(isOpen && state && state.status === ActionStatus.Success) {
       if(state && state.updatedImageUrl) {
         update({ image: state.updatedImageUrl }).then(res => toast({
@@ -100,7 +92,7 @@ export const ManageProfilePhoto: React.FC<IManageProfilePhoto> = ({ userId, curr
       </Dialog>
       <Button 
         type='button' 
-        disabled={Boolean(!currentUserImageUrl) || isPending}
+        disabled={Boolean(!session?.user?.image) || isPending}
         onClick={handlePhotoDelete}
         className='w-52 py-6 bg-primary-7 hover:bg-primary-6 rounded-full text-white font-semibold'
       >

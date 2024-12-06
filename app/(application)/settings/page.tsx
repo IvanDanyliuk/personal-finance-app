@@ -28,10 +28,7 @@ export default async function SettingsPage() {
               height={150} 
               className='rounded-full'
             />
-            <ManageProfilePhoto 
-              userId={user?.id!} 
-              currentUserImageUrl={user?.image!} 
-            />
+            <ManageProfilePhoto />
           </div>
           <ManagePersonalData 
             variant='name' 

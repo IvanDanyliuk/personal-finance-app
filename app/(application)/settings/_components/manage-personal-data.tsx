@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormState } from 'react-dom';
 import { useTranslations } from 'next-intl';
 import { Pencil } from 'lucide-react';
 import {
@@ -16,6 +16,8 @@ import { Button } from '@/components/ui/button';
 import { SubmitButton } from '@/components/common/submit-btn';
 import { updateUserData } from '@/lib/actions/user.actions';
 import { useToast } from '@/hooks/use-toast';
+import { useSession } from 'next-auth/react';
+import { ActionStatus } from '@/lib/types/common.types';
 
 
 interface IManagePersonalData {
@@ -26,16 +28,32 @@ interface IManagePersonalData {
 
 
 export const ManagePersonalData: React.FC<IManagePersonalData> = ({ variant, currentUserName, currentUserEmail }) => {
-  const t = useTranslations('SettingsPage.managePersonalData');
+  const t = useTranslations('SettingsPage');
   const { toast } = useToast();
+  const { update } = useSession();
 
   const [state, formAction] = useFormState<any, any>(updateUserData, { name: '', email: '' });
-  const { pending } = useFormStatus();
 
   useEffect(() => {
-    if(state && state.error) {
+    if(state && state.status === ActionStatus.Success && state.updatedName) {
+      update({ name: state.updatedName }).then(res => toast({
+        description: t('actionMessages.userNameUpdated'),
+        variant: 'default',
+        className: 'bg-success-1 text-success-2'
+      }));
+    }
+
+    if(state && state.status === ActionStatus.Success && state.updatedEmail) {
+      update({ email: state.updatedEmail }).then(res => toast({
+        description: t('actionMessages.userEmailUpdated'),
+        variant: 'default',
+        className: 'bg-success-1 text-success-2'
+      }));
+    }
+
+    if(state && state.status === ActionStatus.Failed && state.error) {
       toast({
-        title: t('errors.general.title'),
+        title: t('errors.general'),
         description: t(state.error),
         variant: 'destructive',
         className: 'bg-danger-1 text-danger-2'
@@ -46,7 +64,7 @@ export const ManagePersonalData: React.FC<IManagePersonalData> = ({ variant, cur
   return (
     <div className='w-full flex justify-between items-center'>
       <p className='font-semibold'>
-        {t(variant === 'name' ? 'editNameFormLabel' : 'editEmailFormLabel')}
+        {t(variant === 'name' ? 'managePersonalData.editNameFormLabel' : 'managePersonalData.editEmailFormLabel')}
       </p>
       <div className='md:min-w-[400px] flex justify-between items-center gap-3'>
         <p className='font-semibold'>
@@ -59,7 +77,7 @@ export const ManagePersonalData: React.FC<IManagePersonalData> = ({ variant, cur
           <DialogContent className='py-6'>
             <DialogHeader>
               <DialogTitle>
-                {t(variant === 'name' ? 'updateNameFormTitle' : 'updateEmailFormTitle')}
+                {t(variant === 'name' ? 'managePersonalData.updateNameFormTitle' : 'managePersonalData.updateEmailFormTitle')}
               </DialogTitle>
             </DialogHeader>
             <form action={formAction}>
@@ -70,10 +88,10 @@ export const ManagePersonalData: React.FC<IManagePersonalData> = ({ variant, cur
               />
               <div className='flex gap-3'>
                 <SubmitButton>
-                  {t('submitBtnLabel')}
+                  {t('managePersonalData.submitBtnLabel')}
                 </SubmitButton>
                 <Button className='py-6 mt-3 w-full rounded-full bg-secondary-2 hover:bg-secondary-1 font-semibold'>
-                  {t('cancelBtnLabel')}
+                  {t('managePersonalData.cancelBtnLabel')}
                 </Button>
               </div>
             </form>
