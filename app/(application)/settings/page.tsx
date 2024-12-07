@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { auth } from '@/auth';
-import { getUser } from '@/lib/actions/user.actions';
+import { getUser, getUserById } from '@/lib/actions/user.actions';
 import { ManageProfilePhoto } from './_components';
 import { ManagePersonalData } from './_components/manage-personal-data';
 import UserImagePlaceholder from '@/public/images/user-placeholder.png';
@@ -10,8 +10,8 @@ import UserImagePlaceholder from '@/public/images/user-placeholder.png';
 export default async function SettingsPage() {
   const t = await getTranslations('SettingsPage');
   const session = await auth();
-  const user = await getUser(session?.user?.email!);
-  const userImage = user && user.image ? user.image : UserImagePlaceholder
+  const user = await getUserById(session?.user?.id!);
+  const userImage = user && user.image ? user.image : UserImagePlaceholder;
 
   return (
     <div className='w-full h-full'>

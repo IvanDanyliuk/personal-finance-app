@@ -1,7 +1,8 @@
 'use client';
 
+import { useEffect } from 'react';
 import Image from 'next/image';
-import { useSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { LogOut, Menu } from 'lucide-react';
 import {
@@ -29,6 +30,10 @@ export const NavMenuMobile: React.FC = () => {
   const handleSignOut = async () => {
     await logout();
   };
+
+  useEffect(() => {
+    getSession();
+  }, []);
 
   return (
     <div className='md:hidden'>

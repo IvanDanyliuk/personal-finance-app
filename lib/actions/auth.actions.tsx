@@ -40,6 +40,8 @@ export const signin = async (prevState: any, formData: FormData) => {
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
 
+    console.log('SIGN IN', { email, password })
+
     const validatedFields = signInData.safeParse({
       email, password
     });
@@ -129,7 +131,9 @@ export const signup = async (prevState: any, formData: FormData) => {
     const imageFile = rawImage ? await fetch(rawImage) : '';
     const imageBlob = imageFile ? await imageFile.blob() : new Blob();
     const imageToUpload = new File([imageBlob!], `${name}-avatar`);
-    const image = imageToUpload && imageToUpload.size > 0 ? (await utapi.uploadFiles([imageToUpload]))[0].data?.url : '';
+    const image = imageToUpload && imageToUpload.size > 0 ? 
+      (await utapi.uploadFiles([imageToUpload]))[0].data?.url : 
+      '';
 
     await db.user.create({
       data: {

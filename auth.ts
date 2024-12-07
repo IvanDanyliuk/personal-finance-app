@@ -80,6 +80,7 @@ export const {
       if(user) {
         session.user = {
           ...session.user,
+          id: user.id,
           name: user.name,
           email: user.email,
           image: user.image,
@@ -88,5 +89,5 @@ export const {
 
       return session;
     }
-  }
-})
+  },
+});

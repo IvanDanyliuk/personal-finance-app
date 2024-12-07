@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
 import { useTranslations } from 'next-intl';
 import { Pencil } from 'lucide-react';
@@ -33,14 +33,19 @@ export const ManagePersonalData: React.FC<IManagePersonalData> = ({ variant, cur
   const { update } = useSession();
 
   const [state, formAction] = useFormState<any, any>(updateUserData, { name: '', email: '' });
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const handleFormOpen = () => setIsOpen(!isOpen);
 
   useEffect(() => {
+    console.log('STATE', state)
     if(state && state.status === ActionStatus.Success && state.updatedName) {
       update({ name: state.updatedName }).then(res => toast({
         description: t('actionMessages.userNameUpdated'),
         variant: 'default',
         className: 'bg-success-1 text-success-2'
       }));
+      setIsOpen(false);
     }
 
     if(state && state.status === ActionStatus.Success && state.updatedEmail) {
@@ -49,6 +54,7 @@ export const ManagePersonalData: React.FC<IManagePersonalData> = ({ variant, cur
         variant: 'default',
         className: 'bg-success-1 text-success-2'
       }));
+      setIsOpen(false);
     }
 
     if(state && state.status === ActionStatus.Failed && state.error) {
@@ -70,7 +76,7 @@ export const ManagePersonalData: React.FC<IManagePersonalData> = ({ variant, cur
         <p className='font-semibold'>
           {variant === 'name' ? currentUserName : currentUserEmail}
         </p>
-        <Dialog>
+        <Dialog open={isOpen} onOpenChange={handleFormOpen}>
           <DialogTrigger className='p-3 bg-primary-7 hover:bg-primary-6 rounded-full text-white'>
             <Pencil className='w-5 h-5' />
           </DialogTrigger>
@@ -90,7 +96,11 @@ export const ManagePersonalData: React.FC<IManagePersonalData> = ({ variant, cur
                 <SubmitButton>
                   {t('managePersonalData.submitBtnLabel')}
                 </SubmitButton>
-                <Button className='py-6 mt-3 w-full rounded-full bg-secondary-2 hover:bg-secondary-1 font-semibold'>
+                <Button 
+                  type='button' 
+                  onClick={handleFormOpen} 
+                  className='py-6 mt-3 w-full rounded-full bg-secondary-2 hover:bg-secondary-1 font-semibold'
+                >
                   {t('managePersonalData.cancelBtnLabel')}
                 </Button>
               </div>

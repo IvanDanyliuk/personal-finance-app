@@ -11,6 +11,10 @@ export const getUser = async (email: string) => {
   return await db.user.findUnique({ where: { email } });
 };
 
+export const getUserById = async (id: string) => {
+  return await db.user.findUnique({ where: { id } });
+};
+
 export const updateUserPhoto = async (prevState: any, formData: FormData) => {  
   try {
     const rawNewImage = formData.get('image') as string;
@@ -70,8 +74,6 @@ export const deleteUserPhoto = async () => {
     await utapi.deleteFiles(imageToDeleteId!);
 
     await unstable_update({ user: { ...session.user, image: '' } });
-  
-
     revalidatePath('/', 'layout');
 
     return {
@@ -94,12 +96,10 @@ export const updateUserData = async (prevState: any, formData: FormData) => {
     const email = formData.get('email') as string;
 
     if(session && session.user && name) {
-
       await db.user.update({
         where: { email: session.user.email! },
         data: { name }
       });
-
 
       await unstable_update({ user: { ...session.user, name } });
 
@@ -112,11 +112,13 @@ export const updateUserData = async (prevState: any, formData: FormData) => {
 
     if(session && session.user && email) {
       await db.user.update({
-        where: { id: session.user?.id },
+        where: { email: session.user.email! },
         data: { email }
       });
 
       await unstable_update({ user: { ...session.user, email} });
+
+      revalidatePath('/', 'layout');
 
       return {
         status: ActionStatus.Success,

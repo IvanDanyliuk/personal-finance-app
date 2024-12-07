@@ -1,7 +1,8 @@
 'use client'
 
+import { useEffect } from 'react';
 import Image from 'next/image';
-import { useSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { LogOut } from 'lucide-react';
 import { logout } from '@/lib/actions/auth.actions';
@@ -23,6 +24,10 @@ export const UserMenu: React.FC = () => {
     UserImagePlaceholder;
 
   if(!session) return null;
+
+  useEffect(() => {
+    getSession();
+  }, []);
 
   return (
     <DropdownMenu>
