@@ -8,7 +8,6 @@ import { db } from '@/db';
 import { ActionStatus } from '../types/common.types';
 import { auth, unstable_update } from '@/auth';
 import { saltAndHashPassword } from '../helpers';
-import { signIn } from 'next-auth/react';
 
 
 const newPasswordData = zod.object({

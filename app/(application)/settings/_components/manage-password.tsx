@@ -32,6 +32,7 @@ export const ManagePassword: React.FC = () => {
         variant: 'default',
         className: 'bg-success-1 text-success-2'
       });
+      setIsOpen(false);
     }
 
     if(state && state.status === ActionStatus.Failed && state.error) {

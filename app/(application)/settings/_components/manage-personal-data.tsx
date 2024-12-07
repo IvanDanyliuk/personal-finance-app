@@ -38,7 +38,6 @@ export const ManagePersonalData: React.FC<IManagePersonalData> = ({ variant, cur
   const handleFormOpen = () => setIsOpen(!isOpen);
 
   useEffect(() => {
-    console.log('STATE', state)
     if(state && state.status === ActionStatus.Success && state.updatedName) {
       update({ name: state.updatedName }).then(res => toast({
         description: t('actionMessages.userNameUpdated'),
