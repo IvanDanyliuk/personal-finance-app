@@ -2,8 +2,7 @@ import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { auth } from '@/auth';
 import { getUser, getUserById } from '@/lib/actions/user.actions';
-import { ManageProfilePhoto } from './_components';
-import { ManagePersonalData } from './_components/manage-personal-data';
+import { ManageProfilePhoto, ManagePersonalData, ManageProfileData, ManageFinanceData, ManagePassword } from './_components';
 import UserImagePlaceholder from '@/public/images/user-placeholder.png';
 
 
@@ -38,12 +37,13 @@ export default async function SettingsPage() {
             variant='email' 
             currentUserEmail={user?.email!} 
           />
+          <ManagePassword />
         </div>
         <div className=' bg-slate-400'>
-          Finance
+          <ManageFinanceData />
         </div>
         <div className=' bg-slate-400'>
-          Profile
+          <ManageProfileData />
         </div>
       </div>
     </div>

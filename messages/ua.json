@@ -81,17 +81,41 @@
       "submitBtnLabel": "Підтвердити",
       "cancelBtnLabel": "Відхилити"
     },
+    "managePassword": {
+      "triggerBtnLabel": "Змінити пароль",
+      "currentPasswordLabel": "Поточний пароль",
+      "newPasswordLabel": "Новий пароль",
+      "confirmNewPasswordLabel": "Підтвердити новий пароль",
+      "submitBtnLabel": "Підтвердити",
+      "cancelBtnLabel": "Відхилити"
+    },
     "actionMessages": {
       "profilePhotoUpdated": "Фото профілю оновлено успішно!",
       "profileImageDeleted": "Фото успішно видалено!",
       "userNameUpdated": "Ім'я користувача успішно оновлено!",
-      "userEmailUpdated": "Адресу ел. пошти успішно оновлено!"
+      "userEmailUpdated": "Адресу ел. пошти успішно оновлено!",
+      "passwordUpdated": "Пароль успішно оновлено!"
     },
     "errors": {
+      "general": "Щось пішло не так!",
       "uploadImageFailed": "При оновленні фото профілю виникла помилка",
       "deleteImageFailed": "Не вдалося видалити фото профілю",
       "updateUserNameFailed": "Не вдалося змінити ім'я користувача",
-      "updateUserEmailFailed": "Не вдалося змінити адресу ел. пошти"
+      "updateUserEmailFailed": "Не вдалося змінити адресу ел. пошти",
+      "updatePassword": {
+        "general": "Не вдалось оновити пароль!",
+        "userNotFound": "Користувача не знайдено!",
+        "passwordNotMatch": "Невірний поточний пароль",
+        "fieldsValidation": {
+          "requiredCurrentPassword": "Введіть поточний пароль!",
+          "requiredNewPassword": "Введіть новий пароль!",
+          "requiredConfirmNewPassword": "Підтвердіть новий пароль!",
+          "passwordNotMatch": "Паролі не співпадають",
+          "invalidPassword": "Пароль має включати щонайменше 6 символів",
+          "invalidCurrentPassword": "Невірний поточний пароль",
+          "wrongPassword": "Невірний пароль!"
+        }
+      }
     }
   }
 }

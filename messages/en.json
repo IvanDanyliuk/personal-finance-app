@@ -81,18 +81,41 @@
       "submitBtnLabel": "Submit",
       "cancelBtnLabel": "Cancel"
     },
+    "managePassword": {
+      "triggerBtnLabel": "Change password",
+      "currentPasswordLabel": "Current password",
+      "newPasswordLabel": "New password",
+      "confirmNewPasswordLabel": "Confirm new password",
+      "submitBtnLabel": "Submit",
+      "cancelBtnLabel": "Cancel"
+    },
     "actionMessages": {
       "profilePhotoUpdated": "Image has been updated!",
       "profileImageDeleted": "Image successfully deleted!",
       "userNameUpdated": "User name successfully updated!",
-      "userEmailUpdated": "Email address successfully updated!"
+      "userEmailUpdated": "Email address successfully updated!",
+      "passwordUpdated": "Password updated!"
     },
     "errors": {
       "general": "Something went wrong!",
       "uploadImageFailed": "Cannot update a profile photo",
       "deleteImageFailed": "Cannot delete a profile photo",
       "updateUserNameFailed": "Cannot update user name",
-      "updateUserEmailFailed": "Cannot update user email"
+      "updateUserEmailFailed": "Cannot update user email",
+      "updatePassword": {
+        "general": "Cannot update password!",
+        "userNotFound": "User not found!",
+        "passwordNotMatch": "Incorrect current password!",
+        "fieldsValidation": {
+          "requiredCurrentPassword": "Current password is required!",
+          "requiredNewPassword": "New password is required!",
+          "requiredConfirmNewPassword": "Confirm new password!",
+          "passwordNotMatch": "Passwords not match!",
+          "invalidPassword": "Invalid password",
+          "invalidCurrentPassword": "Invalid current password",
+          "wrongPassword": "Password is wrong!"
+        }
+      }
     }
   }
 }

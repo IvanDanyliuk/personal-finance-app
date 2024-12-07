@@ -81,17 +81,41 @@
       "submitBtnLabel": "Подтвердить",
       "cancelBtnLabel": "Отмена"
     },
+    "managePassword": {
+      "triggerBtnLabel": "Изменить пароль",
+      "currentPasswordLabel": "Текущий пароль",
+      "newPasswordLabel": "Новый пароль",
+      "confirmNewPasswordLabel": "Подтвердить новый пароль",
+      "submitBtnLabel": "Подтвердить",
+      "cancelBtnLabel": "Отмена"
+    },
     "actionMessages": {
       "profilePhotoUpdated": "Фото профиля обновлено успешно!",
       "profileImageDeleted": "Фото успешно удалено!",
       "userNameUpdated": "Имя пользователя успешно обновлено!",
-      "userEmailUpdated": "Адрес эл. почты успешно обновлен!"
+      "userEmailUpdated": "Адрес эл. почты успешно обновлен!",
+      "passwordUpdated": "Пароль успешно обновлен!"
     },
     "errors": {
+      "general": "Что-то пошло не так!",
       "uploadImageFailed": "При обновлении фото профиля произошла ошибка",
       "deleteImageFailed": "Не удалось удалить фото профиля",
       "updateUserNameFailed": "Не удалось изменить имя пользователя",
-      "updateUserEmailFailed": "Не удалось изменить адрес эл. почты"
+      "updateUserEmailFailed": "Не удалось изменить адрес эл. почты",
+      "updatePassword": {
+        "general": "Не удалось изменить пароль!",
+        "userNotFound": "Пользователь не найден!",
+        "passwordNotMatch": "Неверный текущий пароль",
+        "fieldsValidation": {
+          "requiredCurrentPassword": "Введите текущий пароль!",
+          "requiredNewPassword": "Введите новый пароль!",
+          "requiredConfirmNewPassword": "Подтвердите новий пароль!",
+          "passwordNotMatch": "Пароли не совпадают",
+          "invalidPassword": "Пароль должен включать минимум 6 символов",
+          "invalidCurrentPassword": "Неверный текущий пароль",
+          "wrongPassword": "Неверный пароль!"
+        }
+      }
     }
   }
 }

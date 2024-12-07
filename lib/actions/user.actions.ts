@@ -1,10 +1,33 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { z as zod } from 'zod';
+import bcrypt from 'bcryptjs';
 import { utapi } from '../uploadthing/utapi';
 import { db } from '@/db';
 import { ActionStatus } from '../types/common.types';
 import { auth, unstable_update } from '@/auth';
+import { saltAndHashPassword } from '../helpers';
+import { signIn } from 'next-auth/react';
+
+
+const newPasswordData = zod.object({
+  currentPassword: zod
+    .string()
+    .min(1, 'SettingsPage.errors.updatePassword.fieldsValidation.requiredCurrentPassword')
+    .min(6, 'SettingsPage.errors.updatePassword.fieldsValidation.invalidPassword'),
+  newPassword: zod
+    .string()
+    .min(1, 'SettingsPage.errors.updatePassword.fieldsValidation.requiredNewPassword')
+    .min(6, 'SettingsPage.errors.updatePassword.fieldsValidation.invalidPassword'),
+  confirmNewPassword: zod
+    .string()
+    .min(1, 'SettingsPage.errors.updatePassword.fieldsValidation.requiredConfirmNewPassword')
+    .min(6, 'SettingsPage.errors.updatePassword.fieldsValidation.invalidPassword'),
+}).refine((data) => data.newPassword === data.confirmNewPassword, {
+  path: ['confirmNewPassword'],
+  message: 'SettingsPage.errors.updatePassword.fieldsValidation.passwordNotMatch',
+});
 
 
 export const getUser = async (email: string) => {
@@ -133,5 +156,65 @@ export const updateUserData = async (prevState: any, formData: FormData) => {
       status: ActionStatus.Failed,
       error: 'Something went wrong!'
     }
+  }
+};
+
+export const updatePassword = async (prevState: any, formData: FormData) => {
+  try {
+    const session = await auth();
+
+    const newPassword = formData.get('newPassword') as string;
+    const confirmNewPassword = formData.get('confirmNewPassword') as string;
+    const currentPassword = formData.get('currentPassword') as string;
+
+    const validatedFields = newPasswordData.safeParse({
+      currentPassword, newPassword, confirmNewPassword
+    });
+  
+    if(!validatedFields.success) {
+      return {
+        fieldError: validatedFields.error.flatten().fieldErrors,
+      };
+    }
+
+    const user = await db.user.findUnique({ where: { id: session?.user?.id! } });
+
+    if(!user) {
+      throw new Error('errors.updatePassword.userNotFound')
+    }
+
+    const hashedNewPassword = saltAndHashPassword(newPassword);
+
+    if(!user.password) {
+      await db.user.update({
+        where: { id: user.id },
+        data: { password: hashedNewPassword }
+      });
+    } else {
+      const passwordMatch = bcrypt.compareSync(currentPassword as string, user?.password!);
+
+      if(!passwordMatch) {
+        throw new Error('errors.updatePassword.passwordNotMatch');
+      }
+  
+      await db.user.update({
+        where: { id: user.id },
+        data: { password: hashedNewPassword }
+      });
+    }
+
+    await unstable_update({ user: { email: user.email } })
+
+    revalidatePath('/', 'layout');
+
+    return {
+      status: ActionStatus.Success,
+      error: null
+    };
+  } catch (error: any) {
+    return {
+      status: ActionStatus.Failed,
+      error: error.message
+    };
   }
 };

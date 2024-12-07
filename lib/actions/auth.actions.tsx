@@ -40,8 +40,6 @@ export const signin = async (prevState: any, formData: FormData) => {
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
 
-    console.log('SIGN IN', { email, password })
-
     const validatedFields = signInData.safeParse({
       email, password
     });
@@ -89,7 +87,7 @@ export const signin = async (prevState: any, formData: FormData) => {
           };
         default:
           return {
-            error: error.cause?.err?.message
+            error: 'errors.auth.fieldsValidation.invalidCredentials'
           };
       }
     }

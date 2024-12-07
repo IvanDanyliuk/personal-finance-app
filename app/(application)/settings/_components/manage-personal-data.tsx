@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useFormState } from 'react-dom';
+import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { Pencil } from 'lucide-react';
 import {
@@ -16,7 +17,6 @@ import { Button } from '@/components/ui/button';
 import { SubmitButton } from '@/components/common/submit-btn';
 import { updateUserData } from '@/lib/actions/user.actions';
 import { useToast } from '@/hooks/use-toast';
-import { useSession } from 'next-auth/react';
 import { ActionStatus } from '@/lib/types/common.types';
 
 
