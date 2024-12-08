@@ -7,7 +7,7 @@ import { z as zod } from 'zod';
 import { signIn, signOut } from '@/auth';
 import { utapi } from '../uploadthing/utapi';
 import { db } from '@/db';
-import { signInSchema } from '../types/form-schemas/auth';
+import { signInSchema, signUpSchema } from '../types/form-schemas/auth';
 import { ActionStatus } from '../types/common.types';
 
 
@@ -41,8 +41,6 @@ export const signin = async (formData: FormData) => {
       email: formData.get('email'),
       password: formData.get('password'),
     });
-
-    console.log('SIGN IN: VALIDATED FIELDS', validatedFields)
 
     // const validatedFields = signInData.safeParse({
     //   email, password
@@ -114,20 +112,28 @@ export const signin = async (formData: FormData) => {
     throw error;
   };
 
-  revalidatePath('/');
+  // revalidatePath('/');
 };
 
-export const signup = async (prevState: any, formData: FormData) => {
+export const signup = async (formData: FormData) => {
   try {
-    const name = formData.get('name') as string;
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-    const confirmPassword = formData.get('confirmPassword') as string;
-    const rawImage = formData.get('image') as string;
+    // const name = formData.get('name') as string;
+    // const email = formData.get('email') as string;
+    // const password = formData.get('password') as string;
+    // const confirmPassword = formData.get('confirmPassword') as string;
+    // const rawImage = formData.get('image') as string;
 
-    const validatedFields = signUpData.safeParse({
-      name, email, password, confirmPassword
+    const validatedFields = signUpSchema.safeParse({
+      name: formData.get('name'),
+      email: formData.get('email'),
+      password: formData.get('password'),
+      confirmPassword: formData.get('confirmPassword'),
+      image: formData.get('image'),
     });
+
+    // const validatedFields = signUpData.safeParse({
+    //   name, email, password, confirmPassword
+    // });
 
     if(!validatedFields.success) {
       return {
@@ -135,27 +141,30 @@ export const signup = async (prevState: any, formData: FormData) => {
       };
     }
 
-    const existingUser = await db.user.findUnique({ where: { email } });
+    console.log('SIGN IN: VALIDATED FIELDS', validatedFields)
+
+    const existingUser = await db.user.findUnique({ where: { email: validatedFields.data.email } });
 
     if(existingUser) {
       return {
+        status: ActionStatus.Failed,
         error: 'errors.auth.fieldsValidation.userAlreadyExists'
       };
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(validatedFields.data.password, 10);
     
-    const imageFile = rawImage ? await fetch(rawImage) : '';
+    const imageFile = validatedFields.data.image ? await fetch(validatedFields.data.image) : '';
     const imageBlob = imageFile ? await imageFile.blob() : new Blob();
-    const imageToUpload = new File([imageBlob!], `${name}-avatar`);
+    const imageToUpload = new File([imageBlob!], `${validatedFields.data.name}-avatar`);
     const image = imageToUpload && imageToUpload.size > 0 ? 
       (await utapi.uploadFiles([imageToUpload]))[0].data?.url : 
       '';
 
     await db.user.create({
       data: {
-        name,
-        email,
+        name: validatedFields.data.name,
+        email: validatedFields.data.email,
         password: hashedPassword,
         image,
         role: 'USER',
@@ -166,19 +175,27 @@ export const signup = async (prevState: any, formData: FormData) => {
     });
 
     await signIn('credentials', {
-      email,
-      password,
-      redirectTo: '/'
+      email: validatedFields.data.email,
+      password: validatedFields.data.password,
+      redirect: false
+      // redirectTo: '/'
     });
+
+    return {
+      status: ActionStatus.Success,
+      error: null
+    };
   } catch (error: any) {
     if(error instanceof AuthError) {
       switch(error.type) {
         case 'CredentialsSignin':
           return {
+            status: ActionStatus.Failed,
             error: 'auth.fieldsValidation.invalidCredentials'
           };
         default:
           return {
+            status: ActionStatus.Failed,
             error: 'auth.fieldsValidation.wrongCredentials'
           };
       }

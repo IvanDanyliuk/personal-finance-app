@@ -30,7 +30,8 @@
       "googleBtnTooltip": "Sign up with Google"
     },
     "actionMessages": {
-      "signInSuccess": "Welcome!"
+      "signInSuccess": "Welcome!",
+      "signUpSuccess": "Welcome!"
     },
     "errors": {
       "general": {

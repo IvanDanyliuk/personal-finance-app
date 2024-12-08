@@ -1,10 +1,9 @@
-// import { ChangeEvent } from 'react';
+import { UseFormRegister } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import { CircleAlert } from 'lucide-react';
 import { Label } from '../ui/label'
 import { Input } from '../ui/input';
 import { cn } from '@/lib/utils';
-import { UseFormRegister } from 'react-hook-form';
 
 
 interface ITextField {
@@ -14,11 +13,8 @@ interface ITextField {
   placeholder?: string;
   variant?: 'horizontal' | 'vertical';
   register: UseFormRegister<any>;
-  // value?: string;
-  // defaultValue?: string;
   required?: boolean;
   disabled?: boolean;
-  // onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   error?: string;
 };
 
@@ -30,11 +26,8 @@ export const TextField: React.FC<ITextField> = ({
   placeholder,
   variant = 'vertical',
   register,
-  // value,
-  // defaultValue,
   required,
   disabled,
-  // onChange,
   error
 }) => {
   const t = useTranslations();
@@ -58,12 +51,8 @@ export const TextField: React.FC<ITextField> = ({
       <div className={cn(variant === 'vertical' ? 'w-full' : 'flex-1')}>
         <Input 
           id={name}
-          // name={name}
           type={type}
           placeholder={placeholder}
-          // value={value}
-          // defaultValue={defaultValue}
-          // onChange={onChange}
           required={required}
           disabled={disabled}
           className='w-full px-5 py-6 rounded-full'
@@ -74,7 +63,6 @@ export const TextField: React.FC<ITextField> = ({
             <>
               <CircleAlert className='w-4 h-4' />
               <span>
-                {/* {error.map(err => t(err)).join('. ').trim()} */}
                 {t(error)}
               </span>
             </>

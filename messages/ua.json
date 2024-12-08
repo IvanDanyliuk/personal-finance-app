@@ -30,7 +30,8 @@
       "googleBtnTooltip": "Заруєструватися через Google"
     },
     "actionMessages": {
-      "signInSuccess": "Ласкаво просимо!"
+      "signInSuccess": "Ласкаво просимо!",
+      "signUpSuccess": "Ласкаво просимо!"
     },
     "errors": {
       "general": {

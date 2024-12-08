@@ -1,9 +1,8 @@
 import { ReactNode } from 'react';
-// import { useFormStatus } from 'react-dom';
 import Image from 'next/image';
 import { Button } from '../ui/button';
-import Spinner from '../../public/images/tube-spinner.svg';
 import { cn } from '@/lib/utils';
+import Spinner from '../../public/images/tube-spinner.svg';
 
 
 interface ISubmitButton {
@@ -17,8 +16,6 @@ interface ISubmitButton {
 export const SubmitButton: React.FC<ISubmitButton> = ({
   disabled, isSubmitting, className, children
 }) => {
-  // const { pending } = useFormStatus();
-
   return (
     <Button 
       type='submit' 

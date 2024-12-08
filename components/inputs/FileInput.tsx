@@ -1,35 +1,31 @@
-'use client';
-
-import { useState, useRef } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
+import { UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import { CircleAlert, X } from 'lucide-react';
 
 
 interface IFileInput {
-  label?: string;
-  btnTitle: string;
   name: string;
-  required?: boolean;
+  btnTitle: string;
+  label?: string;
   disabled?: boolean;
-  multiple?: boolean;
-  defaultValue?: string;
-  error?: string[]
+  register: UseFormRegister<any>;
+  setValue: UseFormSetValue<any>;
+  error?: string;
 };
 
 
-export const FileInput: React.FC<IFileInput> = ({ 
+export const FileInput: React.FC<IFileInput> = ({
   name, 
-  label,
   btnTitle, 
-  required, 
+  label, 
+  setValue, 
   disabled, 
-  multiple = false, 
-  defaultValue,
-  error 
+  register,
+  error
 }) => {
-  const selectedFilesIntialValue = defaultValue && (multiple ? defaultValue : [defaultValue]) || [];
-  const [selectedFiles, setSelectedFiles] = useState<any>(selectedFilesIntialValue);
-  const ref = useRef<HTMLInputElement>(null);
+  const hiddenFileInputRef = useRef<HTMLInputElement | null>(null);
+  const [preview, setPreview] = useState<any | null>(null);
 
   const convertFileToString = (file: any) => {
     return new Promise((resolve, reject) => {
@@ -47,30 +43,29 @@ export const FileInput: React.FC<IFileInput> = ({
     });
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    ref.current?.click();
-  };
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
 
-  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const data = Array.from(e.target.files!);
-    const pickedFiles = await Promise.all(data.map(async (item: any) => {
-      const url = await convertFileToString(item);
-      return url;
-    }));
-    if(multiple) {
-      setSelectedFiles([...selectedFiles, ...pickedFiles]);
+    if (file) {
+      const url = await convertFileToString(file);
+      setPreview(url);
+      setValue(name, url);
     } else {
-      setSelectedFiles([...pickedFiles])
+      setPreview(null);
     }
   };
 
-  const handleImageDelete = (value: any) => {
-    setSelectedFiles((prevState: any[]) => prevState.filter(url => typeof url === 'string' ? url !== value : url.name !== value.name));
+  const removeImage = () => {
+    setPreview(null);
+    hiddenFileInputRef.current!.value = '';
+    setValue('image', null);
   };
+
+  const triggerFileInput = () => hiddenFileInputRef.current?.click();
+
 
   return (
     <div className='w-full flex items-center gap-3'>
-      <input name={name} type='text' value={selectedFiles.join('|-| ')} onChange={() => {}} className='hidden' />
       {label && <label htmlFor={name} className='w-full md:w-36 text-sm font-semibold'>{label}</label>}
       <div className='relative w-full md:grow'>
         <div className={`w-full flex gap-1 items-center ${!label ? 'justify-center' : ''}`}>
@@ -78,48 +73,48 @@ export const FileInput: React.FC<IFileInput> = ({
             type='button'
             disabled={disabled}
             className='w-36 h-10 bg-slate-500 text-sm text-white uppercase rounded'
-            onClick={handleClick}
+            onClick={triggerFileInput}
           >
             {btnTitle}
           </button>
-          <ul className='flex gap-3 text-xs'>
-            {selectedFiles.map((url: any) => (
-              <li key={crypto.randomUUID()} className='relative'>
+          {
+            preview && (
+              <div>
                 <Image 
-                  src={typeof url === 'string' ? url : URL.createObjectURL(url)} 
+                  src={preview} 
                   alt='Image' 
                   width={50} 
                   height={50} 
                 />
                 <button 
                   type='button' 
-                  onClick={() => handleImageDelete(url)}
+                  onClick={removeImage}
                   className='absolute top-0 right-0 w-5 h-5 flex justify-center items-center text-xs bg-white'
                 >
                   <X />
                 </button>
-              </li>
-            ))}
-          </ul>
+              </div>
+            )
+          }
         </div>
         <input 
-          ref={ref}
-          className={`hidden h-10 w-full text-sm `}
-          id={name}
+          {...register(name)} 
+          ref={hiddenFileInputRef}
+          hidden
           type='file'
-          required={required} 
-          multiple={multiple}
-          onChange={handleChange}
+          onChange={handleFileChange}
         />
         <p className='mt-1 text-xs text-red-600'>
           {error && (
             <>
               <CircleAlert />
-              <span className='ml-1'>{error.join(' ')}</span>
+              <span className='ml-1'>
+                {error}
+              </span>
             </>
           )}
         </p>
       </div>
     </div>
-  );
-};
+  )
+}

@@ -30,7 +30,8 @@
       "googleBtnTooltip": "Зарегистрироваться через Google"
     },
     "actionMessages": {
-      "signInSuccess": "Добро пожаловать!"
+      "signInSuccess": "Добро пожаловать!",
+      "signUpSuccess": "Добро пожаловать!"
     },
     "errors": {
       "general": {
