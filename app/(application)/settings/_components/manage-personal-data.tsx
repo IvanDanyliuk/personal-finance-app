@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useFormState } from 'react-dom';
+import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Pencil } from 'lucide-react';
 import {
   Dialog,
@@ -18,6 +19,7 @@ import { SubmitButton } from '@/components/common/submit-btn';
 import { updateUserData } from '@/lib/actions/user.actions';
 import { useToast } from '@/hooks/use-toast';
 import { ActionStatus } from '@/lib/types/common.types';
+import { updateUserDataSchema, UpdateUserDataSchema } from '@/lib/types/form-schemas/settings';
 
 
 interface IManagePersonalData {
@@ -32,39 +34,60 @@ export const ManagePersonalData: React.FC<IManagePersonalData> = ({ variant, cur
   const { toast } = useToast();
   const { update } = useSession();
 
-  const [state, formAction] = useFormState<any, any>(updateUserData, { name: '', email: '' });
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const form = useForm<UpdateUserDataSchema>({
+    resolver: zodResolver(updateUserDataSchema),
+    defaultValues: { name: '', email: '' },
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting }
+  } = form;
 
   const handleFormOpen = () => setIsOpen(!isOpen);
 
-  useEffect(() => {
-    if(state && state.status === ActionStatus.Success && state.updatedName) {
-      update({ name: state.updatedName }).then(res => toast({
-        description: t('actionMessages.userNameUpdated'),
-        variant: 'default',
-        className: 'bg-success-1 text-success-2'
-      }));
-      setIsOpen(false);
-    }
+  const onSubmitForm: SubmitHandler<UpdateUserDataSchema> = async (data) => {
+    const formData = new FormData();
+    if(data.name) formData.append('name', data.name);
+    if(data.email) formData.append('email', data.email);
 
-    if(state && state.status === ActionStatus.Success && state.updatedEmail) {
-      update({ email: state.updatedEmail }).then(res => toast({
-        description: t('actionMessages.userEmailUpdated'),
-        variant: 'default',
-        className: 'bg-success-1 text-success-2'
-      }));
-      setIsOpen(false);
-    }
+    const { status, updatedName, updatedEmail, error } = await updateUserData(formData);
 
-    if(state && state.status === ActionStatus.Failed && state.error) {
+    if(status === ActionStatus.Success && !error) {
+      const updateQuery = updatedName ? 
+        { name: updatedName } : 
+        updatedEmail ? 
+          { email: updatedEmail } : 
+          null;
+
+      if(updateQuery) {
+        update(updateQuery).then(() => toast({
+          description: t((updatedName ? 
+            'actionMessages.userNameUpdated' : 
+            updatedEmail ? 
+              'actionMessages.userEmailUpdated' : 
+              ''
+          )),
+          variant: 'default',
+          className: 'bg-success-1 text-success-2'
+        }));
+
+        setIsOpen(false);
+      }
+    } 
+
+    if(status === ActionStatus.Failed && error) {
       toast({
         title: t('errors.general'),
-        description: t(state.error),
+        description: t(error),
         variant: 'destructive',
         className: 'bg-danger-1 text-danger-2'
       });
     }
-  }, [state, formAction]);
+  };
 
   return (
     <div className='w-full flex justify-between items-center'>
@@ -75,24 +98,33 @@ export const ManagePersonalData: React.FC<IManagePersonalData> = ({ variant, cur
         <p className='font-semibold'>
           {variant === 'name' ? currentUserName : currentUserEmail}
         </p>
-        <Dialog open={isOpen} onOpenChange={handleFormOpen}>
+        <Dialog 
+          open={isOpen} 
+          onOpenChange={handleFormOpen}
+        >
           <DialogTrigger className='p-3 bg-primary-7 hover:bg-primary-6 rounded-full text-white'>
             <Pencil className='w-5 h-5' />
           </DialogTrigger>
           <DialogContent className='py-6'>
             <DialogHeader>
               <DialogTitle>
-                {t(variant === 'name' ? 'managePersonalData.updateNameFormTitle' : 'managePersonalData.updateEmailFormTitle')}
+                {t(
+                  variant === 'name' ? 
+                    'managePersonalData.updateNameFormTitle' : 
+                    'managePersonalData.updateEmailFormTitle'
+                )}
               </DialogTitle>
             </DialogHeader>
-            <form action={formAction}>
+            <form onSubmit={handleSubmit(onSubmitForm)}>
               <TextField 
                 name={variant === 'name' ? 'name' : 'email'} 
-                type={variant === 'email' ? 'email' : 'text'} 
-                placeholder={variant === 'name' ? currentUserName : currentUserEmail} 
+                type={variant === 'email' ? 'email' : 'text'}
+                placeholder={variant === 'name' ? currentUserName : currentUserEmail}
+                register={register} 
+                error={errors[variant === 'name' ? 'name' : 'email']?.message} 
               />
               <div className='flex gap-3'>
-                <SubmitButton>
+                <SubmitButton isSubmitting={isSubmitting}>
                   {t('managePersonalData.submitBtnLabel')}
                 </SubmitButton>
                 <Button 

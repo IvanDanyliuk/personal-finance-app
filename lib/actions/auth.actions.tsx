@@ -33,18 +33,10 @@ export const logout = async () => {
 
 export const signin = async (formData: FormData) => {
   try {
-    // const email = formData.get('email') as string;
-    // const password = formData.get('password') as string;
-    // const { email, password } = formData;
-
     const validatedFields = signInSchema.safeParse({
       email: formData.get('email'),
       password: formData.get('password'),
     });
-
-    // const validatedFields = signInData.safeParse({
-    //   email, password
-    // });
   
     if(!validatedFields.success) {
       return {
@@ -60,7 +52,6 @@ export const signin = async (formData: FormData) => {
         email: validatedFields.data.email,
         password: validatedFields.data.password,
         redirect: false
-        // redirectTo: '/'
       });
 
       return {
@@ -111,18 +102,10 @@ export const signin = async (formData: FormData) => {
 
     throw error;
   };
-
-  // revalidatePath('/');
 };
 
 export const signup = async (formData: FormData) => {
   try {
-    // const name = formData.get('name') as string;
-    // const email = formData.get('email') as string;
-    // const password = formData.get('password') as string;
-    // const confirmPassword = formData.get('confirmPassword') as string;
-    // const rawImage = formData.get('image') as string;
-
     const validatedFields = signUpSchema.safeParse({
       name: formData.get('name'),
       email: formData.get('email'),
@@ -130,10 +113,6 @@ export const signup = async (formData: FormData) => {
       confirmPassword: formData.get('confirmPassword'),
       image: formData.get('image'),
     });
-
-    // const validatedFields = signUpData.safeParse({
-    //   name, email, password, confirmPassword
-    // });
 
     if(!validatedFields.success) {
       return {
@@ -178,7 +157,6 @@ export const signup = async (formData: FormData) => {
       email: validatedFields.data.email,
       password: validatedFields.data.password,
       redirect: false
-      // redirectTo: '/'
     });
 
     return {
@@ -203,6 +181,4 @@ export const signup = async (formData: FormData) => {
 
     throw error;
   }
-
-  revalidatePath('/');
 };  

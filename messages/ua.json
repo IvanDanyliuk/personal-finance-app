@@ -106,6 +106,7 @@
       "deleteImageFailed": "Не вдалося видалити фото профілю",
       "updateUserNameFailed": "Не вдалося змінити ім'я користувача",
       "updateUserEmailFailed": "Не вдалося змінити адресу ел. пошти",
+      "userExists": "Користувач з такою адресою ел. пошти вже існує!",
       "updatePassword": {
         "general": "Не вдалось оновити пароль!",
         "userNotFound": "Користувача не знайдено!",

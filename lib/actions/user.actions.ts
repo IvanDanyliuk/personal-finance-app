@@ -8,25 +8,10 @@ import { db } from '@/db';
 import { ActionStatus } from '../types/common.types';
 import { auth, unstable_update } from '@/auth';
 import { saltAndHashPassword } from '../helpers';
+import { updateUserDataSchema } from '../types/form-schemas/settings';
 
 
-const newPasswordData = zod.object({
-  currentPassword: zod
-    .string()
-    .min(1, 'SettingsPage.errors.updatePassword.fieldsValidation.requiredCurrentPassword')
-    .min(6, 'SettingsPage.errors.updatePassword.fieldsValidation.invalidPassword'),
-  newPassword: zod
-    .string()
-    .min(1, 'SettingsPage.errors.updatePassword.fieldsValidation.requiredNewPassword')
-    .min(6, 'SettingsPage.errors.updatePassword.fieldsValidation.invalidPassword'),
-  confirmNewPassword: zod
-    .string()
-    .min(1, 'SettingsPage.errors.updatePassword.fieldsValidation.requiredConfirmNewPassword')
-    .min(6, 'SettingsPage.errors.updatePassword.fieldsValidation.invalidPassword'),
-}).refine((data) => data.newPassword === data.confirmNewPassword, {
-  path: ['confirmNewPassword'],
-  message: 'SettingsPage.errors.updatePassword.fieldsValidation.passwordNotMatch',
-});
+
 
 
 export const getUser = async (email: string) => {
@@ -110,41 +95,66 @@ export const deleteUserPhoto = async () => {
   }
 };
 
-export const updateUserData = async (prevState: any, formData: FormData) => {
+export const updateUserData = async (formData: FormData) => {
   try {
     const session = await auth();
 
     const name = formData.get('name') as string;
     const email = formData.get('email') as string;
 
+    console.log('UPDATE USER DATA', { name, email })
+
     if(session && session.user && name) {
+      const validatedName = updateUserDataSchema.safeParse({ name });
+
+      if(!validatedName.success) {
+        return {
+          status: ActionStatus.Failed,
+          fieldError: validatedName.error.flatten().fieldErrors,
+        };
+      }
+
       await db.user.update({
         where: { email: session.user.email! },
-        data: { name }
+        data: { name: validatedName.data.name }
       });
 
-      await unstable_update({ user: { ...session.user, name } });
+      await unstable_update({ user: { ...session.user, name: validatedName.data.name } });
 
       return {
         status: ActionStatus.Success,
-        updatedName: name,
+        updatedName: validatedName.data.name,
         error: null
       };
     };
 
     if(session && session.user && email) {
+      const validatedEmail = updateUserDataSchema.safeParse({ email });
+
+      if(!validatedEmail.success) {
+        return {
+          status: ActionStatus.Failed,
+          fieldError: validatedEmail.error.flatten().fieldErrors,
+        };
+      }
+
+      const existingUser = await db.user.findUnique({ where: { email: validatedEmail.data.email } });
+      if(existingUser) {
+        throw new Error('errors.userExists')
+      }
+
       await db.user.update({
         where: { email: session.user.email! },
-        data: { email }
+        data: { email: validatedEmail.data.email }
       });
 
-      await unstable_update({ user: { ...session.user, email} });
+      await unstable_update({ user: { ...session.user, email: validatedEmail.data.email} });
 
       revalidatePath('/', 'layout');
 
       return {
         status: ActionStatus.Success,
-        updatedEmail: email,
+        updatedEmail: validatedEmail.data.email,
         error: null
       };
     }
@@ -153,7 +163,7 @@ export const updateUserData = async (prevState: any, formData: FormData) => {
   } catch (error: any) {
     return {
       status: ActionStatus.Failed,
-      error: 'Something went wrong!'
+      error: error.message
     }
   }
 };

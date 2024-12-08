@@ -106,6 +106,7 @@
       "deleteImageFailed": "Cannot delete a profile photo",
       "updateUserNameFailed": "Cannot update user name",
       "updateUserEmailFailed": "Cannot update user email",
+      "userExists": "User with such email already exists",
       "updatePassword": {
         "general": "Cannot update password!",
         "userNotFound": "User not found!",

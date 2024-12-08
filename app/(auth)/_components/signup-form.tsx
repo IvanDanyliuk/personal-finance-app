@@ -99,7 +99,10 @@ export const SignUpForm = () => {
         setValue={setValue}
         btnTitle={t('signupPage.image')}
       />
-      <SubmitButton disabled={!isAgreementConfirmed} isSubmitting={isSubmitting}>
+      <SubmitButton 
+        disabled={!isAgreementConfirmed} 
+        isSubmitting={isSubmitting}
+      >
         {t('signupPage.signupBtn')}
       </SubmitButton>
         <div className='py-3 w-full flex justify-start items-center gap-1'>
