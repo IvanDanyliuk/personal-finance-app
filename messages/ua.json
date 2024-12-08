@@ -29,6 +29,9 @@
       "termsAndPrivacyLink": "умовами політики та приватності",
       "googleBtnTooltip": "Заруєструватися через Google"
     },
+    "actionMessages": {
+      "signInSuccess": "Ласкаво просимо!"
+    },
     "errors": {
       "general": {
         "title": "Отакої! Щось пішло не так!"

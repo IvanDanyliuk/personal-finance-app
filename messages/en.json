@@ -29,6 +29,9 @@
       "termsAndPrivacyLink": "Terms & Privacy",
       "googleBtnTooltip": "Sign up with Google"
     },
+    "actionMessages": {
+      "signInSuccess": "Welcome!"
+    },
     "errors": {
       "general": {
         "title": "Oops! Something wet wrong!"

@@ -23,11 +23,11 @@ export const UserMenu: React.FC = () => {
     session.user.image : 
     UserImagePlaceholder;
 
-  if(!session) return null;
-
   useEffect(() => {
     getSession();
   }, []);
+
+  if(!session) return null;
 
   return (
     <DropdownMenu>
@@ -35,17 +35,17 @@ export const UserMenu: React.FC = () => {
         <div className='pr-0 md:pr-5 flex items-center gap-3 border border-secondary-2 rounded-full'>
           <Image 
             src={userImage} 
-            alt={session?.user?.name!} 
+            alt={session!.user!.name!} 
             width={40} 
             height={40} 
             className='rounded-full' 
           />
           <div className='hidden md:block'>
             <p className='text-left text-base text-foreground font-semibold'>
-              {session?.user?.name!}
+              {session!.user!.name!}
             </p>
             <p className='text-left text-xs text-secondary-3'>
-              {session?.user?.email!}
+              {session!.user!.email!}
             </p>
           </div>
         </div>
@@ -53,10 +53,10 @@ export const UserMenu: React.FC = () => {
       <DropdownMenuContent className='px-3 md:px-0 py-1 bg-background text-foreground'>
         <div className='block md:hidden'>
           <p className='text-left text-sm text-foreground font-semibold'>
-            {session?.user?.name!}
+            {session!.user!.name!}
           </p>
           <p className='text-left text-xs text-secondary-3'>
-            {session?.user?.email!}
+            {session!.user!.email!}
           </p>
         </div>
         <Separator className='block md:hidden mt-2' />

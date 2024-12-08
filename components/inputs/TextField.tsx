@@ -1,9 +1,10 @@
-import { ChangeEvent } from 'react';
+// import { ChangeEvent } from 'react';
 import { useTranslations } from 'next-intl';
 import { CircleAlert } from 'lucide-react';
 import { Label } from '../ui/label'
 import { Input } from '../ui/input';
 import { cn } from '@/lib/utils';
+import { UseFormRegister } from 'react-hook-form';
 
 
 interface ITextField {
@@ -12,12 +13,13 @@ interface ITextField {
   type?: string;
   placeholder?: string;
   variant?: 'horizontal' | 'vertical';
-  value?: string;
-  defaultValue?: string;
+  register: UseFormRegister<any>;
+  // value?: string;
+  // defaultValue?: string;
   required?: boolean;
   disabled?: boolean;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  error?: string[];
+  // onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  error?: string;
 };
 
 
@@ -27,11 +29,12 @@ export const TextField: React.FC<ITextField> = ({
   type,
   placeholder,
   variant = 'vertical',
-  value,
-  defaultValue,
+  register,
+  // value,
+  // defaultValue,
   required,
   disabled,
-  onChange,
+  // onChange,
   error
 }) => {
   const t = useTranslations();
@@ -55,22 +58,24 @@ export const TextField: React.FC<ITextField> = ({
       <div className={cn(variant === 'vertical' ? 'w-full' : 'flex-1')}>
         <Input 
           id={name}
-          name={name}
+          // name={name}
           type={type}
           placeholder={placeholder}
-          value={value}
-          defaultValue={defaultValue}
-          onChange={onChange}
+          // value={value}
+          // defaultValue={defaultValue}
+          // onChange={onChange}
           required={required}
           disabled={disabled}
           className='w-full px-5 py-6 rounded-full'
+          {...register(name)}
         />
         <p className='mt-1 flex items-center gap-1 text-sm text-danger-2'>
           {error && (
             <>
               <CircleAlert className='w-4 h-4' />
               <span>
-                {error.map(err => t(err)).join('. ').trim()}
+                {/* {error.map(err => t(err)).join('. ').trim()} */}
+                {t(error)}
               </span>
             </>
           )}

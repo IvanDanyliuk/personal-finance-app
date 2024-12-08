@@ -29,6 +29,9 @@
       "termsAndPrivacyLink": "условия политики и приватности",
       "googleBtnTooltip": "Зарегистрироваться через Google"
     },
+    "actionMessages": {
+      "signInSuccess": "Добро пожаловать!"
+    },
     "errors": {
       "general": {
         "title": "Ой! Что-то пошло не так!"

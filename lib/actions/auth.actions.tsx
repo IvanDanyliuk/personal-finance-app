@@ -2,27 +2,21 @@
 
 import { revalidatePath } from 'next/cache';
 import { AuthError } from 'next-auth';
-import { z as zod } from 'zod';
 import bcrypt from 'bcryptjs';
+import { z as zod } from 'zod';
 import { signIn, signOut } from '@/auth';
 import { utapi } from '../uploadthing/utapi';
 import { db } from '@/db';
+import { signInSchema } from '../types/form-schemas/auth';
+import { ActionStatus } from '../types/common.types';
 
 
-const signUpData = zod.object({
-  name: zod.string().min(1, 'Auth.errors.auth.fieldsValidation.requiredName'),
-  email: zod.string().min(1, 'Auth.errors.auth.fieldsValidation.requiredEmail').email('Auth.errors.auth.fieldsValidation.invalidEmail'),
-  password: zod.string().min(1, 'Auth.errors.auth.fieldsValidation.requiredPassword').min(6, 'Auth.errors.auth.fieldsValidation.invalidPassword'),
-  confirmPassword: zod.string().min(1, 'Auth.errors.auth.fieldsValidation.requiredConfirmPassword').min(6, 'Auth.errors.auth.fieldsValidation.invalidConfirmPassword'),
-}).refine((data) => data.password === data.confirmPassword, {
-  path: ['confirmPassword'],
-  message: 'Auth.errors.auth.fieldsValidation.passwordNotMatch',
-});
-
-const signInData = zod.object({
-  email: zod.string().min(1, 'Auth.errors.auth.fieldsValidation.requiredEmail').email('Auth.errors.auth.fieldsValidation.invalidEmail'),
-  password: zod.string().min(1, 'Auth.errors.auth.fieldsValidation.requiredPassword').min(6, 'Auth.errors.auth.fieldsValidation.invalidPassword'),
-});
+export const transformZodErrors = (error: zod.ZodError) => {
+  return error.issues.map((issue) => ({
+    path: issue.path.join('. '),
+    message: issue.message,
+  }));
+};
 
 
 export const signInWithProvider = async (provider: string) => {
@@ -35,14 +29,24 @@ export const logout = async () => {
   revalidatePath('/');
 };
 
-export const signin = async (prevState: any, formData: FormData) => {
-  try {
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
 
-    const validatedFields = signInData.safeParse({
-      email, password
+
+export const signin = async (formData: FormData) => {
+  try {
+    // const email = formData.get('email') as string;
+    // const password = formData.get('password') as string;
+    // const { email, password } = formData;
+
+    const validatedFields = signInSchema.safeParse({
+      email: formData.get('email'),
+      password: formData.get('password'),
     });
+
+    console.log('SIGN IN: VALIDATED FIELDS', validatedFields)
+
+    // const validatedFields = signInData.safeParse({
+    //   email, password
+    // });
   
     if(!validatedFields.success) {
       return {
@@ -50,21 +54,28 @@ export const signin = async (prevState: any, formData: FormData) => {
       };
     }
 
-    const existingUser = await db.user.findUnique({ where: { email } });
+    const existingUser = await db.user.findUnique({ where: { email: validatedFields.data.email } });
     const existingPassword = existingUser?.password || null;
 
     if(existingUser && existingPassword) {
       await signIn('credentials', {
-        email,
-        password,
-        redirectTo: '/'
+        email: validatedFields.data.email,
+        password: validatedFields.data.password,
+        redirect: false
+        // redirectTo: '/'
       });
+
+      return {
+        status: ActionStatus.Success,
+        error: null
+      };
     } else {
       if(existingUser) {
         const userAccount = await db.account.findUnique({ where: { userId: existingUser!.id! } });
       
         if(userAccount) {
           return {
+            status: ActionStatus.Failed,
             error: userAccount.provider === 'google' ? 
               'errors.auth.fieldsValidation.wrongProviderGoogle' : 
               userAccount.provider === 'facebook' ? 
@@ -72,8 +83,14 @@ export const signin = async (prevState: any, formData: FormData) => {
                 'errors.auth.fieldsValidation.wrongCredentials'
           };
         }
+
+        return {
+          status: ActionStatus.Failed,
+          error: 'errors.auth.fieldsValidation.accountNotExist'
+        };
       } else {
         return {
+          status: ActionStatus.Failed,
           error: 'errors.auth.fieldsValidation.accountNotExist'
         };
       }
@@ -83,10 +100,12 @@ export const signin = async (prevState: any, formData: FormData) => {
       switch(error.type) {
         case 'CredentialsSignin':
           return {
+            status: ActionStatus.Failed,
             error: 'errors.auth.fieldsValidation.invalidCredentials'
           };
         default:
           return {
+            status: ActionStatus.Failed,
             error: 'errors.auth.fieldsValidation.invalidCredentials'
           };
       }
