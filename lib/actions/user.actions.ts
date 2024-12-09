@@ -1,6 +1,7 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { cookies } from 'next/headers';
 import bcrypt from 'bcryptjs';
 import { utapi } from '../uploadthing/utapi';
 import { db } from '@/db';
@@ -110,12 +111,14 @@ export const updateUserData = async (formData: FormData) => {
     const email = formData.get('email') as string;
     const weekStartDay = formData.get('weekStartDay') as string;
     const currency = formData.get('currency') as string;
+    const language = formData.get('language') as string;
 
     const data = removeFalseyFields({
       name,
       email,
       weekStartDay,
-      currency
+      currency,
+      language
     });
 
     if(session && session.user) {
@@ -134,6 +137,10 @@ export const updateUserData = async (formData: FormData) => {
 
       if(validatedFields.data.name || validatedFields.data.email) {
         await unstable_update({ user: { ...session.user, ...validatedFields.data } });
+      }
+
+      if(validatedFields.data.language) {
+        cookies().set('language', validatedFields.data.language);
       }
 
       return {

@@ -10,7 +10,7 @@ import {
   ManagePassword 
 } from './_components';
 import UserImagePlaceholder from '@/public/images/user-placeholder.png';
-import { CURRENCIES, WEEK_STARTS_FROM } from '@/lib/constants';
+import { CURRENCIES, LANGUAGES, WEEK_STARTS_FROM } from '@/lib/constants';
 
 
 export default async function SettingsPage() {
@@ -46,7 +46,17 @@ export default async function SettingsPage() {
           />
           <ManagePassword />
         </div>
-        <ManageProfileData />
+        <div>
+          <h2 className='text-lg font-semibold'>
+            {t('manageProfileData.title')}
+          </h2>
+          <div>
+            <ManageProfileData 
+              currentLanguage={user!.language!} 
+              options={LANGUAGES} 
+            />
+          </div>
+        </div>
         <div>
           <h2 className='text-lg font-semibold'>
             {t('manageGeneralData.title')}

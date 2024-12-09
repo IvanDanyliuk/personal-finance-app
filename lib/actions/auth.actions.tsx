@@ -1,6 +1,7 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { cookies } from 'next/headers';
 import { AuthError } from 'next-auth';
 import bcrypt from 'bcryptjs';
 import { z as zod } from 'zod';
@@ -120,8 +121,6 @@ export const signup = async (formData: FormData) => {
       };
     }
 
-    console.log('SIGN IN: VALIDATED FIELDS', validatedFields)
-
     const existingUser = await db.user.findUnique({ where: { email: validatedFields.data.email } });
 
     if(existingUser) {
@@ -147,7 +146,7 @@ export const signup = async (formData: FormData) => {
         password: hashedPassword,
         image,
         role: 'USER',
-        weekStartDay: 1,
+        weekStartDay: '1',
         currency: 'usd',
         language: 'en',
       }
@@ -158,6 +157,8 @@ export const signup = async (formData: FormData) => {
       password: validatedFields.data.password,
       redirect: false
     });
+
+    cookies().set('language', 'en')
 
     return {
       status: ActionStatus.Success,

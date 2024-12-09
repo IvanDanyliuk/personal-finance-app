@@ -115,6 +115,15 @@
         "saturday": "Субота"
       }
     },
+    "manageProfileData": {
+      "title": "Налаштування профілю",
+      "languageLabel": "Мова",
+      "languages": {
+        "en": "Англійська",
+        "ru": "Ворожа",
+        "ua": "Українська"
+      }
+    },
     "actionMessages": {
       "profilePhotoUpdated": "Фото профілю оновлено успішно!",
       "profileImageDeleted": "Фото успішно видалено!",
@@ -122,7 +131,8 @@
       "userEmailUpdated": "Адресу ел. пошти успішно оновлено!",
       "passwordUpdated": "Пароль успішно оновлено!",
       "userWeekStartDayUpdated": "День початку тижня успішно оновлено!",
-      "userCurrencyUpdated": "Базову валюту успішно оновлено!"
+      "userCurrencyUpdated": "Базову валюту успішно оновлено!",
+      "userLanguageUpdated": "Мову успішно змінено!"
     },
     "errors": {
       "general": "Щось пішло не так!",
@@ -130,6 +140,7 @@
       "deleteImageFailed": "Не вдалося видалити фото профілю",
       "updateUserNameFailed": "Не вдалося змінити ім'я користувача",
       "updateUserEmailFailed": "Не вдалося змінити адресу ел. пошти",
+      "updateLanguageFailed": "Не вдалося змінити мову", 
       "userExists": "Користувач з такою адресою ел. пошти вже існує!",
       "imageRequired": "Додайте фото!",
       "updatePassword": {

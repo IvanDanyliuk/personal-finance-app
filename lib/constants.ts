@@ -51,3 +51,18 @@ export const CURRENCIES = [
     label: 'SettingsPage.manageGeneralData.currencies.pln'
   },
 ];
+
+export const LANGUAGES = [
+  {
+    value: 'en',
+    label: 'SettingsPage.manageProfileData.languages.en'
+  },
+  {
+    value: 'ru',
+    label: 'SettingsPage.manageProfileData.languages.ru'
+  },
+  {
+    value: 'ua',
+    label: 'SettingsPage.manageProfileData.languages.ua'
+  },
+];

@@ -25,6 +25,7 @@ export const updateUserDataSchema = zod.object({
   email: zod.string().min(1, 'Auth.errors.auth.fieldsValidation.requiredEmail').email('Auth.errors.auth.fieldsValidation.invalidEmail').optional().or(zod.literal('')),
   weekStartDay: zod.string().optional().or(zod.literal('')),
   currency: zod.string().optional().or(zod.literal('')),
+  language: zod.string().optional().or(zod.literal('')),
 });
 
 export const updateUserPhotoSchema = zod.object({

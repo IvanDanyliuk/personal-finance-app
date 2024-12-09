@@ -115,6 +115,15 @@
         "saturday": "Saturday"
       }
     },
+    "manageProfileData": {
+      "title": "Profile settings",
+      "languageLabel": "Language",
+      "languages": {
+        "en": "English",
+        "ru": "Enemy",
+        "ua": "Ukrainian"
+      }
+    },
     "actionMessages": {
       "profilePhotoUpdated": "Image has been updated!",
       "profileImageDeleted": "Image successfully deleted!",
@@ -122,7 +131,8 @@
       "userEmailUpdated": "Email address successfully updated!",
       "passwordUpdated": "Password updated!",
       "userWeekStartDayUpdated": "Week Start Day successfully updated!",
-      "userCurrencyUpdated": "Currency successfully updated!"
+      "userCurrencyUpdated": "Currency successfully updated!",
+      "userLanguageUpdated": "Language successfully updated!"
     },
     "errors": {
       "general": "Something went wrong!",
@@ -130,6 +140,7 @@
       "deleteImageFailed": "Cannot delete a profile photo",
       "updateUserNameFailed": "Cannot update user name",
       "updateUserEmailFailed": "Cannot update user email",
+      "updateLanguageFailed": "Cannot update a language",
       "userExists": "User with such email already exists",
       "imageRequired": "Image is required!",
       "updatePassword": {
