@@ -8,7 +8,7 @@ import { db } from '@/db';
 import { ActionStatus } from '../types/common.types';
 import { auth, unstable_update } from '@/auth';
 import { saltAndHashPassword } from '../helpers';
-import { updateUserDataSchema } from '../types/form-schemas/settings';
+import { newPasswordSchema, updateUserDataSchema } from '../types/form-schemas/settings';
 
 
 
@@ -36,7 +36,7 @@ export const updateUserPhoto = async (prevState: any, formData: FormData) => {
 
     if(image) {
       await db.user.update({
-        where: { email: session.user?.email! },
+        where: { email: session.user!.email! },
         data: {
           image
         }
@@ -102,8 +102,6 @@ export const updateUserData = async (formData: FormData) => {
     const name = formData.get('name') as string;
     const email = formData.get('email') as string;
 
-    console.log('UPDATE USER DATA', { name, email })
-
     if(session && session.user && name) {
       const validatedName = updateUserDataSchema.safeParse({ name });
 
@@ -168,7 +166,7 @@ export const updateUserData = async (formData: FormData) => {
   }
 };
 
-export const updatePassword = async (prevState: any, formData: FormData) => {
+export const updatePassword = async (formData: FormData) => {
   try {
     const session = await auth();
 
@@ -176,17 +174,18 @@ export const updatePassword = async (prevState: any, formData: FormData) => {
     const confirmNewPassword = formData.get('confirmNewPassword') as string;
     const currentPassword = formData.get('currentPassword') as string;
 
-    const validatedFields = newPasswordData.safeParse({
+    const validatedFields = newPasswordSchema.safeParse({
       currentPassword, newPassword, confirmNewPassword
     });
   
     if(!validatedFields.success) {
       return {
+        status: ActionStatus.Failed,
         fieldError: validatedFields.error.flatten().fieldErrors,
       };
     }
 
-    const user = await db.user.findUnique({ where: { id: session?.user?.id! } });
+    const user = await db.user.findUnique({ where: { id: session!.user!.id! } });
 
     if(!user) {
       throw new Error('errors.updatePassword.userNotFound')
@@ -200,7 +199,7 @@ export const updatePassword = async (prevState: any, formData: FormData) => {
         data: { password: hashedNewPassword }
       });
     } else {
-      const passwordMatch = bcrypt.compareSync(currentPassword as string, user?.password!);
+      const passwordMatch = bcrypt.compareSync(validatedFields.data.currentPassword as string, user.password!);
 
       if(!passwordMatch) {
         throw new Error('errors.updatePassword.passwordNotMatch');

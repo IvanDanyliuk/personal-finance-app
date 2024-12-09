@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useFormState } from 'react-dom';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { SubmitButton } from '@/components/common/submit-btn';
 import { TextField } from '@/components/inputs';
@@ -14,35 +15,53 @@ import {
 import { useToast } from '@/hooks/use-toast';
 import { updatePassword } from '@/lib/actions/user.actions';
 import { ActionStatus } from '@/lib/types/common.types';
+import { newPasswordSchema, NewPasswordSchema } from '@/lib/types/form-schemas/settings';
 
 
 export const ManagePassword: React.FC = () => {
   const t = useTranslations('SettingsPage');
   const { toast } = useToast();
 
+  const form = useForm<NewPasswordSchema>({
+    resolver: zodResolver(newPasswordSchema),
+    defaultValues: { currentPassword: '', newPassword: '', confirmNewPassword: '' },
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting }
+  } = form;
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [state, formAction] = useFormState<any, any>(updatePassword, {});
 
   const handleDialogOpen = () => setIsOpen(!isOpen);
 
-  useEffect(() => {
-    if(state && state.status === ActionStatus.Success) {
+  const onSubmitForm: SubmitHandler<NewPasswordSchema> = async (data) => {
+    const formData = new FormData();
+    formData.append('currentPassword', data.currentPassword);
+    formData.append('newPassword', data.newPassword);
+    formData.append('confirmNewPassword', data.confirmNewPassword);
+    const { status, error } = await updatePassword(formData);
+
+    if(status === ActionStatus.Success && !error) {
       toast({
-        description: t('actionMessages.passwordUpdated'),
+        description: t('actionMessages.signInSuccess'),
         variant: 'default',
         className: 'bg-success-1 text-success-2'
       });
       setIsOpen(false);
-    }
+    } 
 
-    if(state && state.status === ActionStatus.Failed && state.error) {
+    if(status === ActionStatus.Failed && error) {
       toast({
-        description: t(state.error),
+        title: t('errors.general.title'),
+        description: t(error),
         variant: 'destructive',
         className: 'bg-danger-1 text-danger-2'
       });
     }
-  }, [state, formAction]);
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={handleDialogOpen}>
@@ -50,27 +69,30 @@ export const ManagePassword: React.FC = () => {
         {t('managePassword.triggerBtnLabel')}
       </DialogTrigger>
       <DialogContent>
-        <form action={formAction}>
+        <form onSubmit={handleSubmit(onSubmitForm)}>
           <TextField 
             name='currentPassword' 
-            type='password' 
             label={t('managePassword.currentPasswordLabel')} 
-            error={state && state.fieldError && state.fieldError['currentPassword']} 
+            type='password'
+            register={register} 
+            error={errors['currentPassword']?.message} 
           />
           <TextField 
             name='newPassword' 
-            type='password' 
             label={t('managePassword.newPasswordLabel')} 
-            error={state && state.fieldError && state.fieldError['newPassword']} 
+            type='password'
+            register={register} 
+            error={errors['newPassword']?.message} 
           />
           <TextField 
             name='confirmNewPassword' 
-            type='password' 
             label={t('managePassword.confirmNewPasswordLabel')} 
-            error={state && state.fieldError && state.fieldError['confirmNewPassword']} 
+            type='password'
+            register={register} 
+            error={errors['confirmNewPassword']?.message} 
           />
           <div className='flex gap-3'>
-            <SubmitButton>
+            <SubmitButton isSubmitting={isSubmitting}>
               {t('managePassword.submitBtnLabel')}
             </SubmitButton>
             <Button 
