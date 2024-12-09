@@ -107,6 +107,7 @@
       "updateUserNameFailed": "Не удалось изменить имя пользователя",
       "updateUserEmailFailed": "Не удалось изменить адрес эл. почты",
       "userExists": "Пользователь с таким адресом эл. почты уже существует",
+      "imageRequired": "Добавьте фото!",
       "updatePassword": {
         "general": "Не удалось изменить пароль!",
         "userNotFound": "Пользователь не найден!",

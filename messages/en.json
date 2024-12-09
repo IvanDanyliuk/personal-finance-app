@@ -107,6 +107,7 @@
       "updateUserNameFailed": "Cannot update user name",
       "updateUserEmailFailed": "Cannot update user email",
       "userExists": "User with such email already exists",
+      "imageRequired": "Image is required!",
       "updatePassword": {
         "general": "Cannot update password!",
         "userNotFound": "User not found!",

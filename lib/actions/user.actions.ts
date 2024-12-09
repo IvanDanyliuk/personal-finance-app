@@ -1,17 +1,13 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { z as zod } from 'zod';
 import bcrypt from 'bcryptjs';
 import { utapi } from '../uploadthing/utapi';
 import { db } from '@/db';
 import { ActionStatus } from '../types/common.types';
 import { auth, unstable_update } from '@/auth';
 import { saltAndHashPassword } from '../helpers';
-import { newPasswordSchema, updateUserDataSchema } from '../types/form-schemas/settings';
-
-
-
+import { newPasswordSchema, updateUserDataSchema, updateUserPhotoSchema } from '../types/form-schemas/settings';
 
 
 export const getUser = async (email: string) => {
@@ -22,17 +18,24 @@ export const getUserById = async (id: string) => {
   return await db.user.findUnique({ where: { id } });
 };
 
-export const updateUserPhoto = async (prevState: any, formData: FormData) => {  
+export const updateUserPhoto = async (formData: FormData) => {  
   try {
-    const rawNewImage = formData.get('image') as string;
+    const session = await auth();
+    if(!session) throw new Error('User is not authenticated!');
 
-    const imageFile = rawNewImage ? await fetch(rawNewImage) : '';
+    const validatedImage = updateUserPhotoSchema.safeParse({ image: formData.get('image') });
+
+    if(!validatedImage.success) {
+      return {
+        status: ActionStatus.Failed,
+        fieldError: validatedImage.error.flatten().fieldErrors,
+      };
+    }
+
+    const imageFile = validatedImage.data?.image ? await fetch(validatedImage.data?.image) : '';
     const imageBlob = imageFile ? await imageFile.blob() : new Blob();
     const imageToUpload = new File([imageBlob!], `${crypto.randomUUID()}-avatar`)
     const image = imageToUpload && imageToUpload.size > 0 ? (await utapi.uploadFiles([imageToUpload]))[0].data?.url : '';
-
-    const session = await auth();
-    if(!session) throw new Error('User is not authenticated!');
 
     if(image) {
       await db.user.update({
@@ -71,7 +74,7 @@ export const deleteUserPhoto = async () => {
     if(!session) throw new Error('User is not authenticated!');
 
     await db.user.update({
-      where: { email: session.user?.email! },
+      where: { email: session.user!.email! },
       data: {
         image: ''
       }
