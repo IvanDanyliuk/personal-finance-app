@@ -93,12 +93,36 @@
       "submitBtnLabel": "Подтвердить",
       "cancelBtnLabel": "Отмена"
     },
+    "manageGeneralData": {
+      "title": "Общие настройки",
+      "weekStartDayLabel": "Неделя начинается с",
+      "currencyLabel": "Валюта",
+      "submitBtnLabel": "Подтвердить",
+      "currencies": {
+        "usd": "Доллар США",
+        "eur": "Евро",
+        "rub": "Рубль",
+        "uah": "Гривна",
+        "pln": "Злотый"
+      },
+      "weekDays": {
+        "sunday": "Воскресенье",
+        "monday": "Понедельник",
+        "tuesday": "Вторник",
+        "wednesday": "Среда",
+        "thursday": "Четверг",
+        "friday": "Пятница",
+        "saturday": "Суббота"
+      }
+    },
     "actionMessages": {
       "profilePhotoUpdated": "Фото профиля обновлено успешно!",
       "profileImageDeleted": "Фото успешно удалено!",
       "userNameUpdated": "Имя пользователя успешно обновлено!",
       "userEmailUpdated": "Адрес эл. почты успешно обновлен!",
-      "passwordUpdated": "Пароль успешно обновлен!"
+      "passwordUpdated": "Пароль успешно обновлен!",
+      "userWeekStartDayUpdated": "День начала недели успешно обновлен!",
+      "userCurrencyUpdated": "Базовя валюта успешно обновлена!"
     },
     "errors": {
       "general": "Что-то пошло не так!",

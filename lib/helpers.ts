@@ -21,3 +21,9 @@ export const extractFirstLetters = (input: string) => {
 
   return (firstLetter + lastLetter).toUpperCase();
 };
+
+export const removeFalseyFields = (obj: any) => {
+  return Object.fromEntries(
+      Object.entries(obj).filter(([_, value]) => Boolean(value))
+  );
+};

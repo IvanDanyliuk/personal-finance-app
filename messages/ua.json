@@ -93,12 +93,36 @@
       "submitBtnLabel": "Підтвердити",
       "cancelBtnLabel": "Відхилити"
     },
+    "manageGeneralData": {
+      "title": "Загальні налаштування",
+      "weekStartDayLabel": "Тиждень починається з",
+      "currencyLabel": "Валюта",
+      "submitBtnLabel": "Підтвердити",
+      "currencies": {
+        "usd": "Долар США",
+        "eur": "Євро",
+        "rub": "Рубль",
+        "uah": "Гривня",
+        "pln": "Злотий"
+      },
+      "weekDays": {
+        "sunday": "Неділя",
+        "monday": "Понеділок",
+        "tuesday": "Вівторок",
+        "wednesday": "Середа",
+        "thursday": "Четвер",
+        "friday": "П'ятниця",
+        "saturday": "Субота"
+      }
+    },
     "actionMessages": {
       "profilePhotoUpdated": "Фото профілю оновлено успішно!",
       "profileImageDeleted": "Фото успішно видалено!",
       "userNameUpdated": "Ім'я користувача успішно оновлено!",
       "userEmailUpdated": "Адресу ел. пошти успішно оновлено!",
-      "passwordUpdated": "Пароль успішно оновлено!"
+      "passwordUpdated": "Пароль успішно оновлено!",
+      "userWeekStartDayUpdated": "День початку тижня успішно оновлено!",
+      "userCurrencyUpdated": "Базову валюту успішно оновлено!"
     },
     "errors": {
       "general": "Щось пішло не так!",

@@ -2,8 +2,15 @@ import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { auth } from '@/auth';
 import { getUserById } from '@/lib/actions/user.actions';
-import { ManageProfilePhoto, ManagePersonalData, ManageProfileData, ManageFinanceData, ManagePassword } from './_components';
+import { 
+  ManageProfilePhoto, 
+  ManagePersonalData, 
+  ManageProfileData, 
+  ManageGeneralData, 
+  ManagePassword 
+} from './_components';
 import UserImagePlaceholder from '@/public/images/user-placeholder.png';
+import { CURRENCIES, WEEK_STARTS_FROM } from '@/lib/constants';
 
 
 export default async function SettingsPage() {
@@ -39,11 +46,21 @@ export default async function SettingsPage() {
           />
           <ManagePassword />
         </div>
-        <div className=' bg-slate-400'>
-          <ManageProfileData />
-        </div>
-        <div className=' bg-slate-400'>
-          <ManageFinanceData />
+        <ManageProfileData />
+        <div>
+          <h2 className='text-lg font-semibold'>
+            {t('manageGeneralData.title')}
+          </h2>
+          <div>
+            <ManageGeneralData 
+              currentWeekStartDay={user!.weekStartDay!} 
+              options={WEEK_STARTS_FROM} 
+            />
+            <ManageGeneralData 
+              currentCurrency={user!.currency!} 
+              options={CURRENCIES} 
+            />
+          </div>
         </div>
       </div>
     </div>

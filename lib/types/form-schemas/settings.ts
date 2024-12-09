@@ -1,4 +1,5 @@
 import { z as zod } from 'zod';
+import { ActionStatus } from '../common.types';
 
 
 export const newPasswordSchema = zod.object({
@@ -22,6 +23,8 @@ export const newPasswordSchema = zod.object({
 export const updateUserDataSchema = zod.object({
   name: zod.string().min(1, 'Auth.errors.auth.fieldsValidation.requiredName').optional().or(zod.literal('')),
   email: zod.string().min(1, 'Auth.errors.auth.fieldsValidation.requiredEmail').email('Auth.errors.auth.fieldsValidation.invalidEmail').optional().or(zod.literal('')),
+  weekStartDay: zod.string().optional().or(zod.literal('')),
+  currency: zod.string().optional().or(zod.literal('')),
 });
 
 export const updateUserPhotoSchema = zod.object({
@@ -32,3 +35,12 @@ export const updateUserPhotoSchema = zod.object({
 export type NewPasswordSchema= zod.infer<typeof newPasswordSchema>;
 export type UpdateUserDataSchema= zod.infer<typeof updateUserDataSchema>;
 export type UpdateUserPhotoSchema= zod.infer<typeof updateUserPhotoSchema>;
+export type BasicActionResponse = {
+  status: ActionStatus,
+  error: string | null
+};
+
+export interface ExtendedActionResponse extends UpdateUserDataSchema {
+  status: ActionStatus,
+  error: string | null
+};

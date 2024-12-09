@@ -54,20 +54,20 @@ export const ManagePersonalData: React.FC<IManagePersonalData> = ({ variant, cur
     if(data.name) formData.append('name', data.name);
     if(data.email) formData.append('email', data.email);
 
-    const { status, updatedName, updatedEmail, error } = await updateUserData(formData);
+    const { status, name, email, error } = await updateUserData(formData);
 
     if(status === ActionStatus.Success && !error) {
-      const updateQuery = updatedName ? 
-        { name: updatedName } : 
-        updatedEmail ? 
-          { email: updatedEmail } : 
+      const updateQuery = name ? 
+        { name } : 
+        email ? 
+          { email } : 
           null;
 
       if(updateQuery) {
         update(updateQuery).then(() => toast({
-          description: t((updatedName ? 
+          description: t((name ? 
             'actionMessages.userNameUpdated' : 
-            updatedEmail ? 
+            email ? 
               'actionMessages.userEmailUpdated' : 
               ''
           )),

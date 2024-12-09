@@ -6,7 +6,7 @@ import { utapi } from '../uploadthing/utapi';
 import { db } from '@/db';
 import { ActionStatus } from '../types/common.types';
 import { auth, unstable_update } from '@/auth';
-import { saltAndHashPassword } from '../helpers';
+import { removeFalseyFields, saltAndHashPassword } from '../helpers';
 import { newPasswordSchema, updateUserDataSchema, updateUserPhotoSchema } from '../types/form-schemas/settings';
 
 
@@ -102,62 +102,45 @@ export const updateUserData = async (formData: FormData) => {
   try {
     const session = await auth();
 
+    if(!session) {
+      throw new Error('User in not authenticated!');
+    }
+
     const name = formData.get('name') as string;
     const email = formData.get('email') as string;
+    const weekStartDay = formData.get('weekStartDay') as string;
+    const currency = formData.get('currency') as string;
 
-    if(session && session.user && name) {
-      const validatedName = updateUserDataSchema.safeParse({ name });
+    const data = removeFalseyFields({
+      name,
+      email,
+      weekStartDay,
+      currency
+    });
 
-      if(!validatedName.success) {
+    if(session && session.user) {
+      const validatedFields = updateUserDataSchema.safeParse(data);
+      if(!validatedFields.success) {
         return {
           status: ActionStatus.Failed,
-          fieldError: validatedName.error.flatten().fieldErrors,
+          fieldError: validatedFields.error.flatten().fieldErrors,
         };
       }
 
       await db.user.update({
         where: { email: session.user.email! },
-        data: { name: validatedName.data.name }
+        data: validatedFields.data as any
       });
 
-      await unstable_update({ user: { ...session.user, name: validatedName.data.name } });
+      if(validatedFields.data.name || validatedFields.data.email) {
+        await unstable_update({ user: { ...session.user, ...validatedFields.data } });
+      }
 
       return {
         status: ActionStatus.Success,
-        updatedName: validatedName.data.name,
+        ...validatedFields.data,
         error: null
-      };
-    };
-
-    if(session && session.user && email) {
-      const validatedEmail = updateUserDataSchema.safeParse({ email });
-
-      if(!validatedEmail.success) {
-        return {
-          status: ActionStatus.Failed,
-          fieldError: validatedEmail.error.flatten().fieldErrors,
-        };
-      }
-
-      const existingUser = await db.user.findUnique({ where: { email: validatedEmail.data.email } });
-      if(existingUser) {
-        throw new Error('errors.userExists')
-      }
-
-      await db.user.update({
-        where: { email: session.user.email! },
-        data: { email: validatedEmail.data.email }
-      });
-
-      await unstable_update({ user: { ...session.user, email: validatedEmail.data.email} });
-
-      revalidatePath('/', 'layout');
-
-      return {
-        status: ActionStatus.Success,
-        updatedEmail: validatedEmail.data.email,
-        error: null
-      };
+      } as any;
     }
 
     throw new Error('errors.general');
@@ -165,7 +148,7 @@ export const updateUserData = async (formData: FormData) => {
     return {
       status: ActionStatus.Failed,
       error: error.message
-    }
+    };
   }
 };
 

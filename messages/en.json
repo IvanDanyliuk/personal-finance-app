@@ -93,12 +93,36 @@
       "submitBtnLabel": "Submit",
       "cancelBtnLabel": "Cancel"
     },
+    "manageGeneralData": {
+      "title": "General settings",
+      "weekStartDayLabel": "Week starts from",
+      "currencyLabel": "Currency",
+      "submitBtnLabel": "Submit",
+      "currencies": {
+        "usd": "US Dollar",
+        "eur": "Euro",
+        "rub": "Ruble",
+        "uah": "Hryvnia",
+        "pln": "Zloty"
+      },
+      "weekDays": {
+        "sunday": "Sunday",
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday"
+      }
+    },
     "actionMessages": {
       "profilePhotoUpdated": "Image has been updated!",
       "profileImageDeleted": "Image successfully deleted!",
       "userNameUpdated": "User name successfully updated!",
       "userEmailUpdated": "Email address successfully updated!",
-      "passwordUpdated": "Password updated!"
+      "passwordUpdated": "Password updated!",
+      "userWeekStartDayUpdated": "Week Start Day successfully updated!",
+      "userCurrencyUpdated": "Currency successfully updated!"
     },
     "errors": {
       "general": "Something went wrong!",
