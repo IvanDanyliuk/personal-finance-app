@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { SubmitButton } from '@/components/common/submit-btn';
+import { SubmitButton } from '@/components/common';
 import { CheckboxField, TextField } from '@/components/inputs';
 import { useToast } from "@/hooks/use-toast"
 import { signin } from '@/lib/actions/auth.actions';

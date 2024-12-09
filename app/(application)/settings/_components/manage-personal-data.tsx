@@ -15,7 +15,7 @@ import {
 } from '@/components/ui/dialog';
 import { TextField } from '@/components/inputs';
 import { Button } from '@/components/ui/button';
-import { SubmitButton } from '@/components/common/submit-btn';
+import { SubmitButton } from '@/components/common';
 import { updateUserData } from '@/lib/actions/user.actions';
 import { useToast } from '@/hooks/use-toast';
 import { ActionStatus } from '@/lib/types/common.types';

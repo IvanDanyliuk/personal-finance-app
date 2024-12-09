@@ -7,7 +7,8 @@ import {
   ManagePersonalData, 
   ManageProfileData, 
   ManageGeneralData, 
-  ManagePassword 
+  ManagePassword, 
+  DeleteUser
 } from './_components';
 import UserImagePlaceholder from '@/public/images/user-placeholder.png';
 import { CURRENCIES, LANGUAGES, WEEK_STARTS_FROM } from '@/lib/constants';
@@ -55,6 +56,7 @@ export default async function SettingsPage() {
               currentLanguage={user!.language!} 
               options={LANGUAGES} 
             />
+            <DeleteUser email={user?.email!} />
           </div>
         </div>
         <div>

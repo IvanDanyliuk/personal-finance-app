@@ -3,11 +3,13 @@ import { ManageProfileData } from './manage-profile-data';
 import { ManagePersonalData } from './manage-personal-data';
 import { ManageGeneralData } from './manage-general-data';
 import { ManagePassword } from './manage-password';
+import { DeleteUser } from './delete-user';
 
 export { 
   ManageProfilePhoto, 
   ManageProfileData, 
   ManageGeneralData, 
   ManagePersonalData, 
-  ManagePassword 
+  ManagePassword,
+  DeleteUser 
 };

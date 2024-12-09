@@ -66,7 +66,9 @@
       "analytics": "Аналітика",
       "settings": "Налаштування"
     },
-    "logoutBtn": "Вийти"
+    "logoutBtn": "Вийти",
+    "submitBtnLabel": "OK",
+    "cancelBtnLabel": "Відхилити"
   },
   "SettingsPage": {
     "title": "Налаштування",
@@ -122,6 +124,14 @@
         "en": "Англійська",
         "ru": "Ворожа",
         "ua": "Українська"
+      }
+    },
+    "deleteUser": {
+      "confirmationModal": {
+        "btnLabel": "Видалити обліковий запис",
+        "title": "Ви впевнені що хочете видалити свій обліковий запис?",
+        "message": "Відмінити цю дію буде неможливо.",
+        "emailFieldLabel": "Введіть адресу ел. пошти"
       }
     },
     "actionMessages": {

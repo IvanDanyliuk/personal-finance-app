@@ -6,7 +6,7 @@ import { useSession } from 'next-auth/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
-import { SubmitButton } from '@/components/common/submit-btn';
+import { SubmitButton } from '@/components/common';
 import { FileInput } from '@/components/inputs';
 import { Button } from '@/components/ui/button';
 import {

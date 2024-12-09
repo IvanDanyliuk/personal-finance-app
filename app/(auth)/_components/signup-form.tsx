@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { CheckboxField, FileInput, TextField } from '@/components/inputs';
-import { SubmitButton } from '@/components/common/submit-btn';
+import { SubmitButton } from '@/components/common';
 import { signup } from '@/lib/actions/auth.actions';
 import { signUpSchema, SignUpSchema } from '@/lib/types/form-schemas/auth';
 import { ActionStatus } from '@/lib/types/common.types';
