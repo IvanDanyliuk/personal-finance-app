@@ -1,6 +1,6 @@
 'use client';
 
-import { ReactNode, useState } from 'react';
+import { ReactNode, useState, useTransition } from 'react';
 import { useTranslations } from 'next-intl';
 import {
   Dialog,
@@ -32,10 +32,18 @@ export const ConfirmDialog: React.FC<IConfirmDialog> = ({
   children
 }) => {
   const t = useTranslations('');
+  const [pending, setTransition] = useTransition();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleDialogOpen = () => setIsOpen(!isOpen);
+
+  const onAction = () => {
+    setTransition(() => {
+      action();
+    });
+    setIsOpen(false);
+  }
 
   return (
     <Dialog open={isOpen} onOpenChange={handleDialogOpen}>
@@ -55,8 +63,8 @@ export const ConfirmDialog: React.FC<IConfirmDialog> = ({
         <DialogFooter className='flex gap-3'>
           <Button 
             type='button' 
-            onClick={action} 
-            disabled={disabled} 
+            onClick={onAction} 
+            disabled={disabled || pending} 
             className='py-6 flex-1 rounded-full bg-danger-2 hover:bg-danger-1 text-white font-semibold'
           >
             {t('Layout.submitBtnLabel')}

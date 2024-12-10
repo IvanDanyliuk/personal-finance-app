@@ -6,9 +6,10 @@ import bcrypt from 'bcryptjs';
 import { utapi } from '../uploadthing/utapi';
 import { db } from '@/db';
 import { ActionStatus } from '../types/common.types';
-import { auth, unstable_update } from '@/auth';
+import { auth, signOut, unstable_update } from '@/auth';
 import { removeFalseyFields, saltAndHashPassword } from '../helpers';
 import { newPasswordSchema, updateUserDataSchema, updateUserPhotoSchema } from '../types/form-schemas/settings';
+import { redirect } from 'next/navigation';
 
 
 export const getUser = async (email: string) => {
@@ -18,6 +19,10 @@ export const getUser = async (email: string) => {
 export const getUserById = async (id: string) => {
   return await db.user.findUnique({ where: { id } });
 };
+
+export const getAccount = async (userId: string) => {
+  return await db.account.findUnique({ where: { userId } });
+}
 
 export const updateUserPhoto = async (formData: FormData) => {  
   try {
@@ -208,6 +213,48 @@ export const updatePassword = async (formData: FormData) => {
 
     revalidatePath('/', 'layout');
 
+    return {
+      status: ActionStatus.Success,
+      error: null
+    };
+  } catch (error: any) {
+    return {
+      status: ActionStatus.Failed,
+      error: error.message
+    };
+  }
+};
+
+export const deleteUser = async (formData: FormData) => {
+  try {
+    const session = await auth();
+
+    if(!session) {
+      throw new Error('User is not authenticated!');
+    }
+
+    const email = formData.get('email') as string;
+
+    if(session.user && session.user.email) {
+      if(session.user.email !== email) {
+        throw new Error('errors.deleteUser.notMatchPassword');
+      }
+
+      await db.user.delete({ where: { email: session.user.email } });
+
+      const account = await db.account.findUnique({ where: { userId: session.user.id } });
+      if(account) {
+        await db.account.delete({ where: { id: account.id } });
+      }
+
+      if(session.user.image && session.user.image.includes('utfs.io')) {
+        const imageToDeleteId = session.user?.image!.substring(session.user?.image!.lastIndexOf('/') + 1);
+        await utapi.deleteFiles(imageToDeleteId!);
+      }
+    }
+
+    // await signOut();
+    // redirect('/sign-in');
     return {
       status: ActionStatus.Success,
       error: null

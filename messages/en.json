@@ -142,7 +142,8 @@
       "passwordUpdated": "Password updated!",
       "userWeekStartDayUpdated": "Week Start Day successfully updated!",
       "userCurrencyUpdated": "Currency successfully updated!",
-      "userLanguageUpdated": "Language successfully updated!"
+      "userLanguageUpdated": "Language successfully updated!",
+      "userDeleted": "User successfully deleted!"
     },
     "errors": {
       "general": "Something went wrong!",
@@ -166,6 +167,10 @@
           "invalidCurrentPassword": "Invalid current password",
           "wrongPassword": "Password is wrong!"
         }
+      },
+      "deleteUser": {
+        "deleteUserFailed": "Cannot update a user",
+        "notMatchPassword": "Incorrect password"
       }
     }
   }

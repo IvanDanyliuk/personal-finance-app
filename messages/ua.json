@@ -142,7 +142,8 @@
       "passwordUpdated": "Пароль успішно оновлено!",
       "userWeekStartDayUpdated": "День початку тижня успішно оновлено!",
       "userCurrencyUpdated": "Базову валюту успішно оновлено!",
-      "userLanguageUpdated": "Мову успішно змінено!"
+      "userLanguageUpdated": "Мову успішно змінено!",
+      "userDeleted": "Обліковий запис успішно видалений!"
     },
     "errors": {
       "general": "Щось пішло не так!",
@@ -164,8 +165,12 @@
           "passwordNotMatch": "Паролі не співпадають",
           "invalidPassword": "Пароль має включати щонайменше 6 символів",
           "invalidCurrentPassword": "Невірний поточний пароль",
-          "wrongPassword": "Невірний пароль!"
+          "wrongPassword": "Невірна адреса ел. пошти!"
         }
+      },
+      "deleteUser": {
+        "deleteUserFailed": "Не вдалося видалити обліковий запис",
+        "notMatchPassword": "Невірна адреса ел. пошти"
       }
     }
   }

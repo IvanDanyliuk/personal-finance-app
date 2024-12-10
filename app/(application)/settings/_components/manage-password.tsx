@@ -18,7 +18,12 @@ import { ActionStatus } from '@/lib/types/common.types';
 import { newPasswordSchema, NewPasswordSchema } from '@/lib/types/form-schemas/settings';
 
 
-export const ManagePassword: React.FC = () => {
+interface IManagePassword {
+  accountId?: string;
+}
+
+
+export const ManagePassword: React.FC<IManagePassword> = ({ accountId }) => {
   const t = useTranslations('SettingsPage');
   const { toast } = useToast();
 
@@ -39,7 +44,7 @@ export const ManagePassword: React.FC = () => {
 
   const onSubmitForm: SubmitHandler<NewPasswordSchema> = async (data) => {
     const formData = new FormData();
-    formData.append('currentPassword', data.currentPassword);
+    if(accountId && data.currentPassword) formData.append('currentPassword', data.currentPassword);
     formData.append('newPassword', data.newPassword);
     formData.append('confirmNewPassword', data.confirmNewPassword);
     const { status, error } = await updatePassword(formData);

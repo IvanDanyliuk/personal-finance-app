@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { auth } from '@/auth';
-import { getUserById } from '@/lib/actions/user.actions';
+import { getAccount, getUserById } from '@/lib/actions/user.actions';
 import { 
   ManageProfilePhoto, 
   ManagePersonalData, 
@@ -18,6 +18,8 @@ export default async function SettingsPage() {
   const t = await getTranslations('SettingsPage');
   const session = await auth();
   const user = await getUserById(session!.user!.id!);
+  const account = await getAccount(user?.id!);
+
   const userImage = user && user.image ? user.image : UserImagePlaceholder;
 
   return (
@@ -56,7 +58,7 @@ export default async function SettingsPage() {
               currentLanguage={user!.language!} 
               options={LANGUAGES} 
             />
-            <DeleteUser email={user?.email!} />
+            <DeleteUser />
           </div>
         </div>
         <div>

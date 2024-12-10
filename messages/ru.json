@@ -142,7 +142,8 @@
       "passwordUpdated": "Пароль успешно обновлен!",
       "userWeekStartDayUpdated": "День начала недели успешно обновлен!",
       "userCurrencyUpdated": "Базовя валюта успешно обновлена!",
-      "userLanguageUpdated": "Язык изменен успешно!"
+      "userLanguageUpdated": "Язык изменен успешно!",
+      "userDeleted": "Пользователь успешно удален!"
     },
     "errors": {
       "general": "Что-то пошло не так!",
@@ -164,8 +165,12 @@
           "passwordNotMatch": "Пароли не совпадают",
           "invalidPassword": "Пароль должен включать минимум 6 символов",
           "invalidCurrentPassword": "Неверный текущий пароль",
-          "wrongPassword": "Неверный пароль!"
+          "wrongPassword": "Неверный адрес эл. почты!"
         }
+      },
+      "deleteUser": {
+        "deleteUserFailed": "Не удалось удалить пользователя",
+        "notMatchPassword": "Неверный пароль!"
       }
     }
   }

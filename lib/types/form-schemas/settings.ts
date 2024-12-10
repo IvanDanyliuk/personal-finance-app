@@ -20,6 +20,17 @@ export const newPasswordSchema = zod.object({
   message: 'SettingsPage.errors.updatePassword.fieldsValidation.passwordNotMatch',
 });
 
+export const newPasswordSchemaWithProvider = zod.object({
+  newPassword: zod
+    .string()
+    .min(1, 'SettingsPage.errors.updatePassword.fieldsValidation.requiredNewPassword')
+    .min(6, 'SettingsPage.errors.updatePassword.fieldsValidation.invalidPassword'),
+  confirmNewPassword: zod
+    .string()
+    .min(1, 'SettingsPage.errors.updatePassword.fieldsValidation.requiredConfirmNewPassword')
+    .min(6, 'SettingsPage.errors.updatePassword.fieldsValidation.invalidPassword'),
+})
+
 export const updateUserDataSchema = zod.object({
   name: zod.string().min(1, 'Auth.errors.auth.fieldsValidation.requiredName').optional().or(zod.literal('')),
   email: zod.string().min(1, 'Auth.errors.auth.fieldsValidation.requiredEmail').email('Auth.errors.auth.fieldsValidation.invalidEmail').optional().or(zod.literal('')),
@@ -32,10 +43,16 @@ export const updateUserPhotoSchema = zod.object({
   image: zod.string().min(1, 'SettingsPage.errors.imageRequired')
 });
 
+export const deleteUserSchema = zod.object({
+  email: zod.string().min(1, 'Confirm your email!').email('Email is not correct!')
+});
+
 
 export type NewPasswordSchema= zod.infer<typeof newPasswordSchema>;
 export type UpdateUserDataSchema= zod.infer<typeof updateUserDataSchema>;
 export type UpdateUserPhotoSchema= zod.infer<typeof updateUserPhotoSchema>;
+export type DeleteUserSchema = zod.infer<typeof deleteUserSchema>;
+
 export type BasicActionResponse = {
   status: ActionStatus,
   error: string | null
