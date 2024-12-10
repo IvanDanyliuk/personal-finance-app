@@ -95,6 +95,13 @@
       "submitBtnLabel": "Подтвердить",
       "cancelBtnLabel": "Отмена"
     },
+    "setPassword": {
+      "triggerBtnLabel": "Установить пароль",
+      "passwordLabel": "Пароль",
+      "confirmPasswordLabel": "Подтвердить пароль",
+      "submitBtnLabel": "Подтвердить",
+      "cancelBtnLabel": "Отмена"
+    },
     "manageGeneralData": {
       "title": "Общие настройки",
       "weekStartDayLabel": "Неделя начинается с",
@@ -140,6 +147,7 @@
       "userNameUpdated": "Имя пользователя успешно обновлено!",
       "userEmailUpdated": "Адрес эл. почты успешно обновлен!",
       "passwordUpdated": "Пароль успешно обновлен!",
+      "passwordSet": "Пароль установлен!",
       "userWeekStartDayUpdated": "День начала недели успешно обновлен!",
       "userCurrencyUpdated": "Базовя валюта успешно обновлена!",
       "userLanguageUpdated": "Язык изменен успешно!",
@@ -165,7 +173,18 @@
           "passwordNotMatch": "Пароли не совпадают",
           "invalidPassword": "Пароль должен включать минимум 6 символов",
           "invalidCurrentPassword": "Неверный текущий пароль",
-          "wrongPassword": "Неверный адрес эл. почты!"
+          "wrongPassword": "Неверный пароль!"
+        }
+      },
+      "setPassword": {
+        "general": "Не удалось установить пароль!",
+        "userNotFound": "Пользователь не найден!",
+        "fieldsValidation": {
+          "requiredPassword": "Введите пароль!",
+          "requiredConfirmPassword": "Подтвердите пароль!",
+          "passwordNotMatch": "Пароли не совпадают!",
+          "invalidPassword": "Неверный пароль",
+          "wrongPassword": "Неверный пароль!"
         }
       },
       "deleteUser": {

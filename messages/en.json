@@ -95,6 +95,13 @@
       "submitBtnLabel": "Submit",
       "cancelBtnLabel": "Cancel"
     },
+    "setPassword": {
+      "triggerBtnLabel": "Change password",
+      "passwordLabel": "Password",
+      "confirmPasswordLabel": "Confirm password",
+      "submitBtnLabel": "Submit",
+      "cancelBtnLabel": "Cancel"
+    },
     "manageGeneralData": {
       "title": "General settings",
       "weekStartDayLabel": "Week starts from",
@@ -140,6 +147,7 @@
       "userNameUpdated": "User name successfully updated!",
       "userEmailUpdated": "Email address successfully updated!",
       "passwordUpdated": "Password updated!",
+      "passwordSet": "Password is set!",
       "userWeekStartDayUpdated": "Week Start Day successfully updated!",
       "userCurrencyUpdated": "Currency successfully updated!",
       "userLanguageUpdated": "Language successfully updated!",
@@ -165,6 +173,17 @@
           "passwordNotMatch": "Passwords not match!",
           "invalidPassword": "Invalid password",
           "invalidCurrentPassword": "Invalid current password",
+          "wrongPassword": "Password is wrong!"
+        }
+      },
+      "setPassword": {
+        "general": "Cannot set password!",
+        "userNotFound": "User not found!",
+        "fieldsValidation": {
+          "requiredPassword": "Password is required!",
+          "requiredConfirmPassword": "Confirm password!",
+          "passwordNotMatch": "Passwords not match!",
+          "invalidPassword": "Invalid password",
           "wrongPassword": "Password is wrong!"
         }
       },

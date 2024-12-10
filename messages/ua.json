@@ -95,6 +95,13 @@
       "submitBtnLabel": "Підтвердити",
       "cancelBtnLabel": "Відхилити"
     },
+    "setPassword": {
+      "triggerBtnLabel": "Встановити пароль",
+      "passwordLabel": "Пароль",
+      "confirmPasswordLabel": "Підтвердити пароль",
+      "submitBtnLabel": "Підтвердити",
+      "cancelBtnLabel": "Відхилити"
+    },
     "manageGeneralData": {
       "title": "Загальні налаштування",
       "weekStartDayLabel": "Тиждень починається з",
@@ -140,6 +147,7 @@
       "userNameUpdated": "Ім'я користувача успішно оновлено!",
       "userEmailUpdated": "Адресу ел. пошти успішно оновлено!",
       "passwordUpdated": "Пароль успішно оновлено!",
+      "passwordSet": "Пароль встановлено!",
       "userWeekStartDayUpdated": "День початку тижня успішно оновлено!",
       "userCurrencyUpdated": "Базову валюту успішно оновлено!",
       "userLanguageUpdated": "Мову успішно змінено!",
@@ -166,6 +174,17 @@
           "invalidPassword": "Пароль має включати щонайменше 6 символів",
           "invalidCurrentPassword": "Невірний поточний пароль",
           "wrongPassword": "Невірна адреса ел. пошти!"
+        }
+      },
+      "setPassword": {
+        "general": "Не вдалось встановити пароль!",
+        "userNotFound": "Користувача не знайдено!",
+        "fieldsValidation": {
+          "requiredPassword": "Введіть поточний пароль!",
+          "requiredConfirmPassword": "Підтвердіть пароль!",
+          "passwordNotMatch": "Паролі не співпадають!",
+          "invalidPassword": "Невірний поточний пароль",
+          "wrongPassword": "Невірний пароль!"
         }
       },
       "deleteUser": {

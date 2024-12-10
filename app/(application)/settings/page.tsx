@@ -8,7 +8,8 @@ import {
   ManageProfileData, 
   ManageGeneralData, 
   ManagePassword, 
-  DeleteUser
+  DeleteUser,
+  SetPassword
 } from './_components';
 import UserImagePlaceholder from '@/public/images/user-placeholder.png';
 import { CURRENCIES, LANGUAGES, WEEK_STARTS_FROM } from '@/lib/constants';
@@ -19,7 +20,6 @@ export default async function SettingsPage() {
   const session = await auth();
   const user = await getUserById(session!.user!.id!);
   const account = await getAccount(user?.id!);
-
   const userImage = user && user.image ? user.image : UserImagePlaceholder;
 
   return (
@@ -47,7 +47,7 @@ export default async function SettingsPage() {
             variant='email' 
             currentUserEmail={user!.email!} 
           />
-          <ManagePassword />
+          {account && !user?.password! ? <SetPassword /> : <ManagePassword />}
         </div>
         <div>
           <h2 className='text-lg font-semibold'>

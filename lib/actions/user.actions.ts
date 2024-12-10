@@ -8,7 +8,7 @@ import { db } from '@/db';
 import { ActionStatus } from '../types/common.types';
 import { auth, signOut, unstable_update } from '@/auth';
 import { removeFalseyFields, saltAndHashPassword } from '../helpers';
-import { newPasswordSchema, updateUserDataSchema, updateUserPhotoSchema } from '../types/form-schemas/settings';
+import { newPasswordSchema, setPasswordSchema, updateUserDataSchema, updateUserPhotoSchema } from '../types/form-schemas/settings';
 import { redirect } from 'next/navigation';
 
 
@@ -209,9 +209,56 @@ export const updatePassword = async (formData: FormData) => {
       });
     }
 
-    await unstable_update({ user: { email: user.email } })
+    await unstable_update({ user: { email: user.email } });
 
     revalidatePath('/', 'layout');
+
+    return {
+      status: ActionStatus.Success,
+      error: null
+    };
+  } catch (error: any) {
+    return {
+      status: ActionStatus.Failed,
+      error: error.message
+    };
+  }
+};
+
+export const setPassword = async (formData: FormData) => {
+  try {
+    const session = await auth();
+
+    const password = formData.get('password') as string;
+    const confirmPassword = formData.get('confirmPassword') as string;
+
+    const validatedFields = setPasswordSchema.safeParse({
+      password, confirmPassword
+    });
+  
+    if(!validatedFields.success) {
+      return {
+        status: ActionStatus.Failed,
+        fieldError: validatedFields.error.flatten().fieldErrors,
+      };
+    }
+
+    const user = await db.user.findUnique({ where: { id: session!.user!.id! } });
+
+    if(!user) {
+      throw new Error('errors.setPassword.userNotFound')
+    }
+
+    const hashedNewPassword = saltAndHashPassword(password);
+
+    if(!user.password) {
+      await db.user.update({
+        where: { id: user.id },
+        data: { password: hashedNewPassword }
+      });
+
+      await unstable_update({ user: { email: user.email } });
+    }
 
     return {
       status: ActionStatus.Success,
