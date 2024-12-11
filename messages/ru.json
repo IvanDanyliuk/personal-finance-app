@@ -1,0 +1,196 @@
+{
+  "Auth": {
+    "signinPage": {
+      "title": "Войти",
+      "titleMessage": "Привет! Пожалуйста, войдите в свою учетную запись чтобы продолжить пользоваться приложением",
+      "continueText": "или продолжить через",
+      "noAccountText": "Еще не зарегистрировались?",
+      "signupLinkLabel": "Зарегистрироваться",
+      "email": "Эл. почта",
+      "password": "Пароль",
+      "signinBtn": "Войти",
+      "rememberMeCheckboxLabel": "Запомнить меня",
+      "forgotPasswordLinkLabel": "Забыли пароль?",
+      "googleBtnTooltip": "Войти через Google"
+    },
+    "signupPage": {
+      "title": "Зарегистрироваться",
+      "titleMessage": "Привет! Пожалуйста, создайте свою учетнуюзапись чтобы продолжить пользоваться приложением",
+      "continueText": "или продолжить через",
+      "haveAccountText": "Уже зарегистрированы?",
+      "signinLinkLabel": "Войти",
+      "name": "Имя",
+      "email": "Эл. почта",
+      "password": "Пароль",
+      "confirmPassword": "Подтвердить пароль",
+      "image": "Добавить фото",
+      "signupBtn": "Зарегистрироваться",
+      "agreeText": "Я принимаю",
+      "termsAndPrivacyLink": "условия политики и приватности",
+      "googleBtnTooltip": "Зарегистрироваться через Google"
+    },
+    "actionMessages": {
+      "signInSuccess": "Добро пожаловать!",
+      "signUpSuccess": "Добро пожаловать!"
+    },
+    "errors": {
+      "general": {
+        "title": "Ой! Что-то пошло не так!"
+      },
+      "auth": {
+        "fieldsValidation": {
+          "requiredName": "Введите имя!",
+          "requiredEmail": "Введите адрес эл. почты!",
+          "invalidEmail": "Неправильный адрес эл. почты!",
+          "requiredPassword": "Введите пароль!",
+          "invalidPassword": "Пароль должен включать минимум 6 символов",
+          "requiredConfirmPassword": "Подтвердите пароль!",
+          "invalidConfirmPassword": "Пароль должен включать минимум 6 символов",
+          "passwordNotMatch": "Пароли не совпадают",
+          "wrongProviderGoogle": "Вы создали учетную запись используя ваш Google Account. Войдите через Вашу учетную запись Google и установите пароль в разделе Настройки",
+          "wrongProviderFacebook": "Вы создали учетную запись используя ваш Facebook Account. Войдите через Вашу учетную запись Facebook и установите пароль в разделе Настройки",
+          "wrongCredentials": "Что-то пошло не так!",
+          "accountNotExist": "Учетной записи с таким адресом эл. почты не существует",
+          "invalidCredentials": "Неверные данные для входа в учетную запись",
+          "userAlreadyExists": "Пользователь с таким адресом эл. почты уже существует"
+        }
+      }
+    }
+  },
+  "Layout": {
+    "navLinks": {
+      "dashboard": "Главная",
+      "incomes": "Доходы",
+      "expenses": "Затраты",
+      "savings": "Сбережения",
+      "analytics": "Аналитика",
+      "settings": "Настройки"
+    },
+    "logoutBtn": "Выйти",
+    "submitBtnLabel": "OK",
+    "cancelBtnLabel": "Отмена"
+  },
+  "SettingsPage": {
+    "title": "Настройки",
+    "manageUserPhotoForm": {
+      "triggerBtnLabel": "Изменить фото",
+      "formTitle": "Обновить фото профиля",
+      "addBtnLabel": "Добавить фото",
+      "submitBtnLabel": "Подтвердить",
+      "deleteBtnLabel": "Удалить фото"
+    },
+    "managePersonalData": {
+      "editNameFormLabel": "Имя / Фамилия",
+      "editEmailFormLabel": "Эл. почта",
+      "updateNameFormTitle": "Обновите имя пользователя",
+      "updateEmailFormTitle": "Обновите адрес эл. почты",
+      "submitBtnLabel": "Подтвердить",
+      "cancelBtnLabel": "Отмена"
+    },
+    "managePassword": {
+      "triggerBtnLabel": "Изменить пароль",
+      "currentPasswordLabel": "Текущий пароль",
+      "newPasswordLabel": "Новый пароль",
+      "confirmNewPasswordLabel": "Подтвердить новый пароль",
+      "submitBtnLabel": "Подтвердить",
+      "cancelBtnLabel": "Отмена"
+    },
+    "setPassword": {
+      "triggerBtnLabel": "Установить пароль",
+      "passwordLabel": "Пароль",
+      "confirmPasswordLabel": "Подтвердить пароль",
+      "submitBtnLabel": "Подтвердить",
+      "cancelBtnLabel": "Отмена"
+    },
+    "manageGeneralData": {
+      "title": "Общие настройки",
+      "weekStartDayLabel": "Неделя начинается с",
+      "currencyLabel": "Валюта",
+      "submitBtnLabel": "Подтвердить",
+      "currencies": {
+        "usd": "Доллар США",
+        "eur": "Евро",
+        "rub": "Рубль",
+        "uah": "Гривна",
+        "pln": "Злотый"
+      },
+      "weekDays": {
+        "sunday": "Воскресенье",
+        "monday": "Понедельник",
+        "tuesday": "Вторник",
+        "wednesday": "Среда",
+        "thursday": "Четверг",
+        "friday": "Пятница",
+        "saturday": "Суббота"
+      }
+    },
+    "manageProfileData": {
+      "title": "Настройки профиля",
+      "languageLabel": "Язык",
+      "languages": {
+        "en": "Английский",
+        "ru": "Вражеский",
+        "ua": "Украинский"
+      }
+    },
+    "deleteUser": {
+      "confirmationModal": {
+        "btnLabel": "Удалить учетную запись",
+        "title": "Вы уверены что хотите удалить свою учетную запись?",
+        "message": "Отменить данное действие будет невозможно.",
+        "emailFieldLabel": "Введите адрес эл. почты"
+      }
+    },
+    "actionMessages": {
+      "profilePhotoUpdated": "Фото профиля обновлено успешно!",
+      "profileImageDeleted": "Фото успешно удалено!",
+      "userNameUpdated": "Имя пользователя успешно обновлено!",
+      "userEmailUpdated": "Адрес эл. почты успешно обновлен!",
+      "passwordUpdated": "Пароль успешно обновлен!",
+      "passwordSet": "Пароль установлен!",
+      "userWeekStartDayUpdated": "День начала недели успешно обновлен!",
+      "userCurrencyUpdated": "Базовя валюта успешно обновлена!",
+      "userLanguageUpdated": "Язык изменен успешно!",
+      "userDeleted": "Пользователь успешно удален!"
+    },
+    "errors": {
+      "general": "Что-то пошло не так!",
+      "uploadImageFailed": "При обновлении фото профиля произошла ошибка",
+      "deleteImageFailed": "Не удалось удалить фото профиля",
+      "updateUserNameFailed": "Не удалось изменить имя пользователя",
+      "updateUserEmailFailed": "Не удалось изменить адрес эл. почты",
+      "updateLanguageFailed": "Не удалось изменить язык",
+      "userExists": "Пользователь с таким адресом эл. почты уже существует",
+      "imageRequired": "Добавьте фото!",
+      "updatePassword": {
+        "general": "Не удалось изменить пароль!",
+        "userNotFound": "Пользователь не найден!",
+        "passwordNotMatch": "Неверный текущий пароль",
+        "fieldsValidation": {
+          "requiredCurrentPassword": "Введите текущий пароль!",
+          "requiredNewPassword": "Введите новый пароль!",
+          "requiredConfirmNewPassword": "Подтвердите новий пароль!",
+          "passwordNotMatch": "Пароли не совпадают",
+          "invalidPassword": "Пароль должен включать минимум 6 символов",
+          "invalidCurrentPassword": "Неверный текущий пароль",
+          "wrongPassword": "Неверный пароль!"
+        }
+      },
+      "setPassword": {
+        "general": "Не удалось установить пароль!",
+        "userNotFound": "Пользователь не найден!",
+        "fieldsValidation": {
+          "requiredPassword": "Введите пароль!",
+          "requiredConfirmPassword": "Подтвердите пароль!",
+          "passwordNotMatch": "Пароли не совпадают!",
+          "invalidPassword": "Неверный пароль",
+          "wrongPassword": "Неверный пароль!"
+        }
+      },
+      "deleteUser": {
+        "deleteUserFailed": "Не удалось удалить пользователя",
+        "notMatchPassword": "Неверный пароль!"
+      }
+    }
+  }
+}

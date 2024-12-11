@@ -11,7 +11,8 @@ export const {
   handlers: { GET, POST }, 
   signIn, 
   signOut, 
-  auth 
+  auth,
+  unstable_update 
 } = NextAuth({
   adapter: PrismaAdapter(db),
   session: { strategy: 'jwt' },
@@ -57,4 +58,36 @@ export const {
       }
     })
   ],
-})
+  callbacks: {
+    jwt({ token, user, trigger, session }) {
+      if(user) {
+        token = { ...token, ...user };
+      }
+
+      if(trigger === 'update') {
+        token = { ...token, ...session.user };
+      }
+
+      return token;
+    },
+    session({ session, token }) {
+      let user = token as any;
+
+      if(token.user) {
+        user = token.user
+      }
+
+      if(user) {
+        session.user = {
+          ...session.user,
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          image: user.image,
+        };
+      }
+
+      return session;
+    }
+  },
+});

@@ -1,62 +1,87 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useFormState } from 'react-dom';
 import Link from 'next/link';
-import { SubmitButton } from '@/components/common/submit-btn';
+import { useRouter } from 'next/navigation';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
+import { SubmitButton } from '@/components/common';
 import { CheckboxField, TextField } from '@/components/inputs';
 import { useToast } from "@/hooks/use-toast"
 import { signin } from '@/lib/actions/auth.actions';
-
-
-const initialState = {
-  email: '',
-  password: ''
-};
+import { signInSchema, SignInSchema } from '@/lib/types/form-schemas/auth';
+import { ActionStatus } from '@/lib/types/common.types';
 
 
 export const SignInForm = () => {
-  const [state, formAction] = useFormState<any, any>(signin, initialState);
   const { toast } = useToast();
+  const t = useTranslations('Auth');
+  const router = useRouter();
 
-  useEffect(() => {
-    if(state.error) {
+  const form = useForm<SignInSchema>({
+    resolver: zodResolver(signInSchema),
+    defaultValues: { email: '', password: '' },
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting }
+  } = form;
+
+  const onSubmitForm: SubmitHandler<SignInSchema> = async (data) => {
+    const formData = new FormData();
+    formData.append('email', data.email);
+    formData.append('password', data.password);
+    const { status, error } = await signin(formData);
+
+    if(status === ActionStatus.Success && !error) {
       toast({
-        title: 'Oops! Something wet wrong!',
-        description: state.error,
+        description: t('actionMessages.signInSuccess'),
+        variant: 'default',
+        className: 'bg-success-1 text-success-2'
+      });
+      router.push('/');
+    } 
+
+    if(status === ActionStatus.Failed && error) {
+      toast({
+        title: t('errors.general.title'),
+        description: t(error),
         variant: 'destructive',
         className: 'bg-danger-1 text-danger-2'
       });
     }
-  }, [state, formAction]);
+  };
 
   return (
-    <form 
-      action={formAction} 
-      className='w-full flex flex-col justify-center gap-3'
-    >
+    <form onSubmit={handleSubmit(onSubmitForm)}>
       <TextField 
-        label='Email'
-        name='email'
-        error={state && state.fieldError && state.fieldError['email']}
+        name='email' 
+        label={t('signinPage.email')} 
+        register={register} 
+        error={errors['email']?.message} 
       />
       <TextField 
-        label='Password'
-        name='password'
+        name='password' 
+        label={t('signinPage.email')} 
         type='password'
-        error={state && state.fieldError && state.fieldError['password']}
+        register={register} 
+        error={errors['password']?.message} 
       />
-      <SubmitButton label='Sign in' />
+      <SubmitButton isSubmitting={isSubmitting}>
+        {t('signinPage.signinBtn')}
+      </SubmitButton>
       <div className='py-3 w-full flex justify-between items-center'>
         <CheckboxField 
           name='rememberMe'
-          label='Keep me logged in'
+          label={t('signinPage.rememberMeCheckboxLabel')}
         />
         <Link 
           href='/' 
           className='text-sm text-primary-8 font-semibold'
         >
-          Forgot password?
+          {t('signinPage.forgotPasswordLinkLabel')}
         </Link>
       </div>
     </form>

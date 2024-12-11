@@ -1,28 +1,23 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { z as zod } from 'zod';
-import bcrypt from 'bcryptjs';
-import { signIn, signOut } from '@/auth';
-import { utapi, utFile } from '../uploadthing/utapi';
-import { db } from '@/db';
+import { cookies } from 'next/headers';
 import { AuthError } from 'next-auth';
+import bcrypt from 'bcryptjs';
+import { z as zod } from 'zod';
+import { signIn, signOut } from '@/auth';
+import { utapi } from '../uploadthing/utapi';
+import { db } from '@/db';
+import { signInSchema, signUpSchema } from '../types/form-schemas/auth';
+import { ActionStatus } from '../types/common.types';
 
 
-const signUpData = zod.object({
-  name: zod.string().min(1, 'Name is required!'),
-  email: zod.string().min(1, 'Email is required!').email('Invalid email!'),
-  password: zod.string().min(1, 'Password is required!').min(6, 'Password should have 6 characters at least'),
-  confirmPassword: zod.string().min(1, 'Password confirmation is required!').min(6, 'Password should have 6 characters at least'),
-}).refine((data) => data.password === data.confirmPassword, {
-  path: ['confirmPassword'],
-  message: 'Passwords do not match',
-});
-
-const signInData = zod.object({
-  email: zod.string().min(1, 'Email is required!').email('Invalid email!'),
-  password: zod.string().min(1, 'Password is required!').min(6, 'Password should have 6 characters at least'),
-});
+export const transformZodErrors = (error: zod.ZodError) => {
+  return error.issues.map((issue) => ({
+    path: issue.path.join('. '),
+    message: issue.message,
+  }));
+};
 
 
 export const signInWithProvider = async (provider: string) => {
@@ -35,13 +30,13 @@ export const logout = async () => {
   revalidatePath('/');
 };
 
-export const signin = async (prevState: any, formData: FormData) => {
-  try {
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
 
-    const validatedFields = signInData.safeParse({
-      email, password
+
+export const signin = async (formData: FormData) => {
+  try {
+    const validatedFields = signInSchema.safeParse({
+      email: formData.get('email'),
+      password: formData.get('password'),
     });
   
     if(!validatedFields.success) {
@@ -50,27 +45,43 @@ export const signin = async (prevState: any, formData: FormData) => {
       };
     }
 
-    const existingUser = await db.user.findUnique({ where: { email } });
+    const existingUser = await db.user.findUnique({ where: { email: validatedFields.data.email } });
     const existingPassword = existingUser?.password || null;
 
     if(existingUser && existingPassword) {
       await signIn('credentials', {
-        email,
-        password,
-        redirectTo: '/'
+        email: validatedFields.data.email,
+        password: validatedFields.data.password,
+        redirect: false
       });
+
+      return {
+        status: ActionStatus.Success,
+        error: null
+      };
     } else {
       if(existingUser) {
         const userAccount = await db.account.findUnique({ where: { userId: existingUser!.id! } });
       
         if(userAccount) {
           return {
-            error: `You created your account using your ${userAccount.provider} account. Sign in using your ${userAccount.provider} account and set the password via Settings`
+            status: ActionStatus.Failed,
+            error: userAccount.provider === 'google' ? 
+              'errors.auth.fieldsValidation.wrongProviderGoogle' : 
+              userAccount.provider === 'facebook' ? 
+                'errors.auth.fieldsValidation.wrongProviderFacebook' : 
+                'errors.auth.fieldsValidation.wrongCredentials'
           };
         }
+
+        return {
+          status: ActionStatus.Failed,
+          error: 'errors.auth.fieldsValidation.accountNotExist'
+        };
       } else {
         return {
-          error: 'Account does not exist. There are no accounts with such email'
+          status: ActionStatus.Failed,
+          error: 'errors.auth.fieldsValidation.accountNotExist'
         };
       }
     }
@@ -79,31 +90,29 @@ export const signin = async (prevState: any, formData: FormData) => {
       switch(error.type) {
         case 'CredentialsSignin':
           return {
-            error: 'Invalid credentials'
+            status: ActionStatus.Failed,
+            error: 'errors.auth.fieldsValidation.invalidCredentials'
           };
         default:
           return {
-            error: error.cause?.err?.message
+            status: ActionStatus.Failed,
+            error: 'errors.auth.fieldsValidation.invalidCredentials'
           };
       }
     }
 
     throw error;
   };
-
-  revalidatePath('/');
 };
 
-export const signup = async (prevState: any, formData: FormData) => {
+export const signup = async (formData: FormData) => {
   try {
-    const name = formData.get('name') as string;
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-    const confirmPassword = formData.get('confirmPassword') as string;
-    const rawImage = formData.get('image') as string;
-
-    const validatedFields = signUpData.safeParse({
-      name, email, password, confirmPassword
+    const validatedFields = signUpSchema.safeParse({
+      name: formData.get('name'),
+      email: formData.get('email'),
+      password: formData.get('password'),
+      confirmPassword: formData.get('confirmPassword'),
+      image: formData.get('image'),
     });
 
     if(!validatedFields.success) {
@@ -112,52 +121,65 @@ export const signup = async (prevState: any, formData: FormData) => {
       };
     }
 
-    const existingUser = await db.user.findUnique({ where: { email } });
+    const existingUser = await db.user.findUnique({ where: { email: validatedFields.data.email } });
 
     if(existingUser) {
       return {
-        error: 'The user with such email already exists'
+        status: ActionStatus.Failed,
+        error: 'errors.auth.fieldsValidation.userAlreadyExists'
       };
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const imageFile = rawImage ? await fetch(rawImage) : '';
+    const hashedPassword = await bcrypt.hash(validatedFields.data.password, 10);
+    
+    const imageFile = validatedFields.data.image ? await fetch(validatedFields.data.image) : '';
     const imageBlob = imageFile ? await imageFile.blob() : new Blob();
-    const imageToUpload = new utFile([imageBlob!], `${name}-avatar`, { customId: `${name}-avatar` });
-    const image = imageToUpload && imageToUpload.size > 0 ? (await utapi.uploadFiles([imageToUpload]))[0].data?.url : '';
+    const imageToUpload = new File([imageBlob!], `${validatedFields.data.name}-avatar`);
+    const image = imageToUpload && imageToUpload.size > 0 ? 
+      (await utapi.uploadFiles([imageToUpload]))[0].data?.url : 
+      '';
 
     await db.user.create({
       data: {
-        name,
-        email,
+        name: validatedFields.data.name,
+        email: validatedFields.data.email,
         password: hashedPassword,
         image,
         role: 'USER',
+        weekStartDay: '1',
+        currency: 'usd',
+        language: 'en',
       }
     });
 
     await signIn('credentials', {
-      email,
-      password,
-      redirectTo: '/'
-    })
+      email: validatedFields.data.email,
+      password: validatedFields.data.password,
+      redirect: false
+    });
+
+    cookies().set('language', 'en')
+
+    return {
+      status: ActionStatus.Success,
+      error: null
+    };
   } catch (error: any) {
     if(error instanceof AuthError) {
       switch(error.type) {
         case 'CredentialsSignin':
           return {
-            error: 'Invalid credentials'
+            status: ActionStatus.Failed,
+            error: 'auth.fieldsValidation.invalidCredentials'
           };
         default:
           return {
-            error: 'Something went wrong'
+            status: ActionStatus.Failed,
+            error: 'auth.fieldsValidation.wrongCredentials'
           };
       }
     }
 
     throw error;
   }
-
-  revalidatePath('/');
 };  

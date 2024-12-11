@@ -1,0 +1,196 @@
+{
+  "Auth": {
+    "signinPage": {
+      "title": "Увійти",
+      "titleMessage": "Привіт! Будь ласка, увійдіть у свій обліковий запис щоб продовжити користуватися додатком",
+      "continueText": "або продовжити з",
+      "noAccountText": "Ще не маєте облікового запису?",
+      "signupLinkLabel": "Зареєструватися",
+      "email": "Ел. пошта",
+      "password": "Пароль",
+      "signinBtn": "Увійти",
+      "rememberMeCheckboxLabel": "Запам'ятати мене",
+      "forgotPasswordLinkLabel": "Забули пароль?",
+      "googleBtnTooltip": "Увійти через Google"
+    },
+    "signupPage": {
+      "title": "Зареєструватися",
+      "titleMessage": "Привіт! Будь ласка, створіть свій обліковий запис щоб продовжити користуватися додатком",
+      "continueText": "або продовжити з",
+      "haveAccountText": "Вже заруєструвалися?",
+      "signinLinkLabel": "Увійти",
+      "name": "Ім'я",
+      "email": "Ел. пошта",
+      "password": "Пароль",
+      "confirmPassword": "Підтвердити пароль",
+      "image": "Додати фото",
+      "signupBtn": "Зареєструватися",
+      "agreeText": "Я згоден з",
+      "termsAndPrivacyLink": "умовами політики та приватності",
+      "googleBtnTooltip": "Заруєструватися через Google"
+    },
+    "actionMessages": {
+      "signInSuccess": "Ласкаво просимо!",
+      "signUpSuccess": "Ласкаво просимо!"
+    },
+    "errors": {
+      "general": {
+        "title": "Отакої! Щось пішло не так!"
+      },
+      "auth": {
+        "fieldsValidation": {
+          "requiredName": "Введіть ім'я!",
+          "requiredEmail": "Введіть адресу ел. пошти!",
+          "invalidEmail": "Неправильна адреса ел. пошти!",
+          "requiredPassword": "Введіть пароль!",
+          "invalidPassword": "Пароль має включати щонайменше 6 символів",
+          "requiredConfirmPassword": "Підтвердіть пароль!",
+          "invalidConfirmPassword": "Пароль має включати щонайменше 6 символів",
+          "passwordNotMatch": "Паролі не співпадають",
+          "wrongProviderGoogle": "Ви створили обліковий запис через Google Account. Увійдіть використовуючи Ваш Google Account та встановіть пароль в розділі Налаштування",
+          "wrongProviderFacebook": "Ви створили обліковий запис через Facebook Account. Увійдіть використовуючи Ваш Facebook Account та встановіть пароль в розділі Налаштування",
+          "wrongCredentials": "Щось пішло не так!",
+          "accountNotExist": "Облікового запису з такою адресою ел. пошти не існує",
+          "invalidCredentials": "Невірні дані для входу в обліковий запис",
+          "userAlreadyExists": "Користувач з такою адресою ел. пошти вже існує"
+        }
+      }
+    }
+  },
+  "Layout": {
+    "navLinks": {
+      "dashboard": "Головна",
+      "incomes": "Доходи",
+      "expenses": "Витрати",
+      "savings": "Збереження",
+      "analytics": "Аналітика",
+      "settings": "Налаштування"
+    },
+    "logoutBtn": "Вийти",
+    "submitBtnLabel": "OK",
+    "cancelBtnLabel": "Відхилити"
+  },
+  "SettingsPage": {
+    "title": "Налаштування",
+    "manageUserPhotoForm": {
+      "triggerBtnLabel": "Змінити фото",
+      "formTitle": "Оновити фото профілю",
+      "addBtnLabel": "Додати фото",
+      "submitBtnLabel": "Підтвердити",
+      "deleteBtnLabel": "Видалити фото"
+    },
+    "managePersonalData": {
+      "editNameFormLabel": "Ім'я / Прізвище",
+      "editEmailFormLabel": "Ел. пошта",
+      "updateNameFormTitle": "Оновіть ім'я користувача",
+      "updateEmailFormTitle": "Оновіть адресу ел. пошти",
+      "submitBtnLabel": "Підтвердити",
+      "cancelBtnLabel": "Відхилити"
+    },
+    "managePassword": {
+      "triggerBtnLabel": "Змінити пароль",
+      "currentPasswordLabel": "Поточний пароль",
+      "newPasswordLabel": "Новий пароль",
+      "confirmNewPasswordLabel": "Підтвердити новий пароль",
+      "submitBtnLabel": "Підтвердити",
+      "cancelBtnLabel": "Відхилити"
+    },
+    "setPassword": {
+      "triggerBtnLabel": "Встановити пароль",
+      "passwordLabel": "Пароль",
+      "confirmPasswordLabel": "Підтвердити пароль",
+      "submitBtnLabel": "Підтвердити",
+      "cancelBtnLabel": "Відхилити"
+    },
+    "manageGeneralData": {
+      "title": "Загальні налаштування",
+      "weekStartDayLabel": "Тиждень починається з",
+      "currencyLabel": "Валюта",
+      "submitBtnLabel": "Підтвердити",
+      "currencies": {
+        "usd": "Долар США",
+        "eur": "Євро",
+        "rub": "Рубль",
+        "uah": "Гривня",
+        "pln": "Злотий"
+      },
+      "weekDays": {
+        "sunday": "Неділя",
+        "monday": "Понеділок",
+        "tuesday": "Вівторок",
+        "wednesday": "Середа",
+        "thursday": "Четвер",
+        "friday": "П'ятниця",
+        "saturday": "Субота"
+      }
+    },
+    "manageProfileData": {
+      "title": "Налаштування профілю",
+      "languageLabel": "Мова",
+      "languages": {
+        "en": "Англійська",
+        "ru": "Ворожа",
+        "ua": "Українська"
+      }
+    },
+    "deleteUser": {
+      "confirmationModal": {
+        "btnLabel": "Видалити обліковий запис",
+        "title": "Ви впевнені що хочете видалити свій обліковий запис?",
+        "message": "Відмінити цю дію буде неможливо.",
+        "emailFieldLabel": "Введіть адресу ел. пошти"
+      }
+    },
+    "actionMessages": {
+      "profilePhotoUpdated": "Фото профілю оновлено успішно!",
+      "profileImageDeleted": "Фото успішно видалено!",
+      "userNameUpdated": "Ім'я користувача успішно оновлено!",
+      "userEmailUpdated": "Адресу ел. пошти успішно оновлено!",
+      "passwordUpdated": "Пароль успішно оновлено!",
+      "passwordSet": "Пароль встановлено!",
+      "userWeekStartDayUpdated": "День початку тижня успішно оновлено!",
+      "userCurrencyUpdated": "Базову валюту успішно оновлено!",
+      "userLanguageUpdated": "Мову успішно змінено!",
+      "userDeleted": "Обліковий запис успішно видалений!"
+    },
+    "errors": {
+      "general": "Щось пішло не так!",
+      "uploadImageFailed": "При оновленні фото профілю виникла помилка",
+      "deleteImageFailed": "Не вдалося видалити фото профілю",
+      "updateUserNameFailed": "Не вдалося змінити ім'я користувача",
+      "updateUserEmailFailed": "Не вдалося змінити адресу ел. пошти",
+      "updateLanguageFailed": "Не вдалося змінити мову", 
+      "userExists": "Користувач з такою адресою ел. пошти вже існує!",
+      "imageRequired": "Додайте фото!",
+      "updatePassword": {
+        "general": "Не вдалось оновити пароль!",
+        "userNotFound": "Користувача не знайдено!",
+        "passwordNotMatch": "Невірний поточний пароль",
+        "fieldsValidation": {
+          "requiredCurrentPassword": "Введіть поточний пароль!",
+          "requiredNewPassword": "Введіть новий пароль!",
+          "requiredConfirmNewPassword": "Підтвердіть новий пароль!",
+          "passwordNotMatch": "Паролі не співпадають",
+          "invalidPassword": "Пароль має включати щонайменше 6 символів",
+          "invalidCurrentPassword": "Невірний поточний пароль",
+          "wrongPassword": "Невірна адреса ел. пошти!"
+        }
+      },
+      "setPassword": {
+        "general": "Не вдалось встановити пароль!",
+        "userNotFound": "Користувача не знайдено!",
+        "fieldsValidation": {
+          "requiredPassword": "Введіть поточний пароль!",
+          "requiredConfirmPassword": "Підтвердіть пароль!",
+          "passwordNotMatch": "Паролі не співпадають!",
+          "invalidPassword": "Невірний поточний пароль",
+          "wrongPassword": "Невірний пароль!"
+        }
+      },
+      "deleteUser": {
+        "deleteUserFailed": "Не вдалося видалити обліковий запис",
+        "notMatchPassword": "Невірна адреса ел. пошти"
+      }
+    }
+  }
+}

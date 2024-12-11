@@ -1,14 +1,16 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import NotFound from '../public/images/not-found.svg';
+import { ArrowLeft } from 'lucide-react';
+
 export default function NotFoundPage() {
   return (
-    <div className='w-full h-screen flex justify-center items-center'>
-      <div>
-        <h1 className='text-6xl'>
-          404
-        </h1>
-        <p>
-          Page not found
-        </p>
-      </div>
+    <div className='w-full h-screen flex flex-col justify-center items-center gap-8'>
+      <Image src={NotFound} alt='Page Not Found' width={500} height={500} />
+      <Link href='/' className='px-10 py-3 text-md bg-primary-7 hover:bg-primary-6 text-white font-semibold rounded-full transition-colors duration-300'>
+        <ArrowLeft className='inline mr-1' />
+        Go back
+      </Link>
     </div>
   );
 };

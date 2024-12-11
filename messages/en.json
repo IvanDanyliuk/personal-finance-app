@@ -1,0 +1,196 @@
+{
+  "Auth": {
+    "signinPage": {
+      "title": "Sign In",
+      "titleMessage": "Hi! Please, sign in to your account to continue using an application.",
+      "continueText": "or continue with",
+      "noAccountText": "Do not have an account?",
+      "signupLinkLabel": "Sign up",
+      "email": "Email",
+      "password": "Password",
+      "signinBtn": "Sign in",
+      "rememberMeCheckboxLabel": "Keep me logged in",
+      "forgotPasswordLinkLabel": "Forgot password?",
+      "googleBtnTooltip": "Sign in with Google"
+    },
+    "signupPage": {
+      "title": "Sign Up",
+      "titleMessage": "Hi! Please, create your account to continue using an application.",
+      "continueText": "or continue with",
+      "haveAccountText": "Already have an account?",
+      "signinLinkLabel": "Sign in",
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "image": "Add photo",
+      "signupBtn": "Sign up",
+      "agreeText": "I agree with",
+      "termsAndPrivacyLink": "Terms & Privacy",
+      "googleBtnTooltip": "Sign up with Google"
+    },
+    "actionMessages": {
+      "signInSuccess": "Welcome!",
+      "signUpSuccess": "Welcome!"
+    },
+    "errors": {
+      "general": {
+        "title": "Oops! Something wet wrong!"
+      },
+      "auth": {
+        "fieldsValidation": {
+          "requiredName": "Name is required!",
+          "requiredEmail": "Email is required!",
+          "invalidEmail": "Invalid email!",
+          "requiredPassword": "Password is required!",
+          "invalidPassword": "Password should have 6 characters at least",
+          "requiredConfirmPassword": "Password confirmation is required!",
+          "invalidConfirmPassword": "Password should have 6 characters at least",
+          "passwordNotMatch": "Passwords do not match",
+          "wrongProviderGoogle": "You created your account using your Google account. Sign in using your Google account and set the password via Settings",
+          "wrongProviderFacebook": "You created your account using your Facebook account. Sign in using your Facebook account and set the password via Settings",
+          "wrongCredentials": "Something went wrong!",
+          "accountNotExist": "Account does not exist. There are no accounts with such email",
+          "invalidCredentials": "Invalid credentials",
+          "userAlreadyExists": "The user with such email already exists"
+        }
+      }
+    }
+  },
+  "Layout": {
+    "navLinks": {
+      "dashboard": "Dashboard",
+      "incomes": "Incomes",
+      "expenses": "Expenses",
+      "savings": "Savings",
+      "analytics": "Analytics",
+      "settings": "Settings"
+    },
+    "logoutBtn": "Log out",
+    "submitBtnLabel": "OK",
+    "cancelBtnLabel": "Cancel"
+  },
+  "SettingsPage": {
+    "title": "Settings",
+    "manageUserPhotoForm": {
+      "triggerBtnLabel": "Update photo",
+      "formTitle": "Update user name",
+      "addBtnLabel": "Add photo",
+      "submitBtnLabel": "Submit",
+      "deleteBtnLabel": "Delete photo"
+    },
+    "managePersonalData": {
+      "editNameFormLabel": "First and Last Name",
+      "editEmailFormLabel": "Email",
+      "updateNameFormTitle": "Update your name",
+      "updateEmailFormTitle": "Update your email",
+      "submitBtnLabel": "Submit",
+      "cancelBtnLabel": "Cancel"
+    },
+    "managePassword": {
+      "triggerBtnLabel": "Change password",
+      "currentPasswordLabel": "Current password",
+      "newPasswordLabel": "New password",
+      "confirmNewPasswordLabel": "Confirm new password",
+      "submitBtnLabel": "Submit",
+      "cancelBtnLabel": "Cancel"
+    },
+    "setPassword": {
+      "triggerBtnLabel": "Change password",
+      "passwordLabel": "Password",
+      "confirmPasswordLabel": "Confirm password",
+      "submitBtnLabel": "Submit",
+      "cancelBtnLabel": "Cancel"
+    },
+    "manageGeneralData": {
+      "title": "General settings",
+      "weekStartDayLabel": "Week starts from",
+      "currencyLabel": "Currency",
+      "submitBtnLabel": "Submit",
+      "currencies": {
+        "usd": "US Dollar",
+        "eur": "Euro",
+        "rub": "Ruble",
+        "uah": "Hryvnia",
+        "pln": "Zloty"
+      },
+      "weekDays": {
+        "sunday": "Sunday",
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday"
+      }
+    },
+    "manageProfileData": {
+      "title": "Profile settings",
+      "languageLabel": "Language",
+      "languages": {
+        "en": "English",
+        "ru": "Enemy",
+        "ua": "Ukrainian"
+      }
+    },
+    "deleteUser": {
+      "confirmationModal": {
+        "btnLabel": "Delete Account",
+        "title": "Are you sure you want to delete your account?",
+        "message": "It will be impossible to undo this action.",
+        "emailFieldLabel": "Enter your email"
+      }
+    },
+    "actionMessages": {
+      "profilePhotoUpdated": "Image has been updated!",
+      "profileImageDeleted": "Image successfully deleted!",
+      "userNameUpdated": "User name successfully updated!",
+      "userEmailUpdated": "Email address successfully updated!",
+      "passwordUpdated": "Password updated!",
+      "passwordSet": "Password is set!",
+      "userWeekStartDayUpdated": "Week Start Day successfully updated!",
+      "userCurrencyUpdated": "Currency successfully updated!",
+      "userLanguageUpdated": "Language successfully updated!",
+      "userDeleted": "User successfully deleted!"
+    },
+    "errors": {
+      "general": "Something went wrong!",
+      "uploadImageFailed": "Cannot update a profile photo",
+      "deleteImageFailed": "Cannot delete a profile photo",
+      "updateUserNameFailed": "Cannot update user name",
+      "updateUserEmailFailed": "Cannot update user email",
+      "updateLanguageFailed": "Cannot update a language",
+      "userExists": "User with such email already exists",
+      "imageRequired": "Image is required!",
+      "updatePassword": {
+        "general": "Cannot update password!",
+        "userNotFound": "User not found!",
+        "passwordNotMatch": "Incorrect current password!",
+        "fieldsValidation": {
+          "requiredCurrentPassword": "Current password is required!",
+          "requiredNewPassword": "New password is required!",
+          "requiredConfirmNewPassword": "Confirm new password!",
+          "passwordNotMatch": "Passwords not match!",
+          "invalidPassword": "Invalid password",
+          "invalidCurrentPassword": "Invalid current password",
+          "wrongPassword": "Password is wrong!"
+        }
+      },
+      "setPassword": {
+        "general": "Cannot set password!",
+        "userNotFound": "User not found!",
+        "fieldsValidation": {
+          "requiredPassword": "Password is required!",
+          "requiredConfirmPassword": "Confirm password!",
+          "passwordNotMatch": "Passwords not match!",
+          "invalidPassword": "Invalid password",
+          "wrongPassword": "Password is wrong!"
+        }
+      },
+      "deleteUser": {
+        "deleteUserFailed": "Cannot update a user",
+        "notMatchPassword": "Incorrect password"
+      }
+    }
+  }
+}

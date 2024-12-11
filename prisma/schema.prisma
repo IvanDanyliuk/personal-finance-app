@@ -28,9 +28,12 @@ model User {
   accounts      Account[]
   sessions      Session[]
   role          UserRole?       @default(USER)
-  bankAccounts  BankAccount[]
+  bankAccounts  BankAccount[]   
   incomes       Income?
   expenses      Expense?
+  weekStartDay  String?            @default("1")
+  currency      String?         @default("usd")
+  language      String?         @default("en")   
   // Optional for WebAuthn support
   Authenticator Authenticator[]
  
