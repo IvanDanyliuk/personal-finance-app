@@ -19,17 +19,17 @@ export default async function SettingsPage() {
   const t = await getTranslations('SettingsPage');
   const session = await auth();
   const user = await getUserById(session!.user!.id!);
-  const account = await getAccount(user?.id!);
+  const account = await getAccount(user!.id!);
   const userImage = user && user.image ? user.image : UserImagePlaceholder;
 
   return (
     <div className='w-full h-full'>
-      <h1 className='mb-3 text-3xl font-semibold'>
+      <h1 className='mb-3 text-xl md:text-3xl font-semibold'>
         {t('title')}
       </h1>
-      <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-6'>
-        <div className='flex flex-col gap-3'>
-          <div className='w-full flex justify-between items-center'>
+      <div className='w-full grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6'>
+        <div className='p-3 flex flex-col gap-3 border border-seconday-1 rounded-xl order-1'>
+          <div className='w-full flex flex-col md:flex-row justify-between items-center gap-3'>
             <Image 
               src={userImage} 
               alt={user!.name!} 
@@ -47,25 +47,13 @@ export default async function SettingsPage() {
             variant='email' 
             currentUserEmail={user!.email!} 
           />
-          {account && !user?.password! ? <SetPassword /> : <ManagePassword />}
+          {account && !user!.password! ? <SetPassword /> : <ManagePassword />}
         </div>
-        <div>
-          <h2 className='text-lg font-semibold'>
-            {t('manageProfileData.title')}
-          </h2>
-          <div>
-            <ManageProfileData 
-              currentLanguage={user!.language!} 
-              options={LANGUAGES} 
-            />
-            <DeleteUser />
-          </div>
-        </div>
-        <div>
-          <h2 className='text-lg font-semibold'>
+        <div className='p-3 border border-seconday-1 rounded-xl order-2 md:order-3'>
+          <h2 className='mb-3 text-lg font-semibold'>
             {t('manageGeneralData.title')}
           </h2>
-          <div>
+          <div className='flex flex-col gap-3'>
             <ManageGeneralData 
               currentWeekStartDay={user!.weekStartDay!} 
               options={WEEK_STARTS_FROM} 
@@ -76,6 +64,19 @@ export default async function SettingsPage() {
             />
           </div>
         </div>
+        <div className='p-3 border border-seconday-1 rounded-xl order-3 md:order-2'>
+          <h2 className='mb-3 text-lg font-semibold'>
+            {t('manageProfileData.title')}
+          </h2>
+          <div className='flex flex-col gap-3'>
+            <ManageProfileData 
+              currentLanguage={user!.language!} 
+              options={LANGUAGES} 
+            />
+            <DeleteUser />
+          </div>
+        </div>
+        
       </div>
     </div>
   );

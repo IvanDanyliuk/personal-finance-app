@@ -68,7 +68,7 @@ export const DeleteUser: React.FC = () => {
       <form>
         <TextField 
           name='email'
-          label='Confirm your current email'
+          label={t('deleteUser.confirmationModal.emailFieldLabel')}
           register={register}
           error={errors['email']?.message}
         />

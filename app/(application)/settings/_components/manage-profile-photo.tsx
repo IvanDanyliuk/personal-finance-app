@@ -88,7 +88,7 @@ export const ManageProfilePhoto: React.FC = () => {
   return (
     <div className='flex flex-col gap-3'>
       <Dialog open={isOpen} onOpenChange={handleModalOpen}>
-        <DialogTrigger className='w-52 py-3 bg-primary-7 hover:bg-primary-6 rounded-full text-white font-semibold'>
+        <DialogTrigger className='w-52 py-3 bg-primary-7 hover:bg-primary-6 rounded-full text-white text-sm md:text-base font-semibold'>
           {t('manageUserPhotoForm.triggerBtnLabel')}
         </DialogTrigger>
         <DialogContent>
@@ -113,7 +113,7 @@ export const ManageProfilePhoto: React.FC = () => {
         type='button' 
         disabled={Boolean(!session?.user?.image) || isPending}
         onClick={handlePhotoDelete}
-        className='w-52 py-6 bg-primary-7 hover:bg-primary-6 rounded-full text-white font-semibold'
+        className='w-52 py-6 bg-primary-7 hover:bg-primary-6 rounded-full text-white text-sm md:text-base font-semibold'
       >
         {
           isPending ? 

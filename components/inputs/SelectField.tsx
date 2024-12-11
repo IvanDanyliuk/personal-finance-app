@@ -64,10 +64,10 @@ export const SelectField: React.FC<ISelectField> = ({
           }} 
           value={field.value}
         >
-          <SelectTrigger disabled={disabled} className="w-[180px]">
+          <SelectTrigger disabled={disabled} className="w-[180px] px-6 py-6 rounded-full">
             <SelectValue placeholder="Theme" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className='bg-white'>
             {options.map(({ value, label }) => (
               <SelectItem key={crypto.randomUUID()} value={`${value}`}>
                 {t(label)}

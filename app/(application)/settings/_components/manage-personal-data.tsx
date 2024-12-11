@@ -91,18 +91,18 @@ export const ManagePersonalData: React.FC<IManagePersonalData> = ({ variant, cur
 
   return (
     <div className='w-full flex justify-between items-center'>
-      <p className='font-semibold'>
+      <p className='text-sm md:text-base font-semibold'>
         {t(variant === 'name' ? 'managePersonalData.editNameFormLabel' : 'managePersonalData.editEmailFormLabel')}
       </p>
       <div className='md:min-w-[400px] flex justify-between items-center gap-3'>
-        <p className='font-semibold'>
+        <p className='text-sm md:text-base font-semibold'>
           {variant === 'name' ? currentUserName : currentUserEmail}
         </p>
         <Dialog 
           open={isOpen} 
           onOpenChange={handleFormOpen}
         >
-          <DialogTrigger className='p-3 bg-primary-7 hover:bg-primary-6 rounded-full text-white'>
+          <DialogTrigger className='p-3 bg-primary-7 hover:bg-primary-6 rounded-full text-sm md:text-base text-white'>
             <Pencil className='w-5 h-5' />
           </DialogTrigger>
           <DialogContent className='py-6'>

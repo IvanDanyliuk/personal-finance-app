@@ -47,7 +47,7 @@ export const ConfirmDialog: React.FC<IConfirmDialog> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleDialogOpen}>
-      <DialogTrigger className='px-7 py-3 rounded-full bg-danger-2 hover:bg-danger-1 text-white hover:text-danger-2 border border-danger-2 font-semibold'>
+      <DialogTrigger className='px-7 py-3 w-full md:w-fit rounded-full bg-danger-2 hover:bg-danger-1 text-white hover:text-danger-2 border border-danger-2 font-semibold'>
         {t(triggerBtnLabel)}
       </DialogTrigger>
       <DialogContent className='pt-10'>
@@ -60,7 +60,7 @@ export const ConfirmDialog: React.FC<IConfirmDialog> = ({
           </DialogDescription>
         </DialogHeader>
         {children}
-        <DialogFooter className='flex gap-3'>
+        <DialogFooter className='flex flex-row gap-3'>
           <Button 
             type='button' 
             onClick={onAction} 

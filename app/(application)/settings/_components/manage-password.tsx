@@ -65,7 +65,7 @@ export const ManagePassword: React.FC = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleDialogOpen}>
-      <DialogTrigger className='px-7 py-3 w-fit bg-primary-7 hover:bg-primary-6 rounded-full text-white font-semibold'>
+      <DialogTrigger className='px-7 py-3 w-fit bg-primary-7 hover:bg-primary-6 rounded-full text-sm md:text-base text-white font-semibold'>
         {t('managePassword.triggerBtnLabel')}
       </DialogTrigger>
       <DialogContent>
