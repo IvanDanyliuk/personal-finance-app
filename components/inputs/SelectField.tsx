@@ -1,4 +1,5 @@
 import { useTranslations } from 'next-intl';
+import { ControllerRenderProps, UseFormRegister } from 'react-hook-form';
 import { CircleAlert } from 'lucide-react';
 import {
   Select,
@@ -7,7 +8,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { ControllerRenderProps, UseFormRegister } from 'react-hook-form';
 import { Label } from '../ui/label';
 import { cn } from '@/lib/utils';
 

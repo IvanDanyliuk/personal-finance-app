@@ -21,7 +21,7 @@ interface IConfirmDialog {
   action: () => void;
   disabled?: boolean;
   children: ReactNode;
-}
+};
 
 export const ConfirmDialog: React.FC<IConfirmDialog> = ({
   triggerBtnLabel,

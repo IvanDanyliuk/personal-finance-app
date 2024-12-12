@@ -27,7 +27,6 @@ export default async function RootLayout({
   const session = await auth();
   const locale = await getLocale();
   const messages = await getMessages();
-  console.log('LAYOUT SESSION', session?.user)
 
   return (
     <html lang={locale}>

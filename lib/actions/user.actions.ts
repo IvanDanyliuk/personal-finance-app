@@ -6,10 +6,14 @@ import bcrypt from 'bcryptjs';
 import { utapi } from '../uploadthing/utapi';
 import { db } from '@/db';
 import { ActionStatus } from '../types/common.types';
-import { auth, signOut, unstable_update } from '@/auth';
+import { auth, unstable_update } from '@/auth';
 import { removeFalseyFields, saltAndHashPassword } from '../helpers';
-import { newPasswordSchema, setPasswordSchema, updateUserDataSchema, updateUserPhotoSchema } from '../types/form-schemas/settings';
-import { redirect } from 'next/navigation';
+import { 
+  newPasswordSchema, 
+  setPasswordSchema, 
+  updateUserDataSchema, 
+  updateUserPhotoSchema 
+} from '../types/form-schemas/settings';
 
 
 export const getUser = async (email: string) => {

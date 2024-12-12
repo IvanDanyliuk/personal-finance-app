@@ -29,7 +29,11 @@ interface IManagePersonalData {
 };
 
 
-export const ManagePersonalData: React.FC<IManagePersonalData> = ({ variant, currentUserName, currentUserEmail }) => {
+export const ManagePersonalData: React.FC<IManagePersonalData> = ({ 
+  variant, 
+  currentUserName, 
+  currentUserEmail 
+}) => {
   const t = useTranslations('SettingsPage');
   const { toast } = useToast();
   const { update } = useSession();
