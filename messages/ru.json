@@ -194,6 +194,35 @@
     }
   },
   "IncomesPage": {
-    "title": "Доходы"
+    "title": "Доходы",
+    "createIncomeForm": {
+      "triggerBtnLabel": "Добавить",
+      "title": "Создать статью дохода",
+      "dateFieldLabel": "Дата",
+      "amountFieldLabel": "Сумма",
+      "currencyFieldLabel": "Валюта",
+      "currencyPlaceholder": "Валюта",
+      "sourceFieldLabel": "Источник средств",
+      "sourcePlaceholder": "Выберите источник",
+      "commentFieldLabel": "Комментарий",
+      "submitBtnLabel": "Добавить"
+    },
+    "income_sources": {
+      "cash": "Наличные средства",
+      "investment": "Инвестиции",
+      "salary": "Зарплата",
+      "pension": "Пенсия и соц. выплаты",
+      "money_transfer": "Денежный перевод",
+      "rent": "Арендная плата",
+      "refund": "Компенсации",
+      "cashback": "Кешбэк"
+    },
+    "actionMessages": {
+      "createIncomeSuccess": "Новая статья дохода успешно создана!"
+    },
+    "errors": {
+      "general": "Что-то пошло не так!",
+      "createIncomeFailed": "Не удалось создать новую статью дохода"
+    }
   }
 }

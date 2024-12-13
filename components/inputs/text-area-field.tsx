@@ -1,41 +1,45 @@
 import { ControllerRenderProps, UseFormRegister } from 'react-hook-form';
-import { useTranslations } from 'next-intl';
 import { CircleAlert } from 'lucide-react';
-import { Label } from '../ui/label'
-import { Input } from '../ui/input';
+import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
+import { Label } from '../ui/label';
+import { Textarea } from '../ui/textarea';
 
 
-interface ITextField {
+interface ITextAreaField {
   label?: string;
   name: string;
-  type?: string;
   placeholder?: string;
   variant?: 'horizontal' | 'vertical';
   register?: UseFormRegister<any>;
   field?: ControllerRenderProps<any>,
   required?: boolean;
   disabled?: boolean;
+  maxLength?: number;
+  rows?: number;
+  cols?: number;
   error?: string;
 };
 
 
-export const TextField: React.FC<ITextField> = ({
+export const TextAreaField: React.FC<ITextAreaField> = ({
   label,
   name,
-  type,
   placeholder,
   variant = 'vertical',
   register,
   field,
   required,
   disabled,
+  maxLength,
+  rows,
+  cols,
   error
 }) => {
   const t = useTranslations();
-  
+
   return (
-    <div className={cn(
+<div className={cn(
       variant === 'vertical' ? 'flex-col' : 'flex-row items-center', 
       'w-full flex gap-1'
     )}>
@@ -51,15 +55,16 @@ export const TextField: React.FC<ITextField> = ({
         </Label>
       )}
       <div className={cn(variant === 'vertical' ? 'w-full' : 'flex-1')}>
-        <Input 
+        <Textarea 
           id={name}
-          type={type}
           placeholder={placeholder}
           required={required}
           disabled={disabled}
-          className='w-full px-5 py-6 rounded-full'
-          {...(register ? register(name, { valueAsNumber: type === 'number' }) : field ? field : {})}
-          onChange={(value) => field?.onChange(type === 'number' ? value.target.valueAsNumber : value)}
+          maxLength={maxLength}
+          rows={rows}
+          cols={cols}
+          className='w-full px-5 py-3 rounded-3xl'
+          {...(register ? register(name) : field ? field : {})}
         />
         <p className='mt-1 flex items-center gap-1 text-sm text-danger-2'>
           {error && (
@@ -73,5 +78,5 @@ export const TextField: React.FC<ITextField> = ({
         </p>
       </div>
     </div>
-  );
-};
+  )
+}

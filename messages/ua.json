@@ -194,6 +194,35 @@
     }
   },
   "IncomesPage": {
-    "title": "Доходи"
+    "title": "Доходи",
+    "createIncomeForm": {
+      "triggerBtnLabel": "Додати",
+      "title": "Створити статтю доходу",
+      "dateFieldLabel": "Дата",
+      "amountFieldLabel": "Сума",
+      "currencyFieldLabel": "Валюта",
+      "currencyPlaceholder": "Валюта",
+      "sourceFieldLabel": "Джерело коштів",
+      "sourcePlaceholder": "Оберіть джерело",
+      "commentFieldLabel": "Коментар",
+      "submitBtnLabel": "Додати"
+    },
+    "income_sources": {
+      "cash": "Готівка",
+      "investment": "Інвестиції",
+      "salary": "Зарплата",
+      "pension": "Пенсія і соц. виплати",
+      "money_transfer": "Грошовий переказ",
+      "rent": "Орендна плата",
+      "refund": "Відшкодування",
+      "cashback": "Кешбек"
+    },
+    "actionMessages": {
+      "createIncomeSuccess": "Нову статтю доходу успішно створено!"
+    },
+    "errors": {
+      "general": "Щось пішло не так!",
+      "createIncomeFailed": "Не вдалось створити нову статтю"
+    }
   }
 }

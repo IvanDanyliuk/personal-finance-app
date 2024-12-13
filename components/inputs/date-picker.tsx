@@ -5,22 +5,11 @@ import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-import { Calendar } from '../ui/calendar';
-
-interface IDatePicker {
-  selected: Date; 
-  mode?: 'single' | 'range' | 'multiple' | 'default';
-  onSelect: () => void;
-  initialFocus?: boolean;
-};
+import { Calendar, CalendarProps } from '../ui/calendar';
 
 
-export const DatePicker: React.FC<IDatePicker> = ({
-  selected,
-  mode = 'range',
-  onSelect,
-  initialFocus = true
-}) => {
+
+export const DatePicker: React.FC<CalendarProps> = (props) => {
 
   return (
     <Popover>
@@ -28,20 +17,22 @@ export const DatePicker: React.FC<IDatePicker> = ({
         <Button
           variant={'outline'}
           className={cn(
-            'w-[280px] justify-start text-left font-normal',
-            !selected && 'text-muted-foreground'
+            'w-full px-5 py-6 justify-start text-left font-normal rounded-full',
+            !props.selected && 'text-muted-foreground'
           )}
         >
           <CalendarIcon className='mr-2 h-4 w-4' />
-          {selected ? format(selected, 'PPP') : <span>Pick a date</span>}
+          {
+            props.selected && props.selected instanceof Date ? 
+              format(props.selected, 'PPP') : 
+              <span>Pick a date</span>
+          }
         </Button>
       </PopoverTrigger>
       <PopoverContent className='w-auto p-0'>
         <Calendar
-          mode={mode}
-          selected={selected}
-          onSelect={onSelect}
-          initialFocus={initialFocus}
+          {...props}
+          className='bg-white'
         />
       </PopoverContent>
     </Popover>

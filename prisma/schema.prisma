@@ -19,26 +19,26 @@ enum UserRole {
 }
 
 model User {
-  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  id            String                      @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
-  email         String?         @unique
+  email         String?                     @unique
   password      String?
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
-  role          UserRole?       @default(USER)
-  bankAccounts  BankAccount[]   @relation("UserBankAccounts")
-  incomes       Income[]        @relation("UserIncomes")
-  expenses      Expense[]       @relation("UserExpencses")
-  weekStartDay  String?         @default("1")
-  currency      String?         @default("usd")
-  language      String?         @default("en")   
+  role          UserRole?                   @default(USER)
+  bankAccounts  BankAccount[]               @relation("UserBankAccounts")
+  incomes       Income[]                    @relation("UserIncomes")
+  expenses      Expense[]                   @relation("UserExpencses")
+  weekStartDay  String?                     @default("1")
+  currency      String?                     @default("usd")
+  language      String?                     @default("en")   
   // Optional for WebAuthn support
   Authenticator Authenticator[]
  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime                        @default(now())
+  updatedAt DateTime                        @updatedAt
 }
 
 model Income {
@@ -48,9 +48,10 @@ model Income {
   amount        Int
   source        String
   comment       String?
+  date          DateTime                    @default(now())
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt     DateTime                    @default(now())
+  updatedAt     DateTime                    @updatedAt
 }
 
 enum PaymentMethod {
@@ -67,26 +68,27 @@ model Expense {
   paymentMethod PaymentMethod
   category      ExpenseCategory?
   comment       String?
+  date          DateTime                    @default(now())
 
-createdAt     DateTime              @default(now())
-updatedAt     DateTime              @updatedAt
+  createdAt     DateTime                    @default(now())
+  updatedAt     DateTime                    @updatedAt
 }
 
 model ExpenseCategory {
-  id            String          @id @default(auto()) @map("_id") @db.ObjectId
-  name          String          @unique
+  id            String                      @id @default(auto()) @map("_id") @db.ObjectId
+  name          String                      @unique
   subCategories String[]
-  expense       Expense         @relation(fields: [expenseId], references: [id], onDelete: Cascade)
-  expenseId     String          @db.ObjectId @unique
+  expense       Expense                     @relation(fields: [expenseId], references: [id], onDelete: Cascade)
+  expenseId     String                      @db.ObjectId @unique
 }
 
 model Bank {
-  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  id            String                      @id @default(auto()) @map("_id") @db.ObjectId
   name          String
   country       String
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime                        @default(now())
+  updatedAt DateTime                        @updatedAt
 }
 
 enum Currency {
@@ -102,34 +104,34 @@ enum AccountType {
 }
 
 model BankAccount {
-  id            String          @id @default(auto()) @map("_id") @db.ObjectId
-  user          User            @relation("UserBankAccounts", fields: [userId], references: [id], onDelete: Cascade)
-  userId        String          @db.ObjectId @unique
+  id            String                      @id @default(auto()) @map("_id") @db.ObjectId
+  user          User                        @relation("UserBankAccounts", fields: [userId], references: [id], onDelete: Cascade)
+  userId        String                      @db.ObjectId @unique
   bankId        String          
   currency      Currency
   balance       Int
   type          AccountType
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime                        @default(now())
+  updatedAt DateTime                        @updatedAt
 }
  
 model Account {
-  id                String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId            String  @db.ObjectId @unique
+  id                String                  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String                  @db.ObjectId @unique
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.String
-  access_token      String? @db.String
+  refresh_token     String?                 @db.String
+  access_token      String?                 @db.String
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.String
+  id_token          String?                 @db.String
   session_state     String?
  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime                        @default(now())
+  updatedAt DateTime                        @updatedAt
  
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
  
@@ -137,18 +139,18 @@ model Account {
 }
  
 model Session {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  sessionToken String   @unique
-  userId       String   @db.ObjectId
+  id           String                       @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String                       @unique
+  userId       String                       @db.ObjectId
   expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User                         @relation(fields: [userId], references: [id], onDelete: Cascade)
  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime                        @default(now())
+  updatedAt DateTime                        @updatedAt
 }
  
 model VerificationToken {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  id         String                         @id @default(auto()) @map("_id") @db.ObjectId
   identifier String
   token      String
   expires    DateTime
@@ -158,8 +160,8 @@ model VerificationToken {
  
 // Optional for WebAuthn support
 model Authenticator {
-  credentialID         String  @id @map("_id")
-  userId               String  @db.ObjectId
+  credentialID         String               @id @map("_id")
+  userId               String               @db.ObjectId
   providerAccountId    String
   credentialPublicKey  String
   counter              Int

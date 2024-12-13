@@ -196,11 +196,33 @@
   "IncomesPage": {
     "title": "Incomes",
     "createIncomeForm": {
+      "triggerBtnLabel": "Add",
       "title": "Create a new income",
       "dateFieldLabel": "Date",
       "amountFieldLabel": "Amount",
+      "currencyFieldLabel": "Currency",
+      "currencyPlaceholder": "Currency",
       "sourceFieldLabel": "Source",
-      "commentFieldLabel": "Comment"
+      "sourcePlaceholder": "Select a source",
+      "commentFieldLabel": "Comment",
+      "submitBtnLabel": "Add"
+    },
+    "income_sources": {
+      "cash": "Cash",
+      "investment": "Investment",
+      "salary": "Salary",
+      "pension": "Pension",
+      "money_transfer": "Money transfer",
+      "rent": "Rent",
+      "refund": "Refund",
+      "cashback": "Cashback"
+    },
+    "actionMessages": {
+      "createIncomeSuccess": "New income item successfully created"
+    },
+    "errors": {
+      "general": "Something went wrong!",
+      "createIncomeFailed": "Cannot create a new income item"
     }
   }
 }

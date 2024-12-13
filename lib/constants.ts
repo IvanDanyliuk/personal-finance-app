@@ -70,34 +70,34 @@ export const LANGUAGES = [
 export const INCOME_SOURCES = [
   {
     value: 'cash',
-    label: 'Cash'
+    label: 'IncomesPage.income_sources.cash'
   },
   {
     value: 'investment',
-    label: 'Investment'
+    label: 'IncomesPage.income_sources.investment'
   },
   {
     value: 'salary',
-    label: 'Salary'
+    label: 'IncomesPage.income_sources.salary'
   },
   {
     value: 'pension',
-    label: 'Pension'
+    label: 'IncomesPage.income_sources.pension'
   },
   {
     value: 'money_transfer',
-    label: 'Money transfer'
+    label: 'IncomesPage.income_sources.money_transfer'
   },
   {
     value: 'rent',
-    label: 'Rent'
+    label: 'IncomesPage.income_sources.rent'
   },
   {
     value: 'refund',
-    label: 'Refund'
+    label: 'IncomesPage.income_sources.refund'
   },
   {
     value: 'cashback',
-    label: 'Cashback'
+    label: 'IncomesPage.income_sources.cashback'
   },
 ];
