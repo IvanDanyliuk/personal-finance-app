@@ -28,10 +28,10 @@ model User {
   accounts      Account[]
   sessions      Session[]
   role          UserRole?       @default(USER)
-  bankAccounts  BankAccount[]   
-  incomes       Income?
-  expenses      Expense?
-  weekStartDay  String?            @default("1")
+  bankAccounts  BankAccount[]   @relation("UserBankAccounts")
+  incomes       Income[]        @relation("UserIncomes")
+  expenses      Expense[]       @relation("UserExpencses")
+  weekStartDay  String?         @default("1")
   currency      String?         @default("usd")
   language      String?         @default("en")   
   // Optional for WebAuthn support
@@ -42,15 +42,15 @@ model User {
 }
 
 model Income {
-  id            String          @id @default(auto()) @map("_id") @db.ObjectId
-  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId        String          @db.ObjectId @unique
+  id            String                      @id @default(auto()) @map("_id") @db.ObjectId
+  user          User                        @relation("UserIncomes", fields: [userId], references: [id], onDelete: Cascade)
+  userId        String                      @db.ObjectId @unique
   amount        Int
   source        String
   comment       String?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 enum PaymentMethod {
@@ -59,17 +59,17 @@ enum PaymentMethod {
 }
 
 model Expense {
-  id            String          @id @default(auto()) @map("_id") @db.ObjectId
-  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId        String          @db.ObjectId @unique
+  id            String                      @id @default(auto()) @map("_id") @db.ObjectId
+  user          User                        @relation("UserExpencses", fields: [userId], references: [id], onDelete: Cascade)
+  userId        String                      @db.ObjectId @unique
   amount        Int
   destination   String
   paymentMethod PaymentMethod
   category      ExpenseCategory?
   comment       String?
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+createdAt     DateTime              @default(now())
+updatedAt     DateTime              @updatedAt
 }
 
 model ExpenseCategory {
@@ -103,7 +103,7 @@ enum AccountType {
 
 model BankAccount {
   id            String          @id @default(auto()) @map("_id") @db.ObjectId
-  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user          User            @relation("UserBankAccounts", fields: [userId], references: [id], onDelete: Cascade)
   userId        String          @db.ObjectId @unique
   bankId        String          
   currency      Currency

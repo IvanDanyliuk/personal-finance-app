@@ -192,5 +192,8 @@
         "notMatchPassword": "Невірна адреса ел. пошти"
       }
     }
+  },
+  "IncomesPage": {
+    "title": "Доходи"
   }
 }

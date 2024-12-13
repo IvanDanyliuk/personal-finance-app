@@ -1,6 +1,13 @@
-import { CheckboxField } from './Checkbox';
-import { FileInput } from './FileInput';
-import { TextField } from './TextField';
-import { SelectField } from './SelectField';
+import { CheckboxField } from './checkbox-field';
+import { DatePicker } from './date-picker';
+import { FileInput } from './file-input';
+import { SelectField } from './select-field';
+import { TextField } from './text-field';
 
-export { CheckboxField, FileInput, TextField, SelectField };
+export { 
+  CheckboxField, 
+  DatePicker, 
+  FileInput, 
+  TextField, 
+  SelectField 
+};

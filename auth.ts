@@ -5,7 +5,6 @@ import Credentials from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 import { db } from './db';
 import { saltAndHashPassword } from './lib/helpers';
-import { cookies } from 'next/headers';
 
  
 export const { 

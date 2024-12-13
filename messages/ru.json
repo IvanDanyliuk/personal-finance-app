@@ -192,5 +192,8 @@
         "notMatchPassword": "Неверный пароль!"
       }
     }
+  },
+  "IncomesPage": {
+    "title": "Доходы"
   }
 }

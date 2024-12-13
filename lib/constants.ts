@@ -66,3 +66,38 @@ export const LANGUAGES = [
     label: 'SettingsPage.manageProfileData.languages.ua'
   },
 ];
+
+export const INCOME_SOURCES = [
+  {
+    value: 'cash',
+    label: 'Cash'
+  },
+  {
+    value: 'investment',
+    label: 'Investment'
+  },
+  {
+    value: 'salary',
+    label: 'Salary'
+  },
+  {
+    value: 'pension',
+    label: 'Pension'
+  },
+  {
+    value: 'money_transfer',
+    label: 'Money transfer'
+  },
+  {
+    value: 'rent',
+    label: 'Rent'
+  },
+  {
+    value: 'refund',
+    label: 'Refund'
+  },
+  {
+    value: 'cashback',
+    label: 'Cashback'
+  },
+];
