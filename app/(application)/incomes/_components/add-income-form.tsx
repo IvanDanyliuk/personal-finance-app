@@ -54,7 +54,7 @@ export const AddIncomeForm: React.FC = () => {
     const formData = new FormData();
     formData.append('userId', data.userId);
     formData.append('date', data.date.toISOString());
-    formData.append('amount', data.amount.toString());
+    formData.append('amount', data.amount.toString() || '0');
     formData.append('currency', data.currency);
     formData.append('source', data.source);
     formData.append('comment', data.comment);
@@ -67,6 +67,7 @@ export const AddIncomeForm: React.FC = () => {
         variant: 'default',
         className: 'bg-success-1 text-success-2'
       });
+      setIsOpen(false);
     }
 
     if(status === ActionStatus.Failed && error) {

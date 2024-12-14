@@ -222,7 +222,15 @@
     },
     "errors": {
       "general": "Что-то пошло не так!",
-      "createIncomeFailed": "Не удалось создать новую статью дохода"
+      "createIncome": {
+        "createIncomeFailed": "Не удалось создать новую статью дохода",
+        "wrongUserId": "Вы не авторзованы или ID Вашего профиля неверный",
+        "fieldsValidation": {
+          "requiredAmount": "Укажите сумму",
+          "requiredCurrency": "Выберите валюту",
+          "requiredSource": "Выберите источник средств"
+        }
+      }
     }
   }
 }

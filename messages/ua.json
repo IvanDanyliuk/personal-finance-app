@@ -222,7 +222,15 @@
     },
     "errors": {
       "general": "Щось пішло не так!",
-      "createIncomeFailed": "Не вдалось створити нову статтю"
+      "createIncome": {
+        "createIncomeFailed": "Не вдалось створити нову статтю",
+        "wrongUserId": "Ви не авторизовані або ID Вашого облікового запису некоректний",
+        "fieldsValidation": {
+          "requiredAmount": "Вкажіть суму",
+          "requiredCurrency": "Оберіть валюту",
+          "requiredSource": "Оберіть джерело коштів"
+        }
+      }
     }
   }
 }

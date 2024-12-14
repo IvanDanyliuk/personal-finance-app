@@ -44,9 +44,10 @@ model User {
 model Income {
   id            String                      @id @default(auto()) @map("_id") @db.ObjectId
   user          User                        @relation("UserIncomes", fields: [userId], references: [id], onDelete: Cascade)
-  userId        String                      @db.ObjectId @unique
+  userId        String                      @db.ObjectId
   amount        Int
   source        String
+  currency      String
   comment       String?
   date          DateTime                    @default(now())
 
@@ -62,8 +63,9 @@ enum PaymentMethod {
 model Expense {
   id            String                      @id @default(auto()) @map("_id") @db.ObjectId
   user          User                        @relation("UserExpencses", fields: [userId], references: [id], onDelete: Cascade)
-  userId        String                      @db.ObjectId @unique
+  userId        String                      @db.ObjectId
   amount        Int
+  currency      String
   destination   String
   paymentMethod PaymentMethod
   category      ExpenseCategory?
