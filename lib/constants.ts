@@ -1,69 +1,69 @@
 export const WEEK_STARTS_FROM = [
   {
     value: '1',
-    label: 'SettingsPage.manageGeneralData.weekDays.sunday'
+    label: 'General.weekDays.sunday'
   },
   {
     value: '2',
-    label: 'SettingsPage.manageGeneralData.weekDays.monday'
+    label: 'General.weekDays.monday'
   },
   {
     value: '3',
-    label: 'SettingsPage.manageGeneralData.weekDays.tuesday'
+    label: 'General.weekDays.tuesday'
   },
   {
     value: '4',
-    label: 'SettingsPage.manageGeneralData.weekDays.wednesday'
+    label: 'General.weekDays.wednesday'
   },
   {
     value: '5',
-    label: 'SettingsPage.manageGeneralData.weekDays.thursday'
+    label: 'General.weekDays.thursday'
   },
   {
     value: '6',
-    label: 'SettingsPage.manageGeneralData.weekDays.friday'
+    label: 'General.weekDays.friday'
   },
   {
     value: '7',
-    label: 'SettingsPage.manageGeneralData.weekDays.saturday'
+    label: 'General.weekDays.saturday'
   },
 ]
 
 export const CURRENCIES = [
   {
     value: 'usd',
-    label: 'SettingsPage.manageGeneralData.currencies.usd'
+    label: 'General.currencies.usd'
   },
   {
     value: 'eur',
-    label: 'SettingsPage.manageGeneralData.currencies.eur'
+    label: 'General.currencies.eur'
   },
   {
     value: 'uah',
-    label: 'SettingsPage.manageGeneralData.currencies.uah'
+    label: 'General.currencies.uah'
   },
   {
     value: 'rub',
-    label: 'SettingsPage.manageGeneralData.currencies.rub'
+    label: 'General.currencies.rub'
   },
   {
     value: 'pln',
-    label: 'SettingsPage.manageGeneralData.currencies.pln'
+    label: 'General.currencies.pln'
   },
 ];
 
 export const LANGUAGES = [
   {
     value: 'en',
-    label: 'SettingsPage.manageProfileData.languages.en'
+    label: 'General.languages.en'
   },
   {
     value: 'ru',
-    label: 'SettingsPage.manageProfileData.languages.ru'
+    label: 'General.languages.ru'
   },
   {
     value: 'ua',
-    label: 'SettingsPage.manageProfileData.languages.ua'
+    label: 'General.languages.ua'
   },
 ];
 

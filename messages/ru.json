@@ -207,6 +207,13 @@
       "commentFieldLabel": "Комментарий",
       "submitBtnLabel": "Добавить"
     },
+    "incomesTable": {
+      "dateColLabel": "Дата",
+      "amountColLabel": "Сумма",
+      "currencyColLabel": "Валюта",
+      "sourceColLabel": "Источник средств",
+      "commentColLabel": "Комментарий"
+    },
     "income_sources": {
       "cash": "Наличные средства",
       "investment": "Инвестиции",
@@ -222,9 +229,9 @@
     },
     "errors": {
       "general": "Что-то пошло не так!",
+      "wrongUserId": "Вы не авторзованы или ID Вашего профиля неверный",
       "createIncome": {
         "createIncomeFailed": "Не удалось создать новую статью дохода",
-        "wrongUserId": "Вы не авторзованы или ID Вашего профиля неверный",
         "fieldsValidation": {
           "requiredAmount": "Укажите сумму",
           "requiredCurrency": "Выберите валюту",

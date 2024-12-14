@@ -7,7 +7,7 @@ export const incomeSchema = zod.object({
   amount: zod.number().min(1, 'IncomesPage.errors.createIncome.fieldsValidation.requiredAmount'),
   currency: zod.string().min(1, 'IncomesPage.errors.createIncome.fieldsValidation.requiredCurrency'),
   source: zod.string().min(1, 'IncomesPage.errors.createIncome.fieldsValidation.requiredSource'),
-  comment: zod.string(),
+  comment: zod.string().or(zod.null()),
 });
 
 export type IncomeSchema = zod.infer<typeof incomeSchema>;

@@ -1,4 +1,27 @@
 {
+  "General": {
+    "currencies": {
+      "usd": "Долар США",
+      "eur": "Євро",
+      "rub": "Рубль",
+      "uah": "Гривня",
+      "pln": "Злотий"
+    },
+    "weekDays": {
+      "sunday": "Неділя",
+      "monday": "Понеділок",
+      "tuesday": "Вівторок",
+      "wednesday": "Середа",
+      "thursday": "Четвер",
+      "friday": "П'ятниця",
+      "saturday": "Субота"
+    },
+    "languages": {
+        "en": "Англійська",
+        "ru": "Ворожа",
+        "ua": "Українська"
+      }
+  },
   "Auth": {
     "signinPage": {
       "title": "Увійти",
@@ -106,32 +129,11 @@
       "title": "Загальні налаштування",
       "weekStartDayLabel": "Тиждень починається з",
       "currencyLabel": "Валюта",
-      "submitBtnLabel": "Підтвердити",
-      "currencies": {
-        "usd": "Долар США",
-        "eur": "Євро",
-        "rub": "Рубль",
-        "uah": "Гривня",
-        "pln": "Злотий"
-      },
-      "weekDays": {
-        "sunday": "Неділя",
-        "monday": "Понеділок",
-        "tuesday": "Вівторок",
-        "wednesday": "Середа",
-        "thursday": "Четвер",
-        "friday": "П'ятниця",
-        "saturday": "Субота"
-      }
+      "submitBtnLabel": "Підтвердити"
     },
     "manageProfileData": {
       "title": "Налаштування профілю",
-      "languageLabel": "Мова",
-      "languages": {
-        "en": "Англійська",
-        "ru": "Ворожа",
-        "ua": "Українська"
-      }
+      "languageLabel": "Мова"
     },
     "deleteUser": {
       "confirmationModal": {
@@ -207,6 +209,13 @@
       "commentFieldLabel": "Коментар",
       "submitBtnLabel": "Додати"
     },
+    "incomesTable": {
+      "dateColLabel": "Дата",
+      "amountColLabel": "Сума",
+      "currencyColLabel": "Валюта",
+      "sourceColLabel": "Джерело коштів",
+      "commentColLabel": "Коментар"
+    },
     "income_sources": {
       "cash": "Готівка",
       "investment": "Інвестиції",
@@ -222,9 +231,9 @@
     },
     "errors": {
       "general": "Щось пішло не так!",
+      "wrongUserId": "Ви не авторизовані або ID Вашого облікового запису некоректний",
       "createIncome": {
         "createIncomeFailed": "Не вдалось створити нову статтю",
-        "wrongUserId": "Ви не авторизовані або ID Вашого облікового запису некоректний",
         "fieldsValidation": {
           "requiredAmount": "Вкажіть суму",
           "requiredCurrency": "Оберіть валюту",

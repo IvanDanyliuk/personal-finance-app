@@ -207,6 +207,13 @@
       "commentFieldLabel": "Comment",
       "submitBtnLabel": "Add"
     },
+    "incomesTable": {
+      "dateColLabel": "Date",
+      "amountColLabel": "Amount",
+      "currencyColLabel": "Currency",
+      "sourceColLabel": "Source",
+      "commentColLabel": "Comment"
+    },
     "income_sources": {
       "cash": "Cash",
       "investment": "Investment",
@@ -222,9 +229,9 @@
     },
     "errors": {
       "general": "Something went wrong!",
+      "wrongUserId": "You're not authenticated or your user ID is incorrect",
       "createIncome": {
         "createIncomeFailed": "Cannot create a new income item",
-        "wrongUserId": "You're not authenticated or your user ID is incorrect",
         "fieldsValidation": {
           "requiredAmount": "Amount is required",
           "requiredCurrency": "Select a currency",

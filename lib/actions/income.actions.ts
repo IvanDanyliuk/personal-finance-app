@@ -6,6 +6,31 @@ import { incomeSchema } from "../types/form-schemas/incomes";
 import { db } from "@/db";
 import { revalidatePath } from "next/cache";
 
+
+export const getIncomes = async () => {
+  try {
+    const session = await auth();
+
+    if(!session) {
+      throw new Error('IncomesPage.errors.wrongUserId');
+    }
+
+    const data = await db.income.findMany({ where: { userId: session.user!.id! } });
+
+    return {
+      status: ActionStatus.Success,
+      data,
+      error: null,
+    };
+  } catch (error: any) {
+    return {
+      status: ActionStatus.Failed,
+      data: [],
+      error: error.message,
+    };
+  }
+}
+
 export const createIncome = async (formData: FormData) => {
   try {
     const session = await auth();
@@ -18,7 +43,7 @@ export const createIncome = async (formData: FormData) => {
     const comment = formData.get('comment') as string;
 
     if(!session || session.user?.id !== userId) {
-      throw new Error('IncomesPage.errors.createIncome.wrongUserId');
+      throw new Error('IncomesPage.errors.wrongUserId');
     }
 
     const validatedFields = incomeSchema.safeParse({
