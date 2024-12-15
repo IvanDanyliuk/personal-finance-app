@@ -7,7 +7,23 @@ import { db } from "@/db";
 import { revalidatePath } from "next/cache";
 
 
-export const getIncomes = async () => {
+export const getIncomes = async ({ 
+  sort, 
+  amountFrom,
+  amountTo,
+  dateFrom,
+  dateTo,
+  source,
+  currency
+}: { 
+  sort?: 'asc' | 'desc'; 
+  amountFrom?: any;
+  amountTo?: any; 
+  dateFrom?: string;
+  dateTo?: string;
+  source?: string;
+  currency?: string;
+}) => {
   try {
     const session = await auth();
 
@@ -16,16 +32,19 @@ export const getIncomes = async () => {
     }
 
     const data = await db.income.findMany({ where: { userId: session.user!.id! } });
+    const count = await db.income.count({ where: { userId: session.user!.id! } });
 
     return {
       status: ActionStatus.Success,
       data,
+      count,
       error: null,
     };
   } catch (error: any) {
     return {
       status: ActionStatus.Failed,
       data: [],
+      count: 0,
       error: error.message,
     };
   }
@@ -73,4 +92,44 @@ export const createIncome = async (formData: FormData) => {
       error: error.message,
     };
   }
-}
+};
+
+export const updateIncome = async () => {
+  try {
+    console.log('UPDATE')
+
+    return {
+      status: ActionStatus.Success,
+      error: null,
+    };
+  } catch (error: any) {
+    return {
+      status: ActionStatus.Failed,
+      error: error.message,
+    };
+  }
+};
+
+export const deleteIncome = async (id: string) => {
+  try {
+    const session = await auth();
+
+    if(!session) {
+      throw new Error('IncomesPage.errors.wrongUserId');
+    }
+
+    await db.income.delete({ where: { id } });
+
+    revalidatePath('/incomes');
+
+    return {
+      status: ActionStatus.Success,
+      error: null,
+    };
+  } catch (error: any) {
+    return {
+      status: ActionStatus.Failed,
+      error: error.message,
+    };
+  }
+};

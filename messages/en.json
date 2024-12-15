@@ -195,6 +195,7 @@
   },
   "IncomesPage": {
     "title": "Incomes",
+    "noData": "You haven't added any information about your incomes",
     "createIncomeForm": {
       "triggerBtnLabel": "Add",
       "title": "Create a new income",
@@ -225,7 +226,8 @@
       "cashback": "Cashback"
     },
     "actionMessages": {
-      "createIncomeSuccess": "New income item successfully created"
+      "createIncomeSuccess": "New income item successfully created",
+      "incomeDeleted": "Income item successfully deleted!"
     },
     "errors": {
       "general": "Something went wrong!",

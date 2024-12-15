@@ -57,7 +57,7 @@ export const AddIncomeForm: React.FC = () => {
     formData.append('amount', data.amount.toString() || '0');
     formData.append('currency', data.currency);
     formData.append('source', data.source);
-    formData.append('comment', data.comment);
+    formData.append('comment', data.comment || '');
     
     const { status, error } = await createIncome(formData);
 

@@ -197,6 +197,7 @@
   },
   "IncomesPage": {
     "title": "Доходи",
+    "noData": "Ви ще не додали ніякої інформації про Ваші доходи",
     "createIncomeForm": {
       "triggerBtnLabel": "Додати",
       "title": "Створити статтю доходу",
@@ -227,7 +228,8 @@
       "cashback": "Кешбек"
     },
     "actionMessages": {
-      "createIncomeSuccess": "Нову статтю доходу успішно створено!"
+      "createIncomeSuccess": "Нову статтю доходу успішно створено!",
+      "incomeDeleted": "Статтю витрат успішно видалено"
     },
     "errors": {
       "general": "Щось пішло не так!",
