@@ -5,9 +5,12 @@ import { ActionStatus } from "../types/common.types";
 import { incomeSchema } from "../types/form-schemas/incomes";
 import { db } from "@/db";
 import { revalidatePath } from "next/cache";
+import { removeFalseyFields } from "../helpers";
 
 
 export const getIncomes = async ({ 
+  page,
+  items,
   sort, 
   amountFrom,
   amountTo,
@@ -16,6 +19,8 @@ export const getIncomes = async ({
   source,
   currency
 }: { 
+  page: string;
+  items: string;
   sort?: 'asc' | 'desc'; 
   amountFrom?: any;
   amountTo?: any; 
@@ -27,11 +32,21 @@ export const getIncomes = async ({
   try {
     const session = await auth();
 
+    const props = removeFalseyFields({
+      sort, 
+      amountFrom,
+      amountTo,
+      dateFrom,
+      dateTo,
+      source,
+      currency
+    });
+
     if(!session) {
       throw new Error('IncomesPage.errors.wrongUserId');
     }
 
-    const data = await db.income.findMany({ where: { userId: session.user!.id! } });
+    const data = await db.income.findMany({ where: { userId: session.user!.id! }, skip: (+page - 1) * +items, take: +items });
     const count = await db.income.count({ where: { userId: session.user!.id! } });
 
     return {

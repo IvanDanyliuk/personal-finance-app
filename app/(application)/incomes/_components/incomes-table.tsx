@@ -171,7 +171,7 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
                 </Button>
                 <Button 
                   type='button' 
-                  disabled={currentPage <= Math.ceil(count / itemsPerPage)} 
+                  disabled={currentPage * itemsPerPage >= count} 
                   onClick={handleSetNextPage}
                 >
                   Next

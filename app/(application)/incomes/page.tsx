@@ -5,9 +5,16 @@ import NoDataPlaceholder from '@/public/images/investment.svg';
 import Image from 'next/image';
 
 
-export default async function IncomesPage({ searchParams }) {
+export default async function IncomesPage({ searchParams: { page, items } }: {
+  searchParams: {
+    page: string;
+    items: string;
+  }
+}) {
   const t = await getTranslations();
-  const incomes = await getIncomes({});
+  const incomes = await getIncomes({ page: page || '1', items: items || '10' });
+
+  console.log('SEARCH PARAMS', { page, items })
 
   return (
     <div className='p-3 w-full h-fit border border-background-secondary rounded-3xl'>
