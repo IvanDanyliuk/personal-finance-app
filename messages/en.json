@@ -96,7 +96,11 @@
     },
     "logoutBtn": "Log out",
     "submitBtnLabel": "OK",
-    "cancelBtnLabel": "Cancel"
+    "cancelBtnLabel": "Cancel",
+    "tableNavButtons": {
+      "prev": "Previous",
+      "next": "Next"
+    }
   },
   "SettingsPage": {
     "title": "Settings",

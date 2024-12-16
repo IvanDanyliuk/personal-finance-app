@@ -3,18 +3,27 @@ import { AddIncomeForm, IncomesTable } from './_components';
 import { getIncomes } from '@/lib/actions/income.actions';
 import NoDataPlaceholder from '@/public/images/investment.svg';
 import Image from 'next/image';
+import { removeFalseyFields } from '@/lib/helpers';
 
 
-export default async function IncomesPage({ searchParams: { page, items } }: {
+export default async function IncomesPage({ searchParams: { 
+  page = '1', 
+  items = '10', 
+  sortBy, 
+  order 
+} }: {
   searchParams: {
     page: string;
     items: string;
+    sortBy: string;
+    order: string;
   }
 }) {
   const t = await getTranslations();
-  const incomes = await getIncomes({ page: page || '1', items: items || '10' });
-
-  console.log('SEARCH PARAMS', { page, items })
+  const additionalParams = removeFalseyFields({
+    sortBy, order
+  });
+  const incomes = await getIncomes({ page, items, ...additionalParams });
 
   return (
     <div className='p-3 w-full h-fit border border-background-secondary rounded-3xl'>

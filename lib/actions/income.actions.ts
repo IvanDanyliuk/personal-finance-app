@@ -1,7 +1,7 @@
 'use server';
 
 import { auth } from "@/auth";
-import { ActionStatus } from "../types/common.types";
+import { ActionStatus, SortOrder } from "../types/common.types";
 import { incomeSchema } from "../types/form-schemas/incomes";
 import { db } from "@/db";
 import { revalidatePath } from "next/cache";
@@ -11,7 +11,8 @@ import { removeFalseyFields } from "../helpers";
 export const getIncomes = async ({ 
   page,
   items,
-  sort, 
+  sortBy, 
+  order = SortOrder.Desc,
   amountFrom,
   amountTo,
   dateFrom,
@@ -21,7 +22,8 @@ export const getIncomes = async ({
 }: { 
   page: string;
   items: string;
-  sort?: 'asc' | 'desc'; 
+  sortBy?: string; 
+  order?: SortOrder;
   amountFrom?: any;
   amountTo?: any; 
   dateFrom?: string;
@@ -32,8 +34,9 @@ export const getIncomes = async ({
   try {
     const session = await auth();
 
-    const props = removeFalseyFields({
-      sort, 
+    const sortQuery = sortBy && order ? { [sortBy]: order } : { createdAt: order }
+
+    const filterData = removeFalseyFields({
       amountFrom,
       amountTo,
       dateFrom,
@@ -42,11 +45,20 @@ export const getIncomes = async ({
       currency
     });
 
+    console.log('GET INCOMES', { sortQuery, filterData })
+
     if(!session) {
       throw new Error('IncomesPage.errors.wrongUserId');
     }
 
-    const data = await db.income.findMany({ where: { userId: session.user!.id! }, skip: (+page - 1) * +items, take: +items });
+    const data = await db.income.findMany({ 
+      where: { 
+        userId: session.user!.id! 
+      }, 
+      orderBy: sortQuery,
+      skip: (+page - 1) * +items, 
+      take: +items 
+    });
     const count = await db.income.count({ where: { userId: session.user!.id! } });
 
     return {

@@ -96,7 +96,11 @@
     },
     "logoutBtn": "Выйти",
     "submitBtnLabel": "OK",
-    "cancelBtnLabel": "Отмена"
+    "cancelBtnLabel": "Отмена",
+    "tableNavButtons": {
+      "prev": "Предыдущая",
+      "next": "Следующая"
+    }
   },
   "SettingsPage": {
     "title": "Настройки",

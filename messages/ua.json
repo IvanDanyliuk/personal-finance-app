@@ -96,7 +96,11 @@
     },
     "logoutBtn": "Вийти",
     "submitBtnLabel": "OK",
-    "cancelBtnLabel": "Відхилити"
+    "cancelBtnLabel": "Відхилити",
+    "tableNavButtons": {
+      "prev": "Попередня",
+      "next": "Наступна"
+    }
   },
   "SettingsPage": {
     "title": "Налаштування",

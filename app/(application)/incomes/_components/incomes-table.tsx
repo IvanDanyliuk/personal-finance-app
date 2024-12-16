@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { format } from 'date-fns';
@@ -13,7 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { ActionStatus } from '@/lib/types/common.types';
+import { ActionStatus, SortOrder } from '@/lib/types/common.types';
 import { IncomeSchema } from '@/lib/types/form-schemas/incomes';
 import { TableRowActionsMenu } from '@/components/common';
 import { deleteIncome, updateIncome } from '@/lib/actions/income.actions';
@@ -21,6 +21,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select';
 import { ITEMS_PER_PAGE } from '@/lib/constants';
+import { ArrowDownUp } from 'lucide-react';
 
 
 interface IncomesData extends IncomeSchema {
@@ -32,6 +33,16 @@ interface IIncomesTable {
   data: IncomesData[];
   count: number;
   error: string | null;
+};
+
+const emptyRowData = {
+  id: '',
+  source: '',
+  userId: '',
+  date: '',
+  amount: '',
+  currency: '',
+  comment: ''
 };
 
 
@@ -70,6 +81,24 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
     replace(`${pathname}?${params.toString()}`);
   };
 
+  const handleDataSort = (sortBy: string) => {
+    const currentSortIndicator = params.get('sortBy');
+    const currentSortOrder = params.get('order');
+
+    if(currentSortIndicator !== sortBy) {
+      params.set('sortBy', sortBy);
+      params.set('order', SortOrder.Desc);
+    } else {
+      if(currentSortOrder === SortOrder.Desc) {
+        params.set('order', SortOrder.Asc);
+      } else {
+        params.set('order', SortOrder.Desc);
+      }
+    }
+    
+    replace(`${pathname}?${params.toString()}`);
+  };
+
   useEffect(() => {
     if(status === ActionStatus.Failed && error) {
       toast({
@@ -98,10 +127,16 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
       <TableHeader>
         <TableRow className='text-foreground border-none'>
           <TableHead className='w-[100px] px-6 py-5 bg-background-secondary rounded-l-full'>
-            {t('IncomesPage.incomesTable.dateColLabel').toUpperCase()}
+            <div onClick={() => handleDataSort('date')} className='cursor-pointer flex items-center gap-1'>
+              {t('IncomesPage.incomesTable.dateColLabel').toUpperCase()}
+              <ArrowDownUp className='w-4 h-4' />
+            </div>
           </TableHead>
           <TableHead className='px-6 py-4 bg-background-secondary'>
-            {t('IncomesPage.incomesTable.amountColLabel').toUpperCase()}
+            <div onClick={() => handleDataSort('amount')} className='cursor-pointer flex items-center gap-1'>
+              {t('IncomesPage.incomesTable.amountColLabel').toUpperCase()}
+              <ArrowDownUp className='w-4 h-4' />
+            </div>
           </TableHead>
           <TableHead className='px-6 py-4 bg-background-secondary'>
             {t('IncomesPage.incomesTable.currencyColLabel').toUpperCase()}
@@ -118,19 +153,11 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
       <TableBody>
         {[
           ...data,
-          ...Array.from({ length: itemsPerPage - data.length }, (_, i) => ({
-            id: '',
-            source: '',
-            userId: '',
-            date: '',
-            amount: '',
-            currency: '',
-            comment: ''
-          }))
+          ...Array.from({ length: itemsPerPage - data.length }, (_, i) => emptyRowData)
         ].map(incomeItem => (
-          <>
+          <Fragment key={crypto.randomUUID()}>
             {incomeItem.id ? (
-              <TableRow key={crypto.randomUUID()} className='text-foreground bg-background hover:bg-background-neutral'>
+              <TableRow className='text-foreground bg-background hover:bg-background-neutral'>
                 <TableCell className='px-6 py-3 border-l border-t border-b border-background-neutral rounded-l-full'>
                   {format(incomeItem.date, 'dd.MM.yyyy')}
                 </TableCell>
@@ -159,7 +186,7 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
                 </TableCell>
               </TableRow>
             ) : (
-              <TableRow key={crypto.randomUUID()}>
+              <TableRow>
                 <TableCell className='py-6' />
                 <TableCell className='py-6' />
                 <TableCell className='py-6' />
@@ -168,7 +195,7 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
                 <TableCell className='py-6' />
               </TableRow>
             )}
-          </>
+          </Fragment>
         ))}
       </TableBody>
       <TableFooter className='w-full'>
@@ -187,20 +214,22 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
                   ))}
                 </SelectContent>
               </Select>
-              <div>
+              <div className='flex gap-3'>
                 <Button 
                   type='button' 
                   disabled={currentPage <= 1} 
                   onClick={handleSetPrevPage}
+                  className='min-w-36 bg-primary-7 text-white border-none rounded-full'
                 >
-                  Prev
+                  {t('Layout.tableNavButtons.prev')}
                 </Button>
                 <Button 
                   type='button' 
                   disabled={currentPage * itemsPerPage >= count} 
                   onClick={handleSetNextPage}
+                  className='min-w-36 bg-primary-7 text-white border-none rounded-full'
                 >
-                  Next
+                  {t('Layout.tableNavButtons.next')}
                 </Button>
               </div>
             </div>
