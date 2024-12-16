@@ -64,7 +64,9 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
 
   const handleSetItemsPerPage = (value: string) => {
     setItemsPerPage(+value);
+    setCurrentPage(1);
     params.set('items', value);
+    params.set('page', '1');
     replace(`${pathname}?${params.toString()}`);
   };
 
@@ -114,35 +116,59 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data.map(incomeItem => (
-          <TableRow key={crypto.randomUUID()} className='text-foreground bg-background hover:bg-background-neutral'>
-            <TableCell className='px-6 py-3 border-l border-t border-b border-background-neutral rounded-l-full'>
-              {format(incomeItem.date, 'dd.MM.yyyy')}
-            </TableCell>
-            <TableCell className='px-6 py-3 border-t border-b border-background-neutral'>
-              {incomeItem.amount}
-            </TableCell>
-            <TableCell className='px-6 py-3 border-t border-b border-background-neutral'>
-              {t(`General.currencies.${incomeItem.currency}`)}
-            </TableCell>
-            <TableCell className='px-6 py-3 border-t border-b border-background-neutral'>
-              {t(`IncomesPage.income_sources.${incomeItem.source}`)}
-            </TableCell>
-            <TableCell className='px-6 py-3 border-t border-b border-background-neutral'>
-              {incomeItem.comment || ''}
-            </TableCell>
-            <TableCell className='px-6 py-3 border-r border-t border-b border-background-neutral rounded-r-full'>
-              <TableRowActionsMenu 
-                actionId={incomeItem.id}
-                updateBtnLabel='Update'
-                deleteBtnLabel='Delete'
-                confirmDeleteTitle='Are you sure you want to delete this income item?'
-                confirmDeleteMessage='It will be impossible to undo this action.'
-                updateAction={updateIncome}
-                deleteAction={deleteIncome}
-              />
-            </TableCell>
-          </TableRow>
+        {[
+          ...data,
+          ...Array.from({ length: itemsPerPage - data.length }, (_, i) => ({
+            id: '',
+            source: '',
+            userId: '',
+            date: '',
+            amount: '',
+            currency: '',
+            comment: ''
+          }))
+        ].map(incomeItem => (
+          <>
+            {incomeItem.id ? (
+              <TableRow key={crypto.randomUUID()} className='text-foreground bg-background hover:bg-background-neutral'>
+                <TableCell className='px-6 py-3 border-l border-t border-b border-background-neutral rounded-l-full'>
+                  {format(incomeItem.date, 'dd.MM.yyyy')}
+                </TableCell>
+                <TableCell className='px-6 py-3 border-t border-b border-background-neutral'>
+                  {incomeItem.amount}
+                </TableCell>
+                <TableCell className='px-6 py-3 border-t border-b border-background-neutral'>
+                  {t(`General.currencies.${incomeItem.currency}`)}
+                </TableCell>
+                <TableCell className='px-6 py-3 border-t border-b border-background-neutral'>
+                  {t(`IncomesPage.income_sources.${incomeItem.source}`)}
+                </TableCell>
+                <TableCell className='px-6 py-3 border-t border-b border-background-neutral'>
+                  {incomeItem.comment || ''}
+                </TableCell>
+                <TableCell className='px-6 py-3 border-r border-t border-b border-background-neutral rounded-r-full'>
+                  <TableRowActionsMenu 
+                    actionId={incomeItem.id}
+                    updateBtnLabel='Update'
+                    deleteBtnLabel='Delete'
+                    confirmDeleteTitle='Are you sure you want to delete this income item?'
+                    confirmDeleteMessage='It will be impossible to undo this action.'
+                    updateAction={updateIncome}
+                    deleteAction={deleteIncome}
+                  />
+                </TableCell>
+              </TableRow>
+            ) : (
+              <TableRow key={crypto.randomUUID()}>
+                <TableCell className='py-6' />
+                <TableCell className='py-6' />
+                <TableCell className='py-6' />
+                <TableCell className='py-6' />
+                <TableCell className='py-6' />
+                <TableCell className='py-6' />
+              </TableRow>
+            )}
+          </>
         ))}
       </TableBody>
       <TableFooter className='w-full'>
