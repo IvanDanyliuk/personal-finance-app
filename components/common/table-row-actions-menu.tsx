@@ -78,7 +78,7 @@ export const TableRowActionsMenu: React.FC<ITableRowActionsMenu> = ({
   return (
     <>
       <DropdownMenu>
-        <DropdownMenuTrigger>
+        <DropdownMenuTrigger className='w-full flex justify-end'>
           <EllipsisVertical />
         </DropdownMenuTrigger>
         <DropdownMenuContent className='bg-background text-foreground'>

@@ -10,7 +10,7 @@ export default async function IncomesPage({ searchParams }) {
   const incomes = await getIncomes({});
 
   return (
-    <div className='w-full h-full'>
+    <div className='p-3 w-full h-fit border border-background-secondary rounded-3xl'>
       <h1 className='mb-3 text-xl md:text-3xl font-semibold'>
         {t('IncomesPage.title')}
       </h1>

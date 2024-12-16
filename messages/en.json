@@ -1,4 +1,32 @@
 {
+  "General": {
+    "currencies": {
+      "usd": "US Dollar",
+      "eur": "Euro",
+      "rub": "Ruble",
+      "uah": "Hryvnia",
+      "pln": "Zloty"
+    },
+    "weekDays": {
+      "sunday": "Sunday",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday"
+    },
+    "languages": {
+      "en": "English",
+      "ru": "Enemy",
+      "ua": "Ukrainian"
+    },
+    "itemsPerPage": {
+      "10": "10 items per page",
+      "15": "15 items per page",
+      "20": "20 items per page"
+    }
+  },
   "Auth": {
     "signinPage": {
       "title": "Sign In",
@@ -106,32 +134,11 @@
       "title": "General settings",
       "weekStartDayLabel": "Week starts from",
       "currencyLabel": "Currency",
-      "submitBtnLabel": "Submit",
-      "currencies": {
-        "usd": "US Dollar",
-        "eur": "Euro",
-        "rub": "Ruble",
-        "uah": "Hryvnia",
-        "pln": "Zloty"
-      },
-      "weekDays": {
-        "sunday": "Sunday",
-        "monday": "Monday",
-        "tuesday": "Tuesday",
-        "wednesday": "Wednesday",
-        "thursday": "Thursday",
-        "friday": "Friday",
-        "saturday": "Saturday"
-      }
+      "submitBtnLabel": "Submit"
     },
     "manageProfileData": {
       "title": "Profile settings",
-      "languageLabel": "Language",
-      "languages": {
-        "en": "English",
-        "ru": "Enemy",
-        "ua": "Ukrainian"
-      }
+      "languageLabel": "Language"
     },
     "deleteUser": {
       "confirmationModal": {

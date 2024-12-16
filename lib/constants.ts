@@ -101,3 +101,18 @@ export const INCOME_SOURCES = [
     label: 'IncomesPage.income_sources.cashback'
   },
 ];
+
+export const ITEMS_PER_PAGE = [
+  {
+    value: '10',
+    label: 'General.itemsPerPage.10'
+  },
+  {
+    value: '15',
+    label: 'General.itemsPerPage.15'
+  },
+  {
+    value: '20',
+    label: 'General.itemsPerPage.20'
+  },
+];
