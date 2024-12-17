@@ -236,6 +236,23 @@
       "refund": "Компенсации",
       "cashback": "Кешбэк"
     },
+    "filters": {
+      "date": {
+        "title": "Выберите период",
+        "dateFromLabel": "Период с",
+        "dateToLabel": "Период до",
+        "submitBtnLabel": "OK",
+        "cancelBtnLabel": "Очистить период"
+      },
+      "general": {
+        "title": "Фильтры",
+        "amountFrom": "Сумма с",
+        "amountTo": "Сумма до",
+        "selectSourceTriggerBtn": "Выберите источники дохода",
+        "submitBtnLabel": "OK",
+        "cancelBtnLabel": "Очистить фильтры"
+      }
+    },
     "actionMessages": {
       "createIncomeSuccess": "Новая статья дохода успешно создана!",
       "incomeDeleted": "Статья затрат успешно удалена"

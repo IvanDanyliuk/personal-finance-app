@@ -1,11 +1,12 @@
 'use client';
 
 import { X } from 'lucide-react';
+import { MouseEventHandler } from 'react';
 
 
 interface IChip {
   title: string;
-  onClick?: () => void;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 export const Chip: React.FC<IChip> = ({ title, onClick }) => {
@@ -14,7 +15,9 @@ export const Chip: React.FC<IChip> = ({ title, onClick }) => {
       <span className='text-sm'>
         {title}
       </span>
-      <X onClick={onClick} className='cursor-pointer w-5 h-5' />
+      <button onClick={onClick} className='bg-transparent'>
+        <X className='cursor-pointer w-5 h-5' />
+      </button>
     </div>
-  )
-}
+  );
+};

@@ -236,6 +236,23 @@
       "refund": "Відшкодування",
       "cashback": "Кешбек"
     },
+    "filters": {
+      "date": {
+        "title": "Оберіть період",
+        "dateFromLabel": "Період з",
+        "dateToLabel": "Період до",
+        "submitBtnLabel": "OK",
+        "cancelBtnLabel": "Очистити період"
+      },
+      "general": {
+        "title": "Фільтри",
+        "amountFrom": "Сума з",
+        "amountTo": "Сума до",
+        "selectSourceTriggerBtn": "Оберіть джерела доходу",
+        "submitBtnLabel": "OK",
+        "cancelBtnLabel": "Очистити фільтри"
+      }
+    },
     "actionMessages": {
       "createIncomeSuccess": "Нову статтю доходу успішно створено!",
       "incomeDeleted": "Статтю витрат успішно видалено"

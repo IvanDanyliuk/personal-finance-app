@@ -10,7 +10,6 @@ import { Calendar, CalendarProps } from '../ui/calendar';
 
 
 export const DatePicker: React.FC<CalendarProps> = (props) => {
-
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -36,5 +35,5 @@ export const DatePicker: React.FC<CalendarProps> = (props) => {
         />
       </PopoverContent>
     </Popover>
-  )
-}
+  );
+};

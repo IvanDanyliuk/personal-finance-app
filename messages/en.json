@@ -236,6 +236,23 @@
       "refund": "Refund",
       "cashback": "Cashback"
     },
+    "filters": {
+      "date": {
+        "title": "Choose a period",
+        "dateFromLabel": "Period from",
+        "dateToLabel": "Period to",
+        "submitBtnLabel": "OK",
+        "cancelBtnLabel": "Clear period"
+      },
+      "general": {
+        "title": "Filters",
+        "amountFrom": "Amount from",
+        "amountTo": "Amount to",
+        "selectSourceTriggerBtn": "Select income sources",
+        "submitBtnLabel": "OK",
+        "cancelBtnLabel": "Clear filters"
+      }
+    },
     "actionMessages": {
       "createIncomeSuccess": "New income item successfully created",
       "incomeDeleted": "Income item successfully deleted!"
