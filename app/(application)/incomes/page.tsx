@@ -4,6 +4,7 @@ import { getIncomes } from '@/lib/actions/income.actions';
 import NoDataPlaceholder from '@/public/images/investment.svg';
 import Image from 'next/image';
 import { removeFalseyFields } from '@/lib/helpers';
+import { IncomeFilters } from './_components/income-filters';
 
 
 export default async function IncomesPage({ searchParams: { 
@@ -32,7 +33,7 @@ export default async function IncomesPage({ searchParams: {
       </h1>
       <div className='w-full flex flex-col gap-3'>
         <div className='w-full flex justify-between items-center'>
-          <div>Filters</div>
+          <IncomeFilters />
           <div className='flex items-center gap-3'>
             <div>Export to PDF</div>
             <AddIncomeForm />

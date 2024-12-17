@@ -14,6 +14,7 @@
     --background: 0 0% 100%;
     --background-secondary: 245, 100%, 98%;
     --background-neutral: 0, 0%, 95%;
+    --background-normal: 247, 100%, 86%;
     --foreground: 0 0% 3.9%;
     --primary-9: 248, 39%, 45%;
     --primary-8: 248, 49%, 56%;
@@ -46,6 +47,7 @@
     --background: 0 0% 3.9%;
     --background-secondary: 240, 6%, 14%;
     --background-neutral: 240, 4%, 10%;
+    --background-normal: 240, 4%, 35%;
     --foreground: 0 0% 98%;
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;

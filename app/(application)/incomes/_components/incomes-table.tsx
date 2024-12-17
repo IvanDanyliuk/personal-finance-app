@@ -126,54 +126,54 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
     <Table className='w-full border-separate border-spacing-y-3'>
       <TableHeader>
         <TableRow className='text-foreground border-none'>
-          <TableHead className='w-[100px] px-6 py-5 bg-background-secondary rounded-l-full'>
+          <TableHead className='w-[100px] px-6 py-5 bg-background-normal rounded-l-full'>
             <div onClick={() => handleDataSort('date')} className='cursor-pointer flex items-center gap-1'>
               {t('IncomesPage.incomesTable.dateColLabel').toUpperCase()}
               <ArrowDownUp className='w-4 h-4' />
             </div>
           </TableHead>
-          <TableHead className='px-6 py-4 bg-background-secondary'>
+          <TableHead className='px-6 py-4 bg-background-normal'>
             <div onClick={() => handleDataSort('amount')} className='cursor-pointer flex items-center gap-1'>
               {t('IncomesPage.incomesTable.amountColLabel').toUpperCase()}
               <ArrowDownUp className='w-4 h-4' />
             </div>
           </TableHead>
-          <TableHead className='px-6 py-4 bg-background-secondary'>
+          <TableHead className='px-6 py-4 bg-background-normal'>
             {t('IncomesPage.incomesTable.currencyColLabel').toUpperCase()}
           </TableHead>
-          <TableHead className='px-6 py-4 bg-background-secondary'>
+          <TableHead className='px-6 py-4 bg-background-normal'>
             {t('IncomesPage.incomesTable.sourceColLabel').toUpperCase()}
           </TableHead>
-          <TableHead className='px-6 py-4 bg-background-secondary'>
+          <TableHead className='px-6 py-4 bg-background-normal'>
             {t('IncomesPage.incomesTable.commentColLabel').toUpperCase()}
           </TableHead>
-          <TableHead className='px-6 py-4 bg-background-secondary rounded-r-full' />
+          <TableHead className='px-6 py-4 bg-background-normal rounded-r-full' />
         </TableRow>
       </TableHeader>
       <TableBody>
         {[
           ...data,
-          ...Array.from({ length: itemsPerPage - data.length }, (_, i) => emptyRowData)
+          ...Array.from({ length: itemsPerPage - data.length }, () => emptyRowData)
         ].map(incomeItem => (
           <Fragment key={crypto.randomUUID()}>
             {incomeItem.id ? (
               <TableRow className='text-foreground bg-background hover:bg-background-neutral'>
-                <TableCell className='px-6 py-3 border-l border-t border-b border-background-neutral rounded-l-full'>
+                <TableCell className='px-6 py-2 border-l border-t border-b border-background-neutral rounded-l-full'>
                   {format(incomeItem.date, 'dd.MM.yyyy')}
                 </TableCell>
-                <TableCell className='px-6 py-3 border-t border-b border-background-neutral'>
+                <TableCell className='px-6 py-2 border-t border-b border-background-neutral'>
                   {incomeItem.amount}
                 </TableCell>
-                <TableCell className='px-6 py-3 border-t border-b border-background-neutral'>
+                <TableCell className='px-6 py-2 border-t border-b border-background-neutral'>
                   {t(`General.currencies.${incomeItem.currency}`)}
                 </TableCell>
-                <TableCell className='px-6 py-3 border-t border-b border-background-neutral'>
+                <TableCell className='px-6 py-2 border-t border-b border-background-neutral'>
                   {t(`IncomesPage.income_sources.${incomeItem.source}`)}
                 </TableCell>
-                <TableCell className='px-6 py-3 border-t border-b border-background-neutral'>
+                <TableCell className='px-6 py-2 border-t border-b border-background-neutral'>
                   {incomeItem.comment || ''}
                 </TableCell>
-                <TableCell className='px-6 py-3 border-r border-t border-b border-background-neutral rounded-r-full'>
+                <TableCell className='px-6 py-2 border-r border-t border-b border-background-neutral rounded-r-full'>
                   <TableRowActionsMenu 
                     actionId={incomeItem.id}
                     updateBtnLabel='Update'
@@ -187,12 +187,12 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
               </TableRow>
             ) : (
               <TableRow>
-                <TableCell className='py-6' />
-                <TableCell className='py-6' />
-                <TableCell className='py-6' />
-                <TableCell className='py-6' />
-                <TableCell className='py-6' />
-                <TableCell className='py-6' />
+                <TableCell className='py-5' />
+                <TableCell className='py-5' />
+                <TableCell className='py-5' />
+                <TableCell className='py-5' />
+                <TableCell className='py-5' />
+                <TableCell className='py-5' />
               </TableRow>
             )}
           </Fragment>
@@ -201,12 +201,12 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
       <TableFooter className='w-full'>
         <TableRow>
           <TableCell colSpan={6} className='border border-background-neutral rounded-full'>
-            <div className='px-3 py-5 w-full flex justify-between items-center'>
+            <div className='p-3 w-full flex justify-between items-center'>
               <Select onValueChange={handleSetItemsPerPage}>
                 <SelectTrigger className='p-3 w-fit rounded-full'>
                   {t(`General.itemsPerPage.${itemsPerPage}`)}
                 </SelectTrigger>
-                <SelectContent className='w-fit bg-background-secondary'>
+                <SelectContent className='w-fit bg-background'>
                   {ITEMS_PER_PAGE.map(({ value, label }) => (
                     <SelectItem key={crypto.randomUUID()} value={value}>
                       {t(label)}

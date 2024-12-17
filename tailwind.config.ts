@@ -14,6 +14,7 @@ const config: Config = {
   			background: 'hsl(var(--background))',
 				'background-secondary': 'hsl(var(--background-secondary))',
 				'background-neutral': 'hsl(var(--background-neutral))',
+				'background-normal': 'hsl(var(--background-normal))',
   			foreground: 'hsl(var(--foreground))',
 				primary: {
 					'9': 'hsl(var(--primary-9))',
