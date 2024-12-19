@@ -242,7 +242,10 @@
         "dateFromLabel": "Period from",
         "dateToLabel": "Period to",
         "submitBtnLabel": "OK",
-        "cancelBtnLabel": "Clear period"
+        "cancelBtnLabel": "Clear period",
+        "noFiltersMessage": "All time",
+        "noDateFromMessage": "From beginning",
+        "noDateToMessage": "Now"
       },
       "general": {
         "title": "Filters",

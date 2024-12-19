@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
-import { utapi, utFile } from './uploadthing/utapi';
+import { format } from 'date-fns';
+
 
 export const saltAndHashPassword = (password: any) => {
   const saltRounds = 10;
@@ -26,4 +27,32 @@ export const removeFalseyFields = (obj: any) => {
   return Object.fromEntries(
       Object.entries(obj).filter(([_, value]) => Boolean(value))
   );
+};
+
+export const formatDateFilterValues = ({ 
+  from, 
+  to, 
+  noDateFromMessage, 
+  noDateToMessage, 
+  noDataMessage 
+}: { 
+  from?: string | null; 
+  to?: string | null; 
+  noDateFromMessage: string;
+  noDateToMessage: string;
+  noDataMessage: string;
+}) => {
+  if(!from && !to) {
+    return noDataMessage;
+  }
+
+  if(from && !to) {
+    return `${format(new Date(from)!, 'dd.MM.yyyy')} - ${noDateToMessage}`;
+  }
+
+  if(!from && to) {
+    return `${noDateFromMessage} - ${format(new Date(to)!, 'dd.MM.yyyy')}`;
+  }
+
+  return `${from ? format(new Date(from)!, 'dd.MM.yyyy') : ''} - ${to ? format(new Date(to)!, 'dd.MM.yyyy') : ''}`;
 };

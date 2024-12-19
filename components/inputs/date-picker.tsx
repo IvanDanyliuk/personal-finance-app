@@ -28,10 +28,13 @@ export const DatePicker: React.FC<CalendarProps> = (props) => {
           }
         </Button>
       </PopoverTrigger>
-      <PopoverContent className='w-auto p-0'>
+      <PopoverContent onClick={(e) => {
+        e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation();
+      }} className='w-auto p-0 z-50'>
         <Calendar
           {...props}
-          className='bg-white'
+          className='bg-white z-50'
         />
       </PopoverContent>
     </Popover>

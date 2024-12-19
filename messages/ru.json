@@ -242,7 +242,10 @@
         "dateFromLabel": "Период с",
         "dateToLabel": "Период до",
         "submitBtnLabel": "OK",
-        "cancelBtnLabel": "Очистить период"
+        "cancelBtnLabel": "Очистить период",
+        "noFiltersMessage": "За все время",
+        "noDateFromMessage": "С начала",
+        "noDateToMessage": "Сейчас"
       },
       "general": {
         "title": "Фильтры",
