@@ -28,7 +28,6 @@ export const DateFilters: React.FC = () => {
   const {
     control,
     handleSubmit,
-    formState: { errors },
     setValue
   } = useForm({
     resolver: zodResolver(incomesFilteringByDateSchema),
