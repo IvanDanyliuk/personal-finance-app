@@ -37,15 +37,23 @@ export const getIncomes = async ({
     const sortQuery = sortBy && order ? { [sortBy]: order } : { createdAt: order }
 
     const filterData = removeFalseyFields({
-      amountFrom,
-      amountTo,
-      dateFrom,
-      dateTo,
-      source,
-      currency
+      amount: amountFrom && !amountTo 
+        ? { gte: +amountFrom } 
+        : !amountFrom && amountTo 
+          ? { lte: +amountTo } 
+          : amountFrom && amountTo 
+            ? { gte: +amountFrom, lte: +amountTo } 
+            : null,
+      date: dateFrom && !dateTo 
+        ? { gte: new Date(dateFrom) } 
+        : !dateFrom && dateTo 
+          ? { lte: new Date(dateTo) } 
+          : dateFrom && dateTo 
+            ? { gte: new Date(dateFrom), lte: new Date(dateTo) } 
+            : null,
+      source: source ? { in: source.split(';') } : null,
+      currency: currency ? { in: currency.split(';') } : null,
     });
-
-    console.log('GET INCOMES', { sortQuery, filterData })
 
     if(!session) {
       throw new Error('IncomesPage.errors.wrongUserId');
@@ -53,13 +61,19 @@ export const getIncomes = async ({
 
     const data = await db.income.findMany({ 
       where: { 
-        userId: session.user!.id! 
+        userId: session.user!.id!,
+        ...filterData
       }, 
       orderBy: sortQuery,
       skip: (+page - 1) * +items, 
       take: +items 
     });
-    const count = await db.income.count({ where: { userId: session.user!.id! } });
+    const count = await db.income.count({ 
+      where: { 
+        userId: session.user!.id!, 
+        ...filterData 
+      } 
+    });
 
     return {
       status: ActionStatus.Success,
@@ -75,7 +89,7 @@ export const getIncomes = async ({
       error: error.message,
     };
   }
-}
+};
 
 export const createIncome = async (formData: FormData) => {
   try {

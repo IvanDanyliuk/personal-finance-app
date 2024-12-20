@@ -53,10 +53,12 @@ export const MainFilters: React.FC = () => {
     const amountFrom = params.get('amountFrom');
     const amountTo = params.get('amountTo');
     const source = params.get('source');
+    const currency = params.get('currency');
 
     if(amountFrom) params.delete('amountFrom');
     if(amountTo) params.delete('amountTo');
     if(source) params.delete('source');
+    if(currency) params.delete('currency');
 
     replace(`${pathname}?${params.toString()}`);
     setRestFiltersOpen(false);
@@ -130,7 +132,11 @@ export const MainFilters: React.FC = () => {
                                 : value?.filter((v) => v !== option.value);
                               onChange(newValue);
                               if(newValue) {
-                                params.set('source', newValue?.join(';'))
+                                if(newValue.length === 0) {
+                                  params.delete('source');
+                                } else {
+                                  params.set('source', newValue?.join(';'));
+                                }
                                 replace(`${pathname}?${params.toString()}`);
                               }
                             }}
@@ -172,7 +178,11 @@ export const MainFilters: React.FC = () => {
                                 : value?.filter((v) => v !== currency.value);
                               onChange(newValue);
                               if(newValue) {
-                                params.set('currency', newValue?.join(';'))
+                                if(newValue.length === 0) {
+                                  params.delete('currency');
+                                } else {
+                                  params.set('currency', newValue?.join(';'));
+                                }
                                 replace(`${pathname}?${params.toString()}`);
                               }
                             }}
