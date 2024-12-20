@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
-import { INCOME_SOURCES } from '@/lib/constants';
+import { CURRENCIES, INCOME_SOURCES } from '@/lib/constants';
 import { IncomesGeneralFiltersSchema, incomesGeneralFiltersSchema } from '@/lib/types/form-schemas/incomes';
 import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
@@ -34,7 +34,8 @@ export const MainFilters: React.FC = () => {
     defaultValues: {
       amountFrom: undefined,
       amountTo: undefined,
-      source: params.get('source') ? params.get('source')?.split(';') : []
+      source: params.get('source') ? params.get('source')?.split(';') : [],
+      currency: params.get('currency') ? params.get('currency')?.split(';') : [],
     }
   });
 
@@ -140,6 +141,48 @@ export const MainFilters: React.FC = () => {
                             className={cn('text-sm font-medium text-gray-900')}
                           >
                             {t(option.label)}
+                          </Label>
+                        </li>
+                      ))}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>  
+            )}
+          />
+          <Controller 
+            name='currency'
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <Accordion type='single' collapsible>
+                <AccordionItem value='income_sources' className='w-full border-none'>
+                  <AccordionTrigger className='px-5 border broder-secondary-3 rounded-full'>
+                    {t('IncomesPage.filters.general.selectCurrencyTriggerBtn')}
+                  </AccordionTrigger>
+                  <AccordionContent className='px-5 py-3'>
+                    <ul className='space-y-4'>
+                      {CURRENCIES.map(currency => (
+                        <li key={crypto.randomUUID()} className='flex items-center gap-2'>
+                          <Checkbox
+                            id={currency.value}
+                            checked={value?.includes(currency.value)}
+                            onCheckedChange={(isChecked: boolean) => {
+                              const newValue = isChecked
+                                ? [...(value || []), currency.value]
+                                : value?.filter((v) => v !== currency.value);
+                              onChange(newValue);
+                              if(newValue) {
+                                params.set('currency', newValue?.join(';'))
+                                replace(`${pathname}?${params.toString()}`);
+                              }
+                            }}
+                            className='w-5 h-5 bg-primary-6 text-white'
+                          />
+                          <Label
+                            htmlFor={currency.value}
+                            className={cn('text-sm font-medium text-gray-900')}
+                          >
+                            {t(currency.label)}
                           </Label>
                         </li>
                       ))}

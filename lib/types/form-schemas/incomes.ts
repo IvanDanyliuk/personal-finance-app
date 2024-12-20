@@ -19,6 +19,7 @@ export const incomesGeneralFiltersSchema = zod.object({
   amountFrom: zod.number().nullable().optional(),
   amountTo: zod.number().nullable().optional(),
   source: zod.array(zod.string().nullable()).optional(),
+  currency: zod.array(zod.string().nullable()).optional(),
 });
 
 export type IncomeSchema = zod.infer<typeof incomeSchema>;

@@ -252,6 +252,7 @@
         "amountFrom": "Сумма с",
         "amountTo": "Сумма до",
         "selectSourceTriggerBtn": "Выберите источники дохода",
+        "selectCurrencyTriggerBtn": "Выберите валюту",
         "submitBtnLabel": "OK",
         "cancelBtnLabel": "Очистить фильтры"
       }

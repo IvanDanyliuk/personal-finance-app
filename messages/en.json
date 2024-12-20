@@ -252,6 +252,7 @@
         "amountFrom": "Amount from",
         "amountTo": "Amount to",
         "selectSourceTriggerBtn": "Select income sources",
+        "selectCurencyTriggerBtn": "Select currency",
         "submitBtnLabel": "OK",
         "cancelBtnLabel": "Clear filters"
       }

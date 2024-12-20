@@ -11,18 +11,30 @@ export default async function IncomesPage({ searchParams: {
   page = '1', 
   items = '10', 
   sortBy, 
-  order 
+  order,
+  dateFrom,
+  dateTo,
+  amountFrom,
+  amountTo,
+  source,
+  currency 
 } }: {
   searchParams: {
     page: string;
     items: string;
     sortBy: string;
     order: string;
+    dateFrom: string;
+    dateTo: string;
+    amountFrom: string;
+    amountTo: string;
+    source: string;
+    currency: string;
   }
 }) {
   const t = await getTranslations();
   const additionalParams = removeFalseyFields({
-    sortBy, order
+    sortBy, order, dateFrom, dateTo, amountFrom, amountTo, source, currency
   });
   const incomes = await getIncomes({ page, items, ...additionalParams });
 
