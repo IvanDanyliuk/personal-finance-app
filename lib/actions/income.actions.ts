@@ -1,11 +1,11 @@
 'use server';
 
-import { auth } from "@/auth";
-import { ActionStatus, SortOrder } from "../types/common.types";
-import { incomeSchema } from "../types/form-schemas/incomes";
-import { db } from "@/db";
-import { revalidatePath } from "next/cache";
-import { removeFalseyFields } from "../helpers";
+import { auth } from '@/auth';
+import { ActionStatus, SortOrder } from '../types/common.types';
+import { incomeSchema } from '../types/form-schemas/incomes';
+import { db } from '@/db';
+import { revalidatePath } from 'next/cache';
+import { removeFalseyFields } from '../helpers';
 
 
 export const getIncomes = async ({ 
@@ -135,9 +135,41 @@ export const createIncome = async (formData: FormData) => {
   }
 };
 
-export const updateIncome = async () => {
+export const updateIncome = async (formData: FormData) => {
   try {
-    console.log('UPDATE')
+    const session = await auth();
+
+    if(!session) {
+      throw new Error('IncomesPage.errors.wrongUserId');
+    }
+
+    const id = formData.get('id') as string;
+    const userId = formData.get('userId') as string;
+    const date = formData.get('date') as string;
+    const amount = formData.get('amount') as string;
+    const currency = formData.get('currency') as string;
+    const source = formData.get('source') as string;
+    const comment = formData.get('comment') as string;
+
+    const validatedFields = incomeSchema.safeParse({
+      userId, date: new Date(date), amount: +amount, currency, source, comment
+    });
+
+    if(!validatedFields.success) {
+      return {
+        status: ActionStatus.Failed,
+        fieldError: validatedFields.error.flatten().fieldErrors,
+      };
+    }
+
+    await db.income.update({ 
+      where: { id }, 
+      data: {
+        ...validatedFields.data
+      } 
+    });
+
+    revalidatePath('/incomes');
 
     return {
       status: ActionStatus.Success,

@@ -261,6 +261,7 @@
     },
     "actionMessages": {
       "createIncomeSuccess": "Новая статья дохода успешно создана!",
+      "updateIncomeSuccess": "Статья дохода успешно обновлена",
       "incomeDeleted": "Статья затрат успешно удалена"
     },
     "errors": {

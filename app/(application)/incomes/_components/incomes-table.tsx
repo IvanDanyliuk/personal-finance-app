@@ -3,6 +3,8 @@
 import { Fragment, useEffect, useState, useTransition } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { SubmitHandler } from 'react-hook-form';
+import { ArrowDownUp } from 'lucide-react';
 import { format } from 'date-fns';
 import {
   Table,
@@ -13,16 +15,28 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { 
+  Dialog, 
+  DialogContent, 
+  DialogDescription, 
+  DialogFooter, 
+  DialogHeader, 
+  DialogTitle 
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { 
+  Select, 
+  SelectContent, 
+  SelectItem, 
+  SelectTrigger 
+} from '@/components/ui/select';
+import { IncomeForm } from './';
 import { ActionStatus, SortOrder } from '@/lib/types/common.types';
 import { IncomeSchema } from '@/lib/types/form-schemas/incomes';
 import { TableRowActionsMenu } from '@/components/common';
 import { deleteIncome, updateIncome } from '@/lib/actions/income.actions';
 import { useToast } from '@/hooks/use-toast';
-import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select';
 import { ITEMS_PER_PAGE } from '@/lib/constants';
-import { ArrowDownUp } from 'lucide-react';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 
 interface IncomesData extends IncomeSchema {
@@ -35,6 +49,11 @@ interface IIncomesTable {
   count: number;
   error: string | null;
 };
+
+type RowActionData = {
+  type: 'update' | 'delete'; 
+  item: IncomesData;
+}
 
 const emptyRowData = {
   id: '',
@@ -59,7 +78,7 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
 
   const [isConfirmDialogOpen, setConfirmDialogOpen] = useState<boolean>(false);
-  const [selectedIncomeId, setSelectedIncomeId] = useState<string | null>(null);
+  const [rowActionData, setRowActionData] = useState<RowActionData | null>(null);
   const [pending, setTransition] = useTransition();
 
   const handleSetPrevPage = () => {
@@ -104,20 +123,55 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
     replace(`${pathname}?${params.toString()}`);
   };
 
-  const handleOpenDialog = (incomeId: string) => {
+  const handleOpenDialog = (type: 'update' | 'delete', itemId: string) => {
+    const item = data.find(incomeItem => incomeItem.id === itemId)!;
     setConfirmDialogOpen(true);
-    setSelectedIncomeId(incomeId);
+    setRowActionData({ type, item });
   };
 
-  const handleConfirmDeletingDialogClose = () => {
+  const handleDialogClose = () => {
     setConfirmDialogOpen(false);
-    setSelectedIncomeId(null)
+    setRowActionData(null)
   };
 
-  const handleSubmitDeleting = () => {
-    if(selectedIncomeId) {
+  const handleSubmitIncomeUpdate: SubmitHandler<IncomeSchema> = async (data) => {
+    if(rowActionData) {
+      const formData = new FormData();
+      formData.append('id', rowActionData.item.id)
+      formData.append('userId', data.userId);
+      formData.append('date', data.date.toISOString());
+      formData.append('amount', data.amount.toString() || '0');
+      formData.append('currency', data.currency);
+      formData.append('source', data.source);
+      formData.append('comment', data.comment || '');
+      
+      const { status, error } = await updateIncome(formData);
+
+      if(status === ActionStatus.Success) {
+        toast({
+          description: t(('IncomesPage.actionMessages.updateIncomeSuccess')),
+          variant: 'default',
+          className: 'bg-success-1 text-success-2'
+        });
+        setConfirmDialogOpen(false);
+        setRowActionData(null);
+      }
+
+      if(status === ActionStatus.Failed && error) {
+        toast({
+          title: t('errors.general'),
+          description: t(error),
+          variant: 'destructive',
+          className: 'bg-danger-1 text-danger-2'
+        });
+      }
+    }
+  };
+
+  const handleSubmitIncomeDelete = () => {
+    if(rowActionData) {
       setTransition(() => {
-        deleteIncome(selectedIncomeId).then(res => {
+        deleteIncome(rowActionData.item.id).then(res => {
           if(res.status === ActionStatus.Success) {
             setConfirmDialogOpen(false);
           }
@@ -126,7 +180,7 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
             variant: 'default',
             className: 'bg-success-1 text-success-2'
           });
-          setSelectedIncomeId(null);
+          setRowActionData(null);
         });
       });
     }
@@ -211,8 +265,8 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
                       <TableRowActionsMenu 
                         updateBtnLabel='Update'
                         deleteBtnLabel='Delete'
-                        onUpdate={() => {}}
-                        onDelete={() => handleOpenDialog(incomeItem.id)}
+                        onUpdate={() => handleOpenDialog('update', incomeItem.id)}
+                        onDelete={() => handleOpenDialog('delete', incomeItem.id)}
                       />
                   </TableCell>
                 </TableRow>
@@ -268,37 +322,51 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
           </TableRow>
         </TableFooter>
       </Table>
-      {selectedIncomeId && (
+      {rowActionData && (
         <Dialog 
           open={isConfirmDialogOpen} 
-          onOpenChange={handleConfirmDeletingDialogClose}
+          onOpenChange={handleDialogClose}
         >
           <DialogContent className='space-y-3'>
-            <DialogHeader className='px-6'>
-              <DialogTitle className='mb-3 text-center'>
-                {t('IncomesPage.incomesTable.confirmDeleteTitle')}
-              </DialogTitle>
-              <DialogDescription className='text-center'>
-                {t('IncomesPage.incomesTable.confirmDeleteMessage')}
-              </DialogDescription>
-            </DialogHeader>
-            <DialogFooter className='flex flex-row gap-3'>
-              <Button 
-                type='button' 
-                onClick={handleSubmitDeleting} 
-                disabled={pending || !selectedIncomeId} 
-                className='py-6 flex-1 rounded-full bg-danger-2 hover:bg-danger-1 text-white font-semibold'
-              >
-                {t('Layout.submitBtnLabel')}
-              </Button>
-              <Button 
-                type='button' 
-                onClick={handleConfirmDeletingDialogClose} 
-                className='py-6 flex-1 rounded-full bg-secondary-2 hover:bg-secondary-1 text-white font-semibold'
-              >
-                {t('Layout.cancelBtnLabel')}
-              </Button>
-            </DialogFooter>
+            {rowActionData.type === 'update' ? (
+              <>
+                <DialogHeader>
+                  Update income
+                </DialogHeader>
+                <IncomeForm 
+                  incomeToUpdate={rowActionData.item} 
+                  action={handleSubmitIncomeUpdate} 
+                />
+              </>
+            ) : (
+              <>
+                <DialogHeader className='px-6'>
+                  <DialogTitle className='mb-3 text-center'>
+                    {t('IncomesPage.incomesTable.confirmDeleteTitle')}
+                  </DialogTitle>
+                  <DialogDescription className='text-center'>
+                    {t('IncomesPage.incomesTable.confirmDeleteMessage')}
+                  </DialogDescription>
+                </DialogHeader>
+                <DialogFooter className='flex flex-row gap-3'>
+                  <Button 
+                    type='button' 
+                    onClick={handleSubmitIncomeDelete} 
+                    disabled={pending || !rowActionData.item.id} 
+                    className='py-6 flex-1 rounded-full bg-danger-2 hover:bg-danger-1 text-white font-semibold'
+                  >
+                    {t('Layout.submitBtnLabel')}
+                  </Button>
+                  <Button 
+                    type='button' 
+                    onClick={handleDialogClose} 
+                    className='py-6 flex-1 rounded-full bg-secondary-2 hover:bg-secondary-1 text-white font-semibold'
+                  >
+                    {t('Layout.cancelBtnLabel')}
+                  </Button>
+                </DialogFooter>
+              </>
+            )}
           </DialogContent>
         </Dialog>
       )}

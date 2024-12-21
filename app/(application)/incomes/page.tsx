@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server';
-import { AddIncomeForm, IncomesTable } from './_components';
+import { CreateIncomeModal, IncomesTable } from './_components';
 import { getIncomes } from '@/lib/actions/income.actions';
 import NoDataPlaceholder from '@/public/images/investment.svg';
 import Image from 'next/image';
@@ -48,7 +48,7 @@ export default async function IncomesPage({ searchParams: {
           <IncomeFilters />
           <div className='flex items-center gap-3'>
             <div>Export to PDF</div>
-            <AddIncomeForm />
+            <CreateIncomeModal />
           </div>
         </div>
         {incomes.data.length > 0 ? (
@@ -69,7 +69,7 @@ export default async function IncomesPage({ searchParams: {
             <p className='text-lg'>
               {t('IncomesPage.noData')}
             </p>
-            <AddIncomeForm />
+            <CreateIncomeModal />
           </div>
         )}
       </div>

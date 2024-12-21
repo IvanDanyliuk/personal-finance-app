@@ -261,6 +261,7 @@
     },
     "actionMessages": {
       "createIncomeSuccess": "New income item successfully created",
+      "updateIncomeSuccess": "Income item successfully updated",
       "incomeDeleted": "Income item successfully deleted!"
     },
     "errors": {
