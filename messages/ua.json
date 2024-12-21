@@ -224,7 +224,9 @@
       "amountColLabel": "Сума",
       "currencyColLabel": "Валюта",
       "sourceColLabel": "Джерело коштів",
-      "commentColLabel": "Коментар"
+      "commentColLabel": "Коментар",
+      "confirmDeleteTitle": "Вивпевнені, що хочете видалити цю статтю витрат?",
+      "confirmDeleteMessage": "Відхилити цю дію буде неможливо відхилити"
     },
     "income_sources": {
       "cash": "Готівка",

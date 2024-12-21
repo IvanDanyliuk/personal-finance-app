@@ -224,7 +224,9 @@
       "amountColLabel": "Сумма",
       "currencyColLabel": "Валюта",
       "sourceColLabel": "Источник средств",
-      "commentColLabel": "Комментарий"
+      "commentColLabel": "Комментарий",
+      "confirmDeleteTitle": "Вы уверены, что хотите удалить данную статью затрат?",
+      "confirmDeleteMessage": "Отменить это действие будет невозможно"
     },
     "income_sources": {
       "cash": "Наличные средства",

@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState, useTransition } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { format } from 'date-fns';
@@ -22,6 +22,7 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select';
 import { ITEMS_PER_PAGE } from '@/lib/constants';
 import { ArrowDownUp } from 'lucide-react';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 
 interface IncomesData extends IncomeSchema {
@@ -56,6 +57,10 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
   
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
+
+  const [isConfirmDialogOpen, setConfirmDialogOpen] = useState<boolean>(false);
+  const [selectedIncomeId, setSelectedIncomeId] = useState<string | null>(null);
+  const [pending, setTransition] = useTransition();
 
   const handleSetPrevPage = () => {
     if(currentPage > 1) {
@@ -99,6 +104,34 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
     replace(`${pathname}?${params.toString()}`);
   };
 
+  const handleOpenDialog = (incomeId: string) => {
+    setConfirmDialogOpen(true);
+    setSelectedIncomeId(incomeId);
+  };
+
+  const handleConfirmDeletingDialogClose = () => {
+    setConfirmDialogOpen(false);
+    setSelectedIncomeId(null)
+  };
+
+  const handleSubmitDeleting = () => {
+    if(selectedIncomeId) {
+      setTransition(() => {
+        deleteIncome(selectedIncomeId).then(res => {
+          if(res.status === ActionStatus.Success) {
+            setConfirmDialogOpen(false);
+          }
+          toast({
+            description: t(('IncomesPage.actionMessages.incomeDeleted')),
+            variant: 'default',
+            className: 'bg-success-1 text-success-2'
+          });
+          setSelectedIncomeId(null);
+        });
+      });
+    }
+  };
+
   useEffect(() => {
     if(status === ActionStatus.Failed && error) {
       toast({
@@ -123,119 +156,152 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
   }, []);
 
   return (
-    <Table className='w-full border-separate border-spacing-y-3'>
-      <TableHeader>
-        <TableRow className='text-foreground border-none'>
-          <TableHead className='w-[100px] px-6 py-5 bg-background-normal rounded-l-full'>
-            <div onClick={() => handleDataSort('date')} className='cursor-pointer flex items-center gap-1'>
-              {t('IncomesPage.incomesTable.dateColLabel').toUpperCase()}
-              <ArrowDownUp className='w-4 h-4' />
-            </div>
-          </TableHead>
-          <TableHead className='px-6 py-4 bg-background-normal'>
-            <div onClick={() => handleDataSort('amount')} className='cursor-pointer flex items-center gap-1'>
-              {t('IncomesPage.incomesTable.amountColLabel').toUpperCase()}
-              <ArrowDownUp className='w-4 h-4' />
-            </div>
-          </TableHead>
-          <TableHead className='px-6 py-4 bg-background-normal'>
-            {t('IncomesPage.incomesTable.currencyColLabel').toUpperCase()}
-          </TableHead>
-          <TableHead className='px-6 py-4 bg-background-normal'>
-            {t('IncomesPage.incomesTable.sourceColLabel').toUpperCase()}
-          </TableHead>
-          <TableHead className='px-6 py-4 bg-background-normal'>
-            {t('IncomesPage.incomesTable.commentColLabel').toUpperCase()}
-          </TableHead>
-          <TableHead className='px-6 py-4 bg-background-normal rounded-r-full' />
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {[
-          ...data,
-          ...Array.from({ length: itemsPerPage - data.length }, () => emptyRowData)
-        ].map(incomeItem => (
-          <Fragment key={crypto.randomUUID()}>
-            {incomeItem.id ? (
-              <TableRow className='text-foreground bg-background hover:bg-background-neutral'>
-                <TableCell className='px-6 py-2 border-l border-t border-b border-background-neutral rounded-l-full'>
-                  {format(incomeItem.date, 'dd.MM.yyyy')}
-                </TableCell>
-                <TableCell className='px-6 py-2 border-t border-b border-background-neutral'>
-                  {incomeItem.amount}
-                </TableCell>
-                <TableCell className='px-6 py-2 border-t border-b border-background-neutral'>
-                  {t(`General.currencies.${incomeItem.currency}`)}
-                </TableCell>
-                <TableCell className='px-6 py-2 border-t border-b border-background-neutral'>
-                  {t(`IncomesPage.income_sources.${incomeItem.source}`)}
-                </TableCell>
-                <TableCell className='px-6 py-2 border-t border-b border-background-neutral'>
-                  {incomeItem.comment || ''}
-                </TableCell>
-                <TableCell className='px-6 py-2 border-r border-t border-b border-background-neutral rounded-r-full'>
-                  <TableRowActionsMenu 
-                    actionId={incomeItem.id}
-                    updateBtnLabel='Update'
-                    deleteBtnLabel='Delete'
-                    confirmDeleteTitle='Are you sure you want to delete this income item?'
-                    confirmDeleteMessage='It will be impossible to undo this action.'
-                    updateAction={updateIncome}
-                    deleteAction={deleteIncome}
-                  />
-                </TableCell>
-              </TableRow>
-            ) : (
-              <TableRow>
-                <TableCell className='py-5' />
-                <TableCell className='py-5' />
-                <TableCell className='py-5' />
-                <TableCell className='py-5' />
-                <TableCell className='py-5' />
-                <TableCell className='py-5' />
-              </TableRow>
-            )}
-          </Fragment>
-        ))}
-      </TableBody>
-      <TableFooter className='w-full'>
-        <TableRow>
-          <TableCell colSpan={6} className='border border-background-neutral rounded-full'>
-            <div className='p-3 w-full flex justify-between items-center'>
-              <Select onValueChange={handleSetItemsPerPage}>
-                <SelectTrigger className='p-3 w-fit rounded-full'>
-                  {t(`General.itemsPerPage.${itemsPerPage}`)}
-                </SelectTrigger>
-                <SelectContent className='w-fit bg-background'>
-                  {ITEMS_PER_PAGE.map(({ value, label }) => (
-                    <SelectItem key={crypto.randomUUID()} value={value}>
-                      {t(label)}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <div className='flex gap-3'>
-                <Button 
-                  type='button' 
-                  disabled={currentPage <= 1} 
-                  onClick={handleSetPrevPage}
-                  className='min-w-36 bg-primary-7 text-white border-none rounded-full'
-                >
-                  {t('Layout.tableNavButtons.prev')}
-                </Button>
-                <Button 
-                  type='button' 
-                  disabled={currentPage * itemsPerPage >= count} 
-                  onClick={handleSetNextPage}
-                  className='min-w-36 bg-primary-7 text-white border-none rounded-full'
-                >
-                  {t('Layout.tableNavButtons.next')}
-                </Button>
+    <>
+      <Table className='w-full border-separate border-spacing-y-3'>
+        <TableHeader>
+          <TableRow className='text-foreground border-none'>
+            <TableHead className='w-[100px] px-6 py-5 bg-background-normal rounded-l-full'>
+              <div onClick={() => handleDataSort('date')} className='cursor-pointer flex items-center gap-1'>
+                {t('IncomesPage.incomesTable.dateColLabel').toUpperCase()}
+                <ArrowDownUp className='w-4 h-4' />
               </div>
-            </div>
-          </TableCell>
-        </TableRow>
-      </TableFooter>
-    </Table>
+            </TableHead>
+            <TableHead className='px-6 py-4 bg-background-normal'>
+              <div onClick={() => handleDataSort('amount')} className='cursor-pointer flex items-center gap-1'>
+                {t('IncomesPage.incomesTable.amountColLabel').toUpperCase()}
+                <ArrowDownUp className='w-4 h-4' />
+              </div>
+            </TableHead>
+            <TableHead className='px-6 py-4 bg-background-normal'>
+              {t('IncomesPage.incomesTable.currencyColLabel').toUpperCase()}
+            </TableHead>
+            <TableHead className='px-6 py-4 bg-background-normal'>
+              {t('IncomesPage.incomesTable.sourceColLabel').toUpperCase()}
+            </TableHead>
+            <TableHead className='px-6 py-4 bg-background-normal'>
+              {t('IncomesPage.incomesTable.commentColLabel').toUpperCase()}
+            </TableHead>
+            <TableHead className='px-6 py-4 bg-background-normal rounded-r-full' />
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {[
+            ...data,
+            ...Array.from({ length: itemsPerPage - data.length }, () => emptyRowData)
+          ].map(incomeItem => (
+            <Fragment key={crypto.randomUUID()}>
+              {incomeItem.id ? (
+                <TableRow className='text-foreground bg-background hover:bg-background-neutral'>
+                  <TableCell className='px-6 py-2 border-l border-t border-b border-background-neutral rounded-l-full'>
+                    {format(incomeItem.date, 'dd.MM.yyyy')}
+                  </TableCell>
+                  <TableCell className='px-6 py-2 border-t border-b border-background-neutral'>
+                    {incomeItem.amount}
+                  </TableCell>
+                  <TableCell className='px-6 py-2 border-t border-b border-background-neutral'>
+                    {t(`General.currencies.${incomeItem.currency}`)}
+                  </TableCell>
+                  <TableCell className='px-6 py-2 border-t border-b border-background-neutral'>
+                    {t(`IncomesPage.income_sources.${incomeItem.source}`)}
+                  </TableCell>
+                  <TableCell className='px-6 py-2 border-t border-b border-background-neutral'>
+                    {incomeItem.comment || ''}
+                  </TableCell>
+                    <TableCell className='px-6 py-2 border-r border-t border-b border-background-neutral rounded-r-full'>
+                      <TableRowActionsMenu 
+                        updateBtnLabel='Update'
+                        deleteBtnLabel='Delete'
+                        onUpdate={() => {}}
+                        onDelete={() => handleOpenDialog(incomeItem.id)}
+                      />
+                  </TableCell>
+                </TableRow>
+              ) : (
+                <TableRow>
+                  <TableCell className='py-5' />
+                  <TableCell className='py-5' />
+                  <TableCell className='py-5' />
+                  <TableCell className='py-5' />
+                  <TableCell className='py-5' />
+                  <TableCell className='py-5' />
+                </TableRow>
+              )}
+            </Fragment>
+          ))}
+        </TableBody>
+        <TableFooter className='w-full'>
+          <TableRow>
+            <TableCell colSpan={6} className='border border-background-neutral rounded-full'>
+              <div className='p-3 w-full flex justify-between items-center'>
+                <Select onValueChange={handleSetItemsPerPage}>
+                  <SelectTrigger className='p-3 w-fit rounded-full'>
+                    {t(`General.itemsPerPage.${itemsPerPage}`)}
+                  </SelectTrigger>
+                  <SelectContent className='w-fit bg-background'>
+                    {ITEMS_PER_PAGE.map(({ value, label }) => (
+                      <SelectItem key={crypto.randomUUID()} value={value}>
+                        {t(label)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <div className='flex gap-3'>
+                  <Button 
+                    type='button' 
+                    disabled={currentPage <= 1} 
+                    onClick={handleSetPrevPage}
+                    className='min-w-36 bg-primary-7 text-white border-none rounded-full'
+                  >
+                    {t('Layout.tableNavButtons.prev')}
+                  </Button>
+                  <Button 
+                    type='button' 
+                    disabled={currentPage * itemsPerPage >= count} 
+                    onClick={handleSetNextPage}
+                    className='min-w-36 bg-primary-7 text-white border-none rounded-full'
+                  >
+                    {t('Layout.tableNavButtons.next')}
+                  </Button>
+                </div>
+              </div>
+            </TableCell>
+          </TableRow>
+        </TableFooter>
+      </Table>
+      {selectedIncomeId && (
+        <Dialog 
+          open={isConfirmDialogOpen} 
+          onOpenChange={handleConfirmDeletingDialogClose}
+        >
+          <DialogContent className='space-y-3'>
+            <DialogHeader className='px-6'>
+              <DialogTitle className='mb-3 text-center'>
+                {t('IncomesPage.incomesTable.confirmDeleteTitle')}
+              </DialogTitle>
+              <DialogDescription className='text-center'>
+                {t('IncomesPage.incomesTable.confirmDeleteMessage')}
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter className='flex flex-row gap-3'>
+              <Button 
+                type='button' 
+                onClick={handleSubmitDeleting} 
+                disabled={pending || !selectedIncomeId} 
+                className='py-6 flex-1 rounded-full bg-danger-2 hover:bg-danger-1 text-white font-semibold'
+              >
+                {t('Layout.submitBtnLabel')}
+              </Button>
+              <Button 
+                type='button' 
+                onClick={handleConfirmDeletingDialogClose} 
+                className='py-6 flex-1 rounded-full bg-secondary-2 hover:bg-secondary-1 text-white font-semibold'
+              >
+                {t('Layout.cancelBtnLabel')}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
+    </>
   );
 };
