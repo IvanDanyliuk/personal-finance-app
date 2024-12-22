@@ -64,7 +64,7 @@ export const SignInForm = () => {
       />
       <TextField 
         name='password' 
-        label={t('signinPage.email')} 
+        label={t('signinPage.password')} 
         type='password'
         register={register} 
         error={errors['password']?.message} 

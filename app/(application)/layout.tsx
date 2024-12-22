@@ -10,9 +10,9 @@ export default function RootLayout({
     <div className='flex'>
       <Sidebar />
       <div className='w-full overflow-x-auto min-h-screen'>
-        <div className='overflow-auto h-full'>
+        <div className='h-screen'>
           <Header />
-          <main className='p-3 w-full min-h-[calc(100%-80px)]'>
+          <main className='p-3 w-full h-[calc(100%-80px)] overflow-y-scroll'>
             {children}
           </main>
         </div>

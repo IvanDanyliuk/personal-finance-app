@@ -24,6 +24,7 @@ interface ISelectField {
   variant?: 'vertical' | 'horizontal';
   onHandleChange?: any;
   defaultValue?: string;
+  placeholder?: string;
   disabled?: boolean;
   error?: string;
 }
@@ -36,6 +37,7 @@ export const SelectField: React.FC<ISelectField> = ({
   field, 
   variant = 'horizontal',
   onHandleChange,
+  placeholder, 
   disabled,
   error
 }) => {
@@ -60,12 +62,15 @@ export const SelectField: React.FC<ISelectField> = ({
         <Select 
           onValueChange={(value) => {
             field.onChange(value);
-            onHandleChange()
+            if(onHandleChange) onHandleChange();
           }} 
           value={field.value}
         >
-          <SelectTrigger disabled={disabled} className="w-[180px] px-6 py-6 rounded-full">
-            <SelectValue placeholder="Theme" />
+          <SelectTrigger disabled={disabled} className={cn(
+            variant === 'vertical' ? 'w-full' : 'w-fit',
+            'min-w-[190px] px-6 py-6 rounded-full'
+          )}>
+            <SelectValue placeholder={placeholder} />
           </SelectTrigger>
           <SelectContent className='bg-white'>
             {options.map(({ value, label }) => (

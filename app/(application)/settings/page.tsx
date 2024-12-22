@@ -76,7 +76,6 @@ export default async function SettingsPage() {
             <DeleteUser />
           </div>
         </div>
-        
       </div>
     </div>
   );

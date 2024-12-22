@@ -1,4 +1,4 @@
-import { UseFormRegister } from 'react-hook-form';
+import { ControllerRenderProps, UseFormRegister } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import { CircleAlert } from 'lucide-react';
 import { Label } from '../ui/label'
@@ -12,7 +12,8 @@ interface ITextField {
   type?: string;
   placeholder?: string;
   variant?: 'horizontal' | 'vertical';
-  register: UseFormRegister<any>;
+  register?: UseFormRegister<any>;
+  field?: ControllerRenderProps<any>,
   required?: boolean;
   disabled?: boolean;
   error?: string;
@@ -26,6 +27,7 @@ export const TextField: React.FC<ITextField> = ({
   placeholder,
   variant = 'vertical',
   register,
+  field,
   required,
   disabled,
   error
@@ -56,7 +58,8 @@ export const TextField: React.FC<ITextField> = ({
           required={required}
           disabled={disabled}
           className='w-full px-5 py-6 rounded-full'
-          {...register(name)}
+          {...(register ? register(name, { valueAsNumber: type === 'number' }) : field ? field : {})}
+          onChange={(value) => field?.onChange(type === 'number' ? value.target.valueAsNumber : value)}
         />
         <p className='mt-1 flex items-center gap-1 text-sm text-danger-2'>
           {error && (

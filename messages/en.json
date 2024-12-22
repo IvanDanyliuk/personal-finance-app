@@ -1,4 +1,32 @@
 {
+  "General": {
+    "currencies": {
+      "usd": "US Dollar",
+      "eur": "Euro",
+      "rub": "Ruble",
+      "uah": "Hryvnia",
+      "pln": "Zloty"
+    },
+    "weekDays": {
+      "sunday": "Sunday",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday"
+    },
+    "languages": {
+      "en": "English",
+      "ru": "Enemy",
+      "ua": "Ukrainian"
+    },
+    "itemsPerPage": {
+      "10": "10 items per page",
+      "15": "15 items per page",
+      "20": "20 items per page"
+    }
+  },
   "Auth": {
     "signinPage": {
       "title": "Sign In",
@@ -68,7 +96,11 @@
     },
     "logoutBtn": "Log out",
     "submitBtnLabel": "OK",
-    "cancelBtnLabel": "Cancel"
+    "cancelBtnLabel": "Cancel",
+    "tableNavButtons": {
+      "prev": "Previous",
+      "next": "Next"
+    }
   },
   "SettingsPage": {
     "title": "Settings",
@@ -106,32 +138,11 @@
       "title": "General settings",
       "weekStartDayLabel": "Week starts from",
       "currencyLabel": "Currency",
-      "submitBtnLabel": "Submit",
-      "currencies": {
-        "usd": "US Dollar",
-        "eur": "Euro",
-        "rub": "Ruble",
-        "uah": "Hryvnia",
-        "pln": "Zloty"
-      },
-      "weekDays": {
-        "sunday": "Sunday",
-        "monday": "Monday",
-        "tuesday": "Tuesday",
-        "wednesday": "Wednesday",
-        "thursday": "Thursday",
-        "friday": "Friday",
-        "saturday": "Saturday"
-      }
+      "submitBtnLabel": "Submit"
     },
     "manageProfileData": {
       "title": "Profile settings",
-      "languageLabel": "Language",
-      "languages": {
-        "en": "English",
-        "ru": "Enemy",
-        "ua": "Ukrainian"
-      }
+      "languageLabel": "Language"
     },
     "deleteUser": {
       "confirmationModal": {
@@ -190,6 +201,79 @@
       "deleteUser": {
         "deleteUserFailed": "Cannot update a user",
         "notMatchPassword": "Incorrect password"
+      }
+    }
+  },
+  "IncomesPage": {
+    "title": "Incomes",
+    "noData": "You haven't added any information about your incomes",
+    "createIncomeForm": {
+      "triggerBtnLabel": "Add",
+      "title": "Create a new income",
+      "dateFieldLabel": "Date",
+      "amountFieldLabel": "Amount",
+      "currencyFieldLabel": "Currency",
+      "currencyPlaceholder": "Currency",
+      "sourceFieldLabel": "Source",
+      "sourcePlaceholder": "Select a source",
+      "commentFieldLabel": "Comment",
+      "submitBtnLabel": "Add"
+    },
+    "incomesTable": {
+      "dateColLabel": "Date",
+      "amountColLabel": "Amount",
+      "currencyColLabel": "Currency",
+      "sourceColLabel": "Source",
+      "commentColLabel": "Comment",
+      "confirmDeleteTitle": "Are you sure you want to delete this income item?",
+      "confirmDeleteMessage": "It will be impossible to undo this action."
+    },
+    "income_sources": {
+      "cash": "Cash",
+      "investment": "Investment",
+      "salary": "Salary",
+      "pension": "Pension",
+      "money_transfer": "Money transfer",
+      "rent": "Rent",
+      "refund": "Refund",
+      "cashback": "Cashback"
+    },
+    "filters": {
+      "date": {
+        "title": "Choose a period",
+        "dateFromLabel": "Period from",
+        "dateToLabel": "Period to",
+        "submitBtnLabel": "OK",
+        "cancelBtnLabel": "Clear period",
+        "noFiltersMessage": "All time",
+        "noDateFromMessage": "From beginning",
+        "noDateToMessage": "Now"
+      },
+      "general": {
+        "title": "Filters",
+        "amountFrom": "Amount from",
+        "amountTo": "Amount to",
+        "selectSourceTriggerBtn": "Select income sources",
+        "selectCurencyTriggerBtn": "Select currency",
+        "submitBtnLabel": "OK",
+        "cancelBtnLabel": "Clear filters"
+      }
+    },
+    "actionMessages": {
+      "createIncomeSuccess": "New income item successfully created",
+      "updateIncomeSuccess": "Income item successfully updated",
+      "incomeDeleted": "Income item successfully deleted!"
+    },
+    "errors": {
+      "general": "Something went wrong!",
+      "wrongUserId": "You're not authenticated or your user ID is incorrect",
+      "createIncome": {
+        "createIncomeFailed": "Cannot create a new income item",
+        "fieldsValidation": {
+          "requiredAmount": "Amount is required",
+          "requiredCurrency": "Select a currency",
+          "requiredSource": "Select a source of money"
+        }
       }
     }
   }

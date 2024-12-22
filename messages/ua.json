@@ -1,4 +1,32 @@
 {
+  "General": {
+    "currencies": {
+      "usd": "Долар США",
+      "eur": "Євро",
+      "rub": "Рубль",
+      "uah": "Гривня",
+      "pln": "Злотий"
+    },
+    "weekDays": {
+      "sunday": "Неділя",
+      "monday": "Понеділок",
+      "tuesday": "Вівторок",
+      "wednesday": "Середа",
+      "thursday": "Четвер",
+      "friday": "П'ятниця",
+      "saturday": "Субота"
+    },
+    "languages": {
+      "en": "Англійська",
+      "ru": "Ворожа",
+      "ua": "Українська"
+    },
+    "itemsPerPage": {
+      "10": "10 од. на сторінці",
+      "15": "15 од. на сторінці",
+      "20": "20 од. на сторінці"
+    }
+  },
   "Auth": {
     "signinPage": {
       "title": "Увійти",
@@ -68,7 +96,11 @@
     },
     "logoutBtn": "Вийти",
     "submitBtnLabel": "OK",
-    "cancelBtnLabel": "Відхилити"
+    "cancelBtnLabel": "Відхилити",
+    "tableNavButtons": {
+      "prev": "Попередня",
+      "next": "Наступна"
+    }
   },
   "SettingsPage": {
     "title": "Налаштування",
@@ -106,32 +138,11 @@
       "title": "Загальні налаштування",
       "weekStartDayLabel": "Тиждень починається з",
       "currencyLabel": "Валюта",
-      "submitBtnLabel": "Підтвердити",
-      "currencies": {
-        "usd": "Долар США",
-        "eur": "Євро",
-        "rub": "Рубль",
-        "uah": "Гривня",
-        "pln": "Злотий"
-      },
-      "weekDays": {
-        "sunday": "Неділя",
-        "monday": "Понеділок",
-        "tuesday": "Вівторок",
-        "wednesday": "Середа",
-        "thursday": "Четвер",
-        "friday": "П'ятниця",
-        "saturday": "Субота"
-      }
+      "submitBtnLabel": "Підтвердити"
     },
     "manageProfileData": {
       "title": "Налаштування профілю",
-      "languageLabel": "Мова",
-      "languages": {
-        "en": "Англійська",
-        "ru": "Ворожа",
-        "ua": "Українська"
-      }
+      "languageLabel": "Мова"
     },
     "deleteUser": {
       "confirmationModal": {
@@ -190,6 +201,79 @@
       "deleteUser": {
         "deleteUserFailed": "Не вдалося видалити обліковий запис",
         "notMatchPassword": "Невірна адреса ел. пошти"
+      }
+    }
+  },
+  "IncomesPage": {
+    "title": "Доходи",
+    "noData": "Ви ще не додали ніякої інформації про Ваші доходи",
+    "createIncomeForm": {
+      "triggerBtnLabel": "Додати",
+      "title": "Створити статтю доходу",
+      "dateFieldLabel": "Дата",
+      "amountFieldLabel": "Сума",
+      "currencyFieldLabel": "Валюта",
+      "currencyPlaceholder": "Валюта",
+      "sourceFieldLabel": "Джерело коштів",
+      "sourcePlaceholder": "Оберіть джерело",
+      "commentFieldLabel": "Коментар",
+      "submitBtnLabel": "Додати"
+    },
+    "incomesTable": {
+      "dateColLabel": "Дата",
+      "amountColLabel": "Сума",
+      "currencyColLabel": "Валюта",
+      "sourceColLabel": "Джерело коштів",
+      "commentColLabel": "Коментар",
+      "confirmDeleteTitle": "Вивпевнені, що хочете видалити цю статтю витрат?",
+      "confirmDeleteMessage": "Відхилити цю дію буде неможливо відхилити"
+    },
+    "income_sources": {
+      "cash": "Готівка",
+      "investment": "Інвестиції",
+      "salary": "Зарплата",
+      "pension": "Пенсія і соц. виплати",
+      "money_transfer": "Грошовий переказ",
+      "rent": "Орендна плата",
+      "refund": "Відшкодування",
+      "cashback": "Кешбек"
+    },
+    "filters": {
+      "date": {
+        "title": "Оберіть період",
+        "dateFromLabel": "Період з",
+        "dateToLabel": "Період до",
+        "submitBtnLabel": "OK",
+        "cancelBtnLabel": "Очистити період",
+        "noFiltersMessage": "За весь час",
+        "noDateFromMessage": "З початку",
+        "noDateToMessage": "Зараз"
+      },
+      "general": {
+        "title": "Фільтри",
+        "amountFrom": "Сума з",
+        "amountTo": "Сума до",
+        "selectSourceTriggerBtn": "Оберіть джерела доходу",
+        "selectCurrencyTriggerBtn": "Оберіть валюту",
+        "submitBtnLabel": "OK",
+        "cancelBtnLabel": "Очистити фільтри"
+      }
+    },
+    "actionMessages": {
+      "createIncomeSuccess": "Нову статтю доходу успішно створено!",
+      "updateIncomeSuccess": "Статтю витрат успішно оновлено!",
+      "incomeDeleted": "Статтю витрат успішно видалено"
+    },
+    "errors": {
+      "general": "Щось пішло не так!",
+      "wrongUserId": "Ви не авторизовані або ID Вашого облікового запису некоректний",
+      "createIncome": {
+        "createIncomeFailed": "Не вдалось створити нову статтю",
+        "fieldsValidation": {
+          "requiredAmount": "Вкажіть суму",
+          "requiredCurrency": "Оберіть валюту",
+          "requiredSource": "Оберіть джерело коштів"
+        }
       }
     }
   }

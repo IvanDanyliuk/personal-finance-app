@@ -149,7 +149,17 @@ export const updateUserData = async (formData: FormData) => {
       }
 
       if(validatedFields.data.language) {
-        cookies().set('language', validatedFields.data.language);
+        cookies().set(
+          'language', 
+          validatedFields.data.language, 
+          {
+            path: '/',
+            httpOnly: false,
+            sameSite: 'strict',
+            secure: true,
+            maxAge: 60 * 60 * 24 * 30
+          }
+        );
       }
 
       return {
@@ -303,9 +313,7 @@ export const deleteUser = async (formData: FormData) => {
         await utapi.deleteFiles(imageToDeleteId!);
       }
     }
-
-    // await signOut();
-    // redirect('/sign-in');
+    
     return {
       status: ActionStatus.Success,
       error: null
