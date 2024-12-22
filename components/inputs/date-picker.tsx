@@ -4,16 +4,16 @@ import { CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { Calendar, CalendarProps } from '../ui/calendar';
-
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dropdown-menu';
 
 
 export const DatePicker: React.FC<CalendarProps> = (props) => {
   return (
-    <Popover>
-      <PopoverTrigger asChild>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
         <Button
+          type='button'
           variant={'outline'}
           className={cn(
             'w-full px-5 py-6 justify-start text-left font-normal rounded-full',
@@ -27,16 +27,13 @@ export const DatePicker: React.FC<CalendarProps> = (props) => {
               <span>Pick a date</span>
           }
         </Button>
-      </PopoverTrigger>
-      <PopoverContent onClick={(e) => {
-        e.stopPropagation();
-        e.nativeEvent.stopImmediatePropagation();
-      }} className='w-auto p-0 z-50'>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent onClick={(e) => e.stopPropagation()} className='w-auto p-0 bg-background z-50'>
         <Calendar
           {...props}
-          className='bg-white z-50'
+          className='bg-background'
         />
-      </PopoverContent>
-    </Popover>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };

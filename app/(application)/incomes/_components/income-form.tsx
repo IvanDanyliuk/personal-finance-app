@@ -29,7 +29,7 @@ export const IncomeForm: React.FC<IIncomeForm> = ({ incomeToUpdate, action }) =>
     currency: '',
     source: '', 
     comment: ''
-  }
+  };
 
   const form = useForm<IncomeSchema>({
     resolver: zodResolver(incomeSchema),
@@ -58,6 +58,7 @@ export const IncomeForm: React.FC<IIncomeForm> = ({ incomeToUpdate, action }) =>
               selected={field.value}
               onSelect={field.onChange}
               initialFocus
+              className='z-[1000]'
             />
           )}
         />

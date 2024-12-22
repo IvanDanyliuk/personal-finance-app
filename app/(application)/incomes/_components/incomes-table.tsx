@@ -53,7 +53,7 @@ interface IIncomesTable {
 type RowActionData = {
   type: 'update' | 'delete'; 
   item: IncomesData;
-}
+};
 
 const emptyRowData = {
   id: '',
