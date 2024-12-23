@@ -30,7 +30,7 @@ import {
   SelectItem, 
   SelectTrigger 
 } from '@/components/ui/select';
-import { IncomeForm } from './';
+import { IncomeForm } from '../../app/(application)/incomes/_components';
 import { ActionStatus, ColType, SortOrder } from '@/lib/types/common.types';
 import { IncomeSchema } from '@/lib/types/form-schemas/incomes';
 import { TableRowActionsMenu } from '@/components/common';
@@ -43,7 +43,7 @@ interface IncomesData extends IncomeSchema {
   id: string;
 };
 
-interface IIncomesTable {
+interface IDataTable {
   status: ActionStatus;
   columns: ColType[];
   data: IncomesData[];
@@ -69,7 +69,7 @@ const emptyRowData = {
 };
 
 
-export const IncomesTable: React.FC<IIncomesTable> = ({ 
+export const DataTable: React.FC<IDataTable> = ({ 
   status, 
   columns, 
   data, 
@@ -135,7 +135,7 @@ export const IncomesTable: React.FC<IIncomesTable> = ({
   };
 
   const handleOpenDialog = (type: 'update' | 'delete', itemId: string) => {
-    const item = data.find(incomeItem => incomeItem.id === itemId)!;
+    const item = data.find(dataItem => dataItem.id === itemId)!;
     setConfirmDialogOpen(true);
     setRowActionData({ type, item });
   };
@@ -145,7 +145,7 @@ export const IncomesTable: React.FC<IIncomesTable> = ({
     setRowActionData(null)
   };
 
-  const handleSubmitIncomeUpdate: SubmitHandler<IncomesData> = async (data) => {
+  const handleSubmitUpdate: SubmitHandler<IncomesData> = async (data) => {
     if(rowActionData) {
       const formData = new FormData();
       formData.append('id', rowActionData.item.id)
@@ -181,7 +181,7 @@ export const IncomesTable: React.FC<IIncomesTable> = ({
     }
   };
 
-  const handleSubmitIncomeDelete = () => {
+  const handleSubmitDelete = () => {
     if(rowActionData) {
       setTransition(() => {
         deleteAction(rowActionData.item.id).then(res => {
@@ -253,9 +253,9 @@ export const IncomesTable: React.FC<IIncomesTable> = ({
           {[
             ...data,
             ...Array.from({ length: itemsPerPage - data.length }, () => emptyRowData)
-          ].map((incomeItem: any) => (
+          ].map((dataItem: any) => (
             <Fragment key={crypto.randomUUID()}>
-              {incomeItem.id ? (
+              {dataItem.id ? (
                 <TableRow className='text-foreground bg-background hover:bg-background-neutral'>
                   {columns.map((item, i) => (
                     <TableCell 
@@ -266,10 +266,10 @@ export const IncomesTable: React.FC<IIncomesTable> = ({
                       )}
                     >
                       {item.name === 'date' 
-                        ? format(incomeItem.date, 'dd.MM.yyyy') 
+                        ? format(dataItem.date, 'dd.MM.yyyy') 
                         : item.name === 'amount' || item.name === 'comment'
-                          ? incomeItem[item.name]
-                          : t(`${item.value}.${incomeItem[item.name]}`)
+                          ? dataItem[item.name]
+                          : t(`${item.value}.${dataItem[item.name]}`)
                       }
                     </TableCell>
                   ))}
@@ -277,8 +277,8 @@ export const IncomesTable: React.FC<IIncomesTable> = ({
                     <TableRowActionsMenu 
                       updateBtnLabel='Update'
                       deleteBtnLabel='Delete'
-                      onUpdate={() => handleOpenDialog('update', incomeItem.id)}
-                      onDelete={() => handleOpenDialog('delete', incomeItem.id)}
+                      onUpdate={() => handleOpenDialog('update', dataItem.id)}
+                      onDelete={() => handleOpenDialog('delete', dataItem.id)}
                     />
                   </TableCell>
                 </TableRow>
@@ -350,7 +350,7 @@ export const IncomesTable: React.FC<IIncomesTable> = ({
                 </DialogHeader>
                 <IncomeForm 
                   incomeToUpdate={rowActionData.item} 
-                  action={handleSubmitIncomeUpdate} 
+                  action={handleSubmitUpdate} 
                 />
               </>
             ) : (
@@ -366,7 +366,7 @@ export const IncomesTable: React.FC<IIncomesTable> = ({
                 <DialogFooter className='flex flex-row gap-3'>
                   <Button 
                     type='button' 
-                    onClick={handleSubmitIncomeDelete} 
+                    onClick={handleSubmitDelete} 
                     disabled={pending || !rowActionData.item.id} 
                     className='py-6 flex-1 rounded-full bg-danger-2 hover:bg-danger-1 text-white font-semibold'
                   >

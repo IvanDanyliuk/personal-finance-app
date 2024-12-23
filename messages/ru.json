@@ -276,5 +276,21 @@
         }
       }
     }
+  },
+  "ExpensesPage": {
+    "errors": {
+      "general": "Что-то пошло не так!",
+      "wrongUserId": "Вы не авторзованы или ID Вашего профиля неверный",
+      "createExpense": {
+        "createExpenseFailed": "Не удалось создать новую статью затрат",
+        "fieldsValidation": {
+          "requiredAmount": "Укажите сумму",
+          "requiredCurrency": "Выберите валюту",
+          "requiredDestination": "Выберите назначение транзакции",
+          "requiredPaymentMethod": "Выберите способ оплаты",
+          "requiredCategory": "Выберите категорию"
+        }
+      }
+    }
   }
 }

@@ -268,11 +268,27 @@
       "general": "Щось пішло не так!",
       "wrongUserId": "Ви не авторизовані або ID Вашого облікового запису некоректний",
       "createIncome": {
-        "createIncomeFailed": "Не вдалось створити нову статтю",
+        "createIncomeFailed": "Не вдалось створити нову статтю доходу",
         "fieldsValidation": {
           "requiredAmount": "Вкажіть суму",
           "requiredCurrency": "Оберіть валюту",
           "requiredSource": "Оберіть джерело коштів"
+        }
+      }
+    }
+  },
+  "ExpensesPage": {
+    "errors": {
+      "general": "Щось пішло не так!",
+      "wrongUserId": "Ви не авторизовані або ID Вашого облікового запису некоректний",
+      "createExpense": {
+        "createExpenseFailed": "Не вдалось створити нову статтю витрат",
+        "fieldsValidation": {
+          "requiredAmount": "Вкажіть суму",
+          "requiredCurrency": "Оберіть валюту",
+          "requiredDestination": "Оберіть призначення транзакції",
+          "requiredPaymentMethod": "Оберіть спосіб оплати",
+          "requiredCategory": "Оберіть категорію"
         }
       }
     }

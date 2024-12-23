@@ -1,11 +1,12 @@
 import { getTranslations } from 'next-intl/server';
-import { CreateIncomeModal, IncomesTable } from './_components';
+import { CreateIncomeModal } from './_components';
 import { deleteIncome, getIncomes, updateIncome } from '@/lib/actions/income.actions';
 import NoDataPlaceholder from '@/public/images/investment.svg';
 import Image from 'next/image';
 import { removeFalseyFields } from '@/lib/helpers';
 import { IncomeFilters } from './_components/income-filters';
 import { ColType } from '@/lib/types/common.types';
+import { DataTable } from '@/components/data-rendering';
 
 
 const columns: ColType[] = [
@@ -87,7 +88,7 @@ export default async function IncomesPage({ searchParams: {
           </div>
         </div>
         {incomes.data.length > 0 ? (
-          <IncomesTable 
+          <DataTable 
             status={incomes.status} 
             columns={columns}
             data={incomes.data} 
