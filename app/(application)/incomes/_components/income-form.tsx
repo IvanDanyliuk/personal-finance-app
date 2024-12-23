@@ -11,10 +11,13 @@ import { Label } from '@/components/ui/label';
 import { CURRENCIES, INCOME_SOURCES } from '@/lib/constants';
 import { incomeSchema, IncomeSchema } from '@/lib/types/form-schemas/incomes';
 
+interface IIncomeData extends IncomeSchema {
+  id: string;
+}
 
 interface IIncomeForm {
   incomeToUpdate?: IncomeSchema;
-  action: SubmitHandler<IncomeSchema>;
+  action: SubmitHandler<IIncomeData>;
 };
 
 
@@ -31,7 +34,7 @@ export const IncomeForm: React.FC<IIncomeForm> = ({ incomeToUpdate, action }) =>
     comment: ''
   };
 
-  const form = useForm<IncomeSchema>({
+  const form = useForm<IIncomeData>({
     resolver: zodResolver(incomeSchema),
     defaultValues,
   });

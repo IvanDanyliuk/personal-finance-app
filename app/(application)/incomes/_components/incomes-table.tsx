@@ -31,12 +31,12 @@ import {
   SelectTrigger 
 } from '@/components/ui/select';
 import { IncomeForm } from './';
-import { ActionStatus, SortOrder } from '@/lib/types/common.types';
+import { ActionStatus, ColType, SortOrder } from '@/lib/types/common.types';
 import { IncomeSchema } from '@/lib/types/form-schemas/incomes';
 import { TableRowActionsMenu } from '@/components/common';
-import { deleteIncome, updateIncome } from '@/lib/actions/income.actions';
 import { useToast } from '@/hooks/use-toast';
 import { ITEMS_PER_PAGE } from '@/lib/constants';
+import { cn } from '@/lib/utils';
 
 
 interface IncomesData extends IncomeSchema {
@@ -45,8 +45,11 @@ interface IncomesData extends IncomeSchema {
 
 interface IIncomesTable {
   status: ActionStatus;
+  columns: ColType[];
   data: IncomesData[];
   count: number;
+  updateAction: (formData: FormData) => Promise<any>;
+  deleteAction: (id: string) => Promise<any>;
   error: string | null;
 };
 
@@ -66,14 +69,22 @@ const emptyRowData = {
 };
 
 
-export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, error }) => {
+export const IncomesTable: React.FC<IIncomesTable> = ({ 
+  status, 
+  columns, 
+  data, 
+  count, 
+  updateAction, 
+  deleteAction, 
+  error 
+}) => {
   const t = useTranslations();
   const { toast } = useToast();
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
   const params = new URLSearchParams(searchParams);
-  
+
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
 
@@ -83,7 +94,7 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
 
   const handleSetPrevPage = () => {
     if(currentPage > 1) {
-      setCurrentPage(currentPage -1);
+      setCurrentPage(currentPage - 1);
       params.set('page', `${currentPage - 1}`);
       replace(`${pathname}?${params.toString()}`);
     }
@@ -134,18 +145,20 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
     setRowActionData(null)
   };
 
-  const handleSubmitIncomeUpdate: SubmitHandler<IncomeSchema> = async (data) => {
+  const handleSubmitIncomeUpdate: SubmitHandler<IncomesData> = async (data) => {
     if(rowActionData) {
       const formData = new FormData();
       formData.append('id', rowActionData.item.id)
       formData.append('userId', data.userId);
-      formData.append('date', data.date.toISOString());
-      formData.append('amount', data.amount.toString() || '0');
-      formData.append('currency', data.currency);
-      formData.append('source', data.source);
-      formData.append('comment', data.comment || '');
+      columns.forEach((col) => {
+        formData.append(
+          col.name, 
+          col.name === 'date'
+            ? data[col.name].toISOString() 
+            : `${data[col.name as keyof IncomeSchema]}`)
+      });
       
-      const { status, error } = await updateIncome(formData);
+      const { status, error } = await updateAction(formData);
 
       if(status === ActionStatus.Success) {
         toast({
@@ -171,7 +184,7 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
   const handleSubmitIncomeDelete = () => {
     if(rowActionData) {
       setTransition(() => {
-        deleteIncome(rowActionData.item.id).then(res => {
+        deleteAction(rowActionData.item.id).then(res => {
           if(res.status === ActionStatus.Success) {
             setConfirmDialogOpen(false);
           }
@@ -214,27 +227,25 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
       <Table className='w-full border-separate border-spacing-y-3'>
         <TableHeader>
           <TableRow className='text-foreground border-none'>
-            <TableHead className='w-[100px] px-6 py-5 bg-background-normal rounded-l-full'>
-              <div onClick={() => handleDataSort('date')} className='cursor-pointer flex items-center gap-1'>
-                {t('IncomesPage.incomesTable.dateColLabel').toUpperCase()}
-                <ArrowDownUp className='w-4 h-4' />
-              </div>
-            </TableHead>
-            <TableHead className='px-6 py-4 bg-background-normal'>
-              <div onClick={() => handleDataSort('amount')} className='cursor-pointer flex items-center gap-1'>
-                {t('IncomesPage.incomesTable.amountColLabel').toUpperCase()}
-                <ArrowDownUp className='w-4 h-4' />
-              </div>
-            </TableHead>
-            <TableHead className='px-6 py-4 bg-background-normal'>
-              {t('IncomesPage.incomesTable.currencyColLabel').toUpperCase()}
-            </TableHead>
-            <TableHead className='px-6 py-4 bg-background-normal'>
-              {t('IncomesPage.incomesTable.sourceColLabel').toUpperCase()}
-            </TableHead>
-            <TableHead className='px-6 py-4 bg-background-normal'>
-              {t('IncomesPage.incomesTable.commentColLabel').toUpperCase()}
-            </TableHead>
+            {columns.map((col, i) => (
+              <TableHead 
+                key={crypto.randomUUID()} 
+                className={cn(
+                  'px-6 py-5 bg-background-normal',
+                  i === 0 ? 'w-[100px] rounded-l-full' : ''
+                )}
+              >
+                <div 
+                  onClick={col.isSortable ? () => handleDataSort(col.name) : undefined} 
+                  className='cursor-pointer flex items-center gap-1'
+                >
+                  {t(col.label).toUpperCase()}
+                  {col.isSortable && (
+                    <ArrowDownUp className='w-4 h-4' />
+                  )}
+                </div>
+              </TableHead>
+            ))}
             <TableHead className='px-6 py-4 bg-background-normal rounded-r-full' />
           </TableRow>
         </TableHeader>
@@ -242,42 +253,46 @@ export const IncomesTable: React.FC<IIncomesTable> = ({ status, data, count, err
           {[
             ...data,
             ...Array.from({ length: itemsPerPage - data.length }, () => emptyRowData)
-          ].map(incomeItem => (
+          ].map((incomeItem: any) => (
             <Fragment key={crypto.randomUUID()}>
               {incomeItem.id ? (
                 <TableRow className='text-foreground bg-background hover:bg-background-neutral'>
-                  <TableCell className='px-6 py-2 border-l border-t border-b border-background-neutral rounded-l-full'>
-                    {format(incomeItem.date, 'dd.MM.yyyy')}
-                  </TableCell>
-                  <TableCell className='px-6 py-2 border-t border-b border-background-neutral'>
-                    {incomeItem.amount}
-                  </TableCell>
-                  <TableCell className='px-6 py-2 border-t border-b border-background-neutral'>
-                    {t(`General.currencies.${incomeItem.currency}`)}
-                  </TableCell>
-                  <TableCell className='px-6 py-2 border-t border-b border-background-neutral'>
-                    {t(`IncomesPage.income_sources.${incomeItem.source}`)}
-                  </TableCell>
-                  <TableCell className='px-6 py-2 border-t border-b border-background-neutral'>
-                    {incomeItem.comment || ''}
-                  </TableCell>
-                    <TableCell className='px-6 py-2 border-r border-t border-b border-background-neutral rounded-r-full'>
-                      <TableRowActionsMenu 
-                        updateBtnLabel='Update'
-                        deleteBtnLabel='Delete'
-                        onUpdate={() => handleOpenDialog('update', incomeItem.id)}
-                        onDelete={() => handleOpenDialog('delete', incomeItem.id)}
-                      />
+                  {columns.map((item, i) => (
+                    <TableCell 
+                      key={crypto.randomUUID()} 
+                      className={cn(
+                        'px-6 py-2 border-t border-b border-background-neutral',
+                        i === 0 ? 'border-l rounded-l-full' : ''
+                      )}
+                    >
+                      {item.name === 'date' 
+                        ? format(incomeItem.date, 'dd.MM.yyyy') 
+                        : item.name === 'amount' || item.name === 'comment'
+                          ? incomeItem[item.name]
+                          : t(`${item.value}.${incomeItem[item.name]}`)
+                      }
+                    </TableCell>
+                  ))}
+                  <TableCell className='px-6 py-2 border-r border-t border-b border-background-neutral rounded-r-full'>
+                    <TableRowActionsMenu 
+                      updateBtnLabel='Update'
+                      deleteBtnLabel='Delete'
+                      onUpdate={() => handleOpenDialog('update', incomeItem.id)}
+                      onDelete={() => handleOpenDialog('delete', incomeItem.id)}
+                    />
                   </TableCell>
                 </TableRow>
               ) : (
                 <TableRow>
-                  <TableCell className='py-5' />
-                  <TableCell className='py-5' />
-                  <TableCell className='py-5' />
-                  <TableCell className='py-5' />
-                  <TableCell className='py-5' />
-                  <TableCell className='py-5' />
+                  {Array(columns.length + 1)
+                    .fill('')
+                    .map(() => (
+                      <TableCell 
+                        key={crypto.randomUUID()} 
+                        className='py-5' 
+                      />
+                    )
+                  )}
                 </TableRow>
               )}
             </Fragment>

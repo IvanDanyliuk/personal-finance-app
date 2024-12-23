@@ -1,10 +1,45 @@
 import { getTranslations } from 'next-intl/server';
 import { CreateIncomeModal, IncomesTable } from './_components';
-import { getIncomes } from '@/lib/actions/income.actions';
+import { deleteIncome, getIncomes, updateIncome } from '@/lib/actions/income.actions';
 import NoDataPlaceholder from '@/public/images/investment.svg';
 import Image from 'next/image';
 import { removeFalseyFields } from '@/lib/helpers';
 import { IncomeFilters } from './_components/income-filters';
+import { ColType } from '@/lib/types/common.types';
+
+
+const columns: ColType[] = [
+  {
+    name: 'date',
+    label: 'IncomesPage.incomesTable.dateColLabel',
+    value: '',
+    isSortable: true,
+  },
+  {
+    name: 'amount',
+    label: 'IncomesPage.incomesTable.amountColLabel',
+    value: '',
+    isSortable: true,
+  },
+  {
+    name: 'currency',
+    label: 'IncomesPage.incomesTable.currencyColLabel',
+    value: 'General.currencies',
+    isSortable: false,
+  },
+  {
+    name: 'source',
+    label: 'IncomesPage.incomesTable.sourceColLabel',
+    value: 'IncomesPage.income_sources',
+    isSortable: false,
+  },
+  {
+    name: 'comment',
+    label: 'IncomesPage.incomesTable.commentColLabel',
+    value: '',
+    isSortable: false,
+  },
+];
 
 
 export default async function IncomesPage({ searchParams: { 
@@ -54,8 +89,11 @@ export default async function IncomesPage({ searchParams: {
         {incomes.data.length > 0 ? (
           <IncomesTable 
             status={incomes.status} 
+            columns={columns}
             data={incomes.data} 
             count={incomes.count}
+            updateAction={updateIncome}
+            deleteAction={deleteIncome}
             error={incomes.error} 
           />
         ) : (
