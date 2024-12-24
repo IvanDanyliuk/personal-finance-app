@@ -56,3 +56,6 @@ export const formatDateFilterValues = ({
 
   return `${from ? format(new Date(from)!, 'dd.MM.yyyy') : ''} - ${to ? format(new Date(to)!, 'dd.MM.yyyy') : ''}`;
 };
+
+export const generateEmptyState = <T>(keys: (keyof T)[]): Record<keyof T, string> =>
+  keys.reduce((acc, key) => ({ ...acc, [key]: "" }), {} as Record<keyof T, string>);

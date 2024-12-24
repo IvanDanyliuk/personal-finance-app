@@ -33,20 +33,28 @@ import {
 import { IncomeForm } from '../../app/(application)/incomes/_components';
 import { ActionStatus, ColType, SortOrder } from '@/lib/types/common.types';
 import { IncomeSchema } from '@/lib/types/form-schemas/incomes';
+import { ExpenseSchema } from '@/lib/types/form-schemas/expenses';
 import { TableRowActionsMenu } from '@/components/common';
 import { useToast } from '@/hooks/use-toast';
 import { ITEMS_PER_PAGE } from '@/lib/constants';
 import { cn } from '@/lib/utils';
+import { generateEmptyState } from '@/lib/helpers';
 
 
 interface IncomesData extends IncomeSchema {
   id: string;
 };
 
+interface ExpenseData extends ExpenseSchema {
+  id: string;
+};
+
+type IData = IncomesData | ExpenseData;
+
 interface IDataTable {
   status: ActionStatus;
   columns: ColType[];
-  data: IncomesData[];
+  data: IData[];
   count: number;
   updateAction: (formData: FormData) => Promise<any>;
   deleteAction: (id: string) => Promise<any>;
@@ -55,17 +63,7 @@ interface IDataTable {
 
 type RowActionData = {
   type: 'update' | 'delete'; 
-  item: IncomesData;
-};
-
-const emptyRowData = {
-  id: '',
-  source: '',
-  userId: '',
-  date: '',
-  amount: '',
-  currency: '',
-  comment: ''
+  item: IData;
 };
 
 
@@ -91,6 +89,10 @@ export const DataTable: React.FC<IDataTable> = ({
   const [isConfirmDialogOpen, setConfirmDialogOpen] = useState<boolean>(false);
   const [rowActionData, setRowActionData] = useState<RowActionData | null>(null);
   const [pending, setTransition] = useTransition();
+
+  const keys = Object.keys({ ...data[0] }) as (keyof IData)[];
+  const emptyRowData = generateEmptyState<IData>(keys);
+  console.log('EMPTY STATE', emptyRowData)
 
   const handleSetPrevPage = () => {
     if(currentPage > 1) {
@@ -145,7 +147,7 @@ export const DataTable: React.FC<IDataTable> = ({
     setRowActionData(null)
   };
 
-  const handleSubmitUpdate: SubmitHandler<IncomesData> = async (data) => {
+  const handleSubmitUpdate: SubmitHandler<IData> = async (data) => {
     if(rowActionData) {
       const formData = new FormData();
       formData.append('id', rowActionData.item.id)
@@ -155,7 +157,7 @@ export const DataTable: React.FC<IDataTable> = ({
           col.name, 
           col.name === 'date'
             ? data[col.name].toISOString() 
-            : `${data[col.name as keyof IncomeSchema]}`)
+            : `${data[col.name as keyof IData]}`)
       });
       
       const { status, error } = await updateAction(formData);
@@ -349,7 +351,7 @@ export const DataTable: React.FC<IDataTable> = ({
                   Update income
                 </DialogHeader>
                 <IncomeForm 
-                  incomeToUpdate={rowActionData.item} 
+                  incomeToUpdate={rowActionData.item as IncomesData} 
                   action={handleSubmitUpdate} 
                 />
               </>

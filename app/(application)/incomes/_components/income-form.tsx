@@ -16,7 +16,7 @@ interface IIncomeData extends IncomeSchema {
 }
 
 interface IIncomeForm {
-  incomeToUpdate?: IncomeSchema;
+  incomeToUpdate?: IIncomeData;
   action: SubmitHandler<IIncomeData>;
 };
 
