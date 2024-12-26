@@ -323,7 +323,32 @@
       "charity": "Благочинність",
       "education": "Освіта",
       "entertainment": "Розваги",
+      "auto": "Автомобіль",
+      "public_transport": "Сусп. транспорт",
+      "repair": "Ремонт",
       "other": "Інше"
+    },
+    "filters": {
+      "date": {
+        "title": "Оберіть період",
+        "dateFromLabel": "Період з",
+        "dateToLabel": "Період до",
+        "submitBtnLabel": "ОК",
+        "cancelBtnLabel": "Очистити період",
+        "noFiltersMessage": "За весь час",
+        "noDateFromMessage": "З початку",
+        "noDateToMessage": "Зараз"
+      },
+      "general": {
+        "title": "Фільтри",
+        "amountFrom": "Сума з",
+        "amountTo": "Сума до",
+        "selectCategoryTriggerBtn": "Оберіть категорію",
+        "selectCurrencyTriggerBtn": "Оберіть валюту",
+        "selectPaymentMethodTriggerBtn": "Оберіть спосіб оплати",
+        "submitBtnLabel": "ОК",
+        "cancelBtnLabel": "Очистити фільтри"
+      }
     },
     "actionMessages": {
       "createExpenseSuccess": "Нову статтю витрат успішно створено!",

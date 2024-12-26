@@ -8,6 +8,9 @@ import SelfCare from '@/public/images/expense-categories/self-care.svg';
 import Charity from '@/public/images/expense-categories/charity.svg';
 import Education from '@/public/images/expense-categories/education.svg';
 import Entertainment from '@/public/images/expense-categories/entertainment.svg';
+import Auto from '@/public/images/expense-categories/car.svg';
+import PublicTransport from '@/public/images/expense-categories/public-transport.svg';
+import Repair from '@/public/images/expense-categories/repair.svg';
 import Other from '@/public/images/expense-categories/other.svg';
 
 
@@ -164,7 +167,7 @@ export const EXPENSE_CATEGORIES = [
   },
   {
     value: 'rent',
-    label: 'ExpensesPage.expense_destinations.medicament',
+    label: 'ExpensesPage.expense_destinations.rent',
     icon: Rent
   },
   {
@@ -191,6 +194,21 @@ export const EXPENSE_CATEGORIES = [
     value: 'entertainment',
     label: 'ExpensesPage.expense_destinations.entertainment',
     icon: Entertainment
+  },
+  {
+    value: 'auto',
+    label: 'ExpensesPage.expense_destinations.auto',
+    icon: Auto
+  },
+  {
+    value: 'public_transport',
+    label: 'ExpensesPage.expense_destinations.public_transport',
+    icon: PublicTransport
+  },
+  {
+    value: 'repair',
+    label: 'ExpensesPage.expense_destinations.repair',
+    icon: Repair
   },
   {
     value: 'other',

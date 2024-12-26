@@ -1,12 +1,11 @@
+import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 import { deleteExpense, getExpenses, updateExpense } from '@/lib/actions/expense.actions';
 import { removeFalseyFields } from '@/lib/helpers';
 import { ColType } from '@/lib/types/common.types';
-import { getTranslations } from 'next-intl/server';
-import { IncomeFilters } from '../incomes/_components';
 import { DataTable } from '@/components/data-rendering';
 import NoDataPlaceholder from '@/public/images/investment.svg';
-import Image from 'next/image';
-import { CreateExpenseModal } from './_components';
+import { CreateExpenseModal, ExpenseFilters } from './_components';
 
 
 const columns: ColType[] = [
@@ -64,7 +63,7 @@ export default async function ExpensesPage({ searchParams: {
   dateTo,
   amountFrom,
   amountTo,
-  destination,
+  category,
   paymentMethod,
   currency 
 } }: {
@@ -77,12 +76,13 @@ export default async function ExpensesPage({ searchParams: {
     dateTo: string;
     amountFrom: string;
     amountTo: string;
-    destination: string;
+    category: string;
     paymentMethod: string;
     currency: string;
   }
 }) {
   const t = await getTranslations();
+
   const additionalParams = removeFalseyFields({
     sortBy, 
     order, 
@@ -90,10 +90,11 @@ export default async function ExpensesPage({ searchParams: {
     dateTo, 
     amountFrom, 
     amountTo, 
-    destination, 
+    category, 
     currency, 
     paymentMethod
   });
+
   const expenses = await getExpenses({ 
     page, 
     items, 
@@ -107,7 +108,7 @@ export default async function ExpensesPage({ searchParams: {
       </h1>
       <div className='w-full flex flex-col gap-3'>
         <div className='w-full flex justify-between items-center'>
-          <IncomeFilters />
+          <ExpenseFilters />
           <div className='flex items-center gap-3'>
             <div>Export to PDF</div>
             <CreateExpenseModal />

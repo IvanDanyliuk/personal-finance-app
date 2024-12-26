@@ -323,7 +323,32 @@
       "charity": "Charity",
       "education": "Education",
       "entertainment": "Entertainment",
+      "auto": "Auto",
+      "public_transport": "Public transport",
+      "repair": "Repair",
       "other": "Other"
+    },
+    "filters": {
+      "date": {
+        "title": "Choose a period",
+        "dateFromLabel": "Period from",
+        "dateToLabel": "Period to",
+        "submitBtnLabel": "OK",
+        "cancelBtnLabel": "Clear period",
+        "noFiltersMessage": "All time",
+        "noDateFromMessage": "From beginning",
+        "noDateToMessage": "Now"
+      },
+      "general": {
+        "title": "Filters",
+        "amountFrom": "Amount from",
+        "amountTo": "Amount to",
+        "selectCategoryTriggerBtn": "Select expense categories",
+        "selectCurrencyTriggerBtn": "Select currency",
+        "selectPaymentMethodTriggerBtn": "Select a payment method",
+        "submitBtnLabel": "OK",
+        "cancelBtnLabel": "Clear filters"
+      }
     },
     "actionMessages": {
       "createExpenseSuccess": "New expense item successfully created",

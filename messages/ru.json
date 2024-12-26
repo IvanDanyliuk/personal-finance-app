@@ -323,7 +323,32 @@
       "charity": "Благотворительность",
       "education": "Образование",
       "entertainment": "Развлечения",
+      "auto": "Автомобиль",
+      "public_transport": "Общ. транспорт",
+      "repair": "Ремонт",
       "other": "Прочее"
+    },
+    "filters": {
+      "date": {
+        "title": "Выберите период",
+        "dateFromLabel": "Период с",
+        "dateToLabel": "Период до",
+        "submitBtnLabel": "ОК",
+        "cancelBtnLabel": "Очистить период",
+        "noFiltersMessage": "За все время",
+        "noDateFromMessage": "С начала",
+        "noDateToMessage": "Сейчас"
+      },
+      "general": {
+        "title": "Фильтры",
+        "amountFrom": "Сумма с",
+        "amountTo": "Сумма до",
+        "selectCategoryTriggerBtn": "Выберите категорию",
+        "selectCurrencyTriggerBtn": "Выберите валюту",
+        "selectPaymentMethodTriggerBtn": "Выберите способ оплаты",
+        "submitBtnLabel": "OK",
+        "cancelBtnLabel": "Очистить фильтры"
+      }
     },
     "actionMessages": {
       "createExpenseSuccess": "Новая статья затрат успешно создана!",

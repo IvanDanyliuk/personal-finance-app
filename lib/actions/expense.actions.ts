@@ -17,7 +17,7 @@ export const getExpenses = async ({
   amountTo,
   dateFrom,
   dateTo,
-  destination,
+  category,
   paymentMethod,
   currency
 }: { 
@@ -29,7 +29,7 @@ export const getExpenses = async ({
   amountTo?: any; 
   dateFrom?: string;
   dateTo?: string;
-  destination?: string;
+  category?: string;
   paymentMethod?: string;
   currency?: string;
 }) => {
@@ -53,12 +53,10 @@ export const getExpenses = async ({
           : dateFrom && dateTo 
             ? { gte: new Date(dateFrom), lte: new Date(dateTo) } 
             : null,
-      destination: destination ? { in: destination.split(';') } : null,
+      category: category ? { in: category.split(';') } : null,
       paymentMethod: paymentMethod ? { in: paymentMethod.split(';') } : null,
       currency: currency ? { in: currency.split(';') } : null,
     });
-
-    console.log('GET EXPENSES', filterData)
 
     if(!session) {
       throw new Error('ExpensePage  .errors.wrongUserId');
@@ -73,7 +71,7 @@ export const getExpenses = async ({
       skip: (+page - 1) * +items, 
       take: +items 
     });
-    const count = await db.income.count({ 
+    const count = await db.expense.count({ 
       where: { 
         userId: session.user!.id!, 
         ...filterData 
