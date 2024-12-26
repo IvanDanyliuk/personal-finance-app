@@ -67,8 +67,8 @@ model Expense {
   amount        Int
   currency      String
   destination   String
-  paymentMethod PaymentMethod
-  category      ExpenseCategory?
+  paymentMethod String
+  category      String
   comment       String?
   date          DateTime                    @default(now())
 
@@ -76,13 +76,13 @@ model Expense {
   updatedAt     DateTime                    @updatedAt
 }
 
-model ExpenseCategory {
-  id            String                      @id @default(auto()) @map("_id") @db.ObjectId
-  name          String                      @unique
-  subCategories String[]
-  expense       Expense                     @relation(fields: [expenseId], references: [id], onDelete: Cascade)
-  expenseId     String                      @db.ObjectId @unique
-}
+// model ExpenseCategory {
+//   id            String                      @id @default(auto()) @map("_id") @db.ObjectId
+//   name          String                      @unique
+//   subCategories String[]
+//   expense       Expense                     @relation(fields: [expenseId], references: [id], onDelete: Cascade)
+//   expenseId     String                      @db.ObjectId @unique
+// }
 
 model Bank {
   id            String                      @id @default(auto()) @map("_id") @db.ObjectId

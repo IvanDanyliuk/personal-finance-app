@@ -210,6 +210,7 @@
     "createIncomeForm": {
       "triggerBtnLabel": "Додати",
       "title": "Створити статтю доходу",
+      "titleUpdate": "Оновити статтю доходу",
       "dateFieldLabel": "Дата",
       "amountFieldLabel": "Сума",
       "currencyFieldLabel": "Валюта",
@@ -225,7 +226,7 @@
       "currencyColLabel": "Валюта",
       "sourceColLabel": "Джерело коштів",
       "commentColLabel": "Коментар",
-      "confirmDeleteTitle": "Вивпевнені, що хочете видалити цю статтю витрат?",
+      "confirmDeleteTitle": "Ви впевнені, що хочете видалити цю статтю витрат?",
       "confirmDeleteMessage": "Відхилити цю дію буде неможливо відхилити"
     },
     "income_sources": {
@@ -261,8 +262,8 @@
     },
     "actionMessages": {
       "createIncomeSuccess": "Нову статтю доходу успішно створено!",
-      "updateIncomeSuccess": "Статтю витрат успішно оновлено!",
-      "incomeDeleted": "Статтю витрат успішно видалено"
+      "updateIncomeSuccess": "Статтю доходу успішно оновлено!",
+      "incomeDeleted": "Статтю доходу успішно видалено"
     },
     "errors": {
       "general": "Щось пішло не так!",
@@ -278,6 +279,82 @@
     }
   },
   "ExpensesPage": {
+    "title": "Витрати",
+    "noData": "Ви ще не додали ніякої інформації про Ваші витрати",
+    "createExpenseForm": {
+      "triggerBtnLabel": "Додати",
+      "title": "Створити статтю витрат",
+      "titleUpdate": "Оновити статтю витрат",
+      "dateFieldLabel": "Дата",
+      "amountFieldLabel": "Сума",
+      "currencyFieldLabel": "Валюта",
+      "currencyPlaceholder": "Валюта",
+      "destinationFieldLabel": "Призначення",
+      "categoryFieldLabel": "Категорія",
+      "categoryPlaceholder": "Оберіть категорію",
+      "paymentMethodFieldLabel": "Метод оплати",
+      "paymentMethodPlaceholder": "Оберіть метод оплати",
+      "commentFieldLabel": "Коментар",
+      "submitBtnLabel": "Додати"
+    },
+    "expenseTable": {
+      "dateColLabel": "Дата",
+      "amountColLabel": "Сума",
+      "currencyColLabel": "Валюта",
+      "destinationColLabel": "Призначення",
+      "categoryColLabel": "Категорія",
+      "paymentMethodColLabel": "Метод олати",
+      "commentColLabel": "Коментар",
+      "confirmDeleteTitle": "Ви впевнені, що хочете видалити цю статтю витрат?",
+      "confirmDeleteMessage": "Відхилити цю дію буде неможливо відхилити"
+    },
+    "payment_methods": {
+      "cash": "Готівка",
+      "card": "Картка"
+    },
+    "expense_destinations": {
+      "utilities": "Комунальні платежі",
+      "food": "Продукти харчування",
+      "household": "Госп. товари",
+      "medicament": "Медикаменти",
+      "rent": "Орендна плата",
+      "clothes": "Одяг",
+      "self_care": "Догляд за собою",
+      "charity": "Благочинність",
+      "education": "Освіта",
+      "entertainment": "Розваги",
+      "auto": "Автомобіль",
+      "public_transport": "Сусп. транспорт",
+      "repair": "Ремонт",
+      "other": "Інше"
+    },
+    "filters": {
+      "date": {
+        "title": "Оберіть період",
+        "dateFromLabel": "Період з",
+        "dateToLabel": "Період до",
+        "submitBtnLabel": "ОК",
+        "cancelBtnLabel": "Очистити період",
+        "noFiltersMessage": "За весь час",
+        "noDateFromMessage": "З початку",
+        "noDateToMessage": "Зараз"
+      },
+      "general": {
+        "title": "Фільтри",
+        "amountFrom": "Сума з",
+        "amountTo": "Сума до",
+        "selectCategoryTriggerBtn": "Оберіть категорію",
+        "selectCurrencyTriggerBtn": "Оберіть валюту",
+        "selectPaymentMethodTriggerBtn": "Оберіть спосіб оплати",
+        "submitBtnLabel": "ОК",
+        "cancelBtnLabel": "Очистити фільтри"
+      }
+    },
+    "actionMessages": {
+      "createExpenseSuccess": "Нову статтю витрат успішно створено!",
+      "updateExpenseSuccess": "Статтю витрат успішно оновлено!",
+      "expenseDeleted": "Статтю витрат успішно видалено"
+    },
     "errors": {
       "general": "Щось пішло не так!",
       "wrongUserId": "Ви не авторизовані або ID Вашого облікового запису некоректний",
