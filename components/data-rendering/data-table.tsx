@@ -271,7 +271,7 @@ export const DataTable: React.FC<IDataTable> = ({
                         ? format(dataItem.date, 'dd.MM.yyyy') 
                         : item.name === 'amount' || item.name === 'comment'
                           ? dataItem[item.name]
-                          : t(`${item.value}.${dataItem[item.name]}`)
+                          : t(`${item.value ? item.value + '.' : ''}${dataItem[item.name]}`)
                       }
                     </TableCell>
                   ))}
@@ -302,7 +302,7 @@ export const DataTable: React.FC<IDataTable> = ({
         </TableBody>
         <TableFooter className='w-full'>
           <TableRow>
-            <TableCell colSpan={6} className='border border-background-neutral rounded-full'>
+            <TableCell colSpan={columns.length + 1} className='border border-background-neutral rounded-full'>
               <div className='p-3 w-full flex justify-between items-center'>
                 <Select onValueChange={handleSetItemsPerPage}>
                   <SelectTrigger className='p-3 w-fit rounded-full'>

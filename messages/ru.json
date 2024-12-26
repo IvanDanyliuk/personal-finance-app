@@ -225,7 +225,7 @@
       "currencyColLabel": "Валюта",
       "sourceColLabel": "Источник средств",
       "commentColLabel": "Комментарий",
-      "confirmDeleteTitle": "Вы уверены, что хотите удалить данную статью затрат?",
+      "confirmDeleteTitle": "Вы уверены, что хотите удалить данную статью дохода?",
       "confirmDeleteMessage": "Отменить это действие будет невозможно"
     },
     "income_sources": {
@@ -262,7 +262,7 @@
     "actionMessages": {
       "createIncomeSuccess": "Новая статья дохода успешно создана!",
       "updateIncomeSuccess": "Статья дохода успешно обновлена",
-      "incomeDeleted": "Статья затрат успешно удалена"
+      "incomeDeleted": "Статья дохода успешно удалена"
     },
     "errors": {
       "general": "Что-то пошло не так!",
@@ -278,6 +278,56 @@
     }
   },
   "ExpensesPage": {
+    "title": "Расходы",
+    "noData": "Вы еще не добавили никакой информации о Ваших расходах",
+    "createExpenseForm": {
+      "triggerBtnLabel": "Добавить",
+      "title": "Создать статью расхода",
+      "dateFieldLabel": "Дата",
+      "amountFieldLabel": "Сумма",
+      "currencyFieldLabel": "Валюта",
+      "currencyPlaceholder": "Валюта",
+      "categoryFieldLabel": "Категория",
+      "categoryPlaceholder": "Выберите категорию",
+      "destinationFieldLabel": "Назначение",
+      "paymentMethodFieldLabel": "Способ оплаты",
+      "paymentMethodPlaceholder": "Выберите способ оплаты",
+      "commentFieldLabel": "Комментарий",
+      "submitBtnLabel": "Добавить"
+    },
+    "expenseTable": {
+      "dateColLabel": "Дата",
+      "amountColLabel": "Сумма",
+      "currencyColLabel": "Валюта",
+      "destinationColLabel": "Назначение",
+      "categoryColLabel": "Категория",
+      "paymentMethodColLabel": "Способ оплаты",
+      "commentColLabel": "Комментарий",
+      "confirmDeleteTitle": "Вы уверены, что хотите удалить данную статью затрат?",
+      "confirmDeleteMessage": "Отменить это действие будет невозможно"
+    },
+    "payment_methods": {
+      "cash": "Наличными",
+      "card": "Карта"
+    },
+    "expense_destinations": {
+      "utilities": "Коммунальные платежи",
+      "food": "Продукты",
+      "household": "Хоз. товары",
+      "medicament": "Медикаменты",
+      "rent": "Арендная плата",
+      "clothes": "Одежда",
+      "self_care": "Уход за собой",
+      "charity": "Благотворительность",
+      "education": "Образование",
+      "entertainment": "Развлечения",
+      "other": "Прочее"
+    },
+    "actionMessages": {
+      "createExpenseSuccess": "Новая статья затрат успешно создана!",
+      "updateExpenseSuccess": "Статья затрат успешно обновлена",
+      "expenseDeleted": "Статья затрат успешно удалена"
+    },
     "errors": {
       "general": "Что-то пошло не так!",
       "wrongUserId": "Вы не авторзованы или ID Вашего профиля неверный",

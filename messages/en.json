@@ -278,6 +278,56 @@
     }
   },
   "ExpensesPage": {
+    "title": "Expenses",
+    "noData": "You haven't added any information about your expenses",
+    "createExpenseForm": {
+      "triggerBtnLabel": "Add",
+      "title": "Create a new income",
+      "dateFieldLabel": "Date",
+      "amountFieldLabel": "Amount",
+      "currencyFieldLabel": "Currency",
+      "currencyPlaceholder": "Currency",
+      "categoryFieldLabel": "Category",
+      "categoryPlaceholder": "Select a category",
+      "destinationFieldLabel": "Destination",
+      "paymentMethodFieldLabel": "Payment method",
+      "paymentMethodPlaceholder": "Select a payment method",
+      "commentFieldLabel": "Comment",
+      "submitBtnLabel": "Add"
+    },
+    "expenseTable": {
+      "dateColLabel": "Date",
+      "amountColLabel": "Amount",
+      "currencyColLabel": "Currency",
+      "destinationColLabel": "Destination",
+      "categoryColLabel": "Category",
+      "paymentMethodColLabel": "Payment method",
+      "commentColLabel": "Comment",
+      "confirmDeleteTitle": "Are you sure you want to delete this expense item?",
+      "confirmDeleteMessage": "It will be impossible to undo this action."
+    },
+    "payment_methods": {
+      "cash": "Cash",
+      "card": "Card"
+    },
+    "expense_destinations": {
+      "utilities": "Utilities",
+      "food": "Food",
+      "household": "Household goods",
+      "medicament": "Medicament",
+      "rent": "Rent",
+      "clothes": "Clothes",
+      "self_care": "Self-Care",
+      "charity": "Charity",
+      "education": "Education",
+      "entertainment": "Entertainment",
+      "other": "Other"
+    },
+    "actionMessages": {
+      "createExpenseSuccess": "New expense item successfully created",
+      "updateExpenseSuccess": "Expense item successfully updated",
+      "expenseDeleted": "Expense item successfully deleted!"
+    },
     "errors": {
       "general": "Something went wrong!",
       "wrongUserId": "You're not authenticated or your user ID is incorrect",
