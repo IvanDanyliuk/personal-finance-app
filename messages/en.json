@@ -210,6 +210,7 @@
     "createIncomeForm": {
       "triggerBtnLabel": "Add",
       "title": "Create a new income",
+      "titleUpdate": "Update an income",
       "dateFieldLabel": "Date",
       "amountFieldLabel": "Amount",
       "currencyFieldLabel": "Currency",
@@ -282,7 +283,8 @@
     "noData": "You haven't added any information about your expenses",
     "createExpenseForm": {
       "triggerBtnLabel": "Add",
-      "title": "Create a new income",
+      "title": "Create a new expense",
+      "titleUpdate": "Update an expense",
       "dateFieldLabel": "Date",
       "amountFieldLabel": "Amount",
       "currencyFieldLabel": "Currency",

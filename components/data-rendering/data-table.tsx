@@ -38,7 +38,8 @@ import { TableRowActionsMenu } from '@/components/common';
 import { useToast } from '@/hooks/use-toast';
 import { ITEMS_PER_PAGE } from '@/lib/constants';
 import { cn } from '@/lib/utils';
-import { generateEmptyState } from '@/lib/helpers';
+import { generateEmptyState, hasKey } from '@/lib/helpers';
+import { ExpenseForm } from '@/app/(application)/expenses/_components';
 
 
 interface IncomesData extends IncomeSchema {
@@ -164,7 +165,11 @@ export const DataTable: React.FC<IDataTable> = ({
 
       if(status === ActionStatus.Success) {
         toast({
-          description: t(('IncomesPage.actionMessages.updateIncomeSuccess')),
+          description: t(
+            hasKey<IncomesData>(rowActionData.item, 'source') 
+              ? 'IncomesPage.actionMessages.updateIncomeSuccess' 
+              : 'ExpensesPage.actionMessages.updateExpenseSuccess'
+          ),
           variant: 'default',
           className: 'bg-success-1 text-success-2'
         });
@@ -347,22 +352,45 @@ export const DataTable: React.FC<IDataTable> = ({
           <DialogContent className='space-y-3'>
             {rowActionData.type === 'update' ? (
               <>
-                <DialogHeader>
-                  Update income
-                </DialogHeader>
-                <IncomeForm 
-                  incomeToUpdate={rowActionData.item as IncomesData} 
-                  action={handleSubmitUpdate} 
-                />
+                {hasKey<IncomesData>(rowActionData.item, 'source') && (
+                  <>
+                    <DialogHeader className='text-lg font-semibold'>
+                      {t('IncomesPage.createIncomeForm.titleUpdate')}
+                    </DialogHeader>
+                    <IncomeForm 
+                      incomeToUpdate={rowActionData.item as IncomesData} 
+                      action={handleSubmitUpdate} 
+                    />
+                  </>
+                )}
+                {hasKey<ExpenseData>(rowActionData.item, 'category') && (
+                  <>
+                    <DialogHeader className='text-lg font-semibold'>
+                      {t('ExpensesPage.createExpenseForm.titleUpdate')}
+                    </DialogHeader>
+                    <ExpenseForm 
+                      expenseToUpdate={rowActionData.item as ExpenseData} 
+                      action={handleSubmitUpdate} 
+                    />
+                  </>
+                )}
               </>
             ) : (
               <>
                 <DialogHeader className='px-6'>
                   <DialogTitle className='mb-3 text-center'>
-                    {t('IncomesPage.incomesTable.confirmDeleteTitle')}
+                    {t(
+                      hasKey<IncomesData>(rowActionData.item, 'source') 
+                        ? 'IncomesPage.incomesTable.confirmDeleteTitle' 
+                        : 'ExpensesPage.expenseTable.confirmDeleteTitle'
+                    )}
                   </DialogTitle>
                   <DialogDescription className='text-center'>
-                    {t('IncomesPage.incomesTable.confirmDeleteMessage')}
+                    {t(
+                      hasKey<IncomesData>(rowActionData.item, 'source') 
+                        ? 'IncomesPage.incomesTable.confirmDeleteMessage' 
+                        : 'ExpensesPage.expenseTable.confirmDeleteMessage'
+                    )}
                   </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className='flex flex-row gap-3'>

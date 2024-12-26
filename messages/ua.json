@@ -210,6 +210,7 @@
     "createIncomeForm": {
       "triggerBtnLabel": "Додати",
       "title": "Створити статтю доходу",
+      "titleUpdate": "Оновити статтю доходу",
       "dateFieldLabel": "Дата",
       "amountFieldLabel": "Сума",
       "currencyFieldLabel": "Валюта",
@@ -282,7 +283,8 @@
     "noData": "Ви ще не додали ніякої інформації про Ваші витрати",
     "createExpenseForm": {
       "triggerBtnLabel": "Додати",
-      "title": "Создать статью витрат",
+      "title": "Створити статтю витрат",
+      "titleUpdate": "Оновити статтю витрат",
       "dateFieldLabel": "Дата",
       "amountFieldLabel": "Сума",
       "currencyFieldLabel": "Валюта",

@@ -59,3 +59,6 @@ export const formatDateFilterValues = ({
 
 export const generateEmptyState = <T>(keys: (keyof T)[]): Record<keyof T, string> =>
   keys.reduce((acc, key) => ({ ...acc, [key]: "" }), {} as Record<keyof T, string>);
+
+export const hasKey = <T>(obj: unknown, key: keyof T): obj is T =>
+  typeof obj === "object" && obj !== null && key in obj;

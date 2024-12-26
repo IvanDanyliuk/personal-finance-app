@@ -132,7 +132,6 @@ export const ExpenseForm: React.FC<IExpenseForm> = ({ expenseToUpdate, action })
             name='currency'
             label={t('ExpensesPage.createExpenseForm.currencyFieldLabel')}
             variant='vertical'
-
             field={field}
             placeholder={t('ExpensesPage.createExpenseForm.currencyPlaceholder')}
             options={CURRENCIES}

@@ -142,16 +142,81 @@ export const createExpense = async (formData: FormData) => {
 
 export const updateExpense = async (formData: FormData) => {
   try {
-    
+    const session = await auth();
+
+    if(!session) {
+      throw new Error('ExpensesPage.errors.wrongUserId');
+    }
+
+    const id = formData.get('id') as string;
+    const userId = formData.get('userId') as string;
+    const date = formData.get('date') as string;
+    const amount = formData.get('amount') as string;
+    const currency = formData.get('currency') as string;
+    const category = formData.get('category') as string;
+    const destination = formData.get('destination') as string;
+    const paymentMethod = formData.get('paymentMethod') as string;
+    const comment = formData.get('comment') as string;
+
+    const validatedFields = expenseSchema.safeParse({
+      userId, 
+      date: new Date(date), 
+      amount: +amount, 
+      currency, 
+      category, 
+      destination, 
+      paymentMethod, 
+      comment
+    });
+
+    if(!validatedFields.success) {
+      return {
+        status: ActionStatus.Failed,
+        fieldError: validatedFields.error.flatten().fieldErrors,
+      };
+    }
+
+    await db.expense.update({ 
+      where: { id }, 
+      data: {
+        ...validatedFields.data
+      } 
+    });
+
+    revalidatePath('/expenses');
+
+    return {
+      status: ActionStatus.Success,
+      error: null,
+    };
   } catch (error: any) {
-    
+    return {
+      status: ActionStatus.Failed,
+      error: error.message,
+    };
   }
 };
 
 export const deleteExpense = async (id: string) => {
   try {
-    
+    const session = await auth();
+
+    if(!session) {
+      throw new Error('ExpensesPage.errors.wrongUserId');
+    }
+
+    await db.expense.delete({ where: { id } });
+
+    revalidatePath('/expenses');
+
+    return {
+      status: ActionStatus.Success,
+      error: null,
+    };
   } catch (error: any) {
-    
+    return {
+      status: ActionStatus.Failed,
+      error: error.message,
+    };
   }
 };
