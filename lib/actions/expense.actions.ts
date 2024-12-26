@@ -58,6 +58,8 @@ export const getExpenses = async ({
       currency: currency ? { in: currency.split(';') } : null,
     });
 
+    console.log('GET EXPENSES', filterData)
+
     if(!session) {
       throw new Error('ExpensePage  .errors.wrongUserId');
     }
