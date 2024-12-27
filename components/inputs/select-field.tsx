@@ -10,7 +10,6 @@ import {
 } from '@/components/ui/select';
 import { Label } from '../ui/label';
 import { cn } from '@/lib/utils';
-import { ReactNode } from 'react';
 import Image from 'next/image';
 
 
@@ -20,7 +19,7 @@ interface ISelectField {
   options: {
     value: string;
     label: string;
-    icon?: string | ReactNode;
+    icon?: string;
   }[];
   register?: UseFormRegister<any>;
   field: ControllerRenderProps<any>;
@@ -77,14 +76,14 @@ export const SelectField: React.FC<ISelectField> = ({
           </SelectTrigger>
           <SelectContent className='bg-white'>
             {options.map(({ value, label, icon }) => (
-              <SelectItem key={crypto.randomUUID()} value={`${value}`}>
+              <SelectItem key={crypto.randomUUID()} value={`${value}`} className='flex items-center'>
                 {icon && (
                   <Image 
-                    src={icon!} 
+                    src={icon} 
                     alt={value} 
                     width={16} 
                     height={16} 
-                    className='mr-1 inline' 
+                    className='mr-2 inline' 
                   />
                 )}
                 {t(label)}
