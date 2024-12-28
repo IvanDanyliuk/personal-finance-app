@@ -87,7 +87,6 @@ export const IncomeForm: React.FC<IIncomeForm> = ({ incomeToUpdate, action }) =>
             name='source'
             label={t('IncomesPage.createIncomeForm.sourceFieldLabel')}
             variant='vertical'
-
             field={field}
             placeholder={t('IncomesPage.createIncomeForm.sourcePlaceholder')}
             options={INCOME_SOURCES}
