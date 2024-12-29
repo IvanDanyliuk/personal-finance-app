@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Separator } from '../ui/separator';
-import UserImagePlaceholder from '@/public/images/user-placeholder.png';
+import UserImagePlaceholder from '@/assets/images/user-placeholder.png';
 
 
 export const UserMenu: React.FC = () => {
@@ -25,6 +25,7 @@ export const UserMenu: React.FC = () => {
 
   useEffect(() => {
     getSession();
+    console.log('SESSION', session)
   }, []);
 
   if(!session) return null;
