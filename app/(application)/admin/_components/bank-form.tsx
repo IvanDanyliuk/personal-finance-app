@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import {
   Dialog,
@@ -10,18 +10,24 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { bankSchema, BankSchema } from '@/lib/types/form-schemas/admin';
-import { TextField } from '@/components/inputs';
+import { Combobox, TextField } from '@/components/inputs';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { ActionStatus } from '@/lib/types/common.types';
 import { useToast } from '@/hooks/use-toast';
+import { createBank } from '@/lib/actions/bank.actions';
+import { useRouter } from 'next/navigation';
+import { COUNTRIES } from '@/lib/constants';
 
 
 export const BankForm = () => {
   const t = useTranslations();
   const { toast } = useToast();
+  const router = useRouter();
 
   const [isOpen, setOpen] = useState<boolean>(false);
+  const countries = COUNTRIES
+  console.log('BANK FORM', countries)
 
   const {
     control,
@@ -46,24 +52,28 @@ export const BankForm = () => {
 
     const { status, error } = await createBank(formData);
     
-        if(status === ActionStatus.Success && !error) {
-          toast({
-            description: t('actionMessages.signUpSuccess'),
-            variant: 'default',
-            className: 'bg-success-1 text-success-2'
-          });
-          router.push('/');
-        } 
-    
-        if(status === ActionStatus.Failed && error) {
-          toast({
-            title: t('errors.general.title'),
-            description: t(error),
-            variant: 'destructive',
-            className: 'bg-danger-1 text-danger-2'
-          });
-        }
+    if(status === ActionStatus.Success && !error) {
+      toast({
+        description: t('actionMessages.signUpSuccess'),
+        variant: 'default',
+        className: 'bg-success-1 text-success-2'
+      });
+      router.push('/');
+    } 
+
+    if(status === ActionStatus.Failed && error) {
+      toast({
+        title: t('errors.general.title'),
+        description: t(error),
+        variant: 'destructive',
+        className: 'bg-danger-1 text-danger-2'
+      });
+    }
   };
+
+  useEffect(() => {
+
+  }, []);
 
   return (
     <Dialog open={isOpen} onOpenChange={handleMenuOpen}>
@@ -79,9 +89,22 @@ export const BankForm = () => {
             render={({ field }) => (
               <TextField 
                 name='name'
-                label={t('Name')}
+                label={t('Admin.Banks.bankForm.nameFieldLabel')}
                 field={field}
                 error={errors['name']?.message}
+              />
+            )}
+          />
+          <Controller 
+            name='country'
+            control={control}
+            render={({ field }) => (
+              <Combobox 
+                name='country'
+                label={t('Admin.Banks.bankForm.countryFieldLabel')}
+                field={field}
+                placeholder={t('Admin.Banks.bankForm.countryFieldPlaceholder')}
+                options={[]}
               />
             )}
           />

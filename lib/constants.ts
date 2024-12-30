@@ -1,3 +1,4 @@
+import { countries as countriesList } from 'countries-list';
 import Utilities from '@/public/images/expense-categories/utilities.svg';
 import Food from '@/public/images/expense-categories/groceries.svg';
 import Household from '@/public/images/expense-categories/household.svg';
@@ -215,4 +216,11 @@ export const EXPENSE_CATEGORIES = [
     label: 'ExpensesPage.expense_destinations.other',
     icon: Other
   },
+];
+
+export const COUNTRIES = [
+  {
+    value: 'at',
+    label: ''
+  }
 ];

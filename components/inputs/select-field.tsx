@@ -29,7 +29,7 @@ interface ISelectField {
   placeholder?: string;
   disabled?: boolean;
   error?: string;
-}
+};
 
 
 export const SelectField: React.FC<ISelectField> = ({
@@ -76,7 +76,11 @@ export const SelectField: React.FC<ISelectField> = ({
           </SelectTrigger>
           <SelectContent className='bg-white'>
             {options.map(({ value, label, icon }) => (
-              <SelectItem key={crypto.randomUUID()} value={`${value}`} className='flex items-center'>
+              <SelectItem 
+                key={crypto.randomUUID()} 
+                value={`${value}`} 
+                className='flex items-center'
+              >
                 {icon && (
                   <Image 
                     src={icon} 
