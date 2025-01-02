@@ -41,11 +41,10 @@ export const updateUserPhoto = async (formData: FormData) => {
         fieldError: validatedImage.error.flatten().fieldErrors,
       };
     }
-
-    const imageFile = validatedImage.data?.image ? await fetch(validatedImage.data?.image) : '';
-    const imageBlob = imageFile ? await imageFile.blob() : new Blob();
-    const imageToUpload = new File([imageBlob!], `${crypto.randomUUID()}-avatar`)
-    const image = imageToUpload && imageToUpload.size > 0 ? (await utapi.uploadFiles([imageToUpload]))[0].data?.url : '';
+    
+    const image = validatedImage.data.image.size > 0 
+      ? (await utapi.uploadFiles([validatedImage.data.image]))[0].data?.url 
+      : '';
 
     if(image) {
       await db.user.update({

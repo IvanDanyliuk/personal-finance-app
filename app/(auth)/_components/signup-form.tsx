@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { CheckboxField, FileInput, TextField } from '@/components/inputs';
@@ -26,7 +26,7 @@ export const SignUpForm = () => {
   });
 
   const {
-    register,
+    control,
     handleSubmit,
     setValue, 
     formState: { errors, isSubmitting }
@@ -67,37 +67,67 @@ export const SignUpForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmitForm)}>
-      <TextField 
-        name='name' 
-        label={t('signupPage.name')} 
-        register={register} 
-        error={errors['name']?.message} 
+      <Controller 
+        name='name'
+        control={control}
+        render={({ field }) => (
+          <TextField 
+            name='name' 
+            label={t('signupPage.name')} 
+            field={field}
+            error={errors['name']?.message} 
+          />
+        )}
       />
-      <TextField 
-        name='email' 
-        label={t('signupPage.email')} 
-        register={register} 
-        error={errors['email']?.message} 
+      <Controller 
+        name='email'
+        control={control}
+        render={({ field }) => (
+          <TextField 
+            name='email' 
+            label={t('signupPage.email')} 
+            field={field}
+            error={errors['email']?.message} 
+          />
+        )}
       />
-      <TextField 
-        name='password' 
-        label={t('signupPage.password')} 
-        type='password'
-        register={register} 
-        error={errors['password']?.message} 
+      <Controller 
+        name='password'
+        control={control}
+        render={({ field }) => (
+          <TextField 
+            name='password' 
+            label={t('signupPage.password')} 
+            type='password'
+            field={field}
+            error={errors['password']?.message} 
+          />
+        )}
       />
-      <TextField 
-        name='confirmPassword' 
-        label={t('signupPage.confirmPassword')} 
-        type='password'
-        register={register} 
-        error={errors['confirmPassword']?.message} 
+      <Controller 
+        name='confirmPassword'
+        control={control}
+        render={({ field }) => (
+          <TextField 
+            name='confirmPassword' 
+            label={t('signupPage.confirmPassword')} 
+            type='password'
+            field={field}
+            error={errors['confirmPassword']?.message} 
+          />
+        )}
       />
-      <FileInput 
+      <Controller 
         name='image'
-        register={register}
-        setValue={setValue}
-        btnTitle={t('signupPage.image')}
+        control={control}
+        render={({ field }) => (
+          <FileInput 
+            name='image'
+            field={field}
+            setValue={setValue}
+            btnTitle={t('signupPage.image')}
+          />
+        )}
       />
       <SubmitButton 
         disabled={!isAgreementConfirmed} 
