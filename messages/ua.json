@@ -190,6 +190,12 @@
       "errors": {
         "general": {
           "title": "Отакої! Щось пішло не так!"
+        },
+        "fieldsValidation": {
+          "requiredName": "Введіть ім'я!",
+          "requiredCountry": "Оберіть країну",
+          "maxImageSizeLimit": "Розмір фото не має перевищувати 5Мб",
+          "invalidImageType": "Підтримуються тільки наступні формати: .jpeg, .jpg, .png та .webp"
         }
       }
     }

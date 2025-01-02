@@ -144,7 +144,7 @@
           "invalidConfirmPassword": "Password should have 6 characters at least",
           "passwordNotMatch": "Passwords do not match",
           "maxImageSizeLimit": "Max image size is 5Mb",
-          "invalidImageType": "Only .jpeg, .jpg, .png, and .webp fromats are supported",
+          "invalidImageType": "Only .jpeg, .jpg, .png, and .webp formats are supported",
           "wrongProviderGoogle": "You created your account using your Google account. Sign in using your Google account and set the password via Settings",
           "wrongProviderFacebook": "You created your account using your Facebook account. Sign in using your Facebook account and set the password via Settings",
           "wrongCredentials": "Something went wrong!",
@@ -190,6 +190,12 @@
       "errors": {
         "general": {
           "title": "Oops! Something wet wrong!"
+        },
+        "fieldsValidation": {
+          "requiredName": "Name is required!",
+          "requiredCountry": "Select a country",
+          "maxImageSizeLimit": "Max image size is 5Mb",
+          "invalidImageType": "Only .jpeg, .jpg, .png, and .webp formats are supported"
         }
       }
     }

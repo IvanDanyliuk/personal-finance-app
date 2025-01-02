@@ -132,30 +132,30 @@ export const signup = async (formData: FormData) => {
 
     const hashedPassword = await bcrypt.hash(validatedFields.data.password, 10);
     
-    // const image = validatedFields.data.image.size > 0 ? 
-    //   (await utapi.uploadFiles([validatedFields.data.image]))[0].data?.url : 
-    //   '';
+    const image = validatedFields.data.image.size > 0 ? 
+      (await utapi.uploadFiles([validatedFields.data.image]))[0].data?.url : 
+      '';
 
-    // await db.user.create({
-    //   data: {
-    //     name: validatedFields.data.name,
-    //     email: validatedFields.data.email,
-    //     password: hashedPassword,
-    //     image,
-    //     role: 'USER',
-    //     weekStartDay: '1',
-    //     currency: 'usd',
-    //     language: 'en',
-    //   }
-    // });
+    await db.user.create({
+      data: {
+        name: validatedFields.data.name,
+        email: validatedFields.data.email,
+        password: hashedPassword,
+        image,
+        role: 'USER',
+        weekStartDay: '1',
+        currency: 'usd',
+        language: 'en',
+      }
+    });
 
-    // await signIn('credentials', {
-    //   email: validatedFields.data.email,
-    //   password: validatedFields.data.password,
-    //   redirect: false
-    // });
+    await signIn('credentials', {
+      email: validatedFields.data.email,
+      password: validatedFields.data.password,
+      redirect: false
+    });
 
-    // cookies().set('language', 'en')
+    cookies().set('language', 'en')
 
     return {
       status: ActionStatus.Success,
