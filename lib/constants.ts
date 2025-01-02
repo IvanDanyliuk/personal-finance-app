@@ -221,6 +221,266 @@ export const EXPENSE_CATEGORIES = [
 export const COUNTRIES = [
   {
     value: 'at',
-    label: ''
-  }
+    label: 'General.countries.at'
+  },
+  {
+    value: 'be',
+    label: 'General.countries.be'
+  },
+  {
+    value: 'bg',
+    label: 'General.countries.bg'
+  },
+  {
+    value: 'cz',
+    label: 'General.countries.cz'
+  },
+  {
+    value: 'dk',
+    label: 'General.countries.dk'
+  },
+  {
+    value: 'de',
+    label: 'General.countries.de'
+  },
+  {
+    value: 'ee',
+    label: 'General.countries.ee'
+  },
+  {
+    value: 'ie',
+    label: 'General.countries.ie'
+  },
+  {
+    value: 'el',
+    label: 'General.countries.el'
+  },
+  {
+    value: 'es',
+    label: 'General.countries.es'
+  },
+  {
+    value: 'fr',
+    label: 'General.countries.fr'
+  },
+  {
+    value: 'hr',
+    label: 'General.countries.hr'
+  },
+  {
+    value: 'it',
+    label: 'General.countries.it'
+  },
+  {
+    value: 'cy',
+    label: 'General.countries.cy'
+  },
+  {
+    value: 'lv',
+    label: 'General.countries.lv'
+  },
+  {
+    value: 'lt',
+    label: 'General.countries.lt'
+  },
+  {
+    value: 'lu',
+    label: 'General.countries.lu'
+  },
+  {
+    value: 'hu',
+    label: 'General.countries.hu'
+  },
+  {
+    value: 'mt',
+    label: 'General.countries.mt'
+  },
+  {
+    value: 'nl',
+    label: 'General.countries.nl'
+  },
+  {
+    value: 'pl',
+    label: 'General.countries.pl'
+  },
+  {
+    value: 'pt',
+    label: 'General.countries.pt'
+  },
+  {
+    value: 'ro',
+    label: 'General.countries.ro'
+  },
+  {
+    value: 'sl',
+    label: 'General.countries.sl'
+  },
+  {
+    value: 'sk',
+    label: 'General.countries.sk'
+  },
+  {
+    value: 'fi',
+    label: 'General.countries.fi'
+  },
+  {
+    value: 'se',
+    label: 'General.countries.se'
+  },
+  {
+    value: 'is',
+    label: 'General.countries.is'
+  },
+  {
+    value: 'li',
+    label: 'General.countries.li'
+  },
+  {
+    value: 'no',
+    label: 'General.countries.no'
+  },
+  {
+    value: 'ch',
+    label: 'General.countries.ch'
+  },
+  {
+    value: 'ba',
+    label: 'General.countries.ba'
+  },
+  {
+    value: 'me',
+    label: 'General.countries.me'
+  },
+  {
+    value: 'md',
+    label: 'General.countries.md'
+  },
+  {
+    value: 'mk',
+    label: 'General.countries.mk'
+  },
+  {
+    value: 'ge',
+    label: 'General.countries.ge'
+  },
+  {
+    value: 'al',
+    label: 'General.countries.al'
+  },
+  {
+    value: 'rs',
+    label: 'General.countries.rs'
+  },
+  {
+    value: 'tr',
+    label: 'General.countries.tr'
+  },
+  {
+    value: 'ua',
+    label: 'General.countries.ua'
+  },
+  {
+    value: 'xk',
+    label: 'General.countries.xk'
+  },
+  {
+    value: 'am',
+    label: 'General.countries.am'
+  },
+  {
+    value: 'az',
+    label: 'General.countries.az'
+  },
+  {
+    value: 'by',
+    label: 'General.countries.by'
+  },
+  {
+    value: 'dz',
+    label: 'General.countries.dz'
+  },
+  {
+    value: 'eg',
+    label: 'General.countries.eg'
+  },
+  {
+    value: 'il',
+    label: 'General.countries.il'
+  },
+  {
+    value: 'jo',
+    label: 'General.countries.jo'
+  },
+  {
+    value: 'ar',
+    label: 'General.countries.ar'
+  },
+  {
+    value: 'au',
+    label: 'General.countries.au'
+  },
+  {
+    value: 'br',
+    label: 'General.countries.br'
+  },
+  {
+    value: 'ca',
+    label: 'General.countries.ca'
+  },
+  {
+    value: 'cn_x_hk',
+    label: 'General.countries.cn_x_hk'
+  },
+  {
+    value: 'hk',
+    label: 'General.countries.hk'
+  },
+  {
+    value: 'in',
+    label: 'General.countries.in'
+  },
+  {
+    value: 'jp',
+    label: 'General.countries.jp'
+  },
+  {
+    value: 'mx',
+    label: 'General.countries.mx'
+  },
+  {
+    value: 'ng',
+    label: 'General.countries.ng'
+  },
+  {
+    value: 'nz',
+    label: 'General.countries.nz'
+  },
+  {
+    value: 'ru',
+    label: 'General.countries.ru'
+  },
+  {
+    value: 'sg',
+    label: 'General.countries.sg'
+  },
+  {
+    value: 'za',
+    label: 'General.countries.za'
+  },
+  {
+    value: 'kr',
+    label: 'General.countries.kr'
+  },
+  {
+    value: 'tw',
+    label: 'General.countries.tw'
+  },
+  {
+    value: 'uk',
+    label: 'General.countries.uk'
+  },
+  {
+    value: 'us',
+    label: 'General.countries.us'
+  },
 ];

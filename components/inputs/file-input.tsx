@@ -1,7 +1,12 @@
 import { useRef, useState } from 'react';
 import Image from 'next/image';
-import { UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import { 
+  ControllerRenderProps, 
+  UseFormRegister, 
+  UseFormSetValue 
+} from 'react-hook-form';
 import { CircleAlert, X } from 'lucide-react';
+import { convertFileToString } from '@/lib/helpers';
 
 
 interface IFileInput {
@@ -9,7 +14,8 @@ interface IFileInput {
   btnTitle: string;
   label?: string;
   disabled?: boolean;
-  register: UseFormRegister<any>;
+  register?: UseFormRegister<any>;
+  field?: ControllerRenderProps<any>;
   setValue: UseFormSetValue<any>;
   error?: string;
 };
@@ -19,37 +25,39 @@ export const FileInput: React.FC<IFileInput> = ({
   name, 
   btnTitle, 
   label, 
+  register,
+  field, 
   setValue, 
   disabled, 
-  register,
   error
 }) => {
   const hiddenFileInputRef = useRef<HTMLInputElement | null>(null);
   const [preview, setPreview] = useState<any | null>(null);
 
-  const convertFileToString = (file: any) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
+  // const convertFileToString = (file: any) => {
+  //   return new Promise((resolve, reject) => {
+  //     const fileReader = new FileReader();
 
-      fileReader.readAsDataURL(file);
+  //     fileReader.readAsDataURL(file);
 
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      ;}
+  //     fileReader.onload = () => {
+  //       resolve(fileReader.result);
+  //     ;}
 
-      fileReader.onerror = (error: any) => {
-        reject(error);
-      };
-    });
-  };
+  //     fileReader.onerror = (error: any) => {
+  //       reject(error);
+  //     };
+  //   });
+  // };
 
-  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (event: React.ChangeEvent<any>) => {
     const file = event.target.files?.[0];
 
-    if (file) {
+    if(file) {
       const url = await convertFileToString(file);
       setPreview(url);
-      setValue(name, url);
+      if(field) field.onChange(file);
+      setValue(name, file);
     } else {
       setPreview(null);
     }
@@ -98,7 +106,7 @@ export const FileInput: React.FC<IFileInput> = ({
           }
         </div>
         <input 
-          {...register(name)} 
+          // {...(register ? register(name) : field ? field : {})} 
           ref={hiddenFileInputRef}
           hidden
           type='file'

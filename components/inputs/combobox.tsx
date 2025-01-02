@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import { ControllerRenderProps, UseFormRegister } from 'react-hook-form';
 import { Label } from '../ui/label';
 import { Check, CircleAlert } from 'lucide-react';
@@ -9,6 +8,7 @@ import { useTranslations } from 'next-intl';
 import { Button } from '../ui/button';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '../ui/command';
 import { cn } from '@/lib/utils';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dropdown-menu';
 
 
 interface ICombobox {
@@ -21,7 +21,7 @@ interface ICombobox {
   }[];
   placeholder: string;
   register?: UseFormRegister<any>;
-  field: ControllerRenderProps<any>;
+  field?: ControllerRenderProps<any>;
   onHandleChange?: any;
   defaultValue?: string;
   disabled?: boolean;
@@ -34,6 +34,7 @@ export const Combobox: React.FC<ICombobox> = ({
   label,
   options,
   field,
+  register,
   placeholder,
   disabled,
   error
@@ -52,21 +53,21 @@ export const Combobox: React.FC<ICombobox> = ({
         </Label>
       )}
       <div className='w-full'>
-        <Popover open={isOpen} onOpenChange={setOpen}>
-          <PopoverTrigger disabled={disabled} asChild>
+        <DropdownMenu open={isOpen} onOpenChange={setOpen}>
+          <DropdownMenuTrigger disabled={disabled} asChild>
             <Button 
               variant='outline' 
               role='combobox' 
               aria-expanded={isOpen} 
               className='w-full justify-between'
             >
-              {field.value 
+              {field?.value 
                 ? options.find(option => option.value === field.value!)?.label 
                 : (placeholder || '')
               }
             </Button>
-          </PopoverTrigger>
-          <PopoverContent>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className='bg-background'>
             <Command>
               <CommandInput placeholder={placeholder} />
               <CommandList>
@@ -78,22 +79,23 @@ export const Combobox: React.FC<ICombobox> = ({
                     <CommandItem
                       key={crypto.randomUUID()}
                       value={option.value}
-                      onSelect={field.onChange}
+                      onSelect={field?.onChange}
                     >
                       <Check 
                         className={cn(
                           'mr-2 h-4 w-4',
-                          field.value === option.value ? 'opacity-100' : 'opacity-0'
+                          field?.value === option.value ? 'opacity-100' : 'opacity-0'
                         )}
                       />
-                      {option.label}
+                      {t(option.label)}
                     </CommandItem>
                   ))}
                 </CommandGroup>
               </CommandList>
             </Command>
-          </PopoverContent>
-        </Popover>
+            <input type="hidden" {...(register ? register(name) : field ? field : {})} />
+          </DropdownMenuContent>
+        </DropdownMenu>
         <p className='mt-1 flex items-center gap-1 text-sm text-danger-2'>
           {error && (
             <>
