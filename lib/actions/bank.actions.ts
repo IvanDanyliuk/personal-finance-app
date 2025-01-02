@@ -11,10 +11,11 @@ import { revalidatePath } from 'next/cache';
 
 export const getBanks = async () => {
   try {
-    
+    const banks = await db.bank.findMany();
+
     return {
       status: ActionStatus.Success,
-      data: [],
+      data: banks,
       count: 0,
       error: null,
     };

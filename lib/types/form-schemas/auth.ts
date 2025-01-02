@@ -1,5 +1,5 @@
-import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE } from '@/lib/constants';
 import { z as zod } from 'zod';
+import { ACCEPTED_IMAGE_TYPES, MAX_IMAGE_FILE_SIZE } from '@/lib/constants';
 
 
 export const signUpSchema = zod.object({
