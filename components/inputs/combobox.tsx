@@ -2,11 +2,18 @@
 
 import { useState } from 'react';
 import { ControllerRenderProps, UseFormRegister } from 'react-hook-form';
-import { Label } from '../ui/label';
 import { Check, CircleAlert } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { Label } from '../ui/label';
 import { Button } from '../ui/button';
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '../ui/command';
+import { 
+  Command, 
+  CommandEmpty, 
+  CommandGroup, 
+  // CommandInput, 
+  CommandItem, 
+  CommandList 
+} from '../ui/command';
 import { cn } from '@/lib/utils';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dropdown-menu';
 
@@ -59,17 +66,17 @@ export const Combobox: React.FC<ICombobox> = ({
               variant='outline' 
               role='combobox' 
               aria-expanded={isOpen} 
-              className='w-full justify-between'
+              className='w-full p-6 rounded-full justify-between'
             >
               {field?.value 
-                ? options.find(option => option.value === field.value!)?.label 
+                ? t(options.find(option => option.value === field.value!)?.label) 
                 : (placeholder || '')
               }
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className='bg-background'>
-            <Command>
-              <CommandInput placeholder={placeholder} />
+            <Command className='z-50'>
+              {/* <CommandInput placeholder={placeholder} /> */}
               <CommandList>
                 <CommandEmpty>
                   {t('General.noData')}

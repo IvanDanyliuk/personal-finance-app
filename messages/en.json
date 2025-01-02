@@ -173,11 +173,22 @@
   "Admin": {
     "Banks": {
       "bankForm": {
+        "formTriggerBtnLabel": "Create bank",
+        "formTitle": "Create a new bank",
         "nameFieldLabel": "Name",
         "countryFieldLabel": "Country",
         "countryFieldPlaceholder": "Select a country",
         "logoFieldLabel": "Logo",
+        "logoUploadBtnLabel": "Upload a logo",
         "submitBtnLabel": "Submit"
+      },
+      "actionMessages": {
+        "createBankSuccess": "New bank successfully created!"
+      },
+      "errors": {
+        "general": {
+          "title": "Oops! Something wet wrong!"
+        }
       }
     }
   },

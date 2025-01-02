@@ -1,12 +1,12 @@
 'use server';
 
-import { auth } from "@/auth";
-import { ActionStatus } from "../types/common.types";
-import { getUser } from "./user.actions";
-import { db } from "@/db";
-import { bankSchema } from "../types/form-schemas/admin";
-import { utapi } from "../uploadthing/utapi";
-import { convertFileToString } from '../helpers';
+import { auth } from '@/auth';
+import { ActionStatus } from '../types/common.types';
+import { getUser } from './user.actions';
+import { db } from '@/db';
+import { bankSchema } from '../types/form-schemas/admin';
+import { utapi } from '../uploadthing/utapi';
+import { revalidatePath } from 'next/cache';
 
 
 export const getBanks = async () => {
@@ -63,25 +63,18 @@ export const createBank = async (formData: FormData) => {
       };
     }
 
-    // const imageFile = validatedFields.data.logo ? await fetch(validatedFields.data.logo) : '';
-    // const imageBlob = imageFile ? await imageFile.blob() : new Blob();
-    // const imageToUpload = new File([imageBlob!], `${validatedFields.data.name}-avatar`);
-    // const uploadedLogo = imageToUpload && imageToUpload.size > 0 ? 
-    //   (await utapi.uploadFiles([imageToUpload]))[0].data?.url : 
-    //   '';
-
     const uploadedLogo = validatedFields.data.logo.size > 0 ? 
       (await utapi.uploadFiles([validatedFields.data.logo]))[0].data?.url : 
       '';
-
-    console.log('CREATE BANK: FINAL DATA', {validatedFields, uploadedLogo})
     
-    // await db.bank.create({ 
-    //   data: { 
-    //     ...validatedFields.data, 
-    //     logo: uploadedLogo! 
-    //   } 
-    // });
+    await db.bank.create({ 
+      data: { 
+        ...validatedFields.data, 
+        logo: uploadedLogo! 
+      } 
+    });
+
+    revalidatePath('/admin');
 
     return {
       status: ActionStatus.Success,

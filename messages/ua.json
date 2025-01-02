@@ -173,11 +173,22 @@
   "Admin": {
     "Banks": {
       "bankForm": {
+        "formTriggerBtnLabel": "Створити банк",
+        "formTitle": "Створити новий банк",
         "nameFieldLabel": "Ім'я",
         "countryFieldLabel": "Країна",
         "countryFieldPlaceholder": "Оберіть країну",
         "logoFieldLabel": "Логотип",
+        "logoUploadBtnLabel": "Додати логотип",
         "submitBtnLabel": "Створити"
+      },
+      "actionMessages": {
+        "createBankSuccess": "Новий банк успішно створено!"
+      },
+      "errors": {
+        "general": {
+          "title": "Отакої! Щось пішло не так!"
+        }
       }
     }
   },

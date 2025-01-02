@@ -23,22 +23,6 @@ export const extractFirstLetters = (input: string) => {
   return (firstLetter + lastLetter).toUpperCase();
 };
 
-export const convertFileToString = (file: any) => {
-  return new Promise((resolve, reject) => {
-    const fileReader = new FileReader();
-
-    fileReader.readAsDataURL(file);
-
-    fileReader.onload = () => {
-      resolve(fileReader.result);
-    ;}
-
-    fileReader.onerror = (error: any) => {
-      reject(error);
-    };
-  });
-};
-
 export const removeFalseyFields = (obj: any) => {
   return Object.fromEntries(
       Object.entries(obj).filter(([_, value]) => Boolean(value))

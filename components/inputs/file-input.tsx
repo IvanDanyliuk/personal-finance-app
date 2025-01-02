@@ -6,7 +6,6 @@ import {
   UseFormSetValue 
 } from 'react-hook-form';
 import { CircleAlert, X } from 'lucide-react';
-import { convertFileToString } from '@/lib/helpers';
 
 
 interface IFileInput {
@@ -25,7 +24,6 @@ export const FileInput: React.FC<IFileInput> = ({
   name, 
   btnTitle, 
   label, 
-  register,
   field, 
   setValue, 
   disabled, 
@@ -34,21 +32,21 @@ export const FileInput: React.FC<IFileInput> = ({
   const hiddenFileInputRef = useRef<HTMLInputElement | null>(null);
   const [preview, setPreview] = useState<any | null>(null);
 
-  // const convertFileToString = (file: any) => {
-  //   return new Promise((resolve, reject) => {
-  //     const fileReader = new FileReader();
+  const convertFileToString = (file: any) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
 
-  //     fileReader.readAsDataURL(file);
+      fileReader.readAsDataURL(file);
 
-  //     fileReader.onload = () => {
-  //       resolve(fileReader.result);
-  //     ;}
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      ;}
 
-  //     fileReader.onerror = (error: any) => {
-  //       reject(error);
-  //     };
-  //   });
-  // };
+      fileReader.onerror = (error: any) => {
+        reject(error);
+      };
+    });
+  };
 
   const handleFileChange = async (event: React.ChangeEvent<any>) => {
     const file = event.target.files?.[0];
@@ -74,13 +72,20 @@ export const FileInput: React.FC<IFileInput> = ({
 
   return (
     <div className='w-full flex items-center gap-3'>
-      {label && <label htmlFor={name} className='w-full md:w-36 text-sm font-semibold'>{label}</label>}
+      {label && (
+        <label 
+          htmlFor={name} 
+          className='w-full md:w-36 text-sm font-semibold'
+        >
+          {label}
+        </label>
+      )}
       <div className='relative w-full md:grow'>
         <div className={`w-full flex gap-1 items-center ${!label ? 'justify-center' : ''}`}>
           <button 
             type='button'
             disabled={disabled}
-            className='w-36 h-10 bg-slate-500 text-sm text-white uppercase rounded'
+            className='w-fit h-10 px-3 bg-slate-500 text-sm text-white uppercase rounded'
             onClick={triggerFileInput}
           >
             {btnTitle}
@@ -106,7 +111,6 @@ export const FileInput: React.FC<IFileInput> = ({
           }
         </div>
         <input 
-          // {...(register ? register(name) : field ? field : {})} 
           ref={hiddenFileInputRef}
           hidden
           type='file'

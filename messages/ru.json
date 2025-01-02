@@ -173,11 +173,22 @@
   "Admin": {
     "Banks": {
       "bankForm": {
+        "formTriggerBtnLabel": "Создать банк",
+        "formTitle": "Создать новый банк",
         "nameFieldLabel": "Имя",
         "countryFieldLabel": "Страна",
         "countryFieldPlaceholder": "Выберите страну",
         "logoFieldLabel": "Логотип",
-        "submitBtnLabel": "Подтвердить"
+        "logoUploadBtnLabel": "Добавить логотип",
+        "submitBtnLabel": "Создать"
+      },
+      "actionMessages": {
+        "createBankSuccess": "Новый банк успешно создан!"
+      },
+      "errors": {
+        "general": {
+          "title": "Ой! Что-то пошло не так!"
+        }
       }
     }
   },

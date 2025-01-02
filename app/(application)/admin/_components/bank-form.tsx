@@ -1,7 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
 import {
   Dialog,
   DialogContent,
@@ -11,31 +13,25 @@ import {
 } from '@/components/ui/dialog';
 import { bankSchema, BankSchema } from '@/lib/types/form-schemas/admin';
 import { Combobox, FileInput, TextField } from '@/components/inputs';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useTranslations } from 'next-intl';
 import { ActionStatus } from '@/lib/types/common.types';
 import { useToast } from '@/hooks/use-toast';
 import { createBank } from '@/lib/actions/bank.actions';
-import { useRouter } from 'next/navigation';
-import { COUNTRIES } from '@/lib/constants';
 import { SubmitButton } from '@/components/common';
+import { COUNTRIES } from '@/lib/constants';
 
 
 export const BankForm = () => {
   const t = useTranslations();
   const { toast } = useToast();
-  const router = useRouter();
 
   const [isOpen, setOpen] = useState<boolean>(false);
-  const countries = COUNTRIES
-  console.log('BANK FORM', countries)
 
   const {
     control,
     formState: { errors, isSubmitting },
     setValue,
-    // register,
-    handleSubmit
+    handleSubmit,
+    reset
   } = useForm({
     resolver: zodResolver(bankSchema),
     defaultValues: {
@@ -53,22 +49,21 @@ export const BankForm = () => {
     formData.append('country', data.country);
     formData.append('logo', data.logo);
 
-    console.log('BANK FORM DATA', data)
-
     const { status, error } = await createBank(formData);
     
     if(status === ActionStatus.Success && !error) {
       toast({
-        description: t('Admin.BanksactionMessages.createBankSuccess'),
+        description: t('Admin.Banks.actionMessages.createBankSuccess'),
         variant: 'default',
         className: 'bg-success-1 text-success-2'
       });
-      // router.push('/');
+      reset();
+      setOpen(false);
     } 
 
     if(status === ActionStatus.Failed && error) {
       toast({
-        title: t('Admin.Bankserrors.general.title'),
+        title: t('Admin.Banks.errors.general.title'),
         description: t(error),
         variant: 'destructive',
         className: 'bg-danger-1 text-danger-2'
@@ -78,12 +73,16 @@ export const BankForm = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleMenuOpen}>
-      <DialogTrigger>Open</DialogTrigger>
+      <DialogTrigger>
+        {t('Admin.Banks.bankForm.formTriggerBtnLabel')}
+      </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create a new bank account</DialogTitle>
+          <DialogTitle>
+            {t('Admin.Banks.bankForm.formTitle')}
+          </DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit(onFormSubmit)}>
+        <form onSubmit={handleSubmit(onFormSubmit)} className='space-y-3'>
           <Controller 
             name='name'
             control={control}

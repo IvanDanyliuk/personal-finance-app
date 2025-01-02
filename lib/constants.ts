@@ -1,4 +1,3 @@
-import { countries as countriesList } from 'countries-list';
 import Utilities from '@/public/images/expense-categories/utilities.svg';
 import Food from '@/public/images/expense-categories/groceries.svg';
 import Household from '@/public/images/expense-categories/household.svg';
