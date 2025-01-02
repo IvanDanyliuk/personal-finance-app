@@ -6,6 +6,7 @@ import {
   UseFormSetValue 
 } from 'react-hook-form';
 import { CircleAlert, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 
 interface IFileInput {
@@ -16,7 +17,7 @@ interface IFileInput {
   register?: UseFormRegister<any>;
   field?: ControllerRenderProps<any>;
   setValue: UseFormSetValue<any>;
-  error?: string;
+  error?: any;
 };
 
 
@@ -29,6 +30,7 @@ export const FileInput: React.FC<IFileInput> = ({
   disabled, 
   error
 }) => {
+  const t = useTranslations();
   const hiddenFileInputRef = useRef<HTMLInputElement | null>(null);
   const [preview, setPreview] = useState<any | null>(null);
 
@@ -121,7 +123,7 @@ export const FileInput: React.FC<IFileInput> = ({
             <>
               <CircleAlert />
               <span className='ml-1'>
-                {error}
+                {t(error)}
               </span>
             </>
           )}

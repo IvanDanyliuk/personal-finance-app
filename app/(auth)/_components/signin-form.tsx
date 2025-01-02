@@ -24,7 +24,6 @@ export const SignInForm = () => {
   });
 
   const {
-    // register,
     control,
     handleSubmit,
     formState: { errors, isSubmitting }
@@ -64,7 +63,6 @@ export const SignInForm = () => {
           <TextField 
             name='email' 
             label={t('signinPage.email')} 
-            // register={register} 
             field={field}
             error={errors['email']?.message} 
           />
@@ -78,7 +76,6 @@ export const SignInForm = () => {
             name='password' 
             label={t('signinPage.password')} 
             type='password'
-            // register={register} 
             field={field}
             error={errors['password']?.message} 
           />

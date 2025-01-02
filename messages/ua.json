@@ -122,7 +122,7 @@
       "image": "Додати фото",
       "signupBtn": "Зареєструватися",
       "agreeText": "Я згоден з",
-      "termsAndPrivacyLink": "умовами політики та приватності",
+      "termsAndPrivacyLink": "умовами політики приватності",
       "googleBtnTooltip": "Заруєструватися через Google"
     },
     "actionMessages": {
@@ -143,6 +143,8 @@
           "requiredConfirmPassword": "Підтвердіть пароль!",
           "invalidConfirmPassword": "Пароль має включати щонайменше 6 символів",
           "passwordNotMatch": "Паролі не співпадають",
+          "maxImageSizeLimit": "Розмір фото не має перевищувати 5Мб",
+          "invalidImageType": "Підтримуються тільки наступні формати: .jpeg, .jpg, .png та .webp",
           "wrongProviderGoogle": "Ви створили обліковий запис через Google Account. Увійдіть використовуючи Ваш Google Account та встановіть пароль в розділі Налаштування",
           "wrongProviderFacebook": "Ви створили обліковий запис через Facebook Account. Увійдіть використовуючи Ваш Facebook Account та встановіть пароль в розділі Налаштування",
           "wrongCredentials": "Щось пішло не так!",

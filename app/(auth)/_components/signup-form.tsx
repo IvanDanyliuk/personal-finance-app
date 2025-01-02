@@ -22,7 +22,13 @@ export const SignUpForm = () => {
 
   const form = useForm<SignUpSchema>({
     resolver: zodResolver(signUpSchema),
-    defaultValues: { name: '', email: '', password: '', confirmPassword: '', image: '' },
+    defaultValues: { 
+      name: '', 
+      email: '', 
+      password: '', 
+      confirmPassword: '', 
+      image: '' 
+    },
   });
 
   const {
@@ -126,6 +132,7 @@ export const SignUpForm = () => {
             field={field}
             setValue={setValue}
             btnTitle={t('signupPage.image')}
+            error={errors['image']?.message}
           />
         )}
       />
@@ -138,7 +145,7 @@ export const SignUpForm = () => {
         <div className='py-3 w-full flex justify-start items-center gap-1'>
         <CheckboxField 
           // name='agreement'
-          label={t('agreeText')}
+          label={t('signupPage.agreeText')}
           checked={isAgreementConfirmed}
           onChange={handleAgreementConfirm}
         />
@@ -146,7 +153,7 @@ export const SignUpForm = () => {
           href='/privacy-policy' 
           className='text-sm text-primary-8 font-semibold'
         >
-          {t('termsAndPrivacyLink')}
+          {t('signupPage.termsAndPrivacyLink')}
         </Link>
       </div>
     </form>
