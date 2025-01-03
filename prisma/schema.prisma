@@ -89,6 +89,7 @@ model Bank {
   name          String
   country       String
   logo          String
+  bankAccounts  BankAccount[]               @relation("Banks")
 
   createdAt DateTime                        @default(now())
   updatedAt DateTime                        @updatedAt
@@ -107,13 +108,16 @@ enum AccountType {
 }
 
 model BankAccount {
-  id            String                      @id @default(auto()) @map("_id") @db.ObjectId
-  user          User                        @relation("UserBankAccounts", fields: [userId], references: [id], onDelete: Cascade)
-  userId        String                      @db.ObjectId @unique
-  bankId        String          
-  currency      Currency
-  balance       Int
-  type          AccountType
+  id              String                      @id @default(auto()) @map("_id") @db.ObjectId
+  user            User                        @relation("UserBankAccounts", fields: [userId], references: [id], onDelete: Cascade)
+  userId          String                      @db.ObjectId @unique
+  bank            Bank?                       @relation("Banks", fields: [bankId], references: [id])
+  bankId          String?                     @db.ObjectId
+  currency        String
+  country         String?
+  balance         Int
+  type            String
+  additionalInfo  String?
 
   createdAt DateTime                        @default(now())
   updatedAt DateTime                        @updatedAt

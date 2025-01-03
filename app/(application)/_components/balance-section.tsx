@@ -1,11 +1,20 @@
+import { IBank } from '@/lib/types/bank';
 import { AccountForm } from './';
 
-export const BalanceSection: React.FC = () => {
+
+interface IBalanceSection {
+  banks: IBank[]
+}
+
+
+export const BalanceSection: React.FC<IBalanceSection> = ({ banks }) => {
+  const bankOptions = banks.map(bank => ({ value: bank.id, label: bank.name, icon: bank.logo }));
+
   return (
     <div className='space-y-3'>
       <div className='w-full flex justify-between items-center'>
         <h2>Your funds</h2>
-        <AccountForm />
+        <AccountForm banks={bankOptions} />
       </div>
       <div className='flex gap-3'>
         <div>

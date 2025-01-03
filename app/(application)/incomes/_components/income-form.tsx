@@ -14,7 +14,7 @@ import { incomeSchema, IncomeSchema } from '@/lib/types/form-schemas/incomes';
 
 interface IIncomeData extends IncomeSchema {
   id: string;
-}
+};
 
 interface IIncomeForm {
   incomeToUpdate?: IIncomeData;

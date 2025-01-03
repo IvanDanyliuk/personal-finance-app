@@ -93,6 +93,10 @@
       "tw": "Taiwan",
       "uk": "United Kingdom",
       "us": "United States"
+    },
+    "accountTypes": {
+      "account": "Bank account",
+      "jug": "Cash jug"
     }
   },
   "Auth": {
@@ -469,6 +473,37 @@
     }
   },
   "HomePage": {
-    "title": "Home"
+    "title": "Home",
+    "createAccountForm": {
+      "triggerBtnLabel": "Add",
+      "title": "Create a new account",
+      "typeFieldLabel": "Type",
+      "bankFieldLabel": "Bank",
+      "countryFieldLabel": "Country",
+      "countryFieldPlaceholder": "Select a country",
+      "currencyFieldLabel": "Currency",
+      "currencyFieldPlaceholder": "Select a currency",
+      "balanceFieldLabel": "Amount",
+      "additionalInfo": "Additional information",
+      "submitBtnLabel": "Submit"
+    },
+    "actionMessage": {
+      "createBankAccountSuccess": "New bank account successfully created"
+    },
+    "errors": {
+      "general": "Something went wrong!",
+      "wrongUserId": "You're not authenticated or your user ID is incorrect",
+      "createBankAccount": {
+        "createBankAccountFailed": "Cannot create a new bank account",
+        "jugsWithSameCurrency": "You already have cash jug in this currency. You can have only one cash jug of this currency.",
+        "fieldsValidation": {
+          "requiredType": "Select a type!",
+          "requiredCountry": "Select a country!",
+          "requiredBank": "Select a bank!",
+          "requiredBalance": "Balance is required",
+          "requiredCurrency": "Select a currency"
+        }
+      }
+    }
   }
 }

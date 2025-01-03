@@ -93,6 +93,10 @@
       "tw": "Тайвань",
       "uk": "Велика Британія",
       "us": "США"
+    },
+    "accountTypes": {
+      "account": "Банківський рахунок",
+      "jug": "Готівка"
     }
   },
   "Auth": {
@@ -469,6 +473,36 @@
     }
   },
   "HomePage": {
-    "title": "Головна"
+    "title": "Головна",
+    "createAccountForm": {
+      "triggerBtnLabel": "Додати",
+      "title": "Створити новий рахунок",
+      "typeFieldLabel": "Тип",
+      "typeFieldPlaceholder": "Оберіть тип",
+      "bankFieldLabel": "Банк",
+      "bankFieldPlaceholder": "Оберіть банк",
+      "countryFieldLabel": "Країна",
+      "countryFieldPlaceholder": "Оберіть країну",
+      "currencyFieldLabel": "Валюта",
+      "currencyFieldPlaceholder": "Оберіть валюту",
+      "balanceFieldLabel": "Сума",
+      "additionalInfo": "Додаткова інформація",
+      "submitBtnLabel": "Створити"
+    },
+    "errors": {
+      "general": "Щось пішло не так!",
+      "wrongUserId": "Ви не авторизовані або ID Вашого облікового запису некоректний",
+      "createBankAccount": {
+        "createBankAccountFailed": "Не вдалося створити новий рахунок",
+        "jugsWithSameCurrency": "У Вас вже є готівкові накопичення у цій валюті. Ви не можете мати кілька готівкових накопичень в одній валюті.",
+        "fieldsValidation": {
+          "requiredType": "Оберіть тип",
+          "requiredCountry": "Оберіть країну",
+          "requiredBank": "Оберіть банк",
+          "requiredBalance": "Вкажіть суму",
+          "requiredCurrency": "Оберіть валюту"
+        }
+      }
+    }
   }
 }

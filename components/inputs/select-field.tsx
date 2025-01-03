@@ -28,6 +28,7 @@ interface ISelectField {
   defaultValue?: string;
   placeholder?: string;
   disabled?: boolean;
+  isLocalesActive?: boolean;
   error?: string;
 };
 
@@ -41,6 +42,7 @@ export const SelectField: React.FC<ISelectField> = ({
   onHandleChange,
   placeholder, 
   disabled,
+  isLocalesActive = true,
   error
 }) => {
   const t = useTranslations();
@@ -90,7 +92,7 @@ export const SelectField: React.FC<ISelectField> = ({
                     className='mr-2 inline' 
                   />
                 )}
-                {t(label)}
+                {isLocalesActive ? t(label) : label}
               </SelectItem>
             ))}
           </SelectContent>

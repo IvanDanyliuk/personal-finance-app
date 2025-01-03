@@ -93,6 +93,10 @@
       "tw": "Тайвань",
       "uk": "Великобритания",
       "us": "США"
+    },
+    "accountTypes": {
+      "account": "Банковский счет",
+      "jug": "Наличные"
     }
   },
   "Auth": {
@@ -469,6 +473,35 @@
     }
   },
   "HomePage": {
-    "title": "Главная"
+    "title": "Главная",
+    "createAccountForm": {
+      "triggerBtnLabel": "Добавить",
+      "title": "Создать новый счет",
+      "typeFieldLabel": "Тип",
+      "bankFieldLabel": "Банк",
+      "countryFieldLabel": "Страна",
+      "countryFieldPlaceholder": "Выберите страну",
+      "currencyFieldLabel": "Валюта",
+      "currencyFieldPlaceholder": "Выберите валюту",
+      "balanceFieldLabel": "Сумма",
+      "additionalInfo": "Дополнительная информация",
+      "submitBtnLabel": "Создать"
+    },
+    "errors": {
+      "general": "Что-то пошло не так!",
+      "wrongUserId": "Вы не авторзованы или ID Вашего профиля неверный",
+      "createBankAccount": {
+        "createBankAccountFailed": "Не удалось создать новый счет",
+        "jugsWithSameCurrency": "У вас уже есть наличные сбережения в данной валюте. Вы не можете иметь несколько наличных сбережений в одной валюте.",
+        "fieldsValidation": {
+          "requiredType": "Выберите тип счета!",
+          "requiredCountry": "Выберите страну",
+          "requiredBank": "Выберите банк!",
+          "requiredBalance": "Укажите сумму",
+          "requiredCurrency": "Выберите валюту"
+
+        }
+      }
+    }
   }
 }

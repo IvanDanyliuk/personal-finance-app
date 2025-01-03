@@ -1,9 +1,15 @@
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { BalanceSection } from './_components';
+import { getBanks } from '@/lib/actions/bank.actions';
 
 
-export default function Home() {
-  const t = useTranslations();
+export default async function Home({ 
+  searchParams: { country } 
+}: { 
+  searchParams: { country: string } 
+}) {
+  const t = await getTranslations();
+  const banksByCountry = await getBanks(country);
 
   return (
     <div className='p-3 w-full h-fit border border-background-secondary rounded-3xl'>
@@ -11,7 +17,7 @@ export default function Home() {
         {t('HomePage.title')}
       </h1>
       <div className='w-full flex flex-col gap-3'>
-        <BalanceSection />      
+        <BalanceSection banks={banksByCountry.data} />      
       </div>
     </div>
   );

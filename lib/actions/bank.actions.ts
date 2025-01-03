@@ -9,9 +9,9 @@ import { utapi } from '../uploadthing/utapi';
 import { revalidatePath } from 'next/cache';
 
 
-export const getBanks = async () => {
+export const getBanks = async (country?: string) => {
   try {
-    const banks = await db.bank.findMany();
+    const banks = await db.bank.findMany(country ? { where: { country } } : undefined);
 
     return {
       status: ActionStatus.Success,
