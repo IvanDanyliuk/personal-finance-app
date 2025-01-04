@@ -12,6 +12,7 @@ import Auto from '@/public/images/expense-categories/car.svg';
 import PublicTransport from '@/public/images/expense-categories/public-transport.svg';
 import Repair from '@/public/images/expense-categories/repair.svg';
 import Other from '@/public/images/expense-categories/other.svg';
+import { AccountType } from './types/bank';
 
 
 export const WEEK_STARTS_FROM = [
@@ -489,11 +490,11 @@ export const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'im
 
 export const ACCOUNT_TYPES = [
   {
-    value: 'bank_account',
+    value: AccountType.BankAccount,
     label: 'General.accountTypes.account'
   },
   {
-    value: 'jug',
+    value: AccountType.Jug,
     label: 'General.accountTypes.jug'
   },
 ];

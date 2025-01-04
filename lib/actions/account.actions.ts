@@ -1,10 +1,12 @@
 'use server';
 
-import { auth } from "@/auth";
-import { ActionStatus } from "../types/common.types";
-import { revalidatePath } from "next/cache";
-import { bankAccountSchema } from "../types/form-schemas/bank-account";
-import { db } from "@/db";
+import { auth } from '@/auth';
+import { ActionStatus } from '../types/common.types';
+import { revalidatePath } from 'next/cache';
+import { BankAccountSchema, bankAccountSchema } from '../types/form-schemas/bank-account';
+import { db } from '@/db';
+import { removeFalseyFields } from '../helpers';
+import { AccountType } from '../types/bank';
 
 
 export const createBankAccount = async (formData: FormData) => {
@@ -14,9 +16,6 @@ export const createBankAccount = async (formData: FormData) => {
     if(!session) {
       throw new Error('HomePage.errors.wrongUserId');
     }
-
-    console.log('CREATE BANK ACCOUNT', formData)
-
 
     const validatedFields = bankAccountSchema.safeParse({
       type: formData.get('type'), 
@@ -34,13 +33,11 @@ export const createBankAccount = async (formData: FormData) => {
       };
     }
 
-    console.log('CREATE BANK ACCOUNT', validatedFields)
-
-    if(validatedFields.data.type === 'jug') {
+    if(validatedFields.data.type === AccountType.Jug) {
       const existingJugs = await db.bankAccount.findFirst({ 
         where: { 
           userId: session.user?.id, 
-          type: 'jug', 
+          type: AccountType.Jug, 
           currency: validatedFields.data.currency 
         } 
       });
@@ -50,11 +47,13 @@ export const createBankAccount = async (formData: FormData) => {
       }
     }
 
+    const bankAccountData = {
+      ...removeFalseyFields(validatedFields.data) as BankAccountSchema,
+      userId: session.user!.id!
+    };
+
     await db.bankAccount.create({ 
-      data: {
-        ...validatedFields.data,
-        userId: session.user?.id!
-      } 
+      data: bankAccountData 
     });
 
     revalidatePath('/');

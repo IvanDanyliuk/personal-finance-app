@@ -4,3 +4,8 @@ export interface IBank {
   country: string;
   logo: string;
 }
+
+export enum AccountType {
+  BankAccount = 'bank_account',
+  Jug = 'jug'
+};

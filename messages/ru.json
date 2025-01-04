@@ -487,6 +487,9 @@
       "additionalInfo": "Дополнительная информация",
       "submitBtnLabel": "Создать"
     },
+    "actionMessages": {
+      "createBankAccountSuccess": "Новый счет успешно создан"
+    },
     "errors": {
       "general": "Что-то пошло не так!",
       "wrongUserId": "Вы не авторзованы или ID Вашего профиля неверный",

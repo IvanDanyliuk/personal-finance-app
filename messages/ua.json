@@ -489,6 +489,9 @@
       "additionalInfo": "Додаткова інформація",
       "submitBtnLabel": "Створити"
     },
+    "actionMessages": {
+      "createBankAccountSuccess": "Новий рахунок успішно створено"
+    },
     "errors": {
       "general": "Щось пішло не так!",
       "wrongUserId": "Ви не авторизовані або ID Вашого облікового запису некоректний",

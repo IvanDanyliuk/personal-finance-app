@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { useTranslations } from 'next-intl';
 import {
   Dialog,
   DialogContent,
@@ -10,7 +11,6 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { SelectField, TextField } from '@/components/inputs';
-import { useTranslations } from 'next-intl';
 import { ACCOUNT_TYPES, COUNTRIES, CURRENCIES } from '@/lib/constants';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { BankAccountSchema, bankAccountSchema } from '@/lib/types/form-schemas/bank-account';
@@ -19,6 +19,7 @@ import { TextAreaField } from '@/components/inputs/text-area-field';
 import { createBankAccount } from '@/lib/actions/account.actions';
 import { ActionStatus } from '@/lib/types/common.types';
 import { useToast } from '@/hooks/use-toast';
+import { AccountType } from '@/lib/types/bank';
 
 
 interface IAccountForm {
@@ -44,7 +45,7 @@ export const AccountForm: React.FC<IAccountForm> = ({ banks }) => {
   } = useForm({
     resolver: zodResolver(bankAccountSchema),
     defaultValues: {
-      type: ACCOUNT_TYPES[0].value,
+      type: AccountType.BankAccount,
       country: '',
       bankId: '',
       balance: 0,
@@ -56,7 +57,18 @@ export const AccountForm: React.FC<IAccountForm> = ({ banks }) => {
   const watchedType = watch('type');
   const watchedCountry = watch('country');
 
-  const handleMenuOpen = () => setOpen(!isOpen);
+  const handleMenuOpen = () => {
+    if(isOpen) {
+      reset();
+    }
+    setOpen(!isOpen)
+  };
+
+  const handleAccountTypeChange = () => {
+    if(watchedType === AccountType.BankAccount && watchedCountry) {
+      reset({ country: '', bankId: '' });
+    }
+  };
 
   const onFormSubmit: SubmitHandler<BankAccountSchema> = async (data) => {
     const formData = new FormData();
@@ -110,6 +122,7 @@ export const AccountForm: React.FC<IAccountForm> = ({ banks }) => {
                 label={t('HomePage.createAccountForm.typeFieldLabel')} 
                 options={ACCOUNT_TYPES} 
                 field={field} 
+                onHandleChange={handleAccountTypeChange}
                 variant='vertical'
                 placeholder={t('HomePage.createAccountForm.typeFieldPlaceholder')}
                 error={errors['type']?.message}
@@ -127,7 +140,7 @@ export const AccountForm: React.FC<IAccountForm> = ({ banks }) => {
                 field={field}
                 variant='vertical'
                 placeholder={t('HomePage.createAccountForm.countryFieldPlaceholder')}
-                disabled={watchedType === ACCOUNT_TYPES[1].value}
+                disabled={watchedType === AccountType.Jug}
                 error={errors['country']?.message}
               />
             )}
@@ -144,7 +157,7 @@ export const AccountForm: React.FC<IAccountForm> = ({ banks }) => {
                 variant='vertical'
                 placeholder={t('HomePage.createAccountForm.bankFieldPlaceholder')}
                 isLocalesActive={false}
-                disabled={watchedType === ACCOUNT_TYPES[1].value || !watchedCountry}
+                disabled={watchedType === AccountType.Jug || !watchedCountry}
                 error={errors['bankId']?.message}
               />
             )}

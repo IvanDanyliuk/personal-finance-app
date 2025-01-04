@@ -110,7 +110,7 @@ enum AccountType {
 model BankAccount {
   id              String                      @id @default(auto()) @map("_id") @db.ObjectId
   user            User                        @relation("UserBankAccounts", fields: [userId], references: [id], onDelete: Cascade)
-  userId          String                      @db.ObjectId @unique
+  userId          String                      @db.ObjectId
   bank            Bank?                       @relation("Banks", fields: [bankId], references: [id])
   bankId          String?                     @db.ObjectId
   currency        String
