@@ -1,8 +1,9 @@
 import { z as zod } from 'zod';
+import { AccountType } from '../bank';
 
 
 const basicBankAccountSchema = zod.object({
-  type: zod.enum(['bank_account', 'jug']),
+  type: zod.nativeEnum(AccountType),
   country: zod.string().optional(),
   bankId: zod.string().optional(),
   balance: zod.number().min(1, 'HomePage.errors.createBankAccount.fieldsValidation.requiredBalance'),

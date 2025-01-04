@@ -487,6 +487,14 @@
       "additionalInfo": "Additional information",
       "submitBtnLabel": "Submit"
     },
+    "balanceSection": {
+      "tabs": {
+        "allTabLabel": "All",
+        "bankAccountsTabLabel": "Bank accounts",
+        "jugsTabLabel": "Cash",
+        "cashCardTitle": "Cash"
+      }
+    },
     "actionMessages": {
       "createBankAccountSuccess": "New bank account successfully created"
     },

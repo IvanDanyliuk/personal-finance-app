@@ -1,4 +1,5 @@
+import { AccountCard } from './account-card';
 import { AccountForm } from './account-form';
 import { BalanceSection } from './balance-section';
 
-export { AccountForm, BalanceSection };
+export { AccountCard, AccountForm, BalanceSection };

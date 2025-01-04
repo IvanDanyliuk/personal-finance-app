@@ -9,6 +9,39 @@ import { removeFalseyFields } from '../helpers';
 import { AccountType } from '../types/bank';
 
 
+export const getFunds = async () => {
+  try {
+    const session = await auth();
+
+    if(!session) {
+      throw new Error('HomePage.errors.wrongUserId');
+    }
+
+    const userAccounts = await db.bankAccount.findMany({ 
+      where: { 
+        userId: session.user?.id 
+      }, 
+      include: {
+        bank: true
+      }
+    });
+
+    revalidatePath('/');
+
+    return {
+      status: ActionStatus.Success,
+      data: userAccounts,
+      error: null,
+    };
+  } catch (error: any) {
+    return {
+      status: ActionStatus.Failed,
+      data: null,
+      error: error.message,
+    };
+  }
+};
+
 export const createBankAccount = async (formData: FormData) => {
   try {
     const session = await auth();

@@ -489,6 +489,14 @@
       "additionalInfo": "Додаткова інформація",
       "submitBtnLabel": "Створити"
     },
+    "balanceSection": {
+      "tabs": {
+        "allTabLabel": "Всі",
+        "bankAccountsTabLabel": "Банківські рахунки",
+        "jugsTabLabel": "Готівка",
+        "cashCardTitle": "Готівка"
+      }
+    },
     "actionMessages": {
       "createBankAccountSuccess": "Новий рахунок успішно створено"
     },
