@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import {
   Tooltip,
@@ -8,8 +7,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { AccountType, IBankAccount } from '@/lib/types/bank';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { AccountType, IBankAccount } from '@/lib/types/bank';
+import { formatNumber } from '@/lib/helpers';
 
 
 interface IAccountCard {
@@ -24,7 +24,7 @@ export const AccountCard: React.FC<IAccountCard> = ({ data }) => {
     <div className='relative p-4 min-w-80 h-44 bg-background-secondary rounded-xl'>
       <div className='w-full space-y-5'>
         <div className='flex justify-between items-center'>
-          <p className='text-sm font-semibold'>
+          <p className='text-sm text-secondary-4 font-semibold'>
             {t(`General.currencies.${data.currency}`)}
           </p>
           {data.type === AccountType.BankAccount && data.bankId && data.bank ? (
@@ -51,7 +51,7 @@ export const AccountCard: React.FC<IAccountCard> = ({ data }) => {
           )}
         </div>
         <p className='text-5xl font-bold text-primary-7'>
-          {data.balance}
+          {formatNumber(data.balance)}
         </p>
       </div>
     </div>

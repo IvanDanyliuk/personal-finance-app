@@ -74,3 +74,8 @@ export const groupFundsByCurrency = (funds: IBankAccount[]) => {
     return acc;
   }, {});
 };
+
+export const formatNumber = (num: number) => {
+  const stringifiedNum = `${num}`;
+  return stringifiedNum.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ');
+};

@@ -5,7 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { AccountType, IBank, IBankAccount } from '@/lib/types/bank';
 import { AccountCard, AccountForm } from './';
 import { useEffect, useState } from 'react';
-import { groupFundsByCurrency } from '@/lib/helpers';
+import { formatNumber, groupFundsByCurrency } from '@/lib/helpers';
 
 
 interface IBalanceSection {
@@ -39,17 +39,17 @@ export const BalanceSection: React.FC<IBalanceSection> = ({ banks, funds }) => {
       <div className='flex max-w-full gap-3'>
         <div className='px-4 py-3 w-80 bg-background-secondary rounded-xl space-y-2'>
           <h3 className='text-lg font-semibold text-primary-7'>
-            Total
+            {t('HomePage.balanceSection.totalFunds.subTitle')}
           </h3>
           {totalFunds && (
             <ul>
-              {Object.entries(totalFunds).map(item => (
+              {Object.entries(totalFunds).map((item: any) => (
                 <li key={crypto.randomUUID()} className='flex justify-between'>
-                  <span className='text-primary-8 font-semibold'>
+                  <span className='text-secondary-4 font-semibold'>
                     {t(`General.currencies.${item[0]}`)}
                   </span>
                   <span className='text-xl text-primary-7 font-bold'>
-                    {`${item[1]}`}
+                    {`${formatNumber(item[1])}`}
                   </span>
                 </li>
               ))}

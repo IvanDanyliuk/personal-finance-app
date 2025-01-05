@@ -489,7 +489,8 @@
     },
     "balanceSection": {
       "totalFunds": {
-        "title": "Your funds"
+        "title": "Your funds",
+        "subTitle": "Total"
       },
       "tabs": {
         "allTabLabel": "All",

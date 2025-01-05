@@ -489,7 +489,8 @@
     },
     "balanceSection": {
       "totalFunds": {
-        "title": "Ваши средства"
+        "title": "Ваши средства",
+        "subTitle": "Всего"
       },
       "tabs": {
         "allTabLabel": "Все",
