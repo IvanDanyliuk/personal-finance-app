@@ -490,6 +490,9 @@
       "submitBtnLabel": "Створити"
     },
     "balanceSection": {
+      "totalFunds": {
+        "title": "Ваші кошти"
+      },
       "tabs": {
         "allTabLabel": "Всі",
         "bankAccountsTabLabel": "Банківські рахунки",

@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import { format } from 'date-fns';
+import { IBankAccount } from './types/bank';
 
 
 export const saltAndHashPassword = (password: any) => {
@@ -62,3 +63,14 @@ export const generateEmptyState = <T>(keys: (keyof T)[]): Record<keyof T, string
 
 export const hasKey = <T>(obj: unknown, key: keyof T): obj is T =>
   typeof obj === "object" && obj !== null && key in obj;
+
+export const groupFundsByCurrency = (funds: IBankAccount[]) => {
+  return funds.reduce((acc: any, fund) => {
+    const { currency, balance } = fund;
+    if (!acc[currency]) {
+      acc[currency] = 0;
+    }
+    acc[currency] += balance;
+    return acc;
+  }, {});
+};

@@ -488,6 +488,9 @@
       "submitBtnLabel": "Создать"
     },
     "balanceSection": {
+      "totalFunds": {
+        "title": "Ваши средства"
+      },
       "tabs": {
         "allTabLabel": "Все",
         "bankAccountsTabLabel": "Банковские счета",

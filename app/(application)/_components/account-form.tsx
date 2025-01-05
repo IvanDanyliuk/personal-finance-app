@@ -103,7 +103,7 @@ export const AccountForm: React.FC<IAccountForm> = ({ banks }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleMenuOpen}>
-      <DialogTrigger>
+      <DialogTrigger className='w-36 h-12 bg-primary-7 hover:bg-primary-6 rounded-full text-white text-sm md:text-base font-semibold'>
         {t('HomePage.createAccountForm.triggerBtnLabel')}
       </DialogTrigger>
       <DialogContent>

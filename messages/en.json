@@ -488,6 +488,9 @@
       "submitBtnLabel": "Submit"
     },
     "balanceSection": {
+      "totalFunds": {
+        "title": "Your funds"
+      },
       "tabs": {
         "allTabLabel": "All",
         "bankAccountsTabLabel": "Bank accounts",
