@@ -58,14 +58,14 @@ export const BalanceSection: React.FC<IBalanceSection> = ({ banks, funds }) => {
         </div>
         <div className='px-3 flex-1 overflow-hidden'>
           <Tabs defaultValue='all'>
-            <TabsList className='mb-3 flex gap-6'>
-              <TabsTrigger value='all' className='flex items-center gap-1'>
+            <TabsList className='mb-3 flex justify-start gap-3'>
+              <TabsTrigger value='all' className='flex items-center gap-1 font-semibold'>
                 {t('HomePage.balanceSection.tabs.allTabLabel')}
               </TabsTrigger>
-              <TabsTrigger value='bank_accounts' className='flex items-center gap-1'>
+              <TabsTrigger value='bank_accounts' className='flex items-center gap-1 font-semibold'>
                 {`${t('HomePage.balanceSection.tabs.bankAccountsTabLabel')} (${bankAccounts.length})`}
               </TabsTrigger>
-              <TabsTrigger value='jugs' className='flex items-center gap-1'>
+              <TabsTrigger value='jugs' className='flex items-center gap-1 font-semibold'>
                 {`${t('HomePage.balanceSection.tabs.jugsTabLabel')} (${jugs.length})`}
               </TabsTrigger>
             </TabsList>
