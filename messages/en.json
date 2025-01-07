@@ -497,6 +497,11 @@
         "bankAccountsTabLabel": "Bank accounts",
         "jugsTabLabel": "Cash",
         "cashCardTitle": "Cash"
+      },
+      "accountCard": {
+        "detailsMenuItemLabel": "Details",
+        "transferFundsMenuItemLabel": "Transfer funds",
+        "closeAccountMenuItemLabel": "Close account"
       }
     },
     "actionMessages": {

@@ -499,6 +499,11 @@
         "bankAccountsTabLabel": "Банківські рахунки",
         "jugsTabLabel": "Готівка",
         "cashCardTitle": "Готівка"
+      },
+      "accountCard": {
+        "detailsMenuItemLabel": "Деталі",
+        "transferFundsMenuItemLabel": "Переказати кошти",
+        "closeAccountMenuItemLabel": "Закрити рахунок"
       }
     },
     "actionMessages": {

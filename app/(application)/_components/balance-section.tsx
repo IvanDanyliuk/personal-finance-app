@@ -44,7 +44,7 @@ export const BalanceSection: React.FC<IBalanceSection> = ({ banks, funds }) => {
           {totalFunds && (
             <ul>
               {Object.entries(totalFunds).map((item: any) => (
-                <li key={crypto.randomUUID()} className='flex justify-between'>
+                <li key={crypto.randomUUID()} className='flex justify-between items-center'>
                   <span className='text-secondary-4 font-semibold'>
                     {t(`General.currencies.${item[0]}`)}
                   </span>

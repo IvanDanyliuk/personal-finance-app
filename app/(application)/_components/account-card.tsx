@@ -10,6 +10,7 @@ import {
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { AccountType, IBankAccount } from '@/lib/types/bank';
 import { formatNumber } from '@/lib/helpers';
+import { AccountCardActions } from './';
 
 
 interface IAccountCard {
@@ -21,7 +22,7 @@ export const AccountCard: React.FC<IAccountCard> = ({ data }) => {
   const t = useTranslations();
 
   return (
-    <div className='relative p-4 min-w-80 h-44 bg-background-secondary rounded-xl'>
+    <div className='relative p-4 min-w-80 h-44 flex flex-col justify-between bg-background-secondary rounded-xl'>
       <div className='w-full space-y-5'>
         <div className='flex justify-between items-center'>
           <p className='text-sm text-secondary-4 font-semibold'>
@@ -53,6 +54,9 @@ export const AccountCard: React.FC<IAccountCard> = ({ data }) => {
         <p className='text-5xl font-bold text-primary-7'>
           {formatNumber(data.balance)}
         </p>
+      </div>
+      <div className='flex justify-end items-end'>
+        <AccountCardActions accountId={data.id} />
       </div>
     </div>
   );
