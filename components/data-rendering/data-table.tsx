@@ -93,7 +93,6 @@ export const DataTable: React.FC<IDataTable> = ({
 
   const keys = Object.keys({ ...data[0] }) as (keyof IData)[];
   const emptyRowData = generateEmptyState<IData>(keys);
-  console.log('EMPTY STATE', emptyRowData)
 
   const handleSetPrevPage = () => {
     if(currentPage > 1) {
@@ -282,8 +281,8 @@ export const DataTable: React.FC<IDataTable> = ({
                   ))}
                   <TableCell className='px-6 py-2 border-r border-t border-b border-background-neutral rounded-r-full'>
                     <TableRowActionsMenu 
-                      updateBtnLabel='Update'
-                      deleteBtnLabel='Delete'
+                      updateBtnLabel={t('Layout.tableRowMenuActionBtns.updateRowMenuItem')}
+                      deleteBtnLabel={t('Layout.tableRowMenuActionBtns.deleteRowMenuItem')}
                       onUpdate={() => handleOpenDialog('update', dataItem.id)}
                       onDelete={() => handleOpenDialog('delete', dataItem.id)}
                     />
