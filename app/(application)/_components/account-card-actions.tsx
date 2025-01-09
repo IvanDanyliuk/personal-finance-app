@@ -1,5 +1,8 @@
 'use client';
 
+import { useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { Ellipsis } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -13,10 +16,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Ellipsis } from 'lucide-react';
-import { useTranslations } from 'next-intl';
-import { useState } from 'react';
-
 
 
 interface IAccountCardActions {
@@ -32,7 +31,7 @@ export const AccountCardActions: React.FC<IAccountCardActions> = ({ accountId })
 
   return (
     <>
-      <DropdownMenu>
+      <DropdownMenu modal={false}>
         <DropdownMenuTrigger>
           <Ellipsis className='w-7 h-7' />
         </DropdownMenuTrigger>
@@ -50,7 +49,7 @@ export const AccountCardActions: React.FC<IAccountCardActions> = ({ accountId })
       </DropdownMenu>
 
       <Dialog open={isDetailsOpen} onOpenChange={setDetailsOpen}>
-        <DialogContent>
+        <DialogContent className=''>
           <DialogHeader>
             <DialogTitle>Are you absolutely sure?</DialogTitle>
             <DialogDescription>
