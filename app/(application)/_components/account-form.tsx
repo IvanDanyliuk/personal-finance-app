@@ -11,7 +11,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { SelectField, TextField } from '@/components/inputs';
-import { ACCOUNT_TYPES, COUNTRIES, CURRENCIES } from '@/lib/constants';
+import { ACCOUNT_TYPES, COUNTRIES, CURRENCIES, PAYMENT_SYSTEMS } from '@/lib/constants';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { BankAccountSchema, bankAccountSchema } from '@/lib/types/form-schemas/bank-account';
 import { SubmitButton } from '@/components/common';
@@ -48,6 +48,9 @@ export const AccountForm: React.FC<IAccountForm> = ({ banks }) => {
       type: AccountType.BankAccount,
       country: '',
       bankId: '',
+      accountNumber: '',
+      paymentSystem: '',
+      cardNumber: undefined,
       balance: 0,
       currency: '',
       additionalInfo: '',
@@ -106,102 +109,153 @@ export const AccountForm: React.FC<IAccountForm> = ({ banks }) => {
       <DialogTrigger className='w-36 h-12 bg-primary-7 hover:bg-primary-6 rounded-full text-white text-sm md:text-base font-semibold'>
         {t('HomePage.createAccountForm.triggerBtnLabel')}
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className='min-w-fit max-w-[calc(100%-30px)] md:max-w-fit max-h-[calc(100vh-30px)] overflow-y-scroll md:overflow-y-auto rounded-xl'>
         <DialogHeader>
           <DialogTitle>
             {t('HomePage.createAccountForm.title')}
           </DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit(onFormSubmit)} className='space-y-3'>
-          <Controller 
-            name='type'
-            control={control}
-            render={({ field }) => (
-              <SelectField 
-                name='type' 
-                label={t('HomePage.createAccountForm.typeFieldLabel')} 
-                options={ACCOUNT_TYPES} 
-                field={field} 
-                onHandleChange={handleAccountTypeChange}
-                variant='vertical'
-                placeholder={t('HomePage.createAccountForm.typeFieldPlaceholder')}
-                error={errors['type']?.message}
-              />
-            )}
-          />
-          <Controller 
-            name='country'
-            control={control}
-            render={({ field }) => (
-              <SelectField 
-                name='country'
-                label={t('HomePage.createAccountForm.countryFieldLabel')}
-                options={COUNTRIES}
-                field={field}
-                variant='vertical'
-                placeholder={t('HomePage.createAccountForm.countryFieldPlaceholder')}
-                disabled={watchedType === AccountType.Jug}
-                error={errors['country']?.message}
-              />
-            )}
-          />
-          <Controller 
-            name='bankId'
-            control={control}
-            render={({ field }) => (
-              <SelectField 
-                name='bankId'
-                label={t('HomePage.createAccountForm.bankFieldLabel')}
-                options={banks}
-                field={field}
-                variant='vertical'
-                placeholder={t('HomePage.createAccountForm.bankFieldPlaceholder')}
-                isLocalesActive={false}
-                disabled={watchedType === AccountType.Jug || !watchedCountry}
-                error={errors['bankId']?.message}
-              />
-            )}
-          />
-          <Controller 
-            name='balance'
-            control={control}
-            render={({ field }) => (
-              <TextField 
-                name='balance'
-                type='number'
-                label={t('HomePage.createAccountForm.balanceFieldLabel')}
-                field={field}
-                error={errors['balance']?.message}
-              />
-            )}
-          />
-          <Controller 
-            name='currency'
-            control={control}
-            render={({ field }) => (
-              <SelectField 
-                name='currency'
-                label={t('HomePage.createAccountForm.currencyFieldLabel')}
-                placeholder={t('HomePage.createAccountForm.currencyFieldPlaceholder')}
-                options={CURRENCIES}
-                field={field}
-                variant='vertical'
-                error={errors['currency']?.message}
-              />
-            )}
-          />
-          <Controller 
-            name='additionalInfo'
-            control={control}
-            render={({ field }) => (
-              <TextAreaField 
-                name='additionalInfo'
-                label={t('HomePage.createAccountForm.additionalInfo')}
-                field={field}
-              />
-            )}
-          />
-          <SubmitButton isSubmitting={isSubmitting}>
+        <form onSubmit={handleSubmit(onFormSubmit)} className='w-full flex flex-col md:flex-row md:flex-wrap gap-3'>
+          <fieldset className='flex-1 space-y-3'>
+            <Controller 
+              name='type'
+              control={control}
+              render={({ field }) => (
+                <SelectField 
+                  name='type' 
+                  label={t('HomePage.createAccountForm.typeFieldLabel')} 
+                  options={ACCOUNT_TYPES} 
+                  field={field} 
+                  onHandleChange={handleAccountTypeChange}
+                  variant='vertical'
+                  placeholder={t('HomePage.createAccountForm.typeFieldPlaceholder')}
+                  error={errors['type']?.message}
+                />
+              )}
+            />
+            <Controller 
+              name='country'
+              control={control}
+              render={({ field }) => (
+                <SelectField 
+                  name='country'
+                  label={t('HomePage.createAccountForm.countryFieldLabel')}
+                  options={COUNTRIES}
+                  field={field}
+                  variant='vertical'
+                  placeholder={t('HomePage.createAccountForm.countryFieldPlaceholder')}
+                  disabled={watchedType === AccountType.Jug}
+                  error={errors['country']?.message}
+                />
+              )}
+            />
+            <Controller 
+              name='bankId'
+              control={control}
+              render={({ field }) => (
+                <SelectField 
+                  name='bankId'
+                  label={t('HomePage.createAccountForm.bankFieldLabel')}
+                  options={banks}
+                  field={field}
+                  variant='vertical'
+                  placeholder={t('HomePage.createAccountForm.bankFieldPlaceholder')}
+                  isLocalesActive={false}
+                  disabled={watchedType === AccountType.Jug || !watchedCountry}
+                  error={errors['bankId']?.message}
+                />
+              )}
+            />
+            <Controller 
+              name='accountNumber'
+              control={control}
+              render={({ field }) => (
+                <TextField 
+                  name='accountNumber'
+                  label={t('HomePage.createAccountForm.accountNumberFieldLabel')}
+                  placeholder={t('HomePage.createAccountForm.accountNumberFieldPlaceholder')}
+                  field={field}
+                  disabled={watchedType === AccountType.Jug || !watchedCountry}
+                  error={errors['accountNumber']?.message}
+                />
+              )}
+            />
+            <Controller 
+              name='cardNumber'
+              control={control}
+              render={({ field }) => (
+                <TextField 
+                  name='cardNumber'
+                  label={t('HomePage.createAccountForm.cardNumberFieldLabel')}
+                  type='number'
+                  placeholder={t('HomePage.createAccountForm.cardNumberFieldPlaceholder')}
+                  field={field}
+                  disabled={watchedType === AccountType.Jug || !watchedCountry}
+                  error={errors['cardNumber']?.message}
+                />
+              )}
+            />
+          </fieldset>
+          <fieldset className='flex-1 space-y-3'>
+            <Controller 
+              name='paymentSystem'
+              control={control}
+              render={({ field }) => (
+                <SelectField 
+                  name='paymentSystem'
+                  label={t('HomePage.createAccountForm.paymentSystemFieldLabel')}
+                  options={PAYMENT_SYSTEMS}
+                  field={field}
+                  variant='vertical'
+                  placeholder={t('HomePage.createAccountForm.paymentSystemFieldPlaceholder')}
+                  isLocalesActive
+                  disabled={watchedType === AccountType.Jug || !watchedCountry}
+                  error={errors['paymentSystem']?.message}
+                />
+              )}
+            />
+            <Controller 
+              name='balance'
+              control={control}
+              render={({ field }) => (
+                <TextField 
+                  name='balance'
+                  type='number'
+                  label={t('HomePage.createAccountForm.balanceFieldLabel')}
+                  field={field}
+                  error={errors['balance']?.message}
+                />
+              )}
+            />
+            <Controller 
+              name='currency'
+              control={control}
+              render={({ field }) => (
+                <SelectField 
+                  name='currency'
+                  label={t('HomePage.createAccountForm.currencyFieldLabel')}
+                  placeholder={t('HomePage.createAccountForm.currencyFieldPlaceholder')}
+                  options={CURRENCIES}
+                  field={field}
+                  variant='vertical'
+                  error={errors['currency']?.message}
+                />
+              )}
+            />
+            <Controller 
+              name='additionalInfo'
+              control={control}
+              render={({ field }) => (
+                <TextAreaField 
+                  name='additionalInfo'
+                  label={t('HomePage.createAccountForm.additionalInfo')}
+                  field={field}
+                  rows={6}
+                />
+              )}
+            />
+          </fieldset>
+          <SubmitButton isSubmitting={isSubmitting} className='min-w-full'>
             {t('HomePage.createAccountForm.submitBtnLabel')}
           </SubmitButton>
         </form>

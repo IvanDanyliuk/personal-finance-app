@@ -11,6 +11,9 @@ export interface IBankAccount {
   country?: string | null;
   bankId?: string | null;
   bank?: IBank | null;
+  accountNumber?: string | null;
+  cardNumber?: number | null;
+  paymentSystem?: string | null;
   balance: number;
   currency: string;
   additionalInfo?: string | null;

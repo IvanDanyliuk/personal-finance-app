@@ -22,7 +22,7 @@ export const AccountCard: React.FC<IAccountCard> = ({ data }) => {
   const t = useTranslations();
 
   return (
-    <div className='relative p-4 min-w-80 h-44 flex flex-col justify-between bg-background-secondary rounded-xl'>
+    <div className='relative p-4 min-w-80 h-44 flex flex-col justify-between bg-gradient-to-r from-primary-2 via-primary-3 to-primary-2 rounded-xl'>
       <div className='w-full space-y-5'>
         <div className='flex justify-between items-center'>
           <p className='text-sm text-secondary-4 font-semibold'>
@@ -56,7 +56,7 @@ export const AccountCard: React.FC<IAccountCard> = ({ data }) => {
         </p>
       </div>
       <div className='flex justify-end items-end'>
-        <AccountCardActions accountId={data.id} />
+        <AccountCardActions account={data} />
       </div>
     </div>
   );

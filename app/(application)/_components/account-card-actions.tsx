@@ -16,18 +16,21 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { IBankAccount } from '@/lib/types/bank';
 
 
 interface IAccountCardActions {
-  accountId: string;
-}
+  account: IBankAccount;
+};
 
 
-export const AccountCardActions: React.FC<IAccountCardActions> = ({ accountId }) => {
+export const AccountCardActions: React.FC<IAccountCardActions> = ({ account }) => {
   const t = useTranslations();
 
   const [isDetailsOpen, setDetailsOpen] = useState<boolean>(false);
   const [isTransferOpen, setTransferOpen] = useState<boolean>(false);
+
+  console.log('ACCOUNT ACTIONS DATA', account)
 
   return (
     <>

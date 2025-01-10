@@ -418,6 +418,12 @@
       "cash": "Готівка",
       "card": "Картка"
     },
+    "payment_systems": {
+      "visa": "Visa",
+      "mastercard": "Master Card",
+      "paypal": "PayPal",
+      "amex": "American Express"
+    },
     "expense_destinations": {
       "utilities": "Комунальні платежі",
       "food": "Продукти харчування",
@@ -487,6 +493,12 @@
       "bankFieldPlaceholder": "Оберіть банк",
       "countryFieldLabel": "Країна",
       "countryFieldPlaceholder": "Оберіть країну",
+      "accountNumberFieldLabel": "Номер рахунку",
+      "accountNumberFieldPlaceholder": "Додайте IBAN номер",
+      "cardNumberFieldLabel": "Номер картки",
+      "cardNumberFieldPlaceholder": "Додайте номер картки",
+      "paymentSystemFieldLabel": "Платіжна система",
+      "paymentSystemFieldPlaceholder": "Оберіть платіжну систему",
       "currencyFieldLabel": "Валюта",
       "currencyFieldPlaceholder": "Оберіть валюту",
       "balanceFieldLabel": "Сума",
@@ -524,7 +536,8 @@
           "requiredCountry": "Оберіть країну",
           "requiredBank": "Оберіть банк",
           "requiredBalance": "Вкажіть суму",
-          "requiredCurrency": "Оберіть валюту"
+          "requiredCurrency": "Оберіть валюту",
+          "cardNumberMaxLength": "Номер картки має включати 16 цифр"
         }
       }
     }

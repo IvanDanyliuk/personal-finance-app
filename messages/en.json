@@ -418,6 +418,12 @@
       "cash": "Cash",
       "card": "Card"
     },
+    "payment_systems": {
+      "visa": "Visa",
+      "mastercard": "Master Card",
+      "paypal": "PayPal",
+      "amex": "American Express"
+    },
     "expense_destinations": {
       "utilities": "Utilities",
       "food": "Food",
@@ -485,6 +491,12 @@
       "bankFieldLabel": "Bank",
       "countryFieldLabel": "Country",
       "countryFieldPlaceholder": "Select a country",
+      "accountNumberFieldLabel": "Account number",
+      "accountNumberFieldPlaceholder": "Add the IBAN number",
+      "cardNumberFieldLabel": "Card number",
+      "cardNumberFieldPlaceholder": "Add a card number",
+      "paymentSystemFieldLabel": "Payment system",
+      "paymentSystemFieldPlaceholder": "Select a payment system",
       "currencyFieldLabel": "Currency",
       "currencyFieldPlaceholder": "Select a currency",
       "balanceFieldLabel": "Amount",
@@ -522,7 +534,8 @@
           "requiredCountry": "Select a country!",
           "requiredBank": "Select a bank!",
           "requiredBalance": "Balance is required",
-          "requiredCurrency": "Select a currency"
+          "requiredCurrency": "Select a currency",
+          "cardNumberMaxLength": "Card number must include 16 numbers"
         }
       }
     }

@@ -6,6 +6,16 @@ const basicBankAccountSchema = zod.object({
   type: zod.nativeEnum(AccountType),
   country: zod.string().optional(),
   bankId: zod.string().optional(),
+  accountNumber: zod.string().optional(),
+  cardNumber: zod.number()
+    .optional()
+    .refine(
+      (value) => !value || value.toString().length === 16,
+      {
+        message: 'HomePage.errors.createBankAccount.fieldsValidation.cardNumberMaxLength',
+      }
+    ),
+  paymentSystem: zod.string().optional(),
   balance: zod.number().min(1, 'HomePage.errors.createBankAccount.fieldsValidation.requiredBalance'),
   currency: zod.string().min(1, 'HomePage.errors.createBankAccount.fieldsValidation.requiredCurrency'),
   additionalInfo: zod.string()

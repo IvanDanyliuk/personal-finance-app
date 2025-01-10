@@ -12,6 +12,10 @@ import Auto from '@/public/images/expense-categories/car.svg';
 import PublicTransport from '@/public/images/expense-categories/public-transport.svg';
 import Repair from '@/public/images/expense-categories/repair.svg';
 import Other from '@/public/images/expense-categories/other.svg';
+import Visa from '@/public/images/payment-systems/visa.svg';
+import MasterCard from '@/public/images/payment-systems/mastercard.svg';
+import PayPal from '@/public/images/payment-systems/paypal.svg';
+import AmEx from '@/public/images/payment-systems/amex.svg';
 import { AccountType } from './types/bank';
 
 
@@ -142,6 +146,29 @@ export const PAYMENT_METHODS = [
   {
     value: 'card',
     label: 'ExpensesPage.payment_methods.card'
+  },
+];
+
+export const PAYMENT_SYSTEMS = [
+  {
+    value: 'visa',
+    label: 'ExpensesPage.payment_systems.visa',
+    icon: Visa
+  },
+  {
+    value: 'mastercard',
+    label: 'ExpensesPage.payment_systems.mastercard',
+    icon: MasterCard
+  },
+  {
+    value: 'paypal',
+    label: 'ExpensesPage.payment_systems.paypal',
+    icon: PayPal
+  },
+  {
+    value: 'amex',
+    label: 'ExpensesPage.payment_systems.amex',
+    icon: AmEx
   },
 ];
 

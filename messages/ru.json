@@ -418,6 +418,12 @@
       "cash": "Наличными",
       "card": "Карта"
     },
+    "payment_systems": {
+      "visa": "Visa",
+      "mastercard": "Master Card",
+      "paypal": "PayPal",
+      "amex": "American Express"
+    },
     "expense_destinations": {
       "utilities": "Коммунальные платежи",
       "food": "Продукты",
@@ -485,6 +491,12 @@
       "bankFieldLabel": "Банк",
       "countryFieldLabel": "Страна",
       "countryFieldPlaceholder": "Выберите страну",
+      "accountNumberFieldLabel": "Номер счета",
+      "accountNumberFieldPlaceholder": "Добавьте IBAN номер",
+      "cardNumberFieldLabel": "Номер карты",
+      "cardNumberFieldPlaceholder": "Добавьте номер карты",
+      "paymentSystemFieldLabel": "Платежная система",
+      "paymentSystemFieldPlaceholder": "Выберите платежную систему",
       "currencyFieldLabel": "Валюта",
       "currencyFieldPlaceholder": "Выберите валюту",
       "balanceFieldLabel": "Сумма",
@@ -522,8 +534,8 @@
           "requiredCountry": "Выберите страну",
           "requiredBank": "Выберите банк!",
           "requiredBalance": "Укажите сумму",
-          "requiredCurrency": "Выберите валюту"
-
+          "requiredCurrency": "Выберите валюту",
+          "cardNumberMaxLength": "Номер карты должен включать 16 цифр"
         }
       }
     }
