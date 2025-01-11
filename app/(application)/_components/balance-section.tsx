@@ -49,7 +49,7 @@ export const BalanceSection: React.FC<IBalanceSection> = ({ banks, funds }) => {
                     {t(`General.currencies.${item[0]}`)}
                   </span>
                   <span className='text-xl text-primary-7 font-bold'>
-                    {`${formatNumber(item[1])}`}
+                    {`${formatNumber(item[1], 3)}`}
                   </span>
                 </li>
               ))}

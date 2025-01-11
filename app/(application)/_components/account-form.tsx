@@ -78,6 +78,9 @@ export const AccountForm: React.FC<IAccountForm> = ({ banks }) => {
     formData.append('type', data.type);
     formData.append('country', data.country!);
     formData.append('bankId', data.bankId!);
+    formData.append('accountNumber', data.accountNumber!);
+    formData.append('cardNumber', data.cardNumber ? data.cardNumber.toString() : '');
+    formData.append('paymentSystem', data.paymentSystem!);
     formData.append('balance', data.balance.toString());
     formData.append('currency', data.currency);
     formData.append('additionalInfo', data.additionalInfo);

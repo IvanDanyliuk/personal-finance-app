@@ -7,7 +7,8 @@ const basicBankAccountSchema = zod.object({
   country: zod.string().optional(),
   bankId: zod.string().optional(),
   accountNumber: zod.string().optional(),
-  cardNumber: zod.number()
+  cardNumber: zod
+    .number()
     .optional()
     .refine(
       (value) => !value || value.toString().length === 16,

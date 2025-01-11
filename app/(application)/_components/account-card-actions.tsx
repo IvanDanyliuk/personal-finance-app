@@ -6,9 +6,6 @@ import { Ellipsis } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
 } from '@/components/ui/dialog';
 import {
   DropdownMenu,
@@ -17,6 +14,10 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { IBankAccount } from '@/lib/types/bank';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { formatNumber } from '@/lib/helpers';
+import Image from 'next/image';
+import { PAYMENT_SYSTEMS } from '@/lib/constants';
 
 
 interface IAccountCardActions {
@@ -52,14 +53,26 @@ export const AccountCardActions: React.FC<IAccountCardActions> = ({ account }) =
       </DropdownMenu>
 
       <Dialog open={isDetailsOpen} onOpenChange={setDetailsOpen}>
-        <DialogContent className=''>
-          <DialogHeader>
-            <DialogTitle>Are you absolutely sure?</DialogTitle>
-            <DialogDescription>
-              This action cannot be undone. This will permanently delete your account
-              and remove your data from our servers.
-            </DialogDescription>
-          </DialogHeader>
+        <DialogContent className='min-w-fit'>
+          {account.bank && account.bank.logo && account.cardNumber && account.paymentSystem && (
+            <div className='relative w-80 h-44 p-3 flex flex-col justify-between items-center bg-gradient-to-r from-primary-2 via-primary-3 to-primary-2 rounded-xl'>
+              <Avatar className='h-10'>
+                <AvatarImage src={account!.bank!.logo!} />
+              </Avatar>
+              <p>
+                {formatNumber(account.cardNumber, 4)}
+              </p>
+              <div>
+                <Image 
+                  src={PAYMENT_SYSTEMS.find(item => item.value === account.paymentSystem)!.icon!} 
+                  alt={account.paymentSystem} 
+                  width={7} 
+                  height={7}
+                />
+
+              </div>
+            </div>
+          )}
         </DialogContent>
       </Dialog>
     </>

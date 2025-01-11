@@ -52,7 +52,7 @@ export const AccountCard: React.FC<IAccountCard> = ({ data }) => {
           )}
         </div>
         <p className='text-5xl font-bold text-primary-7'>
-          {formatNumber(data.balance)}
+          {formatNumber(data.balance, 3)}
         </p>
       </div>
       <div className='flex justify-end items-end'>
