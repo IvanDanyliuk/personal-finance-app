@@ -95,7 +95,7 @@
       "us": "США"
     },
     "accountTypes": {
-      "account": "Банківський рахунок",
+      "bank_account": "Банківський рахунок",
       "jug": "Готівка"
     }
   },
@@ -520,6 +520,12 @@
         "detailsMenuItemLabel": "Деталі",
         "transferFundsMenuItemLabel": "Переказати кошти",
         "closeAccountMenuItemLabel": "Закрити рахунок"
+      },
+      "accountDetails": {
+        "bank": "Банк",
+        "currency": "Валюта",
+        "balance": "Баланс",
+        "additionalInfo": "Додаткова інформація"
       }
     },
     "actionMessages": {

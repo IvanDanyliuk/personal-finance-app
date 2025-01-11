@@ -95,7 +95,7 @@
       "us": "United States"
     },
     "accountTypes": {
-      "account": "Bank account",
+      "bank_account": "Bank account",
       "jug": "Cash jug"
     }
   },
@@ -518,6 +518,12 @@
         "detailsMenuItemLabel": "Details",
         "transferFundsMenuItemLabel": "Transfer funds",
         "closeAccountMenuItemLabel": "Close account"
+      },
+      "accountDetails": {
+        "bank": "Bank",
+        "currency": "Currency",
+        "balance": "Balance",
+        "additionalInfo": "Additional information"
       }
     },
     "actionMessages": {

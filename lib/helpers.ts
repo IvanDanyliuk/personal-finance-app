@@ -77,6 +77,6 @@ export const groupFundsByCurrency = (funds: IBankAccount[]) => {
 
 export const formatNumber = (num: number, numsPerSection: number) => {
   const stringifiedNum = `${num}`;
-  const regex = new RegExp(`/(\d)(?=(\d{${numsPerSection}})+(?!\d))`, 'g');
+  const regex = new RegExp(`(\\d)(?=(\\d{${numsPerSection}})+(?!\\d))`, "g");
   return stringifiedNum.toString().replace(regex, '$1 ');
 };

@@ -518,7 +518,7 @@ export const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'im
 export const ACCOUNT_TYPES = [
   {
     value: AccountType.BankAccount,
-    label: 'General.accountTypes.account'
+    label: 'General.accountTypes.bank_account'
   },
   {
     value: AccountType.Jug,

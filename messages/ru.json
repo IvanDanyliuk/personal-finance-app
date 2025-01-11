@@ -95,7 +95,7 @@
       "us": "США"
     },
     "accountTypes": {
-      "account": "Банковский счет",
+      "bank_account": "Банковский счет",
       "jug": "Наличные"
     }
   },
@@ -518,6 +518,12 @@
         "detailsMenuItemLabel": "Подробнее",
         "transferFundsMenuItemLabel": "Перевести средства",
         "closeAccountMenuItemLabel": "Закрыт счет"
+      },
+      "accountDetails": {
+        "bank": "Банк",
+        "currency": "Валюта",
+        "balance": "Остаток",
+        "additionalInfo": "Дополнительная информация"
       }
     },
     "actionMessages": {
