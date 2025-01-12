@@ -105,3 +105,34 @@ export const createBankAccount = async (formData: FormData) => {
     };
   }
 };
+
+export const deleteAccount = async (id: string) => {
+  try {
+    console.log('DELETE ACCOUNT', id)
+    const session = await auth();
+
+    if(!session) {
+      throw new Error('HomePage.errors.wrongUserId');
+    }
+
+    const isAccountExist = await db.bankAccount.findFirst({ where: { id, userId: session.user?.id } });
+
+    if(!isAccountExist) {
+      throw new Error('HomePage.errors.accountNotExist');
+    }
+
+    await db.bankAccount.delete({ where: { id } });
+
+    revalidatePath('/');
+
+    return {
+      status: ActionStatus.Success,
+      error: null,
+    };
+  } catch (error: any) {
+    return {
+      status: ActionStatus.Failed,
+      error: error.message,
+    };
+  }
+};

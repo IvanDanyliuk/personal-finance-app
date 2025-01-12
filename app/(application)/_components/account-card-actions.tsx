@@ -1,11 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { useTranslations } from 'next-intl';
 import { Ellipsis } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
 } from '@/components/ui/dialog';
 import {
   DropdownMenu,
@@ -21,6 +25,11 @@ import { COUNTRIES, PAYMENT_SYSTEMS } from '@/lib/constants';
 import { Courier_Prime } from 'next/font/google';
 import { cn } from '@/lib/utils';
 import { Separator } from '@/components/ui/separator';
+import { Button } from '@/components/ui/button';
+import { deleteAccount } from '@/lib/actions/account.actions';
+import { ActionStatus } from '@/lib/types/common.types';
+import { useToast } from '@/hooks/use-toast';
+import Spinner from '@/public/images/tube-spinner.svg';
 
 
 const cardNumberFont = Courier_Prime({ 
@@ -35,9 +44,38 @@ interface IAccountCardActions {
 
 export const AccountCardActions: React.FC<IAccountCardActions> = ({ account }) => {
   const t = useTranslations();
+  const { toast } = useToast();
+  const [pending, setTransition] = useTransition();
 
   const [isDetailsOpen, setDetailsOpen] = useState<boolean>(false);
   const [isTransferOpen, setTransferOpen] = useState<boolean>(false);
+  const [isDeleteOpen, setDeleteOpen] = useState<boolean>(false);
+
+  const handleAccountDelete = async () => {
+    setTransition(() => {
+      deleteAccount(account.id).then(res => {
+        const { status, error } = res;
+
+        if(status === ActionStatus.Success && !error) {
+          toast({
+            description: t('HomePage.actionMessages.deleteAccountSuccess'),
+            variant: 'default',
+            className: 'bg-success-1 text-success-2'
+          });
+          setDeleteOpen(false);
+        }
+    
+        if(status === ActionStatus.Failed && error) {
+          toast({
+            title: t('HomePage.errors.deleteAccount.deleteAccountFailed'),
+            description: t(error),
+            variant: 'destructive',
+            className: 'bg-danger-1 text-danger-2'
+          });
+        }
+      })
+    });
+  };
 
   return (
     <>
@@ -52,7 +90,7 @@ export const AccountCardActions: React.FC<IAccountCardActions> = ({ account }) =
           <DropdownMenuItem className='cursor-pointer px-3 hover:bg-primary-1 rounded-full'>
             {t('HomePage.balanceSection.accountCard.transferFundsMenuItemLabel')}
           </DropdownMenuItem>
-          <DropdownMenuItem className='cursor-pointer px-3 hover:bg-primary-1 rounded-full'>
+          <DropdownMenuItem onClick={() => setDeleteOpen(true)} className='cursor-pointer px-3 hover:bg-primary-1 rounded-full'>
           {t('HomePage.balanceSection.accountCard.closeAccountMenuItemLabel')}
           </DropdownMenuItem>
         </DropdownMenuContent>
@@ -122,6 +160,43 @@ export const AccountCardActions: React.FC<IAccountCardActions> = ({ account }) =
               </div>
             )}
           </div>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={isDeleteOpen} onOpenChange={setDeleteOpen}>
+        <DialogContent className='pt-10'>
+          <DialogHeader>
+            <DialogTitle className='text-center'>
+              {t('HomePage.balanceSection.deleteAccount.submitAccountDeletingTitle')}
+            </DialogTitle>
+            <DialogDescription className='text-center'>
+              {t('HomePage.balanceSection.deleteAccount.submitAccountDeletingMessage')}
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className='flex flex-row gap-3'>
+            <Button 
+              type='button' 
+              onClick={handleAccountDelete} 
+              disabled={pending} 
+              className='py-6 flex-1 rounded-full bg-danger-2 hover:bg-danger-1 text-white font-semibold'
+            >
+              {pending ? (
+                <Image 
+                  src={Spinner} 
+                  alt='Loading' 
+                  width={20} 
+                  height={20} 
+                />
+              ) : t('HomePage.balanceSection.deleteAccount.submitBtnLabel')}
+            </Button>
+            <Button 
+              type='button' 
+              onClick={() => setDeleteOpen(false)} 
+              className='py-6 flex-1 rounded-full bg-secondary-2 hover:bg-secondary-1 text-white font-semibold'
+            >
+              {t('HomePage.balanceSection.deleteAccount.cancelBtnLabel')}
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </>

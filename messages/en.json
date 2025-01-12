@@ -524,10 +524,17 @@
         "currency": "Currency",
         "balance": "Balance",
         "additionalInfo": "Additional information"
+      },
+      "deleteAccount": {
+        "submitBtnLabel": "OK",
+        "cancelBtnLabel": "Cancel",
+        "submitAccountDeletingTitle": "Are you sure you want to delete this account?",
+        "submitAccountDeletingMessage": "It will be impossible to undo this action."
       }
     },
     "actionMessages": {
-      "createBankAccountSuccess": "New bank account successfully created"
+      "createBankAccountSuccess": "New bank account successfully created",
+      "deleteAccountSuccess": "Account successfully deleted"
     },
     "errors": {
       "general": "Something went wrong!",
@@ -543,6 +550,10 @@
           "requiredCurrency": "Select a currency",
           "cardNumberMaxLength": "Card number must include 16 numbers"
         }
+      },
+      "deleteBankAccount": {
+        "accountNotExist": "Bank account does not exist.",
+        "deleteAccountFailed": "Cannot delete this account."
       }
     }
   }

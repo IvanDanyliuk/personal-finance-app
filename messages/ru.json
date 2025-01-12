@@ -524,10 +524,17 @@
         "currency": "Валюта",
         "balance": "Остаток",
         "additionalInfo": "Дополнительная информация"
+      },
+      "deleteAccount": {
+        "submitBtnLabel": "OK",
+        "cancelBtnLabel": "Отмена",
+        "submitAccountDeletingTitle": "Вы уверены что ходите удалить этот счет?",
+        "submitAccountDeletingMessage": "Отменить это действие буде невозможно."
       }
     },
     "actionMessages": {
-      "createBankAccountSuccess": "Новый счет успешно создан"
+      "createBankAccountSuccess": "Новый счет успешно создан",
+      "deleteAccountSuccess": "Счет успешно удален"
     },
     "errors": {
       "general": "Что-то пошло не так!",
@@ -543,6 +550,10 @@
           "requiredCurrency": "Выберите валюту",
           "cardNumberMaxLength": "Номер карты должен включать 16 цифр"
         }
+      },
+      "deleteBankAccount": {
+        "accountNotExist": "Такого счета не существует.",
+        "deleteAccountFailed": "Не удалось удалить счет."
       }
     }
   }

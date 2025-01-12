@@ -526,10 +526,17 @@
         "currency": "Валюта",
         "balance": "Баланс",
         "additionalInfo": "Додаткова інформація"
+      },
+      "deleteAccount": {
+        "submitBtnLabel": "OK",
+        "cancelBtnLabel": "Відхилити",
+        "submitAccountDeletingTitle": "Ви впевенені що хочете видалити цей рахунок?",
+        "submitAccountDeletingMessage": "Відхилити цю дію буде неможливо."
       }
     },
     "actionMessages": {
-      "createBankAccountSuccess": "Новий рахунок успішно створено"
+      "createBankAccountSuccess": "Новий рахунок успішно створено",
+      "deleteAccountSuccess": "Рахунок успішно видалено"
     },
     "errors": {
       "general": "Щось пішло не так!",
@@ -545,6 +552,10 @@
           "requiredCurrency": "Оберіть валюту",
           "cardNumberMaxLength": "Номер картки має включати 16 цифр"
         }
+      },
+      "deleteBankAccount": {
+        "accountNotExist": "Такого банківського рахунку не існує.",
+        "deleteAccountFailed": "Не вдалося видалити рахунок."
       }
     }
   }
