@@ -25,6 +25,78 @@
       "10": "10 ед. на странице",
       "15": "15 ед. на странице",
       "20": "20 ед. на странице"
+    },
+    "countries": {
+      "at": "Австрия",
+      "be": "Бельгия",
+      "bg": "Болгария",
+      "cz": "Чехия",
+      "dk": "Дания",
+      "de": "Германия",
+      "ee": "Эстония",
+      "ie": "Ирландия",
+      "el": "Греция",
+      "es": "Испания",
+      "fr": "Франция",
+      "hr": "Хорватия",
+      "it": "Италия",
+      "cy": "Кипр",
+      "lv": "Латвия",
+      "lt": "Литва",
+      "lu": "Люксембург",
+      "hu": "Венгрия",
+      "mt": "Мальта",
+      "nl": "Нидерланды",
+      "pl": "Польша",
+      "pt": "Португалия",
+      "ro": "Румыния",
+      "sl": "Словения",
+      "sk": "Словакия",
+      "fi": "Финляндия",
+      "se": "Швеция",
+      "is": "Исландия",
+      "li": "Лихтенштейн",
+      "no": "Норвегия",
+      "ch": "Швейцария",
+      "ba": "Босния и Герцеговина",
+      "me": "Черногория",
+      "md": "Молдова",
+      "mk": "Северная Македония",
+      "ge": "Грузия",
+      "al": "Албания",
+      "rs": "Сербия",
+      "tr": "Турция",
+      "ua": "Украина",
+      "xk": "Косово",
+      "am": "Армения",
+      "az": "Азербайджан",
+      "by": "Беларусь",
+      "dz": "Алжир",
+      "eg": "Египет",
+      "il": "Израиль",
+      "jo": "Иордания",
+      "ar": "Аргентина",
+      "au": "Австралия",
+      "br": "Бразилия",
+      "ca": "Канада",
+      "cn_x_hk": "Китай (кроме Гон-Конга)",
+      "hk": "Гон-Конг",
+      "in": "Индия",
+      "jp": "Япония",
+      "mx": "Мексика",
+      "ng": "Нигерия",
+      "nz": "Новая Зеландия",
+      "ru": "Страна-говно",
+      "sg": "Сингапур",
+      "za": "ЮАР",
+      "kr": "Южная Корея",
+      "tw": "Тайвань",
+      "uk": "Великобритания",
+      "us": "США"
+    },
+    "accountTypes": {
+      "bank_account": "Банковский счет",
+      "jug": "Наличные"
     }
   },
   "Auth": {
@@ -75,6 +147,8 @@
           "requiredConfirmPassword": "Подтвердите пароль!",
           "invalidConfirmPassword": "Пароль должен включать минимум 6 символов",
           "passwordNotMatch": "Пароли не совпадают",
+          "maxImageSizeLimit": "Размер фото не должен превышать 5Мб",
+          "invalidImageType": "Поддерживаються только следующие форматы: .jpeg, .jpg, .png и .webp",
           "wrongProviderGoogle": "Вы создали учетную запись используя ваш Google Account. Войдите через Вашу учетную запись Google и установите пароль в разделе Настройки",
           "wrongProviderFacebook": "Вы создали учетную запись используя ваш Facebook Account. Войдите через Вашу учетную запись Facebook и установите пароль в разделе Настройки",
           "wrongCredentials": "Что-то пошло не так!",
@@ -100,6 +174,38 @@
     "tableNavButtons": {
       "prev": "Предыдущая",
       "next": "Следующая"
+    },
+    "tableRowMenuActionBtns": {
+      "updateRowMenuItem": "Изменить",
+      "deleteRowMenuItem": "Удалить"
+    }
+  },
+  "Admin": {
+    "Banks": {
+      "bankForm": {
+        "formTriggerBtnLabel": "Создать банк",
+        "formTitle": "Создать новый банк",
+        "nameFieldLabel": "Имя",
+        "countryFieldLabel": "Страна",
+        "countryFieldPlaceholder": "Выберите страну",
+        "logoFieldLabel": "Логотип",
+        "logoUploadBtnLabel": "Добавить логотип",
+        "submitBtnLabel": "Создать"
+      },
+      "actionMessages": {
+        "createBankSuccess": "Новый банк успешно создан!"
+      },
+      "errors": {
+        "general": {
+          "title": "Ой! Что-то пошло не так!"
+        },
+        "fieldsValidation": {
+          "requiredName": "Введите имя!",
+          "requiredCountry": "Выберите страну",
+          "maxImageSizeLimit": "Размер фото не должен превышать 5Мб",
+          "invalidImageType": "Поддерживаються только следующие форматы: .jpeg, .jpg, .png и .webp"
+        }
+      }
     }
   },
   "SettingsPage": {
@@ -312,6 +418,12 @@
       "cash": "Наличными",
       "card": "Карта"
     },
+    "payment_systems": {
+      "visa": "Visa",
+      "mastercard": "Master Card",
+      "paypal": "PayPal",
+      "amex": "American Express"
+    },
     "expense_destinations": {
       "utilities": "Коммунальные платежи",
       "food": "Продукты",
@@ -367,6 +479,82 @@
           "requiredPaymentMethod": "Выберите способ оплаты",
           "requiredCategory": "Выберите категорию"
         }
+      }
+    }
+  },
+  "HomePage": {
+    "title": "Главная",
+    "createAccountForm": {
+      "triggerBtnLabel": "Добавить",
+      "title": "Создать новый счет",
+      "typeFieldLabel": "Тип",
+      "bankFieldLabel": "Банк",
+      "countryFieldLabel": "Страна",
+      "countryFieldPlaceholder": "Выберите страну",
+      "accountNumberFieldLabel": "Номер счета",
+      "accountNumberFieldPlaceholder": "Добавьте IBAN номер",
+      "cardNumberFieldLabel": "Номер карты",
+      "cardNumberFieldPlaceholder": "Добавьте номер карты",
+      "paymentSystemFieldLabel": "Платежная система",
+      "paymentSystemFieldPlaceholder": "Выберите платежную систему",
+      "currencyFieldLabel": "Валюта",
+      "currencyFieldPlaceholder": "Выберите валюту",
+      "balanceFieldLabel": "Сумма",
+      "additionalInfo": "Дополнительная информация",
+      "submitBtnLabel": "Создать"
+    },
+    "balanceSection": {
+      "totalFunds": {
+        "title": "Ваши средства",
+        "subTitle": "Всего"
+      },
+      "tabs": {
+        "allTabLabel": "Все",
+        "bankAccountsTabLabel": "Банковские счета",
+        "jugsTabLabel": "Наличные",
+        "cashCardTitle": "Наличные"
+      },
+      "accountCard": {
+        "detailsMenuItemLabel": "Подробнее",
+        "replenishAccountMenuItemLabel": "Пополнить",
+        "transferFundsMenuItemLabel": "Перевести средства",
+        "closeAccountMenuItemLabel": "Закрыт счет"
+      },
+      "accountDetails": {
+        "bank": "Банк",
+        "currency": "Валюта",
+        "balance": "Остаток",
+        "additionalInfo": "Дополнительная информация"
+      },
+      "deleteAccount": {
+        "submitBtnLabel": "OK",
+        "cancelBtnLabel": "Отмена",
+        "submitAccountDeletingTitle": "Вы уверены что ходите удалить этот счет?",
+        "submitAccountDeletingMessage": "Отменить это действие буде невозможно."
+      }
+    },
+    "actionMessages": {
+      "createBankAccountSuccess": "Новый счет успешно создан",
+      "deleteAccountSuccess": "Счет успешно удален"
+    },
+    "errors": {
+      "general": "Что-то пошло не так!",
+      "wrongUserId": "Вы не авторзованы или ID Вашего профиля неверный",
+      "createBankAccount": {
+        "createBankAccountFailed": "Не удалось создать новый счет",
+        "jugsWithSameCurrency": "У вас уже есть наличные сбережения в данной валюте. Вы не можете иметь несколько наличных сбережений в одной валюте.",
+        "fieldsValidation": {
+          "requiredType": "Выберите тип счета!",
+          "requiredCountry": "Выберите страну",
+          "requiredBank": "Выберите банк!",
+          "requiredBalance": "Укажите сумму",
+          "requiredCurrency": "Выберите валюту",
+          "cardNumberMaxLength": "Номер карты должен включать 16 цифр"
+        }
+      },
+      "deleteBankAccount": {
+        "accountNotExist": "Такого счета не существует.",
+        "deleteAccountFailed": "Не удалось удалить счет."
       }
     }
   }

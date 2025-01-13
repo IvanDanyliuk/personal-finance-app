@@ -7,6 +7,26 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  ::-webkit-scrollbar {
+    width: 20px;
+    height: 16px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #f4f4f4;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary-2));
+    border-radius: 100vh;
+    border: 3px solid #f6f7ed;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary-3));
+  }
 }
 
 @layer base {

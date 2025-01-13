@@ -11,9 +11,10 @@ import { Label } from '@/components/ui/label';
 import { CURRENCIES, INCOME_SOURCES } from '@/lib/constants';
 import { incomeSchema, IncomeSchema } from '@/lib/types/form-schemas/incomes';
 
+
 interface IIncomeData extends IncomeSchema {
   id: string;
-}
+};
 
 interface IIncomeForm {
   incomeToUpdate?: IIncomeData;
@@ -87,7 +88,6 @@ export const IncomeForm: React.FC<IIncomeForm> = ({ incomeToUpdate, action }) =>
             name='source'
             label={t('IncomesPage.createIncomeForm.sourceFieldLabel')}
             variant='vertical'
-
             field={field}
             placeholder={t('IncomesPage.createIncomeForm.sourcePlaceholder')}
             options={INCOME_SOURCES}

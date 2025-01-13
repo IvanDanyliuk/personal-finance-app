@@ -43,7 +43,7 @@ export const updateUserDataSchema = zod.object({
 });
 
 export const updateUserPhotoSchema = zod.object({
-  image: zod.string().min(1, 'SettingsPage.errors.imageRequired')
+  image: zod.any()
 });
 
 export const deleteUserSchema = zod.object({

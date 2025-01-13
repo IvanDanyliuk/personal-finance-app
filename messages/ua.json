@@ -25,6 +25,78 @@
       "10": "10 од. на сторінці",
       "15": "15 од. на сторінці",
       "20": "20 од. на сторінці"
+    },
+    "countries": {
+      "at": "Австрія",
+      "be": "Бельгія",
+      "bg": "Болгарія",
+      "cz": "Чехія",
+      "dk": "Данія",
+      "de": "Німеччина",
+      "ee": "Естонія",
+      "ie": "Ірландія",
+      "el": "Греція",
+      "es": "Іспанія",
+      "fr": "Франція",
+      "hr": "Хорватія",
+      "it": "Італія",
+      "cy": "Кіпр",
+      "lv": "Латвія",
+      "lt": "Литва",
+      "lu": "Люксембург",
+      "hu": "Угорщина",
+      "mt": "Мальта",
+      "nl": "Нідерланди",
+      "pl": "Польща",
+      "pt": "Португалія",
+      "ro": "Румунія",
+      "sl": "Словенія",
+      "sk": "Словаччина",
+      "fi": "Фінляндія",
+      "se": "Швеція",
+      "is": "Ісландія",
+      "li": "Ліхтенштейн",
+      "no": "Норвегія",
+      "ch": "Швейцарія",
+      "ba": "Боснія і Герцеговина",
+      "me": "Чорногорія",
+      "md": "Молдова",
+      "mk": "Північна Македонія",
+      "ge": "Грузія",
+      "al": "Албанія",
+      "rs": "Сербія",
+      "tr": "Туреччина",
+      "ua": "Україна",
+      "xk": "Косово",
+      "am": "Арменія",
+      "az": "Азербайджан",
+      "by": "Беларусь",
+      "dz": "Алжир",
+      "eg": "Єгипет",
+      "il": "Ізраїль",
+      "jo": "Іорданія",
+      "ar": "Аргентина",
+      "au": "Австралія",
+      "br": "Бразилія",
+      "ca": "Канада",
+      "cn_x_hk": "Китай (окрім Гон-Конга)",
+      "hk": "Гон-Конг",
+      "in": "Індія",
+      "jp": "Японія",
+      "mx": "Мексика",
+      "ng": "Нігерія",
+      "nz": "Нова Зеландія",
+      "ru": "Країна-лайно",
+      "sg": "Сингапур",
+      "za": "ПАР",
+      "kr": "Південна Корея",
+      "tw": "Тайвань",
+      "uk": "Велика Британія",
+      "us": "США"
+    },
+    "accountTypes": {
+      "bank_account": "Банківський рахунок",
+      "jug": "Готівка"
     }
   },
   "Auth": {
@@ -54,7 +126,7 @@
       "image": "Додати фото",
       "signupBtn": "Зареєструватися",
       "agreeText": "Я згоден з",
-      "termsAndPrivacyLink": "умовами політики та приватності",
+      "termsAndPrivacyLink": "умовами політики приватності",
       "googleBtnTooltip": "Заруєструватися через Google"
     },
     "actionMessages": {
@@ -75,6 +147,8 @@
           "requiredConfirmPassword": "Підтвердіть пароль!",
           "invalidConfirmPassword": "Пароль має включати щонайменше 6 символів",
           "passwordNotMatch": "Паролі не співпадають",
+          "maxImageSizeLimit": "Розмір фото не має перевищувати 5Мб",
+          "invalidImageType": "Підтримуються тільки наступні формати: .jpeg, .jpg, .png та .webp",
           "wrongProviderGoogle": "Ви створили обліковий запис через Google Account. Увійдіть використовуючи Ваш Google Account та встановіть пароль в розділі Налаштування",
           "wrongProviderFacebook": "Ви створили обліковий запис через Facebook Account. Увійдіть використовуючи Ваш Facebook Account та встановіть пароль в розділі Налаштування",
           "wrongCredentials": "Щось пішло не так!",
@@ -100,6 +174,38 @@
     "tableNavButtons": {
       "prev": "Попередня",
       "next": "Наступна"
+    },
+    "tableRowMenuActionBtns": {
+      "updateRowMenuItem": "Редагувати",
+      "deleteRowMenuItem": "Видалити"
+    }
+  },
+  "Admin": {
+    "Banks": {
+      "bankForm": {
+        "formTriggerBtnLabel": "Створити банк",
+        "formTitle": "Створити новий банк",
+        "nameFieldLabel": "Ім'я",
+        "countryFieldLabel": "Країна",
+        "countryFieldPlaceholder": "Оберіть країну",
+        "logoFieldLabel": "Логотип",
+        "logoUploadBtnLabel": "Додати логотип",
+        "submitBtnLabel": "Створити"
+      },
+      "actionMessages": {
+        "createBankSuccess": "Новий банк успішно створено!"
+      },
+      "errors": {
+        "general": {
+          "title": "Отакої! Щось пішло не так!"
+        },
+        "fieldsValidation": {
+          "requiredName": "Введіть ім'я!",
+          "requiredCountry": "Оберіть країну",
+          "maxImageSizeLimit": "Розмір фото не має перевищувати 5Мб",
+          "invalidImageType": "Підтримуються тільки наступні формати: .jpeg, .jpg, .png та .webp"
+        }
+      }
     }
   },
   "SettingsPage": {
@@ -312,6 +418,12 @@
       "cash": "Готівка",
       "card": "Картка"
     },
+    "payment_systems": {
+      "visa": "Visa",
+      "mastercard": "Master Card",
+      "paypal": "PayPal",
+      "amex": "American Express"
+    },
     "expense_destinations": {
       "utilities": "Комунальні платежі",
       "food": "Продукти харчування",
@@ -367,6 +479,84 @@
           "requiredPaymentMethod": "Оберіть спосіб оплати",
           "requiredCategory": "Оберіть категорію"
         }
+      }
+    }
+  },
+  "HomePage": {
+    "title": "Головна",
+    "createAccountForm": {
+      "triggerBtnLabel": "Додати",
+      "title": "Створити новий рахунок",
+      "typeFieldLabel": "Тип",
+      "typeFieldPlaceholder": "Оберіть тип",
+      "bankFieldLabel": "Банк",
+      "bankFieldPlaceholder": "Оберіть банк",
+      "countryFieldLabel": "Країна",
+      "countryFieldPlaceholder": "Оберіть країну",
+      "accountNumberFieldLabel": "Номер рахунку",
+      "accountNumberFieldPlaceholder": "Додайте IBAN номер",
+      "cardNumberFieldLabel": "Номер картки",
+      "cardNumberFieldPlaceholder": "Додайте номер картки",
+      "paymentSystemFieldLabel": "Платіжна система",
+      "paymentSystemFieldPlaceholder": "Оберіть платіжну систему",
+      "currencyFieldLabel": "Валюта",
+      "currencyFieldPlaceholder": "Оберіть валюту",
+      "balanceFieldLabel": "Сума",
+      "additionalInfo": "Додаткова інформація",
+      "submitBtnLabel": "Створити"
+    },
+    "balanceSection": {
+      "totalFunds": {
+        "title": "Ваші кошти",
+        "subTitle": "Всього"
+      },
+      "tabs": {
+        "allTabLabel": "Всі",
+        "bankAccountsTabLabel": "Банківські рахунки",
+        "jugsTabLabel": "Готівка",
+        "cashCardTitle": "Готівка"
+      },
+      "accountCard": {
+        "detailsMenuItemLabel": "Деталі",
+        "replenishAccountMenuItemLabel": "Поповнити",
+        "transferFundsMenuItemLabel": "Переказати кошти",
+        "closeAccountMenuItemLabel": "Закрити рахунок"
+      },
+      "accountDetails": {
+        "bank": "Банк",
+        "currency": "Валюта",
+        "balance": "Баланс",
+        "additionalInfo": "Додаткова інформація"
+      },
+      "deleteAccount": {
+        "submitBtnLabel": "OK",
+        "cancelBtnLabel": "Відхилити",
+        "submitAccountDeletingTitle": "Ви впевенені що хочете видалити цей рахунок?",
+        "submitAccountDeletingMessage": "Відхилити цю дію буде неможливо."
+      }
+    },
+    "actionMessages": {
+      "createBankAccountSuccess": "Новий рахунок успішно створено",
+      "deleteAccountSuccess": "Рахунок успішно видалено"
+    },
+    "errors": {
+      "general": "Щось пішло не так!",
+      "wrongUserId": "Ви не авторизовані або ID Вашого облікового запису некоректний",
+      "createBankAccount": {
+        "createBankAccountFailed": "Не вдалося створити новий рахунок",
+        "jugsWithSameCurrency": "У Вас вже є готівкові накопичення у цій валюті. Ви не можете мати кілька готівкових накопичень в одній валюті.",
+        "fieldsValidation": {
+          "requiredType": "Оберіть тип",
+          "requiredCountry": "Оберіть країну",
+          "requiredBank": "Оберіть банк",
+          "requiredBalance": "Вкажіть суму",
+          "requiredCurrency": "Оберіть валюту",
+          "cardNumberMaxLength": "Номер картки має включати 16 цифр"
+        }
+      },
+      "deleteBankAccount": {
+        "accountNotExist": "Такого банківського рахунку не існує.",
+        "deleteAccountFailed": "Не вдалося видалити рахунок."
       }
     }
   }

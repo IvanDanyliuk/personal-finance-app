@@ -28,8 +28,9 @@ interface ISelectField {
   defaultValue?: string;
   placeholder?: string;
   disabled?: boolean;
+  isLocalesActive?: boolean;
   error?: string;
-}
+};
 
 
 export const SelectField: React.FC<ISelectField> = ({
@@ -41,6 +42,7 @@ export const SelectField: React.FC<ISelectField> = ({
   onHandleChange,
   placeholder, 
   disabled,
+  isLocalesActive = true,
   error
 }) => {
   const t = useTranslations();
@@ -76,7 +78,11 @@ export const SelectField: React.FC<ISelectField> = ({
           </SelectTrigger>
           <SelectContent className='bg-white'>
             {options.map(({ value, label, icon }) => (
-              <SelectItem key={crypto.randomUUID()} value={`${value}`} className='flex items-center'>
+              <SelectItem 
+                key={crypto.randomUUID()} 
+                value={`${value}`} 
+                className='flex items-center'
+              >
                 {icon && (
                   <Image 
                     src={icon} 
@@ -86,7 +92,7 @@ export const SelectField: React.FC<ISelectField> = ({
                     className='mr-2 inline' 
                   />
                 )}
-                {t(label)}
+                {isLocalesActive ? t(label) : label}
               </SelectItem>
             ))}
           </SelectContent>

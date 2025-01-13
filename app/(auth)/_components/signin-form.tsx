@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { SubmitButton } from '@/components/common';
@@ -24,7 +24,7 @@ export const SignInForm = () => {
   });
 
   const {
-    register,
+    control,
     handleSubmit,
     formState: { errors, isSubmitting }
   } = form;
@@ -56,18 +56,30 @@ export const SignInForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmitForm)}>
-      <TextField 
-        name='email' 
-        label={t('signinPage.email')} 
-        register={register} 
-        error={errors['email']?.message} 
+      <Controller 
+        name='email'
+        control={control}
+        render={({ field }) => (
+          <TextField 
+            name='email' 
+            label={t('signinPage.email')} 
+            field={field}
+            error={errors['email']?.message} 
+          />
+        )}
       />
-      <TextField 
-        name='password' 
-        label={t('signinPage.password')} 
-        type='password'
-        register={register} 
-        error={errors['password']?.message} 
+      <Controller 
+        name='password'
+        control={control}
+        render={({ field }) => (
+          <TextField 
+            name='password' 
+            label={t('signinPage.password')} 
+            type='password'
+            field={field}
+            error={errors['password']?.message} 
+          />
+        )}
       />
       <SubmitButton isSubmitting={isSubmitting}>
         {t('signinPage.signinBtn')}

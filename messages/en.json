@@ -25,6 +25,78 @@
       "10": "10 items per page",
       "15": "15 items per page",
       "20": "20 items per page"
+    },
+    "countries": {
+      "at": "Austria",
+      "be": "Belgium",
+      "bg": "Bulgaria",
+      "cz": "Czech Republic",
+      "dk": "Denmark",
+      "de": "Germany",
+      "ee": "Estonia",
+      "ie": "Ireland",
+      "el": "Greece",
+      "es": "Spain",
+      "fr": "France",
+      "hr": "Croatia",
+      "it": "Italy",
+      "cy": "Cyprus",
+      "lv": "Latvia",
+      "lt": "Lithuania",
+      "lu": "Luxembourg",
+      "hu": "Hungary",
+      "mt": "Malta",
+      "nl": "Netherlands",
+      "pl": "Poland",
+      "pt": "Portugal",
+      "ro": "Romania",
+      "sl": "Slovenia",
+      "sk": "Slovakia",
+      "fi": "Finland",
+      "se": "Sweden",
+      "is": "Iceland",
+      "li": "Liechtenstein",
+      "no": "Norway",
+      "ch": "Switzerland",
+      "ba": "Bosnia and Herzegovina",
+      "me": "Montenegro",
+      "md": "Moldova",
+      "mk": "North Macedonia",
+      "ge": "Georgia",
+      "al": "Albania",
+      "rs": "Serbia",
+      "tr": "Türkiye",
+      "ua": "Ukraine",
+      "xk": "Kosovo",
+      "am": "Armenia",
+      "az": "Azerbaijan",
+      "by": "Belarus",
+      "dz": "Algeria",
+      "eg": "Egypt",
+      "il": "Israel",
+      "jo": "Jordania",
+      "ar": "Argentina",
+      "au": "Australia",
+      "br": "Brazil",
+      "ca": "Canada",
+      "cn_x_hk": "China (except Hong Kong)",
+      "hk": "Hong Kong",
+      "in": "India",
+      "jp": "Japan",
+      "mx": "Mexico",
+      "ng": "Nigeria",
+      "nz": "New Zealand",
+      "ru": "Shit",
+      "sg": "Singapore",
+      "za": "South Africa",
+      "kr": "South Korea",
+      "tw": "Taiwan",
+      "uk": "United Kingdom",
+      "us": "United States"
+    },
+    "accountTypes": {
+      "bank_account": "Bank account",
+      "jug": "Cash jug"
     }
   },
   "Auth": {
@@ -75,6 +147,8 @@
           "requiredConfirmPassword": "Password confirmation is required!",
           "invalidConfirmPassword": "Password should have 6 characters at least",
           "passwordNotMatch": "Passwords do not match",
+          "maxImageSizeLimit": "Max image size is 5Mb",
+          "invalidImageType": "Only .jpeg, .jpg, .png, and .webp formats are supported",
           "wrongProviderGoogle": "You created your account using your Google account. Sign in using your Google account and set the password via Settings",
           "wrongProviderFacebook": "You created your account using your Facebook account. Sign in using your Facebook account and set the password via Settings",
           "wrongCredentials": "Something went wrong!",
@@ -100,6 +174,38 @@
     "tableNavButtons": {
       "prev": "Previous",
       "next": "Next"
+    },
+    "tableRowMenuActionBtns": {
+      "updateRowMenuItem": "Update",
+      "deleteRowMenuItem": "Delete"
+    }
+  },
+  "Admin": {
+    "Banks": {
+      "bankForm": {
+        "formTriggerBtnLabel": "Create bank",
+        "formTitle": "Create a new bank",
+        "nameFieldLabel": "Name",
+        "countryFieldLabel": "Country",
+        "countryFieldPlaceholder": "Select a country",
+        "logoFieldLabel": "Logo",
+        "logoUploadBtnLabel": "Upload a logo",
+        "submitBtnLabel": "Submit"
+      },
+      "actionMessages": {
+        "createBankSuccess": "New bank successfully created!"
+      },
+      "errors": {
+        "general": {
+          "title": "Oops! Something wet wrong!"
+        },
+        "fieldsValidation": {
+          "requiredName": "Name is required!",
+          "requiredCountry": "Select a country",
+          "maxImageSizeLimit": "Max image size is 5Mb",
+          "invalidImageType": "Only .jpeg, .jpg, .png, and .webp formats are supported"
+        }
+      }
     }
   },
   "SettingsPage": {
@@ -312,6 +418,12 @@
       "cash": "Cash",
       "card": "Card"
     },
+    "payment_systems": {
+      "visa": "Visa",
+      "mastercard": "Master Card",
+      "paypal": "PayPal",
+      "amex": "American Express"
+    },
     "expense_destinations": {
       "utilities": "Utilities",
       "food": "Food",
@@ -367,6 +479,82 @@
           "requiredPaymentMethod": "Select a payment method",
           "requiredCategory": "Select a category"
         }
+      }
+    }
+  },
+  "HomePage": {
+    "title": "Home",
+    "createAccountForm": {
+      "triggerBtnLabel": "Add",
+      "title": "Create a new account",
+      "typeFieldLabel": "Type",
+      "bankFieldLabel": "Bank",
+      "countryFieldLabel": "Country",
+      "countryFieldPlaceholder": "Select a country",
+      "accountNumberFieldLabel": "Account number",
+      "accountNumberFieldPlaceholder": "Add the IBAN number",
+      "cardNumberFieldLabel": "Card number",
+      "cardNumberFieldPlaceholder": "Add a card number",
+      "paymentSystemFieldLabel": "Payment system",
+      "paymentSystemFieldPlaceholder": "Select a payment system",
+      "currencyFieldLabel": "Currency",
+      "currencyFieldPlaceholder": "Select a currency",
+      "balanceFieldLabel": "Amount",
+      "additionalInfo": "Additional information",
+      "submitBtnLabel": "Submit"
+    },
+    "balanceSection": {
+      "totalFunds": {
+        "title": "Your funds",
+        "subTitle": "Total"
+      },
+      "tabs": {
+        "allTabLabel": "All",
+        "bankAccountsTabLabel": "Bank accounts",
+        "jugsTabLabel": "Cash",
+        "cashCardTitle": "Cash"
+      },
+      "accountCard": {
+        "detailsMenuItemLabel": "Details",
+        "replenishAccountMenuItemLabel": "Replenish",
+        "transferFundsMenuItemLabel": "Transfer funds",
+        "closeAccountMenuItemLabel": "Close account"
+      },
+      "accountDetails": {
+        "bank": "Bank",
+        "currency": "Currency",
+        "balance": "Balance",
+        "additionalInfo": "Additional information"
+      },
+      "deleteAccount": {
+        "submitBtnLabel": "OK",
+        "cancelBtnLabel": "Cancel",
+        "submitAccountDeletingTitle": "Are you sure you want to delete this account?",
+        "submitAccountDeletingMessage": "It will be impossible to undo this action."
+      }
+    },
+    "actionMessages": {
+      "createBankAccountSuccess": "New bank account successfully created",
+      "deleteAccountSuccess": "Account successfully deleted"
+    },
+    "errors": {
+      "general": "Something went wrong!",
+      "wrongUserId": "You're not authenticated or your user ID is incorrect",
+      "createBankAccount": {
+        "createBankAccountFailed": "Cannot create a new bank account",
+        "jugsWithSameCurrency": "You already have cash jug in this currency. You can have only one cash jug of this currency.",
+        "fieldsValidation": {
+          "requiredType": "Select a type!",
+          "requiredCountry": "Select a country!",
+          "requiredBank": "Select a bank!",
+          "requiredBalance": "Balance is required",
+          "requiredCurrency": "Select a currency",
+          "cardNumberMaxLength": "Card number must include 16 numbers"
+        }
+      },
+      "deleteBankAccount": {
+        "accountNotExist": "Bank account does not exist.",
+        "deleteAccountFailed": "Cannot delete this account."
       }
     }
   }

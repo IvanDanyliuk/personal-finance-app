@@ -12,6 +12,11 @@ import Auto from '@/public/images/expense-categories/car.svg';
 import PublicTransport from '@/public/images/expense-categories/public-transport.svg';
 import Repair from '@/public/images/expense-categories/repair.svg';
 import Other from '@/public/images/expense-categories/other.svg';
+import Visa from '@/public/images/payment-systems/visa.svg';
+import MasterCard from '@/public/images/payment-systems/mastercard.svg';
+import PayPal from '@/public/images/payment-systems/paypal.svg';
+import AmEx from '@/public/images/payment-systems/amex.svg';
+import { AccountType } from './types/bank';
 
 
 export const WEEK_STARTS_FROM = [
@@ -144,6 +149,29 @@ export const PAYMENT_METHODS = [
   },
 ];
 
+export const PAYMENT_SYSTEMS = [
+  {
+    value: 'visa',
+    label: 'ExpensesPage.payment_systems.visa',
+    icon: Visa
+  },
+  {
+    value: 'mastercard',
+    label: 'ExpensesPage.payment_systems.mastercard',
+    icon: MasterCard
+  },
+  {
+    value: 'paypal',
+    label: 'ExpensesPage.payment_systems.paypal',
+    icon: PayPal
+  },
+  {
+    value: 'amex',
+    label: 'ExpensesPage.payment_systems.amex',
+    icon: AmEx
+  },
+];
+
 export const EXPENSE_CATEGORIES = [
   {
     value: 'utilities',
@@ -214,5 +242,286 @@ export const EXPENSE_CATEGORIES = [
     value: 'other',
     label: 'ExpensesPage.expense_destinations.other',
     icon: Other
+  },
+];
+
+export const COUNTRIES = [
+  {
+    value: 'at',
+    label: 'General.countries.at'
+  },
+  {
+    value: 'be',
+    label: 'General.countries.be'
+  },
+  {
+    value: 'bg',
+    label: 'General.countries.bg'
+  },
+  {
+    value: 'cz',
+    label: 'General.countries.cz'
+  },
+  {
+    value: 'dk',
+    label: 'General.countries.dk'
+  },
+  {
+    value: 'de',
+    label: 'General.countries.de'
+  },
+  {
+    value: 'ee',
+    label: 'General.countries.ee'
+  },
+  {
+    value: 'ie',
+    label: 'General.countries.ie'
+  },
+  {
+    value: 'el',
+    label: 'General.countries.el'
+  },
+  {
+    value: 'es',
+    label: 'General.countries.es'
+  },
+  {
+    value: 'fr',
+    label: 'General.countries.fr'
+  },
+  {
+    value: 'hr',
+    label: 'General.countries.hr'
+  },
+  {
+    value: 'it',
+    label: 'General.countries.it'
+  },
+  {
+    value: 'cy',
+    label: 'General.countries.cy'
+  },
+  {
+    value: 'lv',
+    label: 'General.countries.lv'
+  },
+  {
+    value: 'lt',
+    label: 'General.countries.lt'
+  },
+  {
+    value: 'lu',
+    label: 'General.countries.lu'
+  },
+  {
+    value: 'hu',
+    label: 'General.countries.hu'
+  },
+  {
+    value: 'mt',
+    label: 'General.countries.mt'
+  },
+  {
+    value: 'nl',
+    label: 'General.countries.nl'
+  },
+  {
+    value: 'pl',
+    label: 'General.countries.pl'
+  },
+  {
+    value: 'pt',
+    label: 'General.countries.pt'
+  },
+  {
+    value: 'ro',
+    label: 'General.countries.ro'
+  },
+  {
+    value: 'sl',
+    label: 'General.countries.sl'
+  },
+  {
+    value: 'sk',
+    label: 'General.countries.sk'
+  },
+  {
+    value: 'fi',
+    label: 'General.countries.fi'
+  },
+  {
+    value: 'se',
+    label: 'General.countries.se'
+  },
+  {
+    value: 'is',
+    label: 'General.countries.is'
+  },
+  {
+    value: 'li',
+    label: 'General.countries.li'
+  },
+  {
+    value: 'no',
+    label: 'General.countries.no'
+  },
+  {
+    value: 'ch',
+    label: 'General.countries.ch'
+  },
+  {
+    value: 'ba',
+    label: 'General.countries.ba'
+  },
+  {
+    value: 'me',
+    label: 'General.countries.me'
+  },
+  {
+    value: 'md',
+    label: 'General.countries.md'
+  },
+  {
+    value: 'mk',
+    label: 'General.countries.mk'
+  },
+  {
+    value: 'ge',
+    label: 'General.countries.ge'
+  },
+  {
+    value: 'al',
+    label: 'General.countries.al'
+  },
+  {
+    value: 'rs',
+    label: 'General.countries.rs'
+  },
+  {
+    value: 'tr',
+    label: 'General.countries.tr'
+  },
+  {
+    value: 'ua',
+    label: 'General.countries.ua'
+  },
+  {
+    value: 'xk',
+    label: 'General.countries.xk'
+  },
+  {
+    value: 'am',
+    label: 'General.countries.am'
+  },
+  {
+    value: 'az',
+    label: 'General.countries.az'
+  },
+  {
+    value: 'by',
+    label: 'General.countries.by'
+  },
+  {
+    value: 'dz',
+    label: 'General.countries.dz'
+  },
+  {
+    value: 'eg',
+    label: 'General.countries.eg'
+  },
+  {
+    value: 'il',
+    label: 'General.countries.il'
+  },
+  {
+    value: 'jo',
+    label: 'General.countries.jo'
+  },
+  {
+    value: 'ar',
+    label: 'General.countries.ar'
+  },
+  {
+    value: 'au',
+    label: 'General.countries.au'
+  },
+  {
+    value: 'br',
+    label: 'General.countries.br'
+  },
+  {
+    value: 'ca',
+    label: 'General.countries.ca'
+  },
+  {
+    value: 'cn_x_hk',
+    label: 'General.countries.cn_x_hk'
+  },
+  {
+    value: 'hk',
+    label: 'General.countries.hk'
+  },
+  {
+    value: 'in',
+    label: 'General.countries.in'
+  },
+  {
+    value: 'jp',
+    label: 'General.countries.jp'
+  },
+  {
+    value: 'mx',
+    label: 'General.countries.mx'
+  },
+  {
+    value: 'ng',
+    label: 'General.countries.ng'
+  },
+  {
+    value: 'nz',
+    label: 'General.countries.nz'
+  },
+  {
+    value: 'ru',
+    label: 'General.countries.ru'
+  },
+  {
+    value: 'sg',
+    label: 'General.countries.sg'
+  },
+  {
+    value: 'za',
+    label: 'General.countries.za'
+  },
+  {
+    value: 'kr',
+    label: 'General.countries.kr'
+  },
+  {
+    value: 'tw',
+    label: 'General.countries.tw'
+  },
+  {
+    value: 'uk',
+    label: 'General.countries.uk'
+  },
+  {
+    value: 'us',
+    label: 'General.countries.us'
+  },
+];
+
+export const MAX_IMAGE_FILE_SIZE = 5000000;
+export const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+
+export const ACCOUNT_TYPES = [
+  {
+    value: AccountType.BankAccount,
+    label: 'General.accountTypes.bank_account'
+  },
+  {
+    value: AccountType.Jug,
+    label: 'General.accountTypes.jug'
   },
 ];

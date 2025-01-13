@@ -7,14 +7,15 @@ import { useTranslations } from 'next-intl';
 import { SlidersHorizontal } from 'lucide-react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
-import { CURRENCIES, EXPENSE_CATEGORIES, PAYMENT_METHODS } from '@/lib/constants';
+import { Input } from '@/components/ui/input';
 import { ExpensesGeneralFiltersSchema, expensesGeneralFiltersSchema } from '@/lib/types/form-schemas/expenses';
 import { cn } from '@/lib/utils';
-import { Input } from '@/components/ui/input';
+import { CURRENCIES, EXPENSE_CATEGORIES, PAYMENT_METHODS } from '@/lib/constants';
 
 
 export const MainFilters: React.FC = () => {
@@ -69,8 +70,19 @@ export const MainFilters: React.FC = () => {
 
   return (
     <Dialog open={isRestFiltersOpen} onOpenChange={setRestFiltersOpen}>
-      <DialogTrigger className='w-10 h-10 flex justify-center items-center bg-primary-7 text-white border-none rounded-full'>
-        <SlidersHorizontal className='w-5 h-5' />
+      <DialogTrigger>
+        <TooltipProvider key={crypto.randomUUID()}>
+          <Tooltip>
+            <TooltipTrigger className='w-10 h-10 flex justify-center items-center bg-primary-7 text-white border-none rounded-full'>
+              <SlidersHorizontal className='w-5 h-5' />
+            </TooltipTrigger>
+            <TooltipContent className='px-3 py-1 bg-primary-7 text-white rounded-full'>
+              <p>
+                {t('ExpensesPage.filters.general.title')}
+              </p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </DialogTrigger>
       <DialogContent className='min-h-fit'>
         <DialogHeader>
