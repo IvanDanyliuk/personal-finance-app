@@ -166,6 +166,12 @@ export const AccountCardActions: React.FC<IAccountCardActions> = ({ account }) =
         </DialogContent>
       </Dialog>
 
+      <Dialog>
+        <DialogContent>
+          
+        </DialogContent>
+      </Dialog>
+
       <Dialog open={isDeleteOpen} onOpenChange={setDeleteOpen}>
         <DialogContent className='pt-10'>
           <DialogHeader>
