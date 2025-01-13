@@ -516,6 +516,7 @@
       },
       "accountCard": {
         "detailsMenuItemLabel": "Подробнее",
+        "replenishAccountMenuItemLabel": "Пополнить",
         "transferFundsMenuItemLabel": "Перевести средства",
         "closeAccountMenuItemLabel": "Закрыт счет"
       },

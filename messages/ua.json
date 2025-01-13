@@ -518,6 +518,7 @@
       },
       "accountCard": {
         "detailsMenuItemLabel": "Деталі",
+        "replenishAccountMenuItemLabel": "Поповнити",
         "transferFundsMenuItemLabel": "Переказати кошти",
         "closeAccountMenuItemLabel": "Закрити рахунок"
       },

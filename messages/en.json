@@ -516,6 +516,7 @@
       },
       "accountCard": {
         "detailsMenuItemLabel": "Details",
+        "replenishAccountMenuItemLabel": "Replenish",
         "transferFundsMenuItemLabel": "Transfer funds",
         "closeAccountMenuItemLabel": "Close account"
       },

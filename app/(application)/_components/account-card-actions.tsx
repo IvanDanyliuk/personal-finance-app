@@ -88,6 +88,9 @@ export const AccountCardActions: React.FC<IAccountCardActions> = ({ account }) =
             {t('HomePage.balanceSection.accountCard.detailsMenuItemLabel')}
           </DropdownMenuItem>
           <DropdownMenuItem className='cursor-pointer px-3 hover:bg-primary-1 rounded-full'>
+            {t('HomePage.balanceSection.accountCard.replenishAccountMenuItemLabel')}
+          </DropdownMenuItem>
+          <DropdownMenuItem className='cursor-pointer px-3 hover:bg-primary-1 rounded-full'>
             {t('HomePage.balanceSection.accountCard.transferFundsMenuItemLabel')}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setDeleteOpen(true)} className='cursor-pointer px-3 hover:bg-primary-1 rounded-full'>

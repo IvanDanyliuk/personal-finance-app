@@ -7,13 +7,14 @@ import { CalendarDays } from 'lucide-react';
 import { Controller, FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { format } from 'date-fns';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { SubmitButton } from '@/components/common';
 import { Button } from '@/components/ui/button'; 
 import { Calendar } from '@/components/ui/calendar';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
-import { formatDateFilterValues } from '@/lib/helpers';
 import { incomesFilteringByDateSchema } from '@/lib/types/form-schemas/incomes';
+import { formatDateFilterValues } from '@/lib/helpers';
 
 
 export const DateFilters: React.FC = () => {
@@ -64,8 +65,19 @@ export const DateFilters: React.FC = () => {
         open={isFiltersOpen} 
         onOpenChange={setFiltersOpen}
       >
-        <DialogTrigger className='w-10 h-10 flex justify-center items-center bg-primary-7 text-white border-none rounded-full'>
-          <CalendarDays className='w-5 h-5' />
+        <DialogTrigger>
+          <TooltipProvider key={crypto.randomUUID()}>
+            <Tooltip>
+              <TooltipTrigger className='w-10 h-10 flex justify-center items-center bg-primary-7 text-white border-none rounded-full'>
+                <CalendarDays className='w-5 h-5' />
+              </TooltipTrigger>
+              <TooltipContent className='px-3 py-1 bg-primary-7 text-white rounded-full'>
+                <p>
+                  {t('IncomesPage.filters.date.title')}
+                </p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </DialogTrigger>
         <DialogContent className='p-3'>
           <DialogHeader>
@@ -136,7 +148,7 @@ export const DateFilters: React.FC = () => {
           </form>
         </DialogContent>
       </Dialog>
-      <div className='px-4 w-fit h-10 flex justify-center items-center border border-background-neutral rounded-full'>
+      <div className='px-4 w-fit h-10 flex justify-center items-center text-sm border border-background-neutral rounded-full'>
         {formatDateFilterValues({ 
           from: params.get('dateFrom'), 
           to: params.get('dateTo'), 
