@@ -6,6 +6,7 @@ import { AccountType, IBank, IBankAccount } from '@/lib/types/bank';
 import { AccountCard, AccountForm } from './';
 import { useEffect, useState } from 'react';
 import { formatNumber, groupFundsByCurrency } from '@/lib/helpers';
+import useBankAccountsStore from '@/lib/store/bank-accounts-slice';
 
 
 interface IBalanceSection {
@@ -22,6 +23,12 @@ export const BalanceSection: React.FC<IBalanceSection> = ({ banks, funds }) => {
   const bankOptions = banks.map(bank => ({ value: bank.id, label: bank.name, icon: bank.logo }));
   const bankAccounts = funds.filter(item => item.type === AccountType.BankAccount);
   const jugs = funds.filter(item => item.type === AccountType.Jug);
+
+  const setBankAccounts = useBankAccountsStore(state => state.setBankAccounts);
+
+  useEffect(() => {
+    setBankAccounts(funds);
+  }, [funds, setBankAccounts]);
 
   useEffect(() => {
     const groupedFunds = groupFundsByCurrency(funds);

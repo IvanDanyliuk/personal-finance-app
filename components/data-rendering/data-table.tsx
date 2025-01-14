@@ -273,7 +273,7 @@ export const DataTable: React.FC<IDataTable> = ({
                     >
                       {item.name === 'date' 
                         ? format(dataItem.date, 'dd.MM.yyyy') 
-                        : item.name === 'amount' || item.name === 'comment'
+                        : item.name === 'amount' || item.name === 'comment' || item.name === 'destination'
                           ? dataItem[item.name]
                           : t(`${item.value ? item.value + '.' : ''}${dataItem[item.name]}`)
                       }

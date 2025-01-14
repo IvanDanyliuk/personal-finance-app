@@ -30,6 +30,7 @@ import { deleteAccount } from '@/lib/actions/account.actions';
 import { ActionStatus } from '@/lib/types/common.types';
 import { useToast } from '@/hooks/use-toast';
 import Spinner from '@/public/images/tube-spinner.svg';
+import useBankAccountsStore from '@/lib/store/bank-accounts-slice';
 
 
 const cardNumberFont = Courier_Prime({ 
@@ -46,6 +47,8 @@ export const AccountCardActions: React.FC<IAccountCardActions> = ({ account }) =
   const t = useTranslations();
   const { toast } = useToast();
   const [pending, setTransition] = useTransition();
+
+  const bankAccounts = useBankAccountsStore(state => state.accounts);
 
   const [isDetailsOpen, setDetailsOpen] = useState<boolean>(false);
   const [isTransferOpen, setTransferOpen] = useState<boolean>(false);
@@ -90,7 +93,7 @@ export const AccountCardActions: React.FC<IAccountCardActions> = ({ account }) =
           <DropdownMenuItem className='cursor-pointer px-3 hover:bg-primary-1 rounded-full'>
             {t('HomePage.balanceSection.accountCard.replenishAccountMenuItemLabel')}
           </DropdownMenuItem>
-          <DropdownMenuItem className='cursor-pointer px-3 hover:bg-primary-1 rounded-full'>
+          <DropdownMenuItem onClick={() => setTransferOpen(true)} className='cursor-pointer px-3 hover:bg-primary-1 rounded-full'>
             {t('HomePage.balanceSection.accountCard.transferFundsMenuItemLabel')}
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setDeleteOpen(true)} className='cursor-pointer px-3 hover:bg-primary-1 rounded-full'>
@@ -166,9 +169,18 @@ export const AccountCardActions: React.FC<IAccountCardActions> = ({ account }) =
         </DialogContent>
       </Dialog>
 
-      <Dialog>
+      <Dialog open={isTransferOpen} onOpenChange={setTransferOpen}>
         <DialogContent>
-          
+          <ul>
+            {bankAccounts
+              .filter(item => item.currency === account.currency)
+              .map(item => (
+                <li key={crypto.randomUUID()}>
+                  {`Type: ${item.type}, Balance: ${item.balance}, Currency: ${item.currency}`}
+                </li>
+              )
+            )}
+          </ul>
         </DialogContent>
       </Dialog>
 

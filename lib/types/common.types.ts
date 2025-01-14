@@ -8,6 +8,11 @@ export enum SortOrder {
   Asc = 'asc'
 };
 
+export enum EntityTypes {
+  Incomes = 'incomes',
+  Expenses = 'expenses'
+};
+
 export type ColType = {
   name: string;
   label: string;
