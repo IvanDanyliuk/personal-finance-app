@@ -19,40 +19,41 @@ enum UserRole {
 }
 
 model User {
-  id            String                      @id @default(auto()) @map("_id") @db.ObjectId
-  name          String?
-  email         String?                     @unique
-  password      String?
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  role          UserRole?                   @default(USER)
-  bankAccounts  BankAccount[]               @relation("UserBankAccounts")
-  incomes       Income[]                    @relation("UserIncomes")
-  expenses      Expense[]                   @relation("UserExpencses")
-  weekStartDay  String?                     @default("1")
-  currency      String?                     @default("usd")
-  language      String?                     @default("en")   
+  id                  String                      @id @default(auto()) @map("_id") @db.ObjectId
+  name                String?
+  email               String?                     @unique
+  password            String?
+  emailVerified       DateTime?
+  image               String?
+  accounts            Account[]
+  sessions            Session[]
+  role                UserRole?                   @default(USER)
+  bankAccounts        BankAccount[]               @relation("UserBankAccounts")
+  fundTransfers       FundTransfer[]              @relation("UserFundsTransfer")
+  incomes             Income[]                    @relation("UserIncomes")
+  expenses            Expense[]                   @relation("UserExpencses")
+  weekStartDay        String?                     @default("1")
+  currency            String?                     @default("usd")
+  language            String?                     @default("en")   
   // Optional for WebAuthn support
-  Authenticator Authenticator[]
+  Authenticator       Authenticator[]
  
-  createdAt DateTime                        @default(now())
-  updatedAt DateTime                        @updatedAt
+  createdAt           DateTime                    @default(now())
+  updatedAt           DateTime                    @updatedAt
 }
 
 model Income {
-  id            String                      @id @default(auto()) @map("_id") @db.ObjectId
-  user          User                        @relation("UserIncomes", fields: [userId], references: [id], onDelete: Cascade)
-  userId        String                      @db.ObjectId
-  amount        Int
-  source        String
-  currency      String
-  comment       String?
-  date          DateTime                    @default(now())
+  id                  String                      @id @default(auto()) @map("_id") @db.ObjectId
+  user                User                        @relation("UserIncomes", fields: [userId], references: [id], onDelete: Cascade)
+  userId              String                      @db.ObjectId
+  amount              Int
+  source              String
+  currency            String
+  comment             String?
+  date                DateTime                    @default(now())
 
-  createdAt     DateTime                    @default(now())
-  updatedAt     DateTime                    @updatedAt
+  createdAt           DateTime                    @default(now())
+  updatedAt           DateTime                    @updatedAt
 }
 
 enum PaymentMethod {
@@ -61,38 +62,30 @@ enum PaymentMethod {
 }
 
 model Expense {
-  id            String                      @id @default(auto()) @map("_id") @db.ObjectId
-  user          User                        @relation("UserExpencses", fields: [userId], references: [id], onDelete: Cascade)
-  userId        String                      @db.ObjectId
-  amount        Int
-  currency      String
-  destination   String
-  paymentMethod String
-  category      String
-  comment       String?
-  date          DateTime                    @default(now())
+  id                  String                      @id @default(auto()) @map("_id") @db.ObjectId
+  user                User                        @relation("UserExpencses", fields: [userId], references: [id], onDelete: Cascade)
+  userId              String                      @db.ObjectId
+  amount              Int
+  currency            String
+  destination         String
+  paymentMethod       String
+  category            String
+  comment             String?
+  date                DateTime                    @default(now())
 
-  createdAt     DateTime                    @default(now())
-  updatedAt     DateTime                    @updatedAt
+  createdAt           DateTime                    @default(now())
+  updatedAt           DateTime                    @updatedAt
 }
 
-// model ExpenseCategory {
-//   id            String                      @id @default(auto()) @map("_id") @db.ObjectId
-//   name          String                      @unique
-//   subCategories String[]
-//   expense       Expense                     @relation(fields: [expenseId], references: [id], onDelete: Cascade)
-//   expenseId     String                      @db.ObjectId @unique
-// }
-
 model Bank {
-  id            String                      @id @default(auto()) @map("_id") @db.ObjectId
-  name          String
-  country       String
-  logo          String
-  bankAccounts  BankAccount[]               @relation("Banks")
+  id                  String                      @id @default(auto()) @map("_id") @db.ObjectId
+  name                String
+  country             String
+  logo                String
+  bankAccounts        BankAccount[]               @relation("Banks")
 
-  createdAt DateTime                        @default(now())
-  updatedAt DateTime                        @updatedAt
+  createdAt           DateTime                    @default(now())
+  updatedAt           DateTime                    @updatedAt
 }
 
 enum Currency {
@@ -103,70 +96,86 @@ enum Currency {
 }
 
 model BankAccount {
-  id              String                      @id @default(auto()) @map("_id") @db.ObjectId
-  user            User                        @relation("UserBankAccounts", fields: [userId], references: [id], onDelete: Cascade)
-  userId          String                      @db.ObjectId
-  bank            Bank?                       @relation("Banks", fields: [bankId], references: [id])
-  bankId          String?                     @db.ObjectId
-  currency        String
-  country         String?
-  accountNumber   String?
-  cardNumber      Int?
-  paymentSystem   String?
-  balance         Int
-  type            String
-  additionalInfo  String?
+  id                  String                      @id @default(auto()) @map("_id") @db.ObjectId
+  user                User                        @relation("UserBankAccounts", fields: [userId], references: [id], onDelete: Cascade)
+  userId              String                      @db.ObjectId
+  bank                Bank?                       @relation("Banks", fields: [bankId], references: [id])
+  bankId              String?                     @db.ObjectId
+  currency            String
+  country             String?
+  accountNumber       String?
+  cardNumber          Int?
+  paymentSystem       String?
+  balance             Int
+  type                String
+  additionalInfo      String?
+  fundsTransferFrom   FundTransfer[]              @relation("FundsTransferFrom")
+  fundsTransferTo   FundTransfer[]                @relation("FundsTransferTo")
 
-  createdAt DateTime                        @default(now())
-  updatedAt DateTime                        @updatedAt
+  createdAt           DateTime                    @default(now())
+  updatedAt           DateTime                    @updatedAt
+}
+
+model FundTransfer {
+  id                  String                      @id @default(auto()) @map("_id") @db.ObjectId
+  user                User                        @relation("UserFundsTransfer", fields: [userId], references: [id], onDelete: Cascade)
+  userId              String                      @db.ObjectId
+  accountFrom         BankAccount                 @relation("FundsTransferFrom", fields: [accountIdFrom], references: [id])
+  accountIdFrom       String                      @db.ObjectId
+  accountTo           BankAccount                 @relation("FundsTransferTo", fields: [accountIdTo], references: [id])
+  accountIdTo         String                      @db.ObjectId
+  amount              Int
+
+  createdAt           DateTime                    @default(now())
+  updatedAt           DateTime                    @updatedAt
 }
  
 model Account {
-  id                String                  @id @default(auto()) @map("_id") @db.ObjectId
-  userId            String                  @db.ObjectId @unique
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?                 @db.String
-  access_token      String?                 @db.String
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?                 @db.String
-  session_state     String?
+  id                  String                      @id @default(auto()) @map("_id") @db.ObjectId
+  userId              String                      @db.ObjectId @unique
+  type                String
+  provider            String
+  providerAccountId   String
+  refresh_token       String?                     @db.String
+  access_token        String?                     @db.String
+  expires_at          Int?
+  token_type          String?
+  scope               String?
+  id_token            String?                     @db.String
+  session_state       String?
  
-  createdAt DateTime                        @default(now())
-  updatedAt DateTime                        @updatedAt
+  createdAt           DateTime                    @default(now())
+  updatedAt           DateTime                    @updatedAt
  
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User                                       @relation(fields: [userId], references: [id], onDelete: Cascade)
  
   @@unique([provider, providerAccountId])
 }
  
 model Session {
-  id           String                       @id @default(auto()) @map("_id") @db.ObjectId
-  sessionToken String                       @unique
-  userId       String                       @db.ObjectId
-  expires      DateTime
-  user         User                         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                  String                      @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken        String                      @unique
+  userId              String                      @db.ObjectId
+  expires             DateTime
+  user                User                        @relation(fields: [userId], references: [id], onDelete: Cascade)
  
-  createdAt DateTime                        @default(now())
-  updatedAt DateTime                        @updatedAt
+  createdAt           DateTime                    @default(now())
+  updatedAt           DateTime                    @updatedAt
 }
  
 model VerificationToken {
-  id         String                         @id @default(auto()) @map("_id") @db.ObjectId
-  identifier String
-  token      String
-  expires    DateTime
+  id                  String                      @id @default(auto()) @map("_id") @db.ObjectId
+  identifier          String
+  token               String
+  expires             DateTime
  
   @@unique([identifier, token])
 }
  
 // Optional for WebAuthn support
 model Authenticator {
-  credentialID         String               @id @map("_id")
-  userId               String               @db.ObjectId
+  credentialID         String                     @id @map("_id")
+  userId               String                     @db.ObjectId
   providerAccountId    String
   credentialPublicKey  String
   counter              Int
@@ -174,7 +183,7 @@ model Authenticator {
   credentialBackedUp   Boolean
   transports           String?
  
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user                 User                       @relation(fields: [userId], references: [id], onDelete: Cascade)
  
   @@unique([userId, credentialID])
 }

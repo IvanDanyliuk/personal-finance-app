@@ -514,7 +514,13 @@
         "allTabLabel": "Всі",
         "bankAccountsTabLabel": "Банківські рахунки",
         "jugsTabLabel": "Готівка",
-        "cashCardTitle": "Готівка"
+        "cashCardTitle": "Готівка",
+        "noFundsTitle": "Кошти не знайдені",
+        "noFundsMessage": "Схоже, Ви ще не додали інформацію про свої кошти",
+        "noAccountsTitle": "Банківські рахунки не знайдені",
+        "noAccountsMessage": "Схоже, Ви ще не додали інформацію про Ваші банківські рахунки",
+        "noJugsTitle": "Кошти в готівці не знайдені",
+        "noJugsMessage": "Схоже, Ви ще не додали інформацію про свої збереження"
       },
       "accountCard": {
         "detailsMenuItemLabel": "Деталі",

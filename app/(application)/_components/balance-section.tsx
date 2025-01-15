@@ -1,10 +1,11 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';  
 import { AccountType, IBank, IBankAccount } from '@/lib/types/bank';
-import { AccountCard, AccountForm } from './';
-import { useEffect, useState } from 'react';
+import { AccountCard, AccountForm, FundsPlaceholder } from './';
 import { formatNumber, groupFundsByCurrency } from '@/lib/helpers';
 import useBankAccountsStore from '@/lib/store/bank-accounts-slice';
 
@@ -78,32 +79,47 @@ export const BalanceSection: React.FC<IBalanceSection> = ({ banks, funds }) => {
             </TabsList>
             <TabsContent value='all'>
               <div className='flex overflow-x-auto gap-4 py-2 scroll-smooth'>
-                {funds.map(item => (
+                {funds.length > 0 ? funds.map(item => (
                   <AccountCard 
                     key={crypto.randomUUID()} 
                     data={item} 
                   />
-                ))}
+                )) : (
+                  <FundsPlaceholder 
+                    title='HomePage.balanceSection.tabs.noFundsTitle' 
+                    message='HomePage.balanceSection.tabs.noFundsMessage' 
+                  />
+                )}
               </div>
             </TabsContent>
             <TabsContent value='bank_accounts'>
               <div className='flex overflow-x-auto gap-4 py-2 scroll-smooth'>
-                {bankAccounts.map(item => (
+                {bankAccounts.length > 0 ? bankAccounts.map(item => (
                   <AccountCard 
                     key={crypto.randomUUID()} 
                     data={item} 
                   />
-                ))}
+                )) : (
+                  <FundsPlaceholder 
+                    title='HomePage.balanceSection.tabs.noAccountsTitle' 
+                    message='HomePage.balanceSection.tabs.noAccountsMessage' 
+                  />
+                )}
               </div>
             </TabsContent>
             <TabsContent value='jugs'>
               <div className='flex overflow-x-auto gap-4 py-2 scroll-smooth'>
-                {jugs.map(item => (
+                {jugs.length > 0 ? jugs.map(item => (
                   <AccountCard 
                     key={crypto.randomUUID()} 
                     data={item} 
                   />
-                ))}
+                )) : (
+                  <FundsPlaceholder 
+                    title='HomePage.balanceSection.tabs.noJugsTitle' 
+                    message='HomePage.balanceSection.tabs.noJugsMessage' 
+                  />
+                )}
               </div>
             </TabsContent>
           </Tabs>

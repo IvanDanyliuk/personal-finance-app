@@ -512,7 +512,13 @@
         "allTabLabel": "All",
         "bankAccountsTabLabel": "Bank accounts",
         "jugsTabLabel": "Cash",
-        "cashCardTitle": "Cash"
+        "cashCardTitle": "Cash",
+        "noFundsTitle": "No funds found",
+        "noFundsMessage": "It seems you don't have any funds yet.",
+        "noAccountsTitle": "No accounts found",
+        "noAccountsMessage": "It seems you haven't opened any bank accounts yet.",
+        "noJugsTitle": "No funds in cash found",
+        "noJugsMessage": "It seems you don't have any funds in cash yet."
       },
       "accountCard": {
         "detailsMenuItemLabel": "Details",

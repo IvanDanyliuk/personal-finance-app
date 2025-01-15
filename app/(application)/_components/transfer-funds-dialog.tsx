@@ -2,6 +2,9 @@
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { IBankAccount } from "@/lib/types/bank";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
 
 
 interface ITransferFundsDialog {
@@ -15,19 +18,25 @@ export const TransferFundsDialog: React.FC<ITransferFundsDialog> = ({
   onOpenChange, 
   bankAccounts
 }) => {
-  
+  const t = useTranslations();
+
+  // const {
+  //   control,
+  //   handleSubmit,
+  //   formState: { errors, isSubmitting }
+  // } = useForm<ITransferFunds>({
+  //   resolver: zodResolver(transferSchema),
+  //   defaultValues: {
+
+  //   },
+  // });
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
-        <ul>
-          {bankAccounts
-            .map(item => (
-              <li key={crypto.randomUUID()}>
-                {`Type: ${item.type}, Balance: ${item.balance}, Currency: ${item.currency}`}
-              </li>
-            )
-          )}
-        </ul>
+        <form action="">
+
+        </form>
       </DialogContent>
     </Dialog>
   );

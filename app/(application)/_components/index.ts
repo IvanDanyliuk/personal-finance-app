@@ -4,6 +4,7 @@ import { AccountDetailsDialog } from './account-details-dialog';
 import { AccountForm } from './account-form';
 import { BalanceSection } from './balance-section';
 import { DeleteAccountDialog } from './delete-account-dialog';
+import { FundsPlaceholder } from './funds-placeholder';
 import { TransferFundsDialog } from './transfer-funds-dialog';
 
 export { 
@@ -13,5 +14,6 @@ export {
   AccountForm, 
   BalanceSection, 
   DeleteAccountDialog, 
+  FundsPlaceholder, 
   TransferFundsDialog 
 };

@@ -512,7 +512,13 @@
         "allTabLabel": "Все",
         "bankAccountsTabLabel": "Банковские счета",
         "jugsTabLabel": "Наличные",
-        "cashCardTitle": "Наличные"
+        "cashCardTitle": "Наличные",
+        "noFundsTitle": "Средства не найдены",
+        "noFundsMessage": "Похоже, вы еще не добавили данные о своих средствах",
+        "noAccountsTitle": "Банковские счета не найдены",
+        "noAccountsMessage": "Похоже, что вы не открыли еще ни одного счета",
+        "noJugsTitle": "Сбережения в наличных не найдены",
+        "noJugsMessage": "Похоже, что вы не указали данные о своих накоплениях"
       },
       "accountCard": {
         "detailsMenuItemLabel": "Подробнее",
