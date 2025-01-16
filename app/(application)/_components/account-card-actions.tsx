@@ -94,6 +94,9 @@ export const AccountCardActions: React.FC<IAccountCardActions> = ({ account }) =
         open={isTransferOpen} 
         onOpenChange={setTransferOpen} 
         bankAccounts={availableToTransferBankAccounts} 
+        // currentBalance={account.balance}
+        currentAccountId={account.id}
+        currency={account.currency}
       />
 
       <DeleteAccountDialog 

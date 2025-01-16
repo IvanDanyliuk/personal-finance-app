@@ -125,6 +125,7 @@ model FundTransfer {
   accountTo           BankAccount                 @relation("FundsTransferTo", fields: [accountToId], references: [id])
   accountToId         String                      @db.ObjectId
   amount              Int
+  currency            String
 
   createdAt           DateTime                    @default(now())
   updatedAt           DateTime                    @updatedAt

@@ -7,6 +7,7 @@ import { BankAccountSchema, bankAccountSchema } from '../types/form-schemas/bank
 import { db } from '@/db';
 import { removeFalseyFields } from '../helpers';
 import { AccountType } from '../types/bank';
+import { transferFundsSchema } from '../types/form-schemas/transfer-funds';
 
 
 export const getFunds = async () => {
@@ -138,7 +139,67 @@ export const deleteAccount = async (id: string) => {
 
 export const transferFunds = async (formData: FormData) => {
   try {
-    console.log('TRANSFER FUNDS ACTION', formData)
+    const session = await auth();
+
+    const validatedFields = transferFundsSchema.safeParse({
+      userId: formData.get('userId'),
+      accountFromId: formData.get('accountFromId'),
+      accountToId: formData.get('accountToId'),
+      amount: formData.get('amount') ? +formData.get('amount')! : undefined,
+      currency: formData.get('currency'),
+    });
+
+    if(!validatedFields.success) {
+      return {
+        status: ActionStatus.Failed,
+        fieldError: validatedFields.error.flatten().fieldErrors,
+      };
+    }
+
+    if(session && session.user && session.user.id !== validatedFields.data.userId) {
+      throw new Error('HomePage.errors.wrongUserId');
+    }
+
+    const destinationAccount = await db.bankAccount.findFirst({ 
+      where: { 
+        id: validatedFields.data.accountToId 
+      } 
+    });
+    const sourceAccount = await db.bankAccount.findFirst({ 
+      where: { 
+        id: validatedFields.data.accountFromId 
+      } 
+    });
+
+    if(destinationAccount?.currency !== sourceAccount?.currency) {
+      throw new Error('HomePage.errors.differentCurrencies');
+    }
+
+    if(sourceAccount!.balance < validatedFields.data.amount) {
+      throw new Error('HomePage.errors.transferFunds.notEnoughFunds')
+    }
+
+    await db.fundTransfer.create({ data: validatedFields.data });
+    
+    await db.bankAccount.update({ 
+      where: { 
+        id: validatedFields.data.accountFromId 
+      }, 
+      data: { 
+        balance: sourceAccount!.balance - validatedFields.data.amount 
+      } 
+    });
+
+    await db.bankAccount.update({
+      where: { 
+        id: validatedFields.data.accountToId 
+      }, 
+      data: { 
+        balance: destinationAccount!.balance + +validatedFields.data.amount 
+      } 
+    });
+
+    revalidatePath('/');
 
     return {
       status: ActionStatus.Success,

@@ -564,11 +564,16 @@
           "requiredBalance": "Balance is required",
           "requiredCurrency": "Select a currency",
           "cardNumberMaxLength": "Card number must include 16 numbers"
+          
         }
       },
       "deleteBankAccount": {
         "accountNotExist": "Bank account does not exist.",
         "deleteAccountFailed": "Cannot delete this account."
+      },
+      "transferFunds": {
+        "differentCurrencies": "You cannot send funds to an account in a different currency",
+        "notEnoughFunds": "You do not have enough funds"
       }
     }
   }

@@ -78,7 +78,7 @@ export const TransferFundsDialog: React.FC<ITransferFundsDialog> = ({
 
     if(status === ActionStatus.Failed && error) {
       toast({
-        title: t('errors.general'),
+        title: t('HomePage.errors.general'),
         description: t(error),
         variant: 'destructive',
         className: 'bg-danger-1 text-danger-2'

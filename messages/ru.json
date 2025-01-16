@@ -569,6 +569,10 @@
       "deleteBankAccount": {
         "accountNotExist": "Такого счета не существует.",
         "deleteAccountFailed": "Не удалось удалить счет."
+      },
+      "transferFunds": {
+        "differentCurrencies": "Вы не можете переводить средства на счет в другой валюте",
+        "notEnoughFunds": "У Вас недостаточно средств"
       }
     }
   }
