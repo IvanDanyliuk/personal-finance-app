@@ -35,10 +35,12 @@ export const TransferFundsDialog: React.FC<ITransferFundsDialog> = ({
   const session = useSession();
   const { toast } = useToast();
 
-  const options = bankAccounts.filter(item => item).map(item => ({
-    value: item.id,
-    label: `${item.accountNumber || ''} ${item.currency.toUpperCase()}${item.balance}`,
-    icon: item.bank ? item.bank.logo : undefined,
+  const options = bankAccounts
+    .filter(item => item.currency === currency && item.id !== currentAccountId)
+    .map(item => ({
+      value: item.id,
+      label: `${item.accountNumber || ''} ${item.currency.toUpperCase()}${item.balance}`,
+      icon: item.bank ? item.bank.logo : undefined,
   }));
 
   const {

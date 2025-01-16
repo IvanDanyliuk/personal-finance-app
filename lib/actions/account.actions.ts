@@ -55,7 +55,7 @@ export const createBankAccount = async (formData: FormData) => {
       country: formData.get('country'), 
       bankId: formData.get('bankId'),
       accountNumber: formData.get('accountNumber'),
-      cardNumber: formData.get('cardNumber') ? +formData.get('cardNumber')! : null,
+      cardNumber: formData.get('cardNumber') ? +formData.get('cardNumber')! : undefined,
       paymentSystem: formData.get('paymentSystem'),
       balance: +formData.get('balance')!,
       currency: formData.get('currency'),
@@ -108,7 +108,6 @@ export const createBankAccount = async (formData: FormData) => {
 
 export const deleteAccount = async (id: string) => {
   try {
-    console.log('DELETE ACCOUNT', id)
     const session = await auth();
 
     if(!session) {
