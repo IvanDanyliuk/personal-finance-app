@@ -537,11 +537,19 @@
         "cancelBtnLabel": "Отмена",
         "submitAccountDeletingTitle": "Вы уверены что ходите удалить этот счет?",
         "submitAccountDeletingMessage": "Отменить это действие буде невозможно."
+      },
+      "transferFundsForm": {
+        "title": "Перевести средства",
+        "accountToIdFieldLabel": "Счет назначения",
+        "amountFieldLabel": "Сумма",
+        "submitBtnLabel": "Подтвердить",
+        "cancelBtnLabel": "Отмена"
       }
     },
     "actionMessages": {
       "createBankAccountSuccess": "Новый счет успешно создан",
-      "deleteAccountSuccess": "Счет успешно удален"
+      "deleteAccountSuccess": "Счет успешно удален",
+      "transferFundSuccess": "Перевод средств выполнен успешно"
     },
     "errors": {
       "general": "Что-то пошло не так!",

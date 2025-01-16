@@ -537,11 +537,19 @@
         "cancelBtnLabel": "Cancel",
         "submitAccountDeletingTitle": "Are you sure you want to delete this account?",
         "submitAccountDeletingMessage": "It will be impossible to undo this action."
+      },
+      "transferFundsForm": {
+        "title": "Transfer funds",
+        "accountToIdFieldLabel": "Destination account",
+        "amountFieldLabel": "Amount",
+        "submitBtnLabel": "Submit",
+        "cancelBtnLabel": "Cancel"
       }
     },
     "actionMessages": {
       "createBankAccountSuccess": "New bank account successfully created",
-      "deleteAccountSuccess": "Account successfully deleted"
+      "deleteAccountSuccess": "Account successfully deleted",
+      "transferFundSuccess": "Funds successfully transfered"
     },
     "errors": {
       "general": "Something went wrong!",

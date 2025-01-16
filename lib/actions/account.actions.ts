@@ -136,3 +136,19 @@ export const deleteAccount = async (id: string) => {
     };
   }
 };
+
+export const transferFunds = async (formData: FormData) => {
+  try {
+    console.log('TRANSFER FUNDS ACTION', formData)
+
+    return {
+      status: ActionStatus.Success,
+      error: null,
+    };
+  } catch (error: any) {
+    return {
+      status: ActionStatus.Failed,
+      error: error.message,
+    };
+  }
+};

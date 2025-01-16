@@ -120,10 +120,10 @@ model FundTransfer {
   id                  String                      @id @default(auto()) @map("_id") @db.ObjectId
   user                User                        @relation("UserFundsTransfer", fields: [userId], references: [id], onDelete: Cascade)
   userId              String                      @db.ObjectId
-  accountFrom         BankAccount                 @relation("FundsTransferFrom", fields: [accountIdFrom], references: [id])
-  accountIdFrom       String                      @db.ObjectId
-  accountTo           BankAccount                 @relation("FundsTransferTo", fields: [accountIdTo], references: [id])
-  accountIdTo         String                      @db.ObjectId
+  accountFrom         BankAccount                 @relation("FundsTransferFrom", fields: [accountFromId], references: [id])
+  accountFromId       String                      @db.ObjectId
+  accountTo           BankAccount                 @relation("FundsTransferTo", fields: [accountToId], references: [id])
+  accountToId         String                      @db.ObjectId
   amount              Int
 
   createdAt           DateTime                    @default(now())

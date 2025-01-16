@@ -79,5 +79,5 @@ export const ConfirmDialog: React.FC<IConfirmDialog> = ({
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};

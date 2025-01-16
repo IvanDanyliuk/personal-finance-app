@@ -1,11 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';  
-import { AccountType, IBank, IBankAccount } from '@/lib/types/bank';
 import { AccountCard, AccountForm, FundsPlaceholder } from './';
+import { AccountType, IBank, IBankAccount } from '@/lib/types/bank';
 import { formatNumber, groupFundsByCurrency } from '@/lib/helpers';
 import useBankAccountsStore from '@/lib/store/bank-accounts-slice';
 
@@ -67,13 +66,22 @@ export const BalanceSection: React.FC<IBalanceSection> = ({ banks, funds }) => {
         <div className='px-3 flex-1 overflow-hidden'>
           <Tabs defaultValue='all'>
             <TabsList className='mb-3 flex justify-start gap-3'>
-              <TabsTrigger value='all' className='flex items-center gap-1 font-semibold'>
+              <TabsTrigger 
+                value='all' 
+                className='flex items-center gap-1 font-semibold'
+              >
                 {t('HomePage.balanceSection.tabs.allTabLabel')}
               </TabsTrigger>
-              <TabsTrigger value='bank_accounts' className='flex items-center gap-1 font-semibold'>
+              <TabsTrigger 
+                value='bank_accounts' 
+                className='flex items-center gap-1 font-semibold'
+              >
                 {`${t('HomePage.balanceSection.tabs.bankAccountsTabLabel')} (${bankAccounts.length})`}
               </TabsTrigger>
-              <TabsTrigger value='jugs' className='flex items-center gap-1 font-semibold'>
+              <TabsTrigger 
+                value='jugs' 
+                className='flex items-center gap-1 font-semibold'
+              >
                 {`${t('HomePage.balanceSection.tabs.jugsTabLabel')} (${jugs.length})`}
               </TabsTrigger>
             </TabsList>

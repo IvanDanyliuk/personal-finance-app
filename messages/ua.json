@@ -539,11 +539,19 @@
         "cancelBtnLabel": "Відхилити",
         "submitAccountDeletingTitle": "Ви впевенені що хочете видалити цей рахунок?",
         "submitAccountDeletingMessage": "Відхилити цю дію буде неможливо."
+      },
+      "transferFundsForm": {
+        "title": "Переказати кошти",
+        "accountToIdFieldLabel": "Рахунок призначення",
+        "amountFieldLabel": "Сума",
+        "submitBtnLabel": "Підтвердити",
+        "cancelBtnLabel": "Відхилити"
       }
     },
     "actionMessages": {
       "createBankAccountSuccess": "Новий рахунок успішно створено",
-      "deleteAccountSuccess": "Рахунок успішно видалено"
+      "deleteAccountSuccess": "Рахунок успішно видалено",
+      "transferFundSuccess": "Переказ коштів успішно виконано"
     },
     "errors": {
       "general": "Щось пішло не так!",
