@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import {
@@ -15,9 +15,15 @@ import { createIncome } from '@/lib/actions/income.actions';
 import { ActionStatus } from '@/lib/types/common.types';
 import { IncomeSchema } from '@/lib/types/form-schemas/incomes';
 import { IncomeForm } from './';
+import useBankAccountsStore from '@/lib/store/bank-accounts-slice';
 
 
-export const CreateIncomeModal: React.FC = () => {
+interface ICreateIncomeModal {
+  funds: any[];
+}
+
+
+export const CreateIncomeModal: React.FC<ICreateIncomeModal> = ({ funds }) => {
   const t = useTranslations('');
   const { toast } = useToast();
 
@@ -31,6 +37,7 @@ export const CreateIncomeModal: React.FC = () => {
     formData.append('date', data.date.toISOString());
     formData.append('amount', data.amount.toString() || '0');
     formData.append('currency', data.currency);
+    formData.append('bankAccountId', data.bankAccountId);
     formData.append('source', data.source);
     formData.append('comment', data.comment || '');
     
@@ -54,6 +61,12 @@ export const CreateIncomeModal: React.FC = () => {
       });
     }
   };
+
+  const setBankAccounts = useBankAccountsStore(state => state.setBankAccounts);
+
+  useEffect(() => {
+    setBankAccounts(funds);
+  }, [funds, setBankAccounts]);
 
   return (
     <Dialog open={isOpen} onOpenChange={handleFormOpen}>

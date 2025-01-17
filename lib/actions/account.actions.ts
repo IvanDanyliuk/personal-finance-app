@@ -37,7 +37,7 @@ export const getFunds = async () => {
   } catch (error: any) {
     return {
       status: ActionStatus.Failed,
-      data: null,
+      data: [],
       error: error.message,
     };
   }

@@ -19,7 +19,10 @@ export default async function Home({
         {t('HomePage.title')}
       </h1>
       <div className='w-full flex flex-col gap-3'>
-        <BalanceSection banks={banksByCountry.data} funds={funds.data || []} />      
+        <BalanceSection 
+          banks={banksByCountry.data} 
+          funds={funds.data || []} 
+        />      
       </div>
     </div>
   );

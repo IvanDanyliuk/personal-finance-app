@@ -51,6 +51,8 @@ model Income {
   currency            String
   comment             String?
   date                DateTime                    @default(now())
+  bankAccount         BankAccount?                @relation("BankAccount", fields: [bankAccountId], references: [id])
+  bankAccountId       String                      @db.ObjectId
 
   createdAt           DateTime                    @default(now())
   updatedAt           DateTime                    @updatedAt
@@ -111,6 +113,7 @@ model BankAccount {
   additionalInfo      String?
   fundsTransferFrom   FundTransfer[]              @relation("FundsTransferFrom")
   fundsTransferTo     FundTransfer[]              @relation("FundsTransferTo")
+  income              Income[]                    @relation("BankAccount")
 
   createdAt           DateTime                    @default(now())
   updatedAt           DateTime                    @updatedAt
@@ -120,10 +123,10 @@ model FundTransfer {
   id                  String                      @id @default(auto()) @map("_id") @db.ObjectId
   user                User                        @relation("UserFundsTransfer", fields: [userId], references: [id], onDelete: Cascade)
   userId              String                      @db.ObjectId
-  accountFrom         BankAccount                 @relation("FundsTransferFrom", fields: [accountFromId], references: [id])
-  accountFromId       String                      @db.ObjectId
-  accountTo           BankAccount                 @relation("FundsTransferTo", fields: [accountToId], references: [id])
-  accountToId         String                      @db.ObjectId
+  accountFrom         BankAccount?                @relation("FundsTransferFrom", fields: [accountFromId], references: [id])
+  accountFromId       String?                     @db.ObjectId
+  accountTo           BankAccount?                @relation("FundsTransferTo", fields: [accountToId], references: [id])
+  accountToId         String?                     @db.ObjectId
   amount              Int
   currency            String
 

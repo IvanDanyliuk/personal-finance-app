@@ -6,7 +6,7 @@ export const incomeSchema = zod.object({
   date: zod.date(),
   amount: zod.number().min(1, 'IncomesPage.errors.createIncome.fieldsValidation.requiredAmount'),
   currency: zod.string().min(1, 'IncomesPage.errors.createIncome.fieldsValidation.requiredCurrency'),
-  bankAccount: zod.string().min(1, 'IncomesPage.errors.createIncome.fieldsValidation.requiredBankAccount'),
+  bankAccountId: zod.string().min(1, 'IncomesPage.errors.createIncome.fieldsValidation.requiredBankAccount'),
   source: zod.string().min(1, 'IncomesPage.errors.createIncome.fieldsValidation.requiredSource'),
   comment: zod.string().or(zod.null()),
 });
