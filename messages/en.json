@@ -321,6 +321,8 @@
       "amountFieldLabel": "Amount",
       "currencyFieldLabel": "Currency",
       "currencyPlaceholder": "Currency",
+      "bankAccountFieldLabel": "Destination account",
+      "bankAccountPlaceholder": "Select an account",
       "sourceFieldLabel": "Source",
       "sourcePlaceholder": "Select a source",
       "commentFieldLabel": "Comment",
@@ -379,7 +381,8 @@
         "fieldsValidation": {
           "requiredAmount": "Amount is required",
           "requiredCurrency": "Select a currency",
-          "requiredSource": "Select a source of money"
+          "requiredSource": "Select a source of money",
+          "requiredBankAccount": "Select an account"
         }
       }
     }

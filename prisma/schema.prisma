@@ -110,7 +110,7 @@ model BankAccount {
   type                String
   additionalInfo      String?
   fundsTransferFrom   FundTransfer[]              @relation("FundsTransferFrom")
-  fundsTransferTo   FundTransfer[]                @relation("FundsTransferTo")
+  fundsTransferTo     FundTransfer[]              @relation("FundsTransferTo")
 
   createdAt           DateTime                    @default(now())
   updatedAt           DateTime                    @updatedAt

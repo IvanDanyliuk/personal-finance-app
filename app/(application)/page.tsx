@@ -13,8 +13,6 @@ export default async function Home({
   const banksByCountry = await getBanks(country);
   const funds = await getFunds();
 
-  console.log('FUNDS', funds)
-
   return (
     <div className='p-3 w-full h-fit border border-background-secondary rounded-3xl'>
       <h1 className='mb-3 text-xl md:text-3xl font-semibold'>

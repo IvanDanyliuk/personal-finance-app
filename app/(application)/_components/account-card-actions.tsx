@@ -69,17 +69,28 @@ export const AccountCardActions: React.FC<IAccountCardActions> = ({ account }) =
           <Ellipsis className='w-7 h-7' />
         </DropdownMenuTrigger>
         <DropdownMenuContent className='p-2 space-y-1 bg-background rounded-xl'>
-          <DropdownMenuItem onClick={() => setDetailsOpen(true)} className='cursor-pointer px-3 hover:bg-primary-1 rounded-full'>
+          <DropdownMenuItem 
+            onClick={() => setDetailsOpen(true)} 
+            className='cursor-pointer px-3 hover:bg-primary-1 rounded-full'
+          >
             {t('HomePage.balanceSection.accountCard.detailsMenuItemLabel')}
           </DropdownMenuItem>
-          <DropdownMenuItem className='cursor-pointer px-3 hover:bg-primary-1 rounded-full'>
+          <DropdownMenuItem 
+            className='cursor-pointer px-3 hover:bg-primary-1 rounded-full'
+          >
             {t('HomePage.balanceSection.accountCard.replenishAccountMenuItemLabel')}
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setTransferOpen(true)} className='cursor-pointer px-3 hover:bg-primary-1 rounded-full'>
+          <DropdownMenuItem 
+            onClick={() => setTransferOpen(true)} 
+            className='cursor-pointer px-3 hover:bg-primary-1 rounded-full'
+          >
             {t('HomePage.balanceSection.accountCard.transferFundsMenuItemLabel')}
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setDeleteOpen(true)} className='cursor-pointer px-3 hover:bg-primary-1 rounded-full'>
-          {t('HomePage.balanceSection.accountCard.closeAccountMenuItemLabel')}
+          <DropdownMenuItem 
+            onClick={() => setDeleteOpen(true)} 
+            className='cursor-pointer px-3 hover:bg-primary-1 rounded-full'
+          >
+            {t('HomePage.balanceSection.accountCard.closeAccountMenuItemLabel')}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -94,7 +105,6 @@ export const AccountCardActions: React.FC<IAccountCardActions> = ({ account }) =
         open={isTransferOpen} 
         onOpenChange={setTransferOpen} 
         bankAccounts={availableToTransferBankAccounts} 
-        // currentBalance={account.balance}
         currentAccountId={account.id}
         currency={account.currency}
       />

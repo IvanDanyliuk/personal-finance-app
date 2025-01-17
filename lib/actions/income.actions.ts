@@ -99,6 +99,7 @@ export const createIncome = async (formData: FormData) => {
     const date = formData.get('date') as string;
     const amount = formData.get('amount') as string;
     const currency = formData.get('currency') as string;
+    const bankAccount = formData.get('bankAccount') as string;
     const source = formData.get('source') as string;
     const comment = formData.get('comment') as string;
 
@@ -107,7 +108,13 @@ export const createIncome = async (formData: FormData) => {
     }
 
     const validatedFields = incomeSchema.safeParse({
-      userId, date: new Date(date), amount: +amount, currency, source, comment
+      userId, 
+      date: new Date(date), 
+      amount: +amount, 
+      currency, 
+      bankAccount, 
+      source, 
+      comment
     });
 
     if(!validatedFields.success) {

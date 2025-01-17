@@ -31,6 +31,7 @@ export const IncomeForm: React.FC<IIncomeForm> = ({ incomeToUpdate, action }) =>
     date: new Date(), 
     amount: 0, 
     currency: '',
+    bankAccount: '',
     source: '', 
     comment: ''
   };
@@ -103,11 +104,25 @@ export const IncomeForm: React.FC<IIncomeForm> = ({ incomeToUpdate, action }) =>
             name='currency'
             label={t('IncomesPage.createIncomeForm.currencyFieldLabel')}
             variant='vertical'
-
             field={field}
             placeholder={t('IncomesPage.createIncomeForm.currencyPlaceholder')}
             options={CURRENCIES}
             error={errors['currency']?.message}
+          />
+        )}
+      />
+      <Controller 
+        name='bankAccount'
+        control={control}
+        render={({ field }) => (
+          <SelectField 
+            name='bankAccount'
+            label={t('IncomesPage.createIncomeForm.bankAccountFieldLabel')}
+            placeholder={t('IncomesPage.createIncomeForm.bankAccountPlaceholder')}
+            variant='vertical'
+            field={field}
+            options={[]}
+            error={errors['bankAccount']?.message}
           />
         )}
       />

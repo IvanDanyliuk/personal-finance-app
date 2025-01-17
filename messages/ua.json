@@ -321,6 +321,8 @@
       "amountFieldLabel": "Сума",
       "currencyFieldLabel": "Валюта",
       "currencyPlaceholder": "Валюта",
+      "bankAccountFieldLabel": "Рахунок призначення",
+      "bankAccountPlaceholder": "Оберіть рахунок",
       "sourceFieldLabel": "Джерело коштів",
       "sourcePlaceholder": "Оберіть джерело",
       "commentFieldLabel": "Коментар",
@@ -379,7 +381,8 @@
         "fieldsValidation": {
           "requiredAmount": "Вкажіть суму",
           "requiredCurrency": "Оберіть валюту",
-          "requiredSource": "Оберіть джерело коштів"
+          "requiredSource": "Оберіть джерело коштів",
+          "requiredBankAccount": "Оберіть рахунок"
         }
       }
     }

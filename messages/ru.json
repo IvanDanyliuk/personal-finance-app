@@ -321,6 +321,8 @@
       "amountFieldLabel": "Сумма",
       "currencyFieldLabel": "Валюта",
       "currencyPlaceholder": "Валюта",
+      "bankAccountFieldLabel": "Счет назначения",
+      "bankAccountPlaceholder": "Выберите счет",
       "sourceFieldLabel": "Источник средств",
       "sourcePlaceholder": "Выберите источник",
       "commentFieldLabel": "Комментарий",
@@ -379,7 +381,8 @@
         "fieldsValidation": {
           "requiredAmount": "Укажите сумму",
           "requiredCurrency": "Выберите валюту",
-          "requiredSource": "Выберите источник средств"
+          "requiredSource": "Выберите источник средств",
+          "requiredBankAccount": "Выберите счет"
         }
       }
     }
