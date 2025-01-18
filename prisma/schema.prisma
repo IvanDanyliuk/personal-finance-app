@@ -51,7 +51,7 @@ model Income {
   currency            String
   comment             String?
   date                DateTime                    @default(now())
-  bankAccount         BankAccount?                @relation("BankAccount", fields: [bankAccountId], references: [id])
+  bankAccount         BankAccount?                @relation("IncomeBankAccount", fields: [bankAccountId], references: [id])
   bankAccountId       String                      @db.ObjectId
 
   createdAt           DateTime                    @default(now())
@@ -74,6 +74,8 @@ model Expense {
   category            String
   comment             String?
   date                DateTime                    @default(now())
+  bankAccount         BankAccount?                @relation("ExpenseBankAccount", fields: [bankAccountId], references: [id])
+  bankAccountId       String                      @db.ObjectId
 
   createdAt           DateTime                    @default(now())
   updatedAt           DateTime                    @updatedAt
@@ -113,7 +115,8 @@ model BankAccount {
   additionalInfo      String?
   fundsTransferFrom   FundTransfer[]              @relation("FundsTransferFrom")
   fundsTransferTo     FundTransfer[]              @relation("FundsTransferTo")
-  income              Income[]                    @relation("BankAccount")
+  income              Income[]                    @relation("IncomeBankAccount")
+  expense             Expense[]                   @relation("ExpenseBankAccount")
 
   createdAt           DateTime                    @default(now())
   updatedAt           DateTime                    @updatedAt

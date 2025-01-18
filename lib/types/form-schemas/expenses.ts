@@ -6,7 +6,8 @@ export const expenseSchema = zod.object({
   amount: zod.number().min(1, 'ExpensesPage.errors.createExpense.fieldsValidation.requiredAmount'),
   currency: zod.string().min(1, 'ExpensesPage.errors.createExpense.fieldsValidation.requiredCurrency'),
   destination: zod.string().min(1, 'ExpensesPage.errors.createExpense.fieldsValidation.requiredDestination'),
-  paymentMethod: zod.string().min(1, 'ExpensesPage.errors.createExpense.fieldsValidation.requiredPaymentMethod'),
+  paymentMethod: zod.string(),
+  bankAccountId: zod.string().min(1, 'IncomesPage.errors.createIncome.fieldsValidation.requiredBankAccount'),
   category: zod.string().min(1, 'ExpensesPage.errors.createExpense.fieldsValidation.requiredCategory'),
   comment: zod.string().or(zod.null()),
 });

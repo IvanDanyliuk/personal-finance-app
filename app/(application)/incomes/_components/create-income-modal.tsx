@@ -54,7 +54,7 @@ export const CreateIncomeModal: React.FC<ICreateIncomeModal> = ({ funds }) => {
 
     if(status === ActionStatus.Failed && error) {
       toast({
-        title: t('errors.general'),
+        title: t('ExpensesPage.errors.general'),
         description: t(error),
         variant: 'destructive',
         className: 'bg-danger-1 text-danger-2'

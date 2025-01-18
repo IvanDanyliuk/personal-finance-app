@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
 import {
@@ -15,9 +15,15 @@ import { createExpense } from '@/lib/actions/expense.actions';
 import { ActionStatus } from '@/lib/types/common.types';
 import { ExpenseSchema } from '@/lib/types/form-schemas/expenses';
 import { ExpenseForm } from './';
+import useBankAccountsStore from '@/lib/store/bank-accounts-slice';
 
 
-export const CreateExpenseModal: React.FC = () => {
+interface ICreateExpenseModal {
+  funds: any[];
+};
+
+
+export const CreateExpenseModal: React.FC<ICreateExpenseModal> = ({ funds }) => {
   const t = useTranslations('');
   const { toast } = useToast();
 
@@ -26,6 +32,8 @@ export const CreateExpenseModal: React.FC = () => {
   const handleFormOpen = () => setIsOpen(!isOpen);
 
   const onSubmitForm: SubmitHandler<ExpenseSchema> = async (data) => {
+    const selectedAccount = funds.find(item => item.id === data.bankAccountId);
+
     const formData = new FormData();
     formData.append('userId', data.userId);
     formData.append('date', data.date.toISOString());
@@ -33,7 +41,8 @@ export const CreateExpenseModal: React.FC = () => {
     formData.append('currency', data.currency);
     formData.append('category', data.category);
     formData.append('destination', data.destination);
-    formData.append('paymentMethod', data.paymentMethod);
+    formData.append('paymentMethod', selectedAccount.type);
+    formData.append('bankAccountId', data.bankAccountId);
     formData.append('comment', data.comment || '');
     
     const { status, error } = await createExpense(formData);
@@ -56,6 +65,12 @@ export const CreateExpenseModal: React.FC = () => {
       });
     }
   };
+
+  const setBankAccounts = useBankAccountsStore(state => state.setBankAccounts);
+
+  useEffect(() => {
+    setBankAccounts(funds);
+  }, [funds, setBankAccounts]);
 
   return (
     <Dialog open={isOpen} onOpenChange={handleFormOpen}>

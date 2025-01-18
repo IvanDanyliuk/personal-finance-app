@@ -473,6 +473,8 @@
     "errors": {
       "general": "Что-то пошло не так!",
       "wrongUserId": "Вы не авторзованы или ID Вашего профиля неверный",
+      "noBankAccountFound": "Не удалось найти счет с таким ID",
+      "noFunds": "Недостаточно средств для этой операции",
       "createExpense": {
         "createExpenseFailed": "Не удалось создать новую статью затрат",
         "fieldsValidation": {

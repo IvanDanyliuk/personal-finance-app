@@ -473,6 +473,8 @@
     "errors": {
       "general": "Something went wrong!",
       "wrongUserId": "You're not authenticated or your user ID is incorrect",
+      "noBankAccountFound": "Cannot find a funds account with such ID",
+      "noFunds": "You don't have enough funds for this transaction",
       "createExpense": {
         "createExpenseFailed": "Cannot create a new expense item",
         "fieldsValidation": {

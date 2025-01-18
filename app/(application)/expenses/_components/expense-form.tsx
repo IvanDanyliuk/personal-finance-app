@@ -1,15 +1,17 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { expenseSchema, ExpenseSchema } from '@/lib/types/form-schemas/expenses';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Label } from '@/components/ui/label';
 import { DatePicker, SelectField, TextField } from '@/components/inputs';
-import { CURRENCIES, EXPENSE_CATEGORIES, PAYMENT_METHODS } from '@/lib/constants';
 import { TextAreaField } from '@/components/inputs/text-area-field';
 import { SubmitButton } from '@/components/common';
+import useBankAccountsStore from '@/lib/store/bank-accounts-slice';
+import { CURRENCIES, EXPENSE_CATEGORIES } from '@/lib/constants';
+import { expenseSchema, ExpenseSchema } from '@/lib/types/form-schemas/expenses';
 
 
 interface IExpenseData extends ExpenseSchema {
@@ -26,6 +28,9 @@ export const ExpenseForm: React.FC<IExpenseForm> = ({ expenseToUpdate, action })
   const session = useSession();
   const t = useTranslations('');
 
+  const [accounts, setAccounts] = useState<{value: string; label: string}[]>([]);
+  const bankAccounts = useBankAccountsStore(state => state.accounts);
+
   const defaultValues = expenseToUpdate || {
     userId: session.data!.user!.id!,
     date: new Date(), 
@@ -34,6 +39,7 @@ export const ExpenseForm: React.FC<IExpenseForm> = ({ expenseToUpdate, action })
     category: '',
     destination: '', 
     paymentMethod: '', 
+    bankAccountId: '',
     comment: ''
   };
 
@@ -45,8 +51,29 @@ export const ExpenseForm: React.FC<IExpenseForm> = ({ expenseToUpdate, action })
   const {
     control,
     handleSubmit,
-    formState: { errors, isSubmitting }
+    formState: { errors, isSubmitting },
+    watch, 
+    reset
   } = form;
+
+  const watchedCurrency = watch('currency');
+  const watchedBankAccountId = watch('bankAccountId');
+
+  const handleCurrencyChange = () => {
+    if(watchedBankAccountId) {
+      reset({ bankAccountId: '' });
+    }
+  };
+
+  useEffect(() => {
+    const bankAccountsOfSelectedCurrency = bankAccounts.filter(account => account.currency === watchedCurrency);
+    const bankAccountOptions = bankAccountsOfSelectedCurrency
+      .map(item => ({ 
+        value: item.id, 
+        label: `${t(`General.accountTypes.${item.type}`)} ${item.currency.toUpperCase()}${item.balance}` 
+      }))
+    setAccounts(bankAccountOptions);
+  }, [watchedCurrency, bankAccounts]);
 
   return (
     <form onSubmit={handleSubmit(action)} className='flex flex-col gap-3'>
@@ -109,7 +136,7 @@ export const ExpenseForm: React.FC<IExpenseForm> = ({ expenseToUpdate, action })
           />
         )}
       />
-      <Controller 
+      {/* <Controller 
         name='paymentMethod'
         control={control}
         render={({ field }) => (
@@ -123,7 +150,7 @@ export const ExpenseForm: React.FC<IExpenseForm> = ({ expenseToUpdate, action })
             error={errors['paymentMethod']?.message}
           />
         )}
-      />
+      /> */}
       <Controller 
         name='currency'
         control={control}
@@ -133,9 +160,27 @@ export const ExpenseForm: React.FC<IExpenseForm> = ({ expenseToUpdate, action })
             label={t('ExpensesPage.createExpenseForm.currencyFieldLabel')}
             variant='vertical'
             field={field}
+            onHandleChange={handleCurrencyChange}
             placeholder={t('ExpensesPage.createExpenseForm.currencyPlaceholder')}
             options={CURRENCIES}
             error={errors['currency']?.message}
+          />
+        )}
+      />
+      <Controller 
+        name='bankAccountId'
+        control={control}
+        render={({ field }) => (
+          <SelectField 
+            name='bankAccountId'
+            label={t('IncomesPage.createIncomeForm.bankAccountFieldLabel')}
+            placeholder={t('IncomesPage.createIncomeForm.bankAccountPlaceholder')}
+            variant='vertical'
+            field={field}
+            disabled={!watchedCurrency}
+            options={accounts}
+            isLocalesActive={false}
+            error={errors['bankAccountId']?.message}
           />
         )}
       />

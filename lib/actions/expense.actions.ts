@@ -6,6 +6,7 @@ import { removeFalseyFields } from '../helpers';
 import { db } from '@/db';
 import { expenseSchema } from '../types/form-schemas/expenses';
 import { revalidatePath } from 'next/cache';
+import { AccountType } from '../types/bank';
 
 
 export const getExpenses = async ({ 
@@ -105,6 +106,7 @@ export const createExpense = async (formData: FormData) => {
     const category = formData.get('category') as string;
     const destination = formData.get('destination') as string;
     const paymentMethod = formData.get('paymentMethod') as string;
+    const bankAccountId = formData.get('bankAccountId') as string;
     const comment = formData.get('comment') as string;
 
     if(!session || session.user?.id !== userId) {
@@ -112,7 +114,15 @@ export const createExpense = async (formData: FormData) => {
     }
 
     const validatedFields = expenseSchema.safeParse({
-      userId, date: new Date(date), amount: +amount, currency, category, destination, paymentMethod, comment
+      userId, 
+      date: new Date(date), 
+      amount: +amount, 
+      currency, 
+      category, 
+      destination, 
+      bankAccountId, 
+      paymentMethod: paymentMethod === AccountType.BankAccount ? 'card' : 'cash', 
+      comment
     });
 
     if(!validatedFields.success) {
@@ -122,11 +132,34 @@ export const createExpense = async (formData: FormData) => {
       };
     }
 
+    const sourceAccount = await db.bankAccount.findFirst({ 
+      where: { 
+        id: validatedFields.data.bankAccountId 
+      } 
+    });
+
+    if(!sourceAccount) {
+      throw new Error('ExpensesPage.errors.noBankAccountFound');
+    }
+
+    if(sourceAccount.balance < +amount) {
+      throw new Error('ExpensesPage.errors.noFunds');
+    }
+
     await db.expense.create({
       data: validatedFields.data
     });
+
+    await db.bankAccount.update({
+      where: {
+        id: validatedFields.data.bankAccountId
+      },
+      data: {
+        balance: sourceAccount.balance - validatedFields.data.amount
+      }
+    });
     
-    revalidatePath('/incomes');
+    revalidatePath('/expenses');
 
     return {
       status: ActionStatus.Success,
@@ -155,8 +188,14 @@ export const updateExpense = async (formData: FormData) => {
     const currency = formData.get('currency') as string;
     const category = formData.get('category') as string;
     const destination = formData.get('destination') as string;
-    const paymentMethod = formData.get('paymentMethod') as string;
+    // const bankAccountId = formData.get('bankAccountId') as string;
     const comment = formData.get('comment') as string;
+
+    // const fundsAccount = await db.bankAccount.findFirst({ where: { id: bankAccountId } });
+
+    // if(!fundsAccount) {
+    //   throw new Error('ExpensesPage.errors.noBankAccountFound')
+    // }
 
     const validatedFields = expenseSchema.safeParse({
       userId, 
@@ -165,7 +204,7 @@ export const updateExpense = async (formData: FormData) => {
       currency, 
       category, 
       destination, 
-      paymentMethod, 
+      // paymentMethod, 
       comment
     });
 
