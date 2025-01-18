@@ -6,6 +6,7 @@ import { ColType } from '@/lib/types/common.types';
 import { DataTable } from '@/components/data-rendering';
 import NoDataPlaceholder from '@/public/images/investment.svg';
 import { CreateExpenseModal, ExpenseFilters } from './_components';
+import { getFunds } from '@/lib/actions/account.actions';
 
 
 const columns: ColType[] = [
@@ -100,6 +101,7 @@ export default async function ExpensesPage({ searchParams: {
     items, 
     ...additionalParams 
   });
+  const funds = await getFunds();
 
   return (
     <div className='p-3 w-full h-fit border border-background-secondary rounded-3xl'>
@@ -111,7 +113,7 @@ export default async function ExpensesPage({ searchParams: {
           <ExpenseFilters />
           <div className='flex items-center gap-3'>
             <div>Export to PDF</div>
-            <CreateExpenseModal />
+            <CreateExpenseModal funds={funds.data} />
           </div>
         </div>
         {expenses.data.length > 0 ? (
@@ -135,7 +137,7 @@ export default async function ExpensesPage({ searchParams: {
             <p className='text-lg'>
               {t('ExpensesPage.noData')}
             </p>
-            <CreateExpenseModal />
+            <CreateExpenseModal funds={funds.data} />
           </div>
         )}
       </div>

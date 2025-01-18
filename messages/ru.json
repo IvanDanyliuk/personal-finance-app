@@ -321,6 +321,8 @@
       "amountFieldLabel": "Сумма",
       "currencyFieldLabel": "Валюта",
       "currencyPlaceholder": "Валюта",
+      "bankAccountFieldLabel": "Счет назначения",
+      "bankAccountPlaceholder": "Выберите счет",
       "sourceFieldLabel": "Источник средств",
       "sourcePlaceholder": "Выберите источник",
       "commentFieldLabel": "Комментарий",
@@ -379,7 +381,8 @@
         "fieldsValidation": {
           "requiredAmount": "Укажите сумму",
           "requiredCurrency": "Выберите валюту",
-          "requiredSource": "Выберите источник средств"
+          "requiredSource": "Выберите источник средств",
+          "requiredBankAccount": "Выберите счет"
         }
       }
     }
@@ -470,6 +473,8 @@
     "errors": {
       "general": "Что-то пошло не так!",
       "wrongUserId": "Вы не авторзованы или ID Вашего профиля неверный",
+      "noBankAccountFound": "Не удалось найти счет с таким ID",
+      "noFunds": "Недостаточно средств для этой операции",
       "createExpense": {
         "createExpenseFailed": "Не удалось создать новую статью затрат",
         "fieldsValidation": {
@@ -512,7 +517,13 @@
         "allTabLabel": "Все",
         "bankAccountsTabLabel": "Банковские счета",
         "jugsTabLabel": "Наличные",
-        "cashCardTitle": "Наличные"
+        "cashCardTitle": "Наличные",
+        "noFundsTitle": "Средства не найдены",
+        "noFundsMessage": "Похоже, вы еще не добавили данные о своих средствах",
+        "noAccountsTitle": "Банковские счета не найдены",
+        "noAccountsMessage": "Похоже, что вы не открыли еще ни одного счета",
+        "noJugsTitle": "Сбережения в наличных не найдены",
+        "noJugsMessage": "Похоже, что вы не указали данные о своих накоплениях"
       },
       "accountCard": {
         "detailsMenuItemLabel": "Подробнее",
@@ -531,11 +542,19 @@
         "cancelBtnLabel": "Отмена",
         "submitAccountDeletingTitle": "Вы уверены что ходите удалить этот счет?",
         "submitAccountDeletingMessage": "Отменить это действие буде невозможно."
+      },
+      "transferFundsForm": {
+        "title": "Перевести средства",
+        "accountToIdFieldLabel": "Счет назначения",
+        "amountFieldLabel": "Сумма",
+        "submitBtnLabel": "Подтвердить",
+        "cancelBtnLabel": "Отмена"
       }
     },
     "actionMessages": {
       "createBankAccountSuccess": "Новый счет успешно создан",
-      "deleteAccountSuccess": "Счет успешно удален"
+      "deleteAccountSuccess": "Счет успешно удален",
+      "transferFundSuccess": "Перевод средств выполнен успешно"
     },
     "errors": {
       "general": "Что-то пошло не так!",
@@ -555,6 +574,10 @@
       "deleteBankAccount": {
         "accountNotExist": "Такого счета не существует.",
         "deleteAccountFailed": "Не удалось удалить счет."
+      },
+      "transferFunds": {
+        "differentCurrencies": "Вы не можете переводить средства на счет в другой валюте",
+        "notEnoughFunds": "У Вас недостаточно средств"
       }
     }
   }

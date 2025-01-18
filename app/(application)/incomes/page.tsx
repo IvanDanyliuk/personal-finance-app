@@ -7,6 +7,7 @@ import { removeFalseyFields } from '@/lib/helpers';
 import { IncomeFilters } from './_components/income-filters';
 import { ColType } from '@/lib/types/common.types';
 import { DataTable } from '@/components/data-rendering';
+import { getFunds } from '@/lib/actions/account.actions';
 
 
 const columns: ColType[] = [
@@ -73,6 +74,7 @@ export default async function IncomesPage({ searchParams: {
     sortBy, order, dateFrom, dateTo, amountFrom, amountTo, source, currency
   });
   const incomes = await getIncomes({ page, items, ...additionalParams });
+  const funds = await getFunds();
 
   return (
     <div className='p-3 w-full h-fit border border-background-secondary rounded-3xl'>
@@ -84,7 +86,7 @@ export default async function IncomesPage({ searchParams: {
           <IncomeFilters />
           <div className='flex items-center gap-3'>
             <div>Export to PDF</div>
-            <CreateIncomeModal />
+            <CreateIncomeModal funds={funds.data} />
           </div>
         </div>
         {incomes.data.length > 0 ? (
@@ -108,7 +110,7 @@ export default async function IncomesPage({ searchParams: {
             <p className='text-lg'>
               {t('IncomesPage.noData')}
             </p>
-            <CreateIncomeModal />
+            <CreateIncomeModal funds={funds.data} />
           </div>
         )}
       </div>

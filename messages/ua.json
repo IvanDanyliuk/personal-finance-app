@@ -321,6 +321,8 @@
       "amountFieldLabel": "Сума",
       "currencyFieldLabel": "Валюта",
       "currencyPlaceholder": "Валюта",
+      "bankAccountFieldLabel": "Рахунок призначення",
+      "bankAccountPlaceholder": "Оберіть рахунок",
       "sourceFieldLabel": "Джерело коштів",
       "sourcePlaceholder": "Оберіть джерело",
       "commentFieldLabel": "Коментар",
@@ -379,7 +381,8 @@
         "fieldsValidation": {
           "requiredAmount": "Вкажіть суму",
           "requiredCurrency": "Оберіть валюту",
-          "requiredSource": "Оберіть джерело коштів"
+          "requiredSource": "Оберіть джерело коштів",
+          "requiredBankAccount": "Оберіть рахунок"
         }
       }
     }
@@ -470,6 +473,8 @@
     "errors": {
       "general": "Щось пішло не так!",
       "wrongUserId": "Ви не авторизовані або ID Вашого облікового запису некоректний",
+      "noBankAccountFound": "Не вдалося знайти рахунок з таким ID",
+      "noFunds": "На Вашому рахунку недостатньо коштів для цієї операції",
       "createExpense": {
         "createExpenseFailed": "Не вдалось створити нову статтю витрат",
         "fieldsValidation": {
@@ -514,7 +519,13 @@
         "allTabLabel": "Всі",
         "bankAccountsTabLabel": "Банківські рахунки",
         "jugsTabLabel": "Готівка",
-        "cashCardTitle": "Готівка"
+        "cashCardTitle": "Готівка",
+        "noFundsTitle": "Кошти не знайдені",
+        "noFundsMessage": "Схоже, Ви ще не додали інформацію про свої кошти",
+        "noAccountsTitle": "Банківські рахунки не знайдені",
+        "noAccountsMessage": "Схоже, Ви ще не додали інформацію про Ваші банківські рахунки",
+        "noJugsTitle": "Кошти в готівці не знайдені",
+        "noJugsMessage": "Схоже, Ви ще не додали інформацію про свої збереження"
       },
       "accountCard": {
         "detailsMenuItemLabel": "Деталі",
@@ -533,11 +544,19 @@
         "cancelBtnLabel": "Відхилити",
         "submitAccountDeletingTitle": "Ви впевенені що хочете видалити цей рахунок?",
         "submitAccountDeletingMessage": "Відхилити цю дію буде неможливо."
+      },
+      "transferFundsForm": {
+        "title": "Переказати кошти",
+        "accountToIdFieldLabel": "Рахунок призначення",
+        "amountFieldLabel": "Сума",
+        "submitBtnLabel": "Підтвердити",
+        "cancelBtnLabel": "Відхилити"
       }
     },
     "actionMessages": {
       "createBankAccountSuccess": "Новий рахунок успішно створено",
-      "deleteAccountSuccess": "Рахунок успішно видалено"
+      "deleteAccountSuccess": "Рахунок успішно видалено",
+      "transferFundSuccess": "Переказ коштів успішно виконано"
     },
     "errors": {
       "general": "Щось пішло не так!",
@@ -557,6 +576,10 @@
       "deleteBankAccount": {
         "accountNotExist": "Такого банківського рахунку не існує.",
         "deleteAccountFailed": "Не вдалося видалити рахунок."
+      },
+      "transferFunds": {
+        "differentCurrencies": "Ви не можете виконати переказ на рахунок в іншій валюті",
+        "notEnoughFunds": "У Вас недостатньо коштів"
       }
     }
   }

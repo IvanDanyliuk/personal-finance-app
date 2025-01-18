@@ -25,8 +25,8 @@ import { AccountType } from '@/lib/types/bank';
 interface IAccountForm {
   banks: {
     value: string;
-    label: string
-  }[]
+    label: string;
+  }[];
 };
 
 

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { ControllerRenderProps, UseFormRegister } from 'react-hook-form';
 import { CircleAlert } from 'lucide-react';
@@ -10,7 +11,6 @@ import {
 } from '@/components/ui/select';
 import { Label } from '../ui/label';
 import { cn } from '@/lib/utils';
-import Image from 'next/image';
 
 
 interface ISelectField {

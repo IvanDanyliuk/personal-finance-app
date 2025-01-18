@@ -152,6 +152,7 @@ export const DataTable: React.FC<IDataTable> = ({
       const formData = new FormData();
       formData.append('id', rowActionData.item.id)
       formData.append('userId', data.userId);
+      formData.append('bankAccountId', data.bankAccountId);
       columns.forEach((col) => {
         formData.append(
           col.name, 
@@ -273,7 +274,7 @@ export const DataTable: React.FC<IDataTable> = ({
                     >
                       {item.name === 'date' 
                         ? format(dataItem.date, 'dd.MM.yyyy') 
-                        : item.name === 'amount' || item.name === 'comment'
+                        : item.name === 'amount' || item.name === 'comment' || item.name === 'destination'
                           ? dataItem[item.name]
                           : t(`${item.value ? item.value + '.' : ''}${dataItem[item.name]}`)
                       }

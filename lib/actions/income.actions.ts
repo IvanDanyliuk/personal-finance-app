@@ -1,10 +1,10 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { auth } from '@/auth';
 import { ActionStatus, SortOrder } from '../types/common.types';
 import { incomeSchema } from '../types/form-schemas/incomes';
 import { db } from '@/db';
-import { revalidatePath } from 'next/cache';
 import { removeFalseyFields } from '../helpers';
 
 
@@ -99,6 +99,7 @@ export const createIncome = async (formData: FormData) => {
     const date = formData.get('date') as string;
     const amount = formData.get('amount') as string;
     const currency = formData.get('currency') as string;
+    const bankAccountId = formData.get('bankAccountId') as string;
     const source = formData.get('source') as string;
     const comment = formData.get('comment') as string;
 
@@ -107,7 +108,13 @@ export const createIncome = async (formData: FormData) => {
     }
 
     const validatedFields = incomeSchema.safeParse({
-      userId, date: new Date(date), amount: +amount, currency, source, comment
+      userId, 
+      date: new Date(date), 
+      amount: +amount, 
+      currency, 
+      bankAccountId, 
+      source, 
+      comment
     });
 
     if(!validatedFields.success) {
@@ -117,8 +124,23 @@ export const createIncome = async (formData: FormData) => {
       };
     }
 
+    const destinationAccount = await db.bankAccount.findFirst({ where: { id: validatedFields.data.bankAccountId } });
+
+    if(!destinationAccount) {
+      throw new Error('Cannot find a bank account with such ID');
+    }
+
     await db.income.create({
       data: validatedFields.data
+    });
+
+    await db.bankAccount.update({
+      where: {
+        id: validatedFields.data.bankAccountId
+      },
+      data: {
+        balance: destinationAccount.balance + validatedFields.data.amount
+      }
     });
     
     revalidatePath('/incomes');
@@ -148,11 +170,18 @@ export const updateIncome = async (formData: FormData) => {
     const date = formData.get('date') as string;
     const amount = formData.get('amount') as string;
     const currency = formData.get('currency') as string;
+    const bankAccountId = formData.get('bankAccountId') as string;
     const source = formData.get('source') as string;
     const comment = formData.get('comment') as string;
 
     const validatedFields = incomeSchema.safeParse({
-      userId, date: new Date(date), amount: +amount, currency, source, comment
+      userId, 
+      date: new Date(date), 
+      amount: +amount, 
+      currency, 
+      bankAccountId, 
+      source, 
+      comment
     });
 
     if(!validatedFields.success) {

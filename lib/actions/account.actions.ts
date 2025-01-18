@@ -7,6 +7,7 @@ import { BankAccountSchema, bankAccountSchema } from '../types/form-schemas/bank
 import { db } from '@/db';
 import { removeFalseyFields } from '../helpers';
 import { AccountType } from '../types/bank';
+import { transferFundsSchema } from '../types/form-schemas/transfer-funds';
 
 
 export const getFunds = async () => {
@@ -36,7 +37,7 @@ export const getFunds = async () => {
   } catch (error: any) {
     return {
       status: ActionStatus.Failed,
-      data: null,
+      data: [],
       error: error.message,
     };
   }
@@ -55,7 +56,7 @@ export const createBankAccount = async (formData: FormData) => {
       country: formData.get('country'), 
       bankId: formData.get('bankId'),
       accountNumber: formData.get('accountNumber'),
-      cardNumber: formData.get('cardNumber') ? +formData.get('cardNumber')! : null,
+      cardNumber: formData.get('cardNumber') ? +formData.get('cardNumber')! : undefined,
       paymentSystem: formData.get('paymentSystem'),
       balance: +formData.get('balance')!,
       currency: formData.get('currency'),
@@ -108,7 +109,6 @@ export const createBankAccount = async (formData: FormData) => {
 
 export const deleteAccount = async (id: string) => {
   try {
-    console.log('DELETE ACCOUNT', id)
     const session = await auth();
 
     if(!session) {
@@ -122,6 +122,82 @@ export const deleteAccount = async (id: string) => {
     }
 
     await db.bankAccount.delete({ where: { id } });
+
+    revalidatePath('/');
+
+    return {
+      status: ActionStatus.Success,
+      error: null,
+    };
+  } catch (error: any) {
+    return {
+      status: ActionStatus.Failed,
+      error: error.message,
+    };
+  }
+};
+
+export const transferFunds = async (formData: FormData) => {
+  try {
+    const session = await auth();
+
+    const validatedFields = transferFundsSchema.safeParse({
+      userId: formData.get('userId'),
+      accountFromId: formData.get('accountFromId'),
+      accountToId: formData.get('accountToId'),
+      amount: formData.get('amount') ? +formData.get('amount')! : undefined,
+      currency: formData.get('currency'),
+    });
+
+    if(!validatedFields.success) {
+      return {
+        status: ActionStatus.Failed,
+        fieldError: validatedFields.error.flatten().fieldErrors,
+      };
+    }
+
+    if(session && session.user && session.user.id !== validatedFields.data.userId) {
+      throw new Error('HomePage.errors.wrongUserId');
+    }
+
+    const destinationAccount = await db.bankAccount.findFirst({ 
+      where: { 
+        id: validatedFields.data.accountToId 
+      } 
+    });
+    const sourceAccount = await db.bankAccount.findFirst({ 
+      where: { 
+        id: validatedFields.data.accountFromId 
+      } 
+    });
+
+    if(destinationAccount?.currency !== sourceAccount?.currency) {
+      throw new Error('HomePage.errors.differentCurrencies');
+    }
+
+    if(sourceAccount!.balance < validatedFields.data.amount) {
+      throw new Error('HomePage.errors.transferFunds.notEnoughFunds')
+    }
+
+    await db.fundTransfer.create({ data: validatedFields.data });
+    
+    await db.bankAccount.update({ 
+      where: { 
+        id: validatedFields.data.accountFromId 
+      }, 
+      data: { 
+        balance: sourceAccount!.balance - validatedFields.data.amount 
+      } 
+    });
+
+    await db.bankAccount.update({
+      where: { 
+        id: validatedFields.data.accountToId 
+      }, 
+      data: { 
+        balance: destinationAccount!.balance + +validatedFields.data.amount 
+      } 
+    });
 
     revalidatePath('/');
 

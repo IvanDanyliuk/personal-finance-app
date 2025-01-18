@@ -1,11 +1,12 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';  
+import { AccountCard, AccountForm, FundsPlaceholder } from './';
 import { AccountType, IBank, IBankAccount } from '@/lib/types/bank';
-import { AccountCard, AccountForm } from './';
-import { useEffect, useState } from 'react';
 import { formatNumber, groupFundsByCurrency } from '@/lib/helpers';
+import useBankAccountsStore from '@/lib/store/bank-accounts-slice';
 
 
 interface IBalanceSection {
@@ -22,6 +23,12 @@ export const BalanceSection: React.FC<IBalanceSection> = ({ banks, funds }) => {
   const bankOptions = banks.map(bank => ({ value: bank.id, label: bank.name, icon: bank.logo }));
   const bankAccounts = funds.filter(item => item.type === AccountType.BankAccount);
   const jugs = funds.filter(item => item.type === AccountType.Jug);
+
+  const setBankAccounts = useBankAccountsStore(state => state.setBankAccounts);
+
+  useEffect(() => {
+    setBankAccounts(funds);
+  }, [funds, setBankAccounts]);
 
   useEffect(() => {
     const groupedFunds = groupFundsByCurrency(funds);
@@ -59,44 +66,68 @@ export const BalanceSection: React.FC<IBalanceSection> = ({ banks, funds }) => {
         <div className='px-3 flex-1 overflow-hidden'>
           <Tabs defaultValue='all'>
             <TabsList className='mb-3 flex justify-start gap-3'>
-              <TabsTrigger value='all' className='flex items-center gap-1 font-semibold'>
+              <TabsTrigger 
+                value='all' 
+                className='flex items-center gap-1 font-semibold'
+              >
                 {t('HomePage.balanceSection.tabs.allTabLabel')}
               </TabsTrigger>
-              <TabsTrigger value='bank_accounts' className='flex items-center gap-1 font-semibold'>
+              <TabsTrigger 
+                value='bank_accounts' 
+                className='flex items-center gap-1 font-semibold'
+              >
                 {`${t('HomePage.balanceSection.tabs.bankAccountsTabLabel')} (${bankAccounts.length})`}
               </TabsTrigger>
-              <TabsTrigger value='jugs' className='flex items-center gap-1 font-semibold'>
+              <TabsTrigger 
+                value='jugs' 
+                className='flex items-center gap-1 font-semibold'
+              >
                 {`${t('HomePage.balanceSection.tabs.jugsTabLabel')} (${jugs.length})`}
               </TabsTrigger>
             </TabsList>
             <TabsContent value='all'>
               <div className='flex overflow-x-auto gap-4 py-2 scroll-smooth'>
-                {funds.map(item => (
+                {funds.length > 0 ? funds.map(item => (
                   <AccountCard 
                     key={crypto.randomUUID()} 
                     data={item} 
                   />
-                ))}
+                )) : (
+                  <FundsPlaceholder 
+                    title='HomePage.balanceSection.tabs.noFundsTitle' 
+                    message='HomePage.balanceSection.tabs.noFundsMessage' 
+                  />
+                )}
               </div>
             </TabsContent>
             <TabsContent value='bank_accounts'>
               <div className='flex overflow-x-auto gap-4 py-2 scroll-smooth'>
-                {bankAccounts.map(item => (
+                {bankAccounts.length > 0 ? bankAccounts.map(item => (
                   <AccountCard 
                     key={crypto.randomUUID()} 
                     data={item} 
                   />
-                ))}
+                )) : (
+                  <FundsPlaceholder 
+                    title='HomePage.balanceSection.tabs.noAccountsTitle' 
+                    message='HomePage.balanceSection.tabs.noAccountsMessage' 
+                  />
+                )}
               </div>
             </TabsContent>
             <TabsContent value='jugs'>
               <div className='flex overflow-x-auto gap-4 py-2 scroll-smooth'>
-                {jugs.map(item => (
+                {jugs.length > 0 ? jugs.map(item => (
                   <AccountCard 
                     key={crypto.randomUUID()} 
                     data={item} 
                   />
-                ))}
+                )) : (
+                  <FundsPlaceholder 
+                    title='HomePage.balanceSection.tabs.noJugsTitle' 
+                    message='HomePage.balanceSection.tabs.noJugsMessage' 
+                  />
+                )}
               </div>
             </TabsContent>
           </Tabs>

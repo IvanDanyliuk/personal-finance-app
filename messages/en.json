@@ -321,6 +321,8 @@
       "amountFieldLabel": "Amount",
       "currencyFieldLabel": "Currency",
       "currencyPlaceholder": "Currency",
+      "bankAccountFieldLabel": "Destination account",
+      "bankAccountPlaceholder": "Select an account",
       "sourceFieldLabel": "Source",
       "sourcePlaceholder": "Select a source",
       "commentFieldLabel": "Comment",
@@ -379,7 +381,8 @@
         "fieldsValidation": {
           "requiredAmount": "Amount is required",
           "requiredCurrency": "Select a currency",
-          "requiredSource": "Select a source of money"
+          "requiredSource": "Select a source of money",
+          "requiredBankAccount": "Select an account"
         }
       }
     }
@@ -470,6 +473,8 @@
     "errors": {
       "general": "Something went wrong!",
       "wrongUserId": "You're not authenticated or your user ID is incorrect",
+      "noBankAccountFound": "Cannot find a funds account with such ID",
+      "noFunds": "You don't have enough funds for this transaction",
       "createExpense": {
         "createExpenseFailed": "Cannot create a new expense item",
         "fieldsValidation": {
@@ -512,7 +517,13 @@
         "allTabLabel": "All",
         "bankAccountsTabLabel": "Bank accounts",
         "jugsTabLabel": "Cash",
-        "cashCardTitle": "Cash"
+        "cashCardTitle": "Cash",
+        "noFundsTitle": "No funds found",
+        "noFundsMessage": "It seems you don't have any funds yet.",
+        "noAccountsTitle": "No accounts found",
+        "noAccountsMessage": "It seems you haven't opened any bank accounts yet.",
+        "noJugsTitle": "No funds in cash found",
+        "noJugsMessage": "It seems you don't have any funds in cash yet."
       },
       "accountCard": {
         "detailsMenuItemLabel": "Details",
@@ -531,11 +542,19 @@
         "cancelBtnLabel": "Cancel",
         "submitAccountDeletingTitle": "Are you sure you want to delete this account?",
         "submitAccountDeletingMessage": "It will be impossible to undo this action."
+      },
+      "transferFundsForm": {
+        "title": "Transfer funds",
+        "accountToIdFieldLabel": "Destination account",
+        "amountFieldLabel": "Amount",
+        "submitBtnLabel": "Submit",
+        "cancelBtnLabel": "Cancel"
       }
     },
     "actionMessages": {
       "createBankAccountSuccess": "New bank account successfully created",
-      "deleteAccountSuccess": "Account successfully deleted"
+      "deleteAccountSuccess": "Account successfully deleted",
+      "transferFundSuccess": "Funds successfully transfered"
     },
     "errors": {
       "general": "Something went wrong!",
@@ -550,11 +569,16 @@
           "requiredBalance": "Balance is required",
           "requiredCurrency": "Select a currency",
           "cardNumberMaxLength": "Card number must include 16 numbers"
+          
         }
       },
       "deleteBankAccount": {
         "accountNotExist": "Bank account does not exist.",
         "deleteAccountFailed": "Cannot delete this account."
+      },
+      "transferFunds": {
+        "differentCurrencies": "You cannot send funds to an account in a different currency",
+        "notEnoughFunds": "You do not have enough funds"
       }
     }
   }
