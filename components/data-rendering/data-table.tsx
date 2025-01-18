@@ -152,6 +152,7 @@ export const DataTable: React.FC<IDataTable> = ({
       const formData = new FormData();
       formData.append('id', rowActionData.item.id)
       formData.append('userId', data.userId);
+      formData.append('bankAccountId', data.bankAccountId);
       columns.forEach((col) => {
         formData.append(
           col.name, 

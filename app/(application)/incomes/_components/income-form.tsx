@@ -28,6 +28,8 @@ export const IncomeForm: React.FC<IIncomeForm> = ({ incomeToUpdate, action }) =>
   const session = useSession();
   const t = useTranslations('');
 
+  const isEditMode = Boolean(incomeToUpdate);
+
   const [accounts, setAccounts] = useState<{value: string; label: string}[]>([]);
   const bankAccounts = useBankAccountsStore(state => state.accounts);
 
@@ -103,6 +105,7 @@ export const IncomeForm: React.FC<IIncomeForm> = ({ incomeToUpdate, action }) =>
             label={t('IncomesPage.createIncomeForm.amountFieldLabel')}
             type='number'
             field={field}
+            disabled={isEditMode}
             error={errors['amount']?.message}
           />
         )}
@@ -133,6 +136,7 @@ export const IncomeForm: React.FC<IIncomeForm> = ({ incomeToUpdate, action }) =>
             field={field}
             placeholder={t('IncomesPage.createIncomeForm.currencyPlaceholder')}
             options={CURRENCIES}
+            disabled={isEditMode}
             onHandleChange={handleCurrencyChange}
             error={errors['currency']?.message}
           />
@@ -148,7 +152,7 @@ export const IncomeForm: React.FC<IIncomeForm> = ({ incomeToUpdate, action }) =>
             placeholder={t('IncomesPage.createIncomeForm.bankAccountPlaceholder')}
             variant='vertical'
             field={field}
-            disabled={!watchedCurrency}
+            disabled={(watchedCurrency && isEditMode) || !watchedCurrency}
             options={accounts}
             isLocalesActive={false}
             error={errors['bankAccountId']?.message}

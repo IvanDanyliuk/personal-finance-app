@@ -28,6 +28,8 @@ export const ExpenseForm: React.FC<IExpenseForm> = ({ expenseToUpdate, action })
   const session = useSession();
   const t = useTranslations('');
 
+  const isEditMode = Boolean(expenseToUpdate);
+
   const [accounts, setAccounts] = useState<{value: string; label: string}[]>([]);
   const bankAccounts = useBankAccountsStore(state => state.accounts);
 
@@ -105,6 +107,7 @@ export const ExpenseForm: React.FC<IExpenseForm> = ({ expenseToUpdate, action })
             label={t('ExpensesPage.createExpenseForm.amountFieldLabel')}
             type='number'
             field={field}
+            disabled={isEditMode}
             error={errors['amount']?.message}
           />
         )}
@@ -136,21 +139,6 @@ export const ExpenseForm: React.FC<IExpenseForm> = ({ expenseToUpdate, action })
           />
         )}
       />
-      {/* <Controller 
-        name='paymentMethod'
-        control={control}
-        render={({ field }) => (
-          <SelectField 
-            name='paymentMethod'
-            label={t('ExpensesPage.createExpenseForm.paymentMethodFieldLabel')}
-            variant='vertical'
-            field={field}
-            placeholder={t('ExpensesPage.createExpenseForm.paymentMethodPlaceholder')}
-            options={PAYMENT_METHODS}
-            error={errors['paymentMethod']?.message}
-          />
-        )}
-      /> */}
       <Controller 
         name='currency'
         control={control}
@@ -163,6 +151,7 @@ export const ExpenseForm: React.FC<IExpenseForm> = ({ expenseToUpdate, action })
             onHandleChange={handleCurrencyChange}
             placeholder={t('ExpensesPage.createExpenseForm.currencyPlaceholder')}
             options={CURRENCIES}
+            disabled={isEditMode}
             error={errors['currency']?.message}
           />
         )}
@@ -177,7 +166,7 @@ export const ExpenseForm: React.FC<IExpenseForm> = ({ expenseToUpdate, action })
             placeholder={t('IncomesPage.createIncomeForm.bankAccountPlaceholder')}
             variant='vertical'
             field={field}
-            disabled={!watchedCurrency}
+            disabled={(watchedCurrency && isEditMode) || !watchedCurrency}
             options={accounts}
             isLocalesActive={false}
             error={errors['bankAccountId']?.message}

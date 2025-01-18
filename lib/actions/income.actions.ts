@@ -175,7 +175,13 @@ export const updateIncome = async (formData: FormData) => {
     const comment = formData.get('comment') as string;
 
     const validatedFields = incomeSchema.safeParse({
-      userId, date: new Date(date), amount: +amount, currency, bankAccountId, source, comment
+      userId, 
+      date: new Date(date), 
+      amount: +amount, 
+      currency, 
+      bankAccountId, 
+      source, 
+      comment
     });
 
     if(!validatedFields.success) {

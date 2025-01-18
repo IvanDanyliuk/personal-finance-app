@@ -188,14 +188,9 @@ export const updateExpense = async (formData: FormData) => {
     const currency = formData.get('currency') as string;
     const category = formData.get('category') as string;
     const destination = formData.get('destination') as string;
-    // const bankAccountId = formData.get('bankAccountId') as string;
+    const paymentMethod = formData.get('paymentMethod') as string;
+    const bankAccountId = formData.get('bankAccountId') as string;
     const comment = formData.get('comment') as string;
-
-    // const fundsAccount = await db.bankAccount.findFirst({ where: { id: bankAccountId } });
-
-    // if(!fundsAccount) {
-    //   throw new Error('ExpensesPage.errors.noBankAccountFound')
-    // }
 
     const validatedFields = expenseSchema.safeParse({
       userId, 
@@ -204,7 +199,8 @@ export const updateExpense = async (formData: FormData) => {
       currency, 
       category, 
       destination, 
-      // paymentMethod, 
+      paymentMethod, 
+      bankAccountId,
       comment
     });
 

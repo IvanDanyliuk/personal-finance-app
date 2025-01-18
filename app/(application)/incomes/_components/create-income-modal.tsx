@@ -20,7 +20,7 @@ import useBankAccountsStore from '@/lib/store/bank-accounts-slice';
 
 interface ICreateIncomeModal {
   funds: any[];
-}
+};
 
 
 export const CreateIncomeModal: React.FC<ICreateIncomeModal> = ({ funds }) => {

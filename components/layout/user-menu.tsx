@@ -25,7 +25,6 @@ export const UserMenu: React.FC = () => {
 
   useEffect(() => {
     getSession();
-    console.log('SESSION', session)
   }, []);
 
   if(!session) return null;
