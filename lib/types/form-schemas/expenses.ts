@@ -1,5 +1,6 @@
 import { z as zod } from 'zod';
 
+
 export const expenseSchema = zod.object({
   userId: zod.string(),
   date: zod.date(),

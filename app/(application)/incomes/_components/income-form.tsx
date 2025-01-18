@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -11,7 +12,6 @@ import { Label } from '@/components/ui/label';
 import { CURRENCIES, INCOME_SOURCES } from '@/lib/constants';
 import { incomeSchema, IncomeSchema } from '@/lib/types/form-schemas/incomes';
 import useBankAccountsStore from '@/lib/store/bank-accounts-slice';
-import { useEffect, useState } from 'react';
 
 
 interface IIncomeData extends IncomeSchema {
