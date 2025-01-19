@@ -1,14 +1,29 @@
-import { getSavingsControlData, getYearsOfSavings } from '@/lib/actions/analytics.actions';
+import { getMonthlySavingsControlDataByYears, getYearsOfSavings } from '@/lib/actions/analytics.actions';
+import { SavingsData } from './_components';
 
-export default async function AnalyticsPage() {
+
+export default async function AnalyticsPage({ 
+  searchParams: { year } 
+}: { 
+  searchParams: { year: string } 
+}) {
   const years = await getYearsOfSavings();
-  const analyticsData = years.data.length > 0 ? await getSavingsControlData(years.data[0]) : null;
-
-  console.log('ANALYTICS', years)
+  const analyticsData = years.data.length > 0 
+    ? await getMonthlySavingsControlDataByYears(year ? +year : years.data[0]) 
+    : null;
 
   return (
-    <div>
-      Analytics
-    </div>
+    <>
+      {
+        years.data.length > 0 && analyticsData ? (
+          <SavingsData 
+            years={years.data} 
+            data={analyticsData.data} 
+          />
+        ) : (
+          <div>No data found</div>
+        )
+      }
+    </>
   );
 };
