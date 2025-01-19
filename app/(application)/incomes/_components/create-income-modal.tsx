@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import { useTranslations } from 'next-intl';
+import { Plus } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -10,6 +11,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { useToast } from '@/hooks/use-toast';
 import { createIncome } from '@/lib/actions/income.actions';
 import { ActionStatus } from '@/lib/types/common.types';
@@ -70,8 +77,20 @@ export const CreateIncomeModal: React.FC<ICreateIncomeModal> = ({ funds }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleFormOpen}>
-      <DialogTrigger className='w-36 h-12 bg-primary-7 hover:bg-primary-6 rounded-full text-white text-sm md:text-base font-semibold'>
-        {t('IncomesPage.createIncomeForm.triggerBtnLabel')}
+      <DialogTrigger>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger className='w-36 h-12 flex justify-center items-center gap-1 bg-primary-7 hover:bg-primary-6 rounded-full text-white text-sm md:text-base font-semibold'>
+              <Plus className='-ml-2' />
+              {t('IncomesPage.createIncomeForm.triggerBtnLabel')}
+            </TooltipTrigger>
+            <TooltipContent className='max-w-44 text-center bg-primary-2 text-secondary-8 rounded-xl'>
+              <p>
+                {t('IncomesPage.createIncomeForm.triggerBtnTooltip')}
+              </p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

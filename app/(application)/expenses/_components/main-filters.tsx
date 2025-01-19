@@ -76,7 +76,7 @@ export const MainFilters: React.FC = () => {
             <TooltipTrigger className='w-10 h-10 flex justify-center items-center bg-primary-7 text-white border-none rounded-full'>
               <SlidersHorizontal className='w-5 h-5' />
             </TooltipTrigger>
-            <TooltipContent className='px-3 py-1 bg-primary-7 text-white rounded-full'>
+            <TooltipContent className='px-3 py-1 max-w-44 text-center bg-primary-2 text-secondary-8 rounded-xl'>
               <p>
                 {t('ExpensesPage.filters.general.title')}
               </p>

@@ -315,6 +315,7 @@
     "noData": "You haven't added any information about your incomes",
     "createIncomeForm": {
       "triggerBtnLabel": "Add",
+      "triggerBtnTooltip": "Add a new income item",
       "title": "Create a new income",
       "titleUpdate": "Update an income",
       "dateFieldLabel": "Date",
@@ -392,6 +393,7 @@
     "noData": "You haven't added any information about your expenses",
     "createExpenseForm": {
       "triggerBtnLabel": "Add",
+      "triggerBtnTooltip": "Add a new expense item",
       "title": "Create a new expense",
       "titleUpdate": "Update an expense",
       "dateFieldLabel": "Date",

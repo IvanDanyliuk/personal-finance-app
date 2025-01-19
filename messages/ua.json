@@ -315,6 +315,7 @@
     "noData": "Ви ще не додали ніякої інформації про Ваші доходи",
     "createIncomeForm": {
       "triggerBtnLabel": "Додати",
+      "triggerBtnTooltip": "Додати нову статтю доходу",
       "title": "Створити статтю доходу",
       "titleUpdate": "Оновити статтю доходу",
       "dateFieldLabel": "Дата",
@@ -392,6 +393,7 @@
     "noData": "Ви ще не додали ніякої інформації про Ваші витрати",
     "createExpenseForm": {
       "triggerBtnLabel": "Додати",
+      "triggerBtnTooltip": "Додати нову статтю витрат",
       "title": "Створити статтю витрат",
       "titleUpdate": "Оновити статтю витрат",
       "dateFieldLabel": "Дата",
