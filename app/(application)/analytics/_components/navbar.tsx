@@ -1,13 +1,14 @@
 'use client';
 
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 
 export const Navbar: React.FC = () => {
+  const t = useTranslations();
   const pathname = usePathname();
-  console.log('NAVBAR', pathname)
 
   return (
     <div className='flex'>
@@ -15,19 +16,19 @@ export const Navbar: React.FC = () => {
         href='/analytics' 
         className={cn(
           pathname === '/analytics' ? ' bg-primary-7 text-white' : 'bg-primary-1 text-secondary-5', 
-          'w-52 py-3 text-center font-semibold border border-primary-7 rounded-l-full'
+          'w-72 py-3 text-center font-semibold border border-primary-7 rounded-l-full'
         )}
       >
-        Main
+        {t('AnalyticsPage.navbar.main')}
       </Link>
       <Link 
         href='/analytics/charts' 
         className={cn(
           pathname === '/analytics/charts' ? ' bg-primary-7 text-white' : 'bg-primary-1 text-secondary-5', 
-          'w-52 py-3 text-center font-semibold border border-primary-7 rounded-r-full'
+          'w-72 py-3 text-center font-semibold border border-primary-7 rounded-r-full'
         )}
       >
-        Charts
+        {t('AnalyticsPage.navbar.charts')}
       </Link>
     </div>
   );
