@@ -603,6 +603,13 @@
       "main": "Savings control",
       "charts": "Charts"
     },
+    "savingsData": {
+      "monthTableCol": "Month",
+      "currencyTableCol": "Currency",
+      "totalIncomeTableCol": "Total income",
+      "totalExpenseTableCol": "Total expense",
+      "savingsTableCol": "Savings"
+    },
     "errors": {
       "general": "Something went wrong!",
       "wrongUserId": "You're not authenticated or your user ID is incorrect"

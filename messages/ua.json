@@ -604,6 +604,13 @@
       "main": "Контроль заощаджень",
       "charts": "Інфографіка"
     },
+    "savingsData": {
+      "monthTableCol": "Місяць",
+      "currencyTableCol": "Валюта",
+      "totalIncomeTableCol": "Всього доходів",
+      "totalExpenseTableCol": "Всього витрат",
+      "savingsTableCol": "Заощаджено"
+    },
     "errors": {
       "general": "Щось пішло не так!",
       "wrongUserId": "Ви не авторизовані або ID Вашого облікового запису некоректний"

@@ -15,7 +15,7 @@ export const Navbar: React.FC = () => {
       <Link 
         href='/analytics' 
         className={cn(
-          pathname === '/analytics' ? ' bg-primary-7 text-white' : 'bg-primary-1 text-secondary-5', 
+          pathname === '/analytics' ? ' bg-primary-7 text-white' : 'bg-background-secondary text-foreground', 
           'w-72 py-3 text-center font-semibold border border-primary-7 rounded-l-full'
         )}
       >
@@ -24,7 +24,7 @@ export const Navbar: React.FC = () => {
       <Link 
         href='/analytics/charts' 
         className={cn(
-          pathname === '/analytics/charts' ? ' bg-primary-7 text-white' : 'bg-primary-1 text-secondary-5', 
+          pathname === '/analytics/charts' ? ' bg-primary-7 text-white' : 'bg-background-secondary text-foreground', 
           'w-72 py-3 text-center font-semibold border border-primary-7 rounded-r-full'
         )}
       >

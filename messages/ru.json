@@ -602,6 +602,13 @@
       "main": "Контроль сбережений",
       "charts": "Инфографика"
     },
+    "savingsData": {
+      "monthTableCol": "Месяц",
+      "currencyTableCol": "Валюта",
+      "totalIncomeTableCol": "Итого дохода",
+      "totalExpenseTableCol": "Итого затрат",
+      "savingsTableCol": "Сбережения"
+    },
     "errors": {
       "general": "Что-то пошло не так!",
       "wrongUserId": "Вы не авторзованы или ID Вашего профиля неверный"

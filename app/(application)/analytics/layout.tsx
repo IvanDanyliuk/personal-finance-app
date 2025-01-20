@@ -1,4 +1,4 @@
-import { Navbar } from "./_components";
+import { Navbar } from './_components';
 
 
 export default function RootLayout({
@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <div className='space-y-3'>
       <Navbar />
-      <div>
+      <div className='w-full'>
         {children}
       </div>
     </div>

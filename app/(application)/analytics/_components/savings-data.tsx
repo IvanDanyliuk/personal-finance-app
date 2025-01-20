@@ -13,6 +13,8 @@ import {
 } from '@/components/ui/table'
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { Progress } from '@/components/ui/progress';
+import { formatNumber } from '@/lib/helpers';
 
 
 interface ISavingsData {
@@ -45,14 +47,14 @@ export const SavingsData: React.FC<ISavingsData> = ({ years, data }) => {
   };
 
   return (
-    <div className='w-full flex gap-3'>
-      <ul className='space-y-1'>
+    <div className='w-full min-w-full flex gap-3'>
+      <ul className='w-auto space-y-1'>
         {years.map((year) => (
           <li key={crypto.randomUUID()}>
             <Button 
               onClick={() => handleSetYear(year)}
               className={cn(
-                currentYear === year ? 'bg-primary-7 text-white' : 'bg-primary-1 text-secondary-5', 
+                currentYear === year ? 'bg-primary-7 text-white' : 'bg-background-secondary text-foreground', 
                 'w-32 border border-primary-7 rounded-full'
               )}
             >
@@ -61,50 +63,96 @@ export const SavingsData: React.FC<ISavingsData> = ({ years, data }) => {
           </li>
         ))}
       </ul>
-      <div>
-      <Table>
+      <div className='flex-1'>
+      <Table className='border-separate'>
         <TableHeader>
-          <TableRow>
-            <TableHead>Month</TableHead>
-            <TableHead>Currency</TableHead>
-            <TableHead>Incomes</TableHead>
-            <TableHead>Expenses</TableHead>
-            <TableHead>Savings</TableHead>
-            <TableHead></TableHead>
+          <TableRow className='border-none bg-background-normal'>
+            <TableHead className='px-6 py-3 rounded-l-full font-semibold'>
+              {t('AnalyticsPage.savingsData.monthTableCol')}
+            </TableHead>
+            <TableHead className='px-6 py-3 font-semibold'>
+              {t('AnalyticsPage.savingsData.currencyTableCol')}
+            </TableHead>
+            <TableHead className='px-6 py-3 font-semibold'>
+              {t('AnalyticsPage.savingsData.totalIncomeTableCol')}
+            </TableHead>
+            <TableHead className='px-6 py-3 font-semibold'>
+              {t('AnalyticsPage.savingsData.totalExpenseTableCol')}
+            </TableHead>
+            <TableHead className='px-6 py-3 font-semibold'>
+              {t('AnalyticsPage.savingsData.savingsTableCol')}
+            </TableHead>
+            <TableHead className='px-6 py-3 rounded-r-full font-semibold' />
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map(item => (
-            <TableRow key={crypto.randomUUID()}>
-              <TableCell className="font-medium">
+          {data.map((item, i) => (
+            <TableRow key={crypto.randomUUID()} className='text-foreground bg-background hover:bg-background-neutral'>
+              <TableCell className={cn(
+                i < data.length - 1 ? 'border-b broder-b-secondary-1' : '', 
+                'px-6 font-medium'
+              )}>
                 {t(`General.months.${item.month - 1}`)}
               </TableCell>
-              <TableCell rowSpan={item.data.length}>
+              <TableCell className={cn(
+                i < data.length - 1 ? 'border-b broder-b-secondary-1' : '', 
+                'px-6 space-y-1'
+              )}>
                 {item.data.map(dataItem => (
                   <div key={crypto.randomUUID()}>
-                    {dataItem.currency}
+                    {t(`General.currencies.${dataItem.currency}`)}
                   </div>
                 ))}
               </TableCell>
-              <TableCell rowSpan={item.data.length}>
+              <TableCell className={cn(
+                i < data.length - 1 ? 'border-b broder-b-secondary-1' : '', 
+                'px-6 space-y-1'
+              )}>
                 {item.data.map(dataItem => (
                   <div key={crypto.randomUUID()}>
-                    {dataItem.totalIncomes}
+                    {formatNumber(dataItem.totalIncomes, 3)}
                   </div>
                 ))}
               </TableCell>
-              <TableCell rowSpan={item.data.length}>
+              <TableCell className={cn(
+                i < data.length - 1 ? 'border-b broder-b-secondary-1' : '', 
+                'px-6 space-y-1'
+              )}>
                 {item.data.map(dataItem => (
                   <div key={crypto.randomUUID()}>
-                    {dataItem.totalExpenses}
+                    {formatNumber(dataItem.totalExpenses, 3)}
                   </div>
                 ))}
               </TableCell>
-              <TableCell rowSpan={item.data.length}>
-
+              <TableCell className={cn(
+                i < data.length - 1 ? 'border-b broder-b-secondary-1' : '', 
+                'px-6 space-y-1'
+              )}>
+                {item.data.map(dataItem => {
+                  const difference = dataItem.totalIncomes - dataItem.totalExpenses;
+                  return (
+                    <div 
+                      key={crypto.randomUUID()} 
+                      className={cn(
+                        difference < 0 ? 'text-danger-2' : 'text-success-2', 
+                        'font-semibold'
+                      )}
+                    >
+                      {difference > 0 ? `+${formatNumber(difference, 3)}` : formatNumber(difference, 3)}
+                    </div>
+                  )
+                })}
               </TableCell>
-              <TableCell rowSpan={item.data.length}>
-
+              <TableCell className={cn(
+                i < data.length - 1 ? 'border-b broder-b-secondary-1' : '', 
+                'px-6 min-w-32 space-y-1'
+              )}>
+                {item.data.map(dataItem => {
+                  const budget = Math.ceil((dataItem.totalExpenses / dataItem.totalIncomes) * 100);
+                  return (
+                    <Progress key={crypto.randomUUID()} value={budget} />
+                  )
+                })}
               </TableCell>
             </TableRow>
           ))}
