@@ -608,7 +608,8 @@
       "currencyTableCol": "Currency",
       "totalIncomeTableCol": "Total income",
       "totalExpenseTableCol": "Total expense",
-      "savingsTableCol": "Savings"
+      "savingsTableCol": "Savings",
+      "limitCovarageTableCol": "Monthly funds limit coverage"
     },
     "errors": {
       "general": "Something went wrong!",

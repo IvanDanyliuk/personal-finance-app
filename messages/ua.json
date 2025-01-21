@@ -609,7 +609,8 @@
       "currencyTableCol": "Валюта",
       "totalIncomeTableCol": "Всього доходів",
       "totalExpenseTableCol": "Всього витрат",
-      "savingsTableCol": "Заощаджено"
+      "savingsTableCol": "Заощаджено",
+      "limitCovarageTableCol": "Покриття ліміту коштів"
     },
     "errors": {
       "general": "Щось пішло не так!",

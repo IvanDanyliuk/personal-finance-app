@@ -607,7 +607,8 @@
       "currencyTableCol": "Валюта",
       "totalIncomeTableCol": "Итого дохода",
       "totalExpenseTableCol": "Итого затрат",
-      "savingsTableCol": "Сбережения"
+      "savingsTableCol": "Сбережения",
+      "limitCovarageTableCol": "Покрытие лимита средств на месяц"
     },
     "errors": {
       "general": "Что-то пошло не так!",
