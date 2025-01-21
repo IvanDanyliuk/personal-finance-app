@@ -3,6 +3,7 @@
 import { auth } from '@/auth';
 import { ActionStatus } from '../types/common.types';
 import { db } from '@/db';
+import { removeFalseyFields } from '../helpers';
 
 
 export const getYearsOfSavings = async () => {
@@ -52,7 +53,15 @@ export const getYearsOfSavings = async () => {
   }
 };
 
-export const getMonthlySavingsControlDataByYears = async (year: number) => {
+export const getMonthlySavingsControlDataByYears = async ({ 
+  year, 
+  dateFrom, 
+  dateTo
+}: { 
+  year?: number; 
+  dateFrom?: string; 
+  dateTo?: string; 
+}) => {
   try {
     const session = await auth();
 
@@ -60,12 +69,22 @@ export const getMonthlySavingsControlDataByYears = async (year: number) => {
       throw new Error('AnalyticsPage.errors.wrongUserId');
     }
 
+    if(!year && !dateFrom && !dateTo) {
+      throw new Error('Pass a period or a period value');
+    } 
+
+    const periodQuery = year ? {
+      gte: new Date(`${year}-01-01T00:00:00.000Z`),
+      lt: new Date(`${year + 1}-01-01T00:00:00.000Z`),
+    } : removeFalseyFields({ 
+      gte: dateFrom ? new Date(dateFrom) : null, 
+      lte: dateTo ? new Date(dateTo) : null,
+    });
+
     const incomes = await db.income.findMany({
       where: {
-        date: {
-          gte: new Date(`${year}-01-01T00:00:00.000Z`),
-          lt: new Date(`${year + 1}-01-01T00:00:00.000Z`),
-        },
+        userId: session.user.id,
+        date: periodQuery,
       },
       select: {
         amount: true,
@@ -76,10 +95,8 @@ export const getMonthlySavingsControlDataByYears = async (year: number) => {
 
     const expenses = await db.expense.findMany({
       where: {
-        date: {
-          gte: new Date(`${year}-01-01T00:00:00.000Z`),
-          lt: new Date(`${year + 1}-01-01T00:00:00.000Z`),
-        },
+        userId: session.user.id,
+        date: periodQuery,
       },
       select: {
         amount: true,

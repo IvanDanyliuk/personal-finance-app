@@ -12,10 +12,10 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import { Progress } from '@/components/ui/progress';
-import { formatNumber } from '@/lib/helpers';
 import { Separator } from '@/components/ui/separator';
+import { cn } from '@/lib/utils';
+import { formatNumber } from '@/lib/helpers';
 
 
 interface ISavingsData {
@@ -55,7 +55,9 @@ export const SavingsData: React.FC<ISavingsData> = ({ years, data }) => {
             <Button 
               onClick={() => handleSetYear(year)}
               className={cn(
-                currentYear === year ? 'bg-primary-7 text-white' : 'bg-background-secondary text-foreground', 
+                currentYear === year 
+                  ? 'bg-primary-7 text-white' 
+                  : 'bg-background-secondary text-foreground', 
                 'w-32 border border-primary-7 rounded-full'
               )}
             >

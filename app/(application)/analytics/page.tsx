@@ -9,7 +9,7 @@ export default async function AnalyticsPage({
 }) {
   const years = await getYearsOfSavings();
   const analyticsData = years.data.length > 0 
-    ? await getMonthlySavingsControlDataByYears(year ? +year : years.data[0]) 
+    ? await getMonthlySavingsControlDataByYears(year ? { year: +year } : { year: years.data[0] }) 
     : null;
 
   return (

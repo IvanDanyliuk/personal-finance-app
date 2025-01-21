@@ -610,7 +610,7 @@
       "totalIncomeTableCol": "Всього доходів",
       "totalExpenseTableCol": "Всього витрат",
       "savingsTableCol": "Заощаджено",
-      "limitCovarageTableCol": "Покриття ліміту коштів"
+      "limitCovarageTableCol": "Виконання бюджету"
     },
     "errors": {
       "general": "Щось пішло не так!",

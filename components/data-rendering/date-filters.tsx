@@ -60,7 +60,7 @@ export const DateFilters: React.FC = () => {
   };
 
   return (
-    <>
+    <div className='flex gap-2'>
       <Dialog 
         open={isFiltersOpen} 
         onOpenChange={setFiltersOpen}
@@ -157,6 +157,6 @@ export const DateFilters: React.FC = () => {
           noDateToMessage: t('IncomesPage.filters.date.noDateToMessage')
         })}
       </div>
-    </>
+    </div>
   );
 };

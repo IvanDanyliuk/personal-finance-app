@@ -608,7 +608,7 @@
       "totalIncomeTableCol": "Итого дохода",
       "totalExpenseTableCol": "Итого затрат",
       "savingsTableCol": "Сбережения",
-      "limitCovarageTableCol": "Покрытие лимита средств на месяц"
+      "limitCovarageTableCol": "Исполнение бюджета"
     },
     "errors": {
       "general": "Что-то пошло не так!",
