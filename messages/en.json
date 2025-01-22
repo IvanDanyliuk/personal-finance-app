@@ -5,7 +5,8 @@
       "eur": "Euro",
       "rub": "Ruble",
       "uah": "Hryvnia",
-      "pln": "Zloty"
+      "pln": "Zloty",
+      "empty": "-"
     },
     "weekDays": {
       "sunday": "Sunday",

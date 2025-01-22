@@ -56,11 +56,13 @@ export const getYearsOfSavings = async () => {
 export const getMonthlySavingsControlDataByYears = async ({ 
   year, 
   dateFrom, 
-  dateTo
+  dateTo,
+  currency
 }: { 
   year?: number; 
   dateFrom?: string; 
-  dateTo?: string; 
+  dateTo?: string;
+  currency?: string; 
 }) => {
   try {
     const session = await auth();
@@ -73,18 +75,26 @@ export const getMonthlySavingsControlDataByYears = async ({
       throw new Error('Pass a period or a period value');
     } 
 
-    const periodQuery = year ? {
-      gte: new Date(`${year}-01-01T00:00:00.000Z`),
-      lt: new Date(`${year + 1}-01-01T00:00:00.000Z`),
-    } : removeFalseyFields({ 
-      gte: dateFrom ? new Date(dateFrom) : null, 
-      lte: dateTo ? new Date(dateTo) : null,
-    });
+    const query = year 
+      ? removeFalseyFields({
+          date: removeFalseyFields({
+            gte: new Date(`${year}-01-01T00:00:00.000Z`),
+            lt: new Date(`${year + 1}-01-01T00:00:00.000Z`),
+          }),
+          currency
+        }) 
+      : removeFalseyFields({ 
+          date: removeFalseyFields({
+            gte: dateFrom ? new Date(dateFrom) : null, 
+            lte: dateTo ? new Date(dateTo) : null,
+          }),
+          currency
+        });
 
     const incomes = await db.income.findMany({
       where: {
         userId: session.user.id,
-        date: periodQuery,
+        ...query,
       },
       select: {
         amount: true,
@@ -96,7 +106,7 @@ export const getMonthlySavingsControlDataByYears = async ({
     const expenses = await db.expense.findMany({
       where: {
         userId: session.user.id,
-        date: periodQuery,
+        ...query,
       },
       select: {
         amount: true,
@@ -137,9 +147,25 @@ export const getMonthlySavingsControlDataByYears = async ({
   
     result.sort((a, b) => a.month - b.month);
 
+    const firstMonth = result[0].month;
+    const lastMonth = result[result.length - 1].month;
+
+    const monthMap = new Map(result.map((item) => [item.month, item.data]));
+
+    // Generate the complete range of months and fill missing ones with 0
+    const data = [];
+    for (let month = firstMonth; month <= lastMonth; month++) {
+      data.push({
+        month,
+        data: monthMap.get(month) || [{ totalIncomes: 0, totalExpenses: 0, currency: 'empty' }],
+      });
+    }
+
+    console.log('DATA', data)
+
     return {
       status: ActionStatus.Success,
-      data: result,
+      data,
       error: null,
     };
   } catch (error: any) {

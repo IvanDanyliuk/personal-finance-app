@@ -93,15 +93,22 @@ export const SavingsData: React.FC<ISavingsData> = ({ years, data }) => {
           </TableHeader>
           <TableBody>
             {data.map((item, i) => (
-              <TableRow key={crypto.randomUUID()} className='text-foreground bg-background hover:bg-background-neutral'>
+              <TableRow 
+                key={crypto.randomUUID()} 
+                className='text-foreground bg-background hover:bg-background-neutral'
+              >
                 <TableCell className={cn(
-                  i < data.length - 1 ? 'border-b border-b-secondary-1' : '', 
+                  i < data.length - 1 
+                    ? 'border-b border-b-secondary-1' 
+                    : '', 
                   'px-6 font-medium'
                 )}>
                   {t(`General.months.${item.month - 1}`)}
                 </TableCell>
                 <TableCell className={cn(
-                  i < data.length - 1 ? 'border-b border-b-secondary-1' : '', 
+                  i < data.length - 1 
+                    ? 'border-b border-b-secondary-1' 
+                    : '', 
                   'px-6 space-y-1'
                 )}>
                   {item.data.map(dataItem => (
@@ -111,7 +118,9 @@ export const SavingsData: React.FC<ISavingsData> = ({ years, data }) => {
                   ))}
                 </TableCell>
                 <TableCell className={cn(
-                  i < data.length - 1 ? 'border-b border-b-secondary-1' : '', 
+                  i < data.length - 1 
+                    ? 'border-b border-b-secondary-1' 
+                    : '', 
                   'px-6 space-y-1'
                 )}>
                   {item.data.map(dataItem => (
@@ -121,7 +130,9 @@ export const SavingsData: React.FC<ISavingsData> = ({ years, data }) => {
                   ))}
                 </TableCell>
                 <TableCell className={cn(
-                  i < data.length - 1 ? 'border-b border-b-secondary-1' : '', 
+                  i < data.length - 1 
+                    ? 'border-b border-b-secondary-1' 
+                    : '', 
                   'px-6 space-y-1'
                 )}>
                   {item.data.map(dataItem => (
@@ -131,7 +142,9 @@ export const SavingsData: React.FC<ISavingsData> = ({ years, data }) => {
                   ))}
                 </TableCell>
                 <TableCell className={cn(
-                  i < data.length - 1 ? 'border-b border-b-secondary-1' : '', 
+                  i < data.length - 1 
+                    ? 'border-b border-b-secondary-1' 
+                    : '', 
                   'px-6 space-y-1'
                 )}>
                   {item.data.map(dataItem => {
@@ -140,17 +153,24 @@ export const SavingsData: React.FC<ISavingsData> = ({ years, data }) => {
                       <div 
                         key={crypto.randomUUID()} 
                         className={cn(
-                          difference < 0 ? 'text-danger-2' : 'text-success-2', 
+                          difference < 0 
+                            ? 'text-danger-2' 
+                            : 'text-success-2', 
                           'font-semibold'
                         )}
                       >
-                        {difference > 0 ? `+${formatNumber(difference, 3)}` : formatNumber(difference, 3)}
+                        {difference > 0 
+                          ? `+${formatNumber(difference, 3)}` 
+                          : formatNumber(difference, 3)
+                        }
                       </div>
                     )
                   })}
                 </TableCell>
                 <TableCell className={cn(
-                  i < data.length - 1 ? 'border-b border-b-secondary-1' : '', 
+                  i < data.length - 1 
+                    ? 'border-b border-b-secondary-1' 
+                    : '', 
                   'px-6 min-w-32 space-y-1'
                 )}>
                   {item.data.map(dataItem => {
