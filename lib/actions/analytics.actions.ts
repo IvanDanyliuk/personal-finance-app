@@ -152,7 +152,6 @@ export const getMonthlySavingsControlDataByYears = async ({
 
     const monthMap = new Map(result.map((item) => [item.month, item.data]));
 
-    // Generate the complete range of months and fill missing ones with 0
     const data = [];
     for (let month = firstMonth; month <= lastMonth; month++) {
       data.push({
@@ -160,8 +159,6 @@ export const getMonthlySavingsControlDataByYears = async ({
         data: monthMap.get(month) || [{ totalIncomes: 0, totalExpenses: 0, currency: 'empty' }],
       });
     }
-
-    console.log('DATA', data)
 
     return {
       status: ActionStatus.Success,

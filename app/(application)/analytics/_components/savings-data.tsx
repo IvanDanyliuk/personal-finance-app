@@ -68,7 +68,7 @@ export const SavingsData: React.FC<ISavingsData> = ({ years, data }) => {
       </ul>
       <Separator orientation='vertical' className='bg-secondary-1' />
       <div className='flex-1'>
-        <Table className='border-separate'>
+        <Table className='border-separate border-spacing-y-3'>
           <TableHeader>
             <TableRow className='border-none bg-background-normal'>
               <TableHead className='px-6 py-3 rounded-l-full font-semibold'>
@@ -97,56 +97,31 @@ export const SavingsData: React.FC<ISavingsData> = ({ years, data }) => {
                 key={crypto.randomUUID()} 
                 className='text-foreground bg-background hover:bg-background-neutral'
               >
-                <TableCell className={cn(
-                  i < data.length - 1 
-                    ? 'border-b border-b-secondary-1' 
-                    : '', 
-                  'px-6 font-medium'
-                )}>
+                <TableCell className='px-6 font-medium border border-r-0 border-secondary-1 rounded-l-3xl'>
                   {t(`General.months.${item.month - 1}`)}
                 </TableCell>
-                <TableCell className={cn(
-                  i < data.length - 1 
-                    ? 'border-b border-b-secondary-1' 
-                    : '', 
-                  'px-6 space-y-1'
-                )}>
+                <TableCell className='px-6 border-t border-b border-secondary-1 space-y-1'>
                   {item.data.map(dataItem => (
                     <div key={crypto.randomUUID()}>
                       {t(`General.currencies.${dataItem.currency}`)}
                     </div>
                   ))}
                 </TableCell>
-                <TableCell className={cn(
-                  i < data.length - 1 
-                    ? 'border-b border-b-secondary-1' 
-                    : '', 
-                  'px-6 space-y-1'
-                )}>
+                <TableCell className='px-6 border-t border-b border-secondary-1 space-y-1'>
                   {item.data.map(dataItem => (
                     <div key={crypto.randomUUID()}>
                       {formatNumber(dataItem.totalIncomes, 3)}
                     </div>
                   ))}
                 </TableCell>
-                <TableCell className={cn(
-                  i < data.length - 1 
-                    ? 'border-b border-b-secondary-1' 
-                    : '', 
-                  'px-6 space-y-1'
-                )}>
+                <TableCell className='px-6 border-t border-b border-secondary-1 space-y-1'>
                   {item.data.map(dataItem => (
                     <div key={crypto.randomUUID()}>
                       {formatNumber(dataItem.totalExpenses, 3)}
                     </div>
                   ))}
                 </TableCell>
-                <TableCell className={cn(
-                  i < data.length - 1 
-                    ? 'border-b border-b-secondary-1' 
-                    : '', 
-                  'px-6 space-y-1'
-                )}>
+                <TableCell className='px-6 border-t border-b border-secondary-1 space-y-1'>
                   {item.data.map(dataItem => {
                     const difference = dataItem.totalIncomes - dataItem.totalExpenses;
                     return (
@@ -171,7 +146,7 @@ export const SavingsData: React.FC<ISavingsData> = ({ years, data }) => {
                   i < data.length - 1 
                     ? 'border-b border-b-secondary-1' 
                     : '', 
-                  'px-6 min-w-32 space-y-1'
+                  'px-6 min-w-32 border border-l-0 border-secondary-1 space-y-1 rounded-r-3xl'
                 )}>
                   {item.data.map(dataItem => {
                     const budget = Math.ceil((dataItem.totalExpenses / dataItem.totalIncomes) * 100);
