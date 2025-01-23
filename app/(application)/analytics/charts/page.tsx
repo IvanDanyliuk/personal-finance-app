@@ -1,5 +1,8 @@
 import { getMonthlySavingsControlDataByYears } from '@/lib/actions/analytics.actions';
 import { ChartBoard } from '../_components';
+import { auth } from '@/auth';
+import { getUser } from '@/lib/actions/user.actions';
+
 
 export default async function AnalyticCharts({ 
   searchParams: { 
@@ -26,13 +29,15 @@ export default async function AnalyticCharts({
         dateTo, 
         currency
       };
-  const montlyFunds = await getMonthlySavingsControlDataByYears(period);
 
-  console.log('MONTHLY FUNDS', montlyFunds.data[0])
+  const session = await auth();
+  const user = await getUser(session!.user!.email!);
+  const monthlyFunds = await getMonthlySavingsControlDataByYears(period);
 
   return (
     <div>
-      <ChartBoard />
+      {JSON.stringify(monthlyFunds.data)}
+      <ChartBoard data={monthlyFunds.data} currentCurrency={user!.currency} />
     </div>
   );
 };
