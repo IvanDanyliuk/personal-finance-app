@@ -611,6 +611,12 @@
       "savingsTableCol": "Сбережения",
       "limitCovarageTableCol": "Исполнение бюджета"
     },
+    "charts": {
+      "cashFlow": {
+        "income": "Доходы",
+        "expenses": "Расходы"
+      }
+    },
     "errors": {
       "general": "Что-то пошло не так!",
       "wrongUserId": "Вы не авторзованы или ID Вашего профиля неверный"

@@ -613,6 +613,12 @@
       "savingsTableCol": "Заощаджено",
       "limitCovarageTableCol": "Виконання бюджету"
     },
+    "charts": {
+      "cashFlow": {
+        "income": "Доходи",
+        "expenses": "Витрати"
+      }
+    },
     "errors": {
       "general": "Щось пішло не так!",
       "wrongUserId": "Ви не авторизовані або ID Вашого облікового запису некоректний"

@@ -151,7 +151,9 @@ export const SavingsData: React.FC<ISavingsData> = ({ years, data }) => {
                   {item.data.map(dataItem => {
                     const budget = Math.ceil((dataItem.totalExpenses / dataItem.totalIncomes) * 100);
                     return (
-                      <Progress key={crypto.randomUUID()} value={budget} />
+                      <div key={crypto.randomUUID()} className='py-2'>
+                        <Progress value={budget} />
+                      </div>
                     )
                   })}
                 </TableCell>
