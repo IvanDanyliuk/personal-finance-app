@@ -3,11 +3,26 @@
 import { useEffect, useMemo, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
 import { DateFilters } from '@/components/data-rendering';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { 
+  Select, 
+  SelectContent, 
+  SelectItem, 
+  SelectTrigger, 
+  SelectValue 
+} from '@/components/ui/select';
+import { 
+  ChartContainer, 
+  ChartLegend, 
+  ChartLegendContent, 
+  ChartTooltip, 
+  ChartTooltipContent, 
+  type ChartConfig 
+} from '@/components/ui/chart';
 import { CURRENCIES } from '@/lib/constants';
-import { ChartContainer, ChartLegend, ChartLegendContent, ChartTooltip, ChartTooltipContent, type ChartConfig } from '@/components/ui/chart';
-import { Bar, BarChart, XAxis } from 'recharts';
+import { NoChartDataPlaceholder } from './no-chart-data-placeholder';
+import NoCashFlowData from '@/public/images/business-vision.svg';
 
 
 interface IChartBoard {
@@ -58,6 +73,20 @@ export const ChartBoard: React.FC<IChartBoard> = ({ data, currentCurrency }) => 
     },
   } satisfies ChartConfig;
 
+  const incomeLineChartConfig = {
+    value: {
+      label: t('AnalyticsPage.charts.income'),
+      color: 'bg-primary-7'
+    }
+  };
+  
+  const expensesLineChartConfig = {
+    value: {
+      label: t('AnalyticsPage.charts.expenses'),
+      color: 'bg-primary-7'
+    }
+  };
+
   const handelSelectCurrency = (value: string) => {
     setSelectedCurrency(value);
     params.set('currency', value);
@@ -91,7 +120,7 @@ export const ChartBoard: React.FC<IChartBoard> = ({ data, currentCurrency }) => 
   }, [currentCurrency]);
 
   return (
-    <div className='space-y-3'>
+    <div className='space-y-10'>
       <div className='flex gap-2'>
         <DateFilters />
         <Select value={selectedCurrency} onValueChange={handelSelectCurrency}>
@@ -110,32 +139,92 @@ export const ChartBoard: React.FC<IChartBoard> = ({ data, currentCurrency }) => 
           </SelectContent>
         </Select>
       </div>
-      <div>
-        <ChartContainer config={cashFlowChartConfig} className='h-80 w-full'>
-          <BarChart accessibilityLayer data={cashFlow}>
-            <XAxis
-              dataKey='month'
-              tickLine={false}
-              tickMargin={10}
-              axisLine={false}
-              tickFormatter={(value) => value}
-            />
-            <ChartTooltip content={<ChartTooltipContent className='w-36' />} />
-            {/* <ChartLegend content={<ChartLegendContent />} /> */}
-            <Bar dataKey='income' fill='hsl(var(--primary-7))' radius={4} />
-            <Bar dataKey='expenses' fill='hsl(var(--primary-4))' radius={4} />
-          </BarChart>
-        </ChartContainer>
+      <div className='space-y-3'>
+        <h4 className='text-lg text-center font-semibold'>
+          {t('AnalyticsPage.charts.cashFlow.title')}
+        </h4>
+        {cashFlow.length > 0 ? (
+          <ChartContainer config={cashFlowChartConfig} className='h-96 w-full'>
+            <BarChart accessibilityLayer data={cashFlow}>
+              <CartesianGrid strokeDasharray='3 3' />
+              <XAxis
+                dataKey='month'
+                tickLine={false}
+                tickMargin={10}
+                axisLine={false}
+                tickFormatter={(value) => value}
+              />
+              <YAxis />
+              <ChartTooltip content={<ChartTooltipContent className='w-36' />} />
+              <ChartLegend content={<ChartLegendContent />} />
+              <Bar dataKey='income' fill='hsl(var(--primary-7))' radius={4} />
+              <Bar dataKey='expenses' fill='hsl(var(--primary-4))' radius={4} />
+            </BarChart>
+          </ChartContainer>
+        ) : (
+          <NoChartDataPlaceholder 
+            image={NoCashFlowData} 
+            message={'AnalyticsPage.charts.noDataMessages.cashFlow'} 
+          />
+        )}
       </div>
-      <div>
-        <ChartContainer config={cashFlowChartConfig} className='h-80 w-full'>
-          
-        </ChartContainer>
+      <div className='space-y-4'>
+        <h4 className='text-lg text-center font-semibold'>
+          {t('AnalyticsPage.charts.income')}
+        </h4>
+        {income.length > 0 ? (
+          <ChartContainer config={incomeLineChartConfig} className='h-96 w-full'>
+            <BarChart accessibilityLayer data={income}>
+              <CartesianGrid strokeDasharray='3 3' />
+              <XAxis
+                dataKey='month'
+                tickLine={false}
+                tickMargin={10}
+                axisLine={false}
+                tickFormatter={(value) => value}
+              />
+              <YAxis />
+              <ChartTooltip content={<ChartTooltipContent className='w-36' />} />
+              <ChartLegend content={<ChartLegendContent />} />
+              <Bar dataKey='value' fill='hsl(var(--primary-7))' radius={4} />
+            </BarChart>
+          </ChartContainer>
+        ) : (
+          <NoChartDataPlaceholder 
+            image={NoCashFlowData} 
+            message={'AnalyticsPage.charts.noDataMessages.income'} 
+          />
+        )}
       </div>
-      <div>
-        Expenses dynamic
+      <div className='space-y-4'>
+        <h4 className='text-lg text-center font-semibold'>
+          {t('AnalyticsPage.charts.expenses')}
+        </h4>
+        {expenses.length > 0 ? (
+          <ChartContainer config={expensesLineChartConfig} className='h-96 w-full'>
+            <BarChart accessibilityLayer data={expenses}>
+              <CartesianGrid strokeDasharray='3 3' />
+              <XAxis
+                dataKey='month'
+                tickLine={false}
+                tickMargin={10}
+                axisLine={false}
+                tickFormatter={(value) => value}
+              />
+              <YAxis />
+              <ChartTooltip content={<ChartTooltipContent className='w-36' />} />
+              <ChartLegend content={<ChartLegendContent />} />
+              <Bar dataKey='value' fill='hsl(var(--primary-7))' radius={4} />
+            </BarChart>
+          </ChartContainer>
+        ) : (
+          <NoChartDataPlaceholder 
+            image={NoCashFlowData} 
+            message={'AnalyticsPage.charts.noDataMessages.expenses'} 
+          />
+        )}
       </div>
-      <div>
+      <div className='space-y-4'>
         Income structure
       </div>
       <div>

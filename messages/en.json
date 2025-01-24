@@ -614,8 +614,16 @@
     },
     "charts": {
       "cashFlow": {
+        "title": "Cash Flow",
         "income": "Income",
         "expenses": "Expenses"
+      },
+      "income": "Income",
+      "expenses": "Expenses",
+      "noDataMessages": {
+        "cashFlow": "Cash Flow data not found",
+        "income": "Income data not found",
+        "expenses": "Expenses data not found"
       }
     },
     "errors": {
