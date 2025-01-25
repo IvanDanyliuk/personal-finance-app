@@ -27,13 +27,19 @@ import NoCashFlowData from '@/public/images/business-vision.svg';
 
 interface IChartBoard {
   data: {
-    month: number;
-    data: {
-      totalIncomes: number;
-      totalExpenses: number;
-      currency: string;
+    dynamic: {
+      month: number;
+      data: {
+        totalIncomes: number;
+        totalExpenses: number;
+        currency: string;
+      }[];
     }[];
-  }[];
+    structure: {
+      incomes: any;
+      expenses: any;
+    };
+  }
   currentCurrency: string;
 };
 
@@ -94,21 +100,21 @@ export const ChartBoard: React.FC<IChartBoard> = ({ data, currentCurrency }) => 
   };
 
   useMemo(() => {
-    const cashFlowData = data.map(dataItem => ({ 
-      month: t(`General.months.${dataItem.month}`), 
+    const cashFlowData = data.dynamic.map(dataItem => ({ 
+      month: t(`General.months.${dataItem.month - 1}`), 
       income: dataItem.data[0].totalIncomes, 
       expenses: dataItem.data[0].totalExpenses,
     }));
     setCashFlow(cashFlowData);
 
-    const incomeData = data.map(dataItem => ({
-      month: t(`General.months.${dataItem.month}`),
+    const incomeData = data.dynamic.map(dataItem => ({
+      month: t(`General.months.${dataItem.month - 1}`),
       value: dataItem.data[0].totalIncomes,
     }));
     setIncome(incomeData);
 
-    const expensesData = data.map(dataItem => ({
-      month: t(`General.months.${dataItem.month}`),
+    const expensesData = data.dynamic.map(dataItem => ({
+      month: t(`General.months.${dataItem.month - 1}`),
       value: dataItem.data[0].totalExpenses,
     }));
     setExpenses(expensesData);
@@ -225,10 +231,16 @@ export const ChartBoard: React.FC<IChartBoard> = ({ data, currentCurrency }) => 
         )}
       </div>
       <div className='space-y-4'>
-        Income structure
+        <h4 className='text-lg text-center font-semibold'>
+          {t('AnalyticsPage.charts.fundsStructure.income')}
+        </h4>
+        {JSON.stringify(data.structure.incomes)}
       </div>
       <div>
-        Expenses structure
+        <h4 className='text-lg text-center font-semibold'>
+          {t('AnalyticsPage.charts.fundsStructure.expenses')}
+        </h4>
+        {JSON.stringify(data.structure.expenses)}
       </div>
     </div>
   );

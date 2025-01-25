@@ -620,6 +620,10 @@
       },
       "income": "Income",
       "expenses": "Expenses",
+      "fundsStructure": {
+        "income": "Income structure",
+        "expenses": "Expenses structure"
+      },
       "noDataMessages": {
         "cashFlow": "Cash Flow data not found",
         "income": "Income data not found",

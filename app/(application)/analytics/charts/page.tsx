@@ -1,6 +1,6 @@
 import { auth } from '@/auth';
 import { ChartBoard } from '../_components';
-import { getMonthlySavingsControlDataByYears } from '@/lib/actions/analytics.actions';
+import { getFundsStructureByCategories, getMonthlySavingsControlDataByYears } from '@/lib/actions/analytics.actions';
 import { getUser } from '@/lib/actions/user.actions';
 import { CURRENCIES } from '@/lib/constants';
 
@@ -36,11 +36,15 @@ export default async function AnalyticCharts({
 
   
   const monthlyFunds = await getMonthlySavingsControlDataByYears(period);
+  const fundsPerCategories = await getFundsStructureByCategories(period);
 
   return (
     <div>
       <ChartBoard 
-        data={monthlyFunds.data} 
+        data={{
+          dynamic: monthlyFunds.data,
+          structure: fundsPerCategories.data
+        }} 
         currentCurrency={user!.currency || CURRENCIES[0].value} 
       />
     </div>

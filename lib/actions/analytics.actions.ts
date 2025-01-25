@@ -173,3 +173,83 @@ export const getMonthlySavingsControlDataByYears = async ({
     };
   }
 };
+
+export const getFundsStructureByCategories = async ({
+  dateFrom, 
+  dateTo,
+  currency
+}: {
+  dateFrom?: string; 
+  dateTo?: string;
+  currency: string;
+}) => {
+  try {
+    const session = await auth();
+
+    if(!session || !session.user) {
+      throw new Error('AnalyticsPage.errors.wrongUserId');
+    }
+
+    if(!currency) {
+      throw new Error('Pass a currency value');
+    } 
+
+    const currentYear = new Date().getFullYear();
+
+    const query = !dateFrom && !dateTo 
+      ? removeFalseyFields({
+          date: removeFalseyFields({
+            gte: new Date(`${currentYear}-01-01T00:00:00.000Z`),
+            lt: new Date(`${currentYear + 1}-01-01T00:00:00.000Z`),
+          }),
+          currency
+        }) 
+      : removeFalseyFields({ 
+          date: removeFalseyFields({
+            gte: dateFrom ? new Date(dateFrom) : null, 
+            lte: dateTo ? new Date(dateTo) : null,
+          }),
+          currency
+        });
+
+    const groupedIncomes = await db.income.groupBy({
+      by: ['source'],
+      where: {
+        userId: session.user.id, 
+        ...query
+      },
+      _sum: {
+        amount: true, 
+      },
+    });
+
+    const groupedExpenses = await db.expense.groupBy({
+      by: ['category'],
+      where: {
+        userId: session.user.id, 
+        ...query
+      },
+      _sum: {
+        amount: true, 
+      },
+    });
+
+    return {
+      status: ActionStatus.Success,
+      data: {
+        incomes: groupedIncomes.map(item => ({ source: item.source, amount: item._sum.amount })),
+        expenses: groupedExpenses.map(item => ({ category: item.category, amount: item._sum.amount })),
+      },
+      error: null,
+    };
+  } catch (error: any) {
+    return {
+      status: ActionStatus.Failed,
+      data: {
+        incomes: [],
+        expenses: [],
+      },
+      error: error.message
+    };
+  }
+};
