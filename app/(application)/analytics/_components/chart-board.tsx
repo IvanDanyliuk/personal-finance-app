@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, XAxis, YAxis } from 'recharts';
 import { DateFilters } from '@/components/data-rendering';
 import { 
   Select, 
@@ -20,7 +20,7 @@ import {
   ChartTooltipContent, 
   type ChartConfig 
 } from '@/components/ui/chart';
-import { CURRENCIES } from '@/lib/constants';
+import { CURRENCIES, EXPENSE_CATEGORIES, INCOME_SOURCES } from '@/lib/constants';
 import { NoChartDataPlaceholder } from './no-chart-data-placeholder';
 import NoCashFlowData from '@/public/images/business-vision.svg';
 
@@ -36,8 +36,14 @@ interface IChartBoard {
       }[];
     }[];
     structure: {
-      incomes: any;
-      expenses: any;
+      incomes: {
+        source: string;
+        amount: number;
+      }[];
+      expenses: {
+        category: string;
+        amount: number;
+      }[];
     };
   }
   currentCurrency: string;
@@ -54,6 +60,18 @@ type FundsData = {
   value: number;
 };
 
+type IncomeStructure = {
+  source: string;
+  amount: number;
+  color: string;
+};
+
+type ExpensesStructure = {
+  category: string;
+  amount: number;
+  color: string;
+};
+
 
 export const ChartBoard: React.FC<IChartBoard> = ({ data, currentCurrency }) => {
   const t = useTranslations();
@@ -67,6 +85,8 @@ export const ChartBoard: React.FC<IChartBoard> = ({ data, currentCurrency }) => 
   const [cashFlow, setCashFlow] = useState<CashFlow[]>([]);
   const [income, setIncome] = useState<FundsData[]>([]);
   const [expenses, setExpenses] = useState<FundsData[]>([]);
+  const [incomeStructure, setIncomeStructure] = useState<IncomeStructure[]>([]);
+  const [expensesStructure, setExpensesStructure] = useState<ExpensesStructure[]>([]);
 
   const cashFlowChartConfig = {
     income: {
@@ -84,12 +104,26 @@ export const ChartBoard: React.FC<IChartBoard> = ({ data, currentCurrency }) => 
       label: t('AnalyticsPage.charts.income'),
       color: 'bg-primary-7'
     }
-  };
+  } satisfies ChartConfig;
   
   const expensesLineChartConfig = {
     value: {
       label: t('AnalyticsPage.charts.expenses'),
       color: 'bg-primary-7'
+    }
+  } satisfies ChartConfig;
+
+  const incomeStructureConfig = {
+    source: {
+      label: t('AnalyticsPage.charts.fundsStructure.income'),
+      color: 'bg-primary-7'
+    }
+  };
+
+  const expensesStructureConfig = {
+    category: {
+      label: t('AnalyticsPage.charts.fundsStructure.expenses'),
+      color: 'bg-primary-5'
     }
   };
 
@@ -118,6 +152,20 @@ export const ChartBoard: React.FC<IChartBoard> = ({ data, currentCurrency }) => 
       value: dataItem.data[0].totalExpenses,
     }));
     setExpenses(expensesData);
+
+    const incomeStructureData = data.structure.incomes.map(dataItem => ({
+      source: t(`IncomesPage.income_sources.${dataItem.source}`),
+      amount: dataItem.amount,
+      color: INCOME_SOURCES.find(item => item.value === dataItem.source)?.color || 'bg-primary-7'
+    }));
+    setIncomeStructure(incomeStructureData);
+
+    const expensesStructureData = data.structure.expenses.map(dataItem => ({
+      category: t(`ExpensesPage.expense_destinations.${dataItem.category}`),
+      amount: dataItem.amount,
+      color: EXPENSE_CATEGORIES.find(item => item.value === dataItem.category)?.color || 'bg-primary-7'
+    }));
+    setExpensesStructure(expensesStructureData);
   }, [data]);
 
   useEffect(() => {
@@ -230,17 +278,57 @@ export const ChartBoard: React.FC<IChartBoard> = ({ data, currentCurrency }) => 
           />
         )}
       </div>
-      <div className='space-y-4'>
-        <h4 className='text-lg text-center font-semibold'>
-          {t('AnalyticsPage.charts.fundsStructure.income')}
-        </h4>
-        {JSON.stringify(data.structure.incomes)}
-      </div>
-      <div>
-        <h4 className='text-lg text-center font-semibold'>
-          {t('AnalyticsPage.charts.fundsStructure.expenses')}
-        </h4>
-        {JSON.stringify(data.structure.expenses)}
+      <div className='w-full flex flex-col md:flex-row gap-6'>
+        <div className='flex-1 space-y-4'>
+          <h4 className='text-lg text-center font-semibold'>
+            {t('AnalyticsPage.charts.fundsStructure.income')}
+          </h4>
+          <ChartContainer config={incomeStructureConfig} className='w-full min-h-fit h-fit'>
+            <PieChart className='w-52'>
+              <Legend />
+              <ChartTooltip content={<ChartTooltipContent className='w-36' />} />
+              <Pie 
+                data={incomeStructure} 
+                dataKey='amount' 
+                nameKey='source' 
+                cx='50%' 
+                cy='50%' 
+                innerRadius={'55%'} 
+                outerRadius={'85%'} 
+                label
+              >
+                {incomeStructure.map((entry, i) => (
+                  <Cell key={`${entry}-${i}`} fill={entry.color} />
+                ))}
+              </Pie>
+            </PieChart>
+          </ChartContainer>
+        </div>
+        <div className='flex-1 space-y-4'>
+          <h4 className='text-lg text-center font-semibold'>
+            {t('AnalyticsPage.charts.fundsStructure.expenses')}
+          </h4>
+          <ChartContainer config={expensesStructureConfig} className='w-full min-h-fit h-fit'>
+            <PieChart className='w-52'>
+              <Legend />
+              <ChartTooltip content={<ChartTooltipContent className='w-36' />} />
+              <Pie 
+                data={expensesStructure} 
+                dataKey='amount' 
+                nameKey='category' 
+                cx='50%' 
+                cy='50%' 
+                innerRadius={'55%'} 
+                outerRadius={'85%'} 
+                label
+              >
+                {expensesStructure.map((entry, i) => (
+                  <Cell key={`${entry}-${i}`} fill={entry.color} />
+                ))}
+              </Pie>
+            </PieChart>
+          </ChartContainer>
+        </div>
       </div>
     </div>
   );

@@ -237,8 +237,14 @@ export const getFundsStructureByCategories = async ({
     return {
       status: ActionStatus.Success,
       data: {
-        incomes: groupedIncomes.map(item => ({ source: item.source, amount: item._sum.amount })),
-        expenses: groupedExpenses.map(item => ({ category: item.category, amount: item._sum.amount })),
+        incomes: groupedIncomes.map(item => ({ 
+          source: item.source, 
+          amount: item._sum.amount 
+        })),
+        expenses: groupedExpenses.map(item => ({ 
+          category: item.category, 
+          amount: item._sum.amount 
+        })),
       },
       error: null,
     };
