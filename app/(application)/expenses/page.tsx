@@ -111,10 +111,7 @@ export default async function ExpensesPage({ searchParams: {
       <div className='w-full flex flex-col gap-3'>
         <div className='w-full flex justify-between items-center'>
           <ExpenseFilters />
-          <div className='flex items-center gap-3'>
-            <div>Export to PDF</div>
-            <CreateExpenseModal funds={funds.data} />
-          </div>
+          <CreateExpenseModal funds={funds.data} />
         </div>
         {expenses.data.length > 0 ? (
           <DataTable 

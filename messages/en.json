@@ -369,7 +369,7 @@
         "dateFromLabel": "Period from",
         "dateToLabel": "Period to",
         "submitBtnLabel": "OK",
-        "cancelBtnLabel": "Clear period",
+        "cancelBtnLabel": "Clear",
         "noFiltersMessage": "All time",
         "noDateFromMessage": "From beginning",
         "noDateToMessage": "Now"

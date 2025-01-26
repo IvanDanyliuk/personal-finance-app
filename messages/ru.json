@@ -369,7 +369,7 @@
         "dateFromLabel": "Период с",
         "dateToLabel": "Период до",
         "submitBtnLabel": "OK",
-        "cancelBtnLabel": "Очистить период",
+        "cancelBtnLabel": "Сбросить",
         "noFiltersMessage": "За все время",
         "noDateFromMessage": "С начала",
         "noDateToMessage": "Сейчас"

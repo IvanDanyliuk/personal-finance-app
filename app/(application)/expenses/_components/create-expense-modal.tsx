@@ -81,12 +81,14 @@ export const CreateExpenseModal: React.FC<ICreateExpenseModal> = ({ funds }) => 
 
   return (
     <Dialog open={isOpen} onOpenChange={handleFormOpen}>
-      <DialogTrigger className='w-36 h-12 flex justify-center items-center gap-1 bg-primary-7 hover:bg-primary-6 rounded-full text-white text-sm md:text-base font-semibold'>
+      <DialogTrigger className='w-12 md:w-36 h-12 flex justify-center items-center gap-1 bg-primary-7 hover:bg-primary-6 rounded-full text-white text-sm md:text-base font-semibold'>
         <TooltipProvider>
           <Tooltip>
-            <TooltipTrigger className='w-36 h-12 flex justify-center items-center gap-1 bg-primary-7 hover:bg-primary-6 rounded-full text-white text-sm md:text-base font-semibold'>
-              <Plus className='-ml-2' />
-              {t('ExpensesPage.createExpenseForm.triggerBtnLabel')}
+            <TooltipTrigger className='w-12 md:w-36 h-12 flex justify-center items-center gap-1 bg-primary-7 hover:bg-primary-6 rounded-full text-white text-sm md:text-base font-semibold'>
+              <Plus className='md:-ml-2' />
+              <span className='hidden md:inline'>
+                {t('ExpensesPage.createExpenseForm.triggerBtnLabel')}
+              </span>
             </TooltipTrigger>
             <TooltipContent className='max-w-44 text-center bg-primary-2 text-secondary-8 rounded-xl'>
               <p>
