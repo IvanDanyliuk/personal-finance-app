@@ -81,7 +81,7 @@ export const CreateExpenseModal: React.FC<ICreateExpenseModal> = ({ funds }) => 
 
   return (
     <Dialog open={isOpen} onOpenChange={handleFormOpen}>
-      <DialogTrigger className='w-12 md:w-36 h-12 flex justify-center items-center gap-1 bg-primary-7 hover:bg-primary-6 rounded-full text-white text-sm md:text-base font-semibold'>
+      <DialogTrigger>
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger className='w-12 md:w-36 h-12 flex justify-center items-center gap-1 bg-primary-7 hover:bg-primary-6 rounded-full text-white text-sm md:text-base font-semibold'>
