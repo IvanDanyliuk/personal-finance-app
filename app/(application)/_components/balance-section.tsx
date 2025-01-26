@@ -43,8 +43,8 @@ export const BalanceSection: React.FC<IBalanceSection> = ({ banks, funds }) => {
         </h2>
         <AccountForm banks={bankOptions} />
       </div>
-      <div className='flex max-w-full gap-3'>
-        <div className='px-4 py-3 w-80 bg-background-secondary rounded-xl space-y-2'>
+      <div className='max-w-full flex flex-col md:flex-row gap-3'>
+        <div className='px-4 py-3 w-full md:w-80 bg-background-secondary rounded-xl space-y-2'>
           <h3 className='text-lg font-semibold text-primary-7'>
             {t('HomePage.balanceSection.totalFunds.subTitle')}
           </h3>
@@ -63,9 +63,9 @@ export const BalanceSection: React.FC<IBalanceSection> = ({ banks, funds }) => {
           </ul>
           )}
         </div>
-        <div className='px-3 flex-1 overflow-hidden'>
+        <div className='md:px-3 flex-1 overflow-hidden'>
           <Tabs defaultValue='all'>
-            <TabsList className='mb-3 flex justify-start gap-3'>
+            <TabsList className='mb-3 h-16 flex justify-start gap-3 overflow-x-scroll md:overflow-auto'>
               <TabsTrigger 
                 value='all' 
                 className='flex items-center gap-1 font-semibold'
