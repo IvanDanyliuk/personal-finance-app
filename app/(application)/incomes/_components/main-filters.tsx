@@ -81,7 +81,7 @@ export const MainFilters: React.FC = () => {
           </Tooltip>
         </TooltipProvider>
       </DialogTrigger>
-      <DialogContent className='max-h-[calc(100vh-3rem)] overflow-y-scroll'>
+      <DialogContent className='min-w-fit max-w-[calc(100%-3rem)] md:max-w-fit max-h-[calc(100vh-3rem)] overflow-y-auto rounded-xl'>
         <DialogHeader>
           <DialogTitle>
             {t('IncomesPage.filters.general.title')}

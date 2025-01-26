@@ -94,7 +94,7 @@ export const CreateIncomeModal: React.FC<ICreateIncomeModal> = ({ funds }) => {
           </Tooltip>
         </TooltipProvider>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className='min-w-fit max-w-[calc(100%-3rem)] md:max-w-fit max-h-[calc(100vh-3rem)] overflow-y-auto rounded-xl'>
         <DialogHeader>
           <DialogTitle>
             {t('IncomesPage.createIncomeForm.title')}

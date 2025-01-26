@@ -48,12 +48,12 @@ export const SavingsData: React.FC<ISavingsData> = ({ years, data }) => {
   };
 
   return (
-    <div className='relative w-full min-h-full h-full flex gap-3'>
-      <ul className='w-auto space-y-1'>
+    <div className='relative w-full min-h-full h-full flex flex-col md:flex-row gap-3'>
+      <ul className='w-auto flex flex-row md:flex-col items-center gap-1 overflow-x-auto md:overflow-x-auto'>
         {years.map((year) => (
-          <li key={crypto.randomUUID()}>
+          <li key={crypto.randomUUID()} className='flex-shrink-0'>
             <Button 
-              onClick={() => handleSetYear(year)}
+              onClick={() => handleSetYear(year)} 
               className={cn(
                 currentYear === year 
                   ? 'bg-primary-7 text-white' 

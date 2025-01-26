@@ -112,7 +112,7 @@ export const AccountForm: React.FC<IAccountForm> = ({ banks }) => {
       <DialogTrigger className='w-36 h-12 bg-primary-7 hover:bg-primary-6 rounded-full text-white text-sm md:text-base font-semibold'>
         {t('HomePage.createAccountForm.triggerBtnLabel')}
       </DialogTrigger>
-      <DialogContent className='min-w-fit max-w-[calc(100%-30px)] md:max-w-fit max-h-[calc(100vh-30px)] overflow-y-scroll md:overflow-y-auto rounded-xl'>
+      <DialogContent className='min-w-fit max-w-[calc(100%-3rem)] md:max-w-fit max-h-[calc(100vh-3rem)] overflow-y-auto rounded-xl'>
         <DialogHeader>
           <DialogTitle>
             {t('HomePage.createAccountForm.title')}

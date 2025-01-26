@@ -79,7 +79,7 @@ export const DateFilters: React.FC = () => {
             </Tooltip>
           </TooltipProvider>
         </DialogTrigger>
-        <DialogContent className='p-6 md:p-3 w-fit md:max-w-fit overflow-y-scroll md:overflow-auto'>
+        <DialogContent className='p-6 md:p-3 min-w-fit max-w-[calc(100%-3rem)] md:max-w-fit max-h-[calc(100vh-3rem)] overflow-y-auto rounded-xl'>
           <DialogHeader>
             <DialogTitle>
               {t('IncomesPage.filters.date.title')}

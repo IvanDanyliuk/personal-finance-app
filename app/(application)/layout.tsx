@@ -12,7 +12,7 @@ export default function RootLayout({
       <div className='w-full overflow-x-auto min-h-screen'>
         <div className='h-screen'>
           <Header />
-          <main className='p-3 w-full h-[calc(100%-80px)] overflow-y-scroll'>
+          <main className='p-3 w-full h-[calc(100%-80px)] overflow-y-auto'>
             {children}
           </main>
         </div>
