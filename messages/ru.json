@@ -508,7 +508,8 @@
     "title": "Главная",
     "createAccountForm": {
       "triggerBtnLabel": "Добавить",
-      "title": "Создать новый счет",
+      "triggerBtnTooltip": "Добавить новый счет",
+      "title": "Добавить новый счет",
       "typeFieldLabel": "Тип",
       "bankFieldLabel": "Банк",
       "countryFieldLabel": "Страна",

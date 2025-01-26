@@ -178,7 +178,7 @@ export const ChartBoard: React.FC<IChartBoard> = ({ data, currentCurrency }) => 
       <div className='flex gap-2'>
         <DateFilters />
         <Select value={selectedCurrency} onValueChange={handelSelectCurrency}>
-          <SelectTrigger className='w-[180px] h-10 px-5 rounded-full'>
+          <SelectTrigger className='w-[180px] h-12 px-5 rounded-full'>
             <SelectValue placeholder='Theme' />
           </SelectTrigger>
           <SelectContent className='bg-background'>
@@ -193,12 +193,12 @@ export const ChartBoard: React.FC<IChartBoard> = ({ data, currentCurrency }) => 
           </SelectContent>
         </Select>
       </div>
-      <div className='space-y-3'>
+      <div className='space-y-3 overflow-x-auto'>
         <h4 className='text-lg text-center font-semibold'>
           {t('AnalyticsPage.charts.cashFlow.title')}
         </h4>
         {cashFlow.length > 0 ? (
-          <ChartContainer config={cashFlowChartConfig} className='h-96 w-full'>
+          <ChartContainer config={cashFlowChartConfig} className='h-96 min-w-full'>
             <BarChart accessibilityLayer data={cashFlow}>
               <CartesianGrid strokeDasharray='3 3' />
               <XAxis
@@ -222,12 +222,12 @@ export const ChartBoard: React.FC<IChartBoard> = ({ data, currentCurrency }) => 
           />
         )}
       </div>
-      <div className='space-y-4'>
+      <div className='space-y-4 overflow-x-auto'>
         <h4 className='text-lg text-center font-semibold'>
           {t('AnalyticsPage.charts.income')}
         </h4>
         {income.length > 0 ? (
-          <ChartContainer config={incomeLineChartConfig} className='h-96 w-full'>
+          <ChartContainer config={incomeLineChartConfig} className='h-96 min-w-full'>
             <BarChart accessibilityLayer data={income}>
               <CartesianGrid strokeDasharray='3 3' />
               <XAxis
@@ -250,12 +250,12 @@ export const ChartBoard: React.FC<IChartBoard> = ({ data, currentCurrency }) => 
           />
         )}
       </div>
-      <div className='space-y-4'>
+      <div className='space-y-4 overflow-x-auto'>
         <h4 className='text-lg text-center font-semibold'>
           {t('AnalyticsPage.charts.expenses')}
         </h4>
         {expenses.length > 0 ? (
-          <ChartContainer config={expensesLineChartConfig} className='h-96 w-full'>
+          <ChartContainer config={expensesLineChartConfig} className='h-96 min-w-full'>
             <BarChart accessibilityLayer data={expenses}>
               <CartesianGrid strokeDasharray='3 3' />
               <XAxis

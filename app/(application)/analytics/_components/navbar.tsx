@@ -16,7 +16,7 @@ export const Navbar: React.FC = () => {
         href='/analytics' 
         className={cn(
           pathname === '/analytics' ? ' bg-primary-7 text-white' : 'bg-background-secondary text-foreground', 
-          'w-72 py-3 text-center font-semibold border border-primary-7 rounded-l-full'
+          'w-72 py-3 flex justify-center items-center text-center font-semibold border border-primary-7 rounded-l-full'
         )}
       >
         {t('AnalyticsPage.navbar.main')}
@@ -25,7 +25,7 @@ export const Navbar: React.FC = () => {
         href='/analytics/charts' 
         className={cn(
           pathname === '/analytics/charts' ? ' bg-primary-7 text-white' : 'bg-background-secondary text-foreground', 
-          'w-72 py-3 text-center font-semibold border border-primary-7 rounded-r-full'
+          'w-72 py-3 flex justify-center items-center text-center font-semibold border border-primary-7 rounded-r-full'
         )}
       >
         {t('AnalyticsPage.navbar.charts')}

@@ -508,6 +508,7 @@
     "title": "Головна",
     "createAccountForm": {
       "triggerBtnLabel": "Додати",
+      "triggerBtnTooltip": "Додати новий рахунок",
       "title": "Створити новий рахунок",
       "typeFieldLabel": "Тип",
       "typeFieldPlaceholder": "Оберіть тип",

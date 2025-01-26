@@ -20,6 +20,8 @@ import { createBankAccount } from '@/lib/actions/account.actions';
 import { ActionStatus } from '@/lib/types/common.types';
 import { useToast } from '@/hooks/use-toast';
 import { AccountType } from '@/lib/types/bank';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Plus } from 'lucide-react';
 
 
 interface IAccountForm {
@@ -109,8 +111,23 @@ export const AccountForm: React.FC<IAccountForm> = ({ banks }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleMenuOpen}>
-      <DialogTrigger className='w-36 h-12 bg-primary-7 hover:bg-primary-6 rounded-full text-white text-sm md:text-base font-semibold'>
-        {t('HomePage.createAccountForm.triggerBtnLabel')}
+      <DialogTrigger>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger className='w-12 md:w-36 h-12 flex justify-center items-center gap-1 bg-primary-7 hover:bg-primary-6 rounded-full text-white text-sm md:text-base font-semibold'>
+              <Plus className='md:-ml-2' />
+              <span className='hidden md:inline'>
+                {t('HomePage.createAccountForm.triggerBtnLabel')}
+              </span>
+            </TooltipTrigger>
+            <TooltipContent className='max-w-44 text-center bg-primary-2 text-secondary-8 rounded-xl'>
+              <p>
+                {t('HomePage.createAccountForm.triggerBtnTooltip')}
+              </p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        
       </DialogTrigger>
       <DialogContent className='min-w-fit max-w-[calc(100%-3rem)] md:max-w-fit max-h-[calc(100vh-3rem)] overflow-y-auto rounded-xl'>
         <DialogHeader>

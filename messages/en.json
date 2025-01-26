@@ -508,6 +508,7 @@
     "title": "Home",
     "createAccountForm": {
       "triggerBtnLabel": "Add",
+      "triggerBtnTooltip": "Add a new account",
       "title": "Create a new account",
       "typeFieldLabel": "Type",
       "bankFieldLabel": "Bank",
