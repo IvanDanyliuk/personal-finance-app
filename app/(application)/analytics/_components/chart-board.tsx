@@ -23,6 +23,7 @@ import {
 import { CURRENCIES, EXPENSE_CATEGORIES, INCOME_SOURCES } from '@/lib/constants';
 import { NoChartDataPlaceholder } from './no-chart-data-placeholder';
 import NoCashFlowData from '@/public/images/business-vision.svg';
+import { CashFlow, ExpensesStructure, FundsData, IncomeStructure } from '@/lib/types/analytics.types';
 
 
 interface IChartBoard {
@@ -45,31 +46,8 @@ interface IChartBoard {
         amount: number;
       }[];
     };
-  }
+  };
   currentCurrency: string;
-};
-
-type CashFlow = {
-  month: string; 
-  income: number; 
-  expenses: number;
-};
-
-type FundsData = {
-  month: string;
-  value: number;
-};
-
-type IncomeStructure = {
-  source: string;
-  amount: number;
-  color: string;
-};
-
-type ExpensesStructure = {
-  category: string;
-  amount: number;
-  color: string;
 };
 
 
