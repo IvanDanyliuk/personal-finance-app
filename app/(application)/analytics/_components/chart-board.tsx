@@ -3,8 +3,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, XAxis, YAxis } from 'recharts';
-import { DateFilters } from '@/components/data-rendering';
+import { 
+  CustomBarChart, 
+  CustomPieChart, 
+  DateFilters 
+} from '@/components/data-rendering';
 import { 
   Select, 
   SelectContent, 
@@ -12,18 +15,15 @@ import {
   SelectTrigger, 
   SelectValue 
 } from '@/components/ui/select';
+import { type ChartConfig } from '@/components/ui/chart';
 import { 
-  ChartContainer, 
-  ChartLegend, 
-  ChartLegendContent, 
-  ChartTooltip, 
-  ChartTooltipContent, 
-  type ChartConfig 
-} from '@/components/ui/chart';
+  CashFlow, 
+  ExpensesStructure, 
+  FundsData, 
+  IncomeStructure 
+} from '@/lib/types/analytics.types';
 import { CURRENCIES, EXPENSE_CATEGORIES, INCOME_SOURCES } from '@/lib/constants';
-import { NoChartDataPlaceholder } from './no-chart-data-placeholder';
 import NoCashFlowData from '@/public/images/business-vision.svg';
-import { CashFlow, ExpensesStructure, FundsData, IncomeStructure } from '@/lib/types/analytics.types';
 
 
 interface IChartBoard {
@@ -171,142 +171,50 @@ export const ChartBoard: React.FC<IChartBoard> = ({ data, currentCurrency }) => 
           </SelectContent>
         </Select>
       </div>
-      <div className='space-y-3 overflow-x-auto'>
-        <h4 className='text-lg text-center font-semibold'>
-          {t('AnalyticsPage.charts.cashFlow.title')}
-        </h4>
-        {cashFlow.length > 0 ? (
-          <ChartContainer config={cashFlowChartConfig} className='h-96 min-w-full'>
-            <BarChart accessibilityLayer data={cashFlow}>
-              <CartesianGrid strokeDasharray='3 3' />
-              <XAxis
-                dataKey='month'
-                tickLine={false}
-                tickMargin={10}
-                axisLine={false}
-                tickFormatter={(value) => value}
-              />
-              <YAxis />
-              <ChartTooltip content={<ChartTooltipContent className='w-36' />} />
-              <ChartLegend content={<ChartLegendContent />} />
-              <Bar dataKey='income' fill='hsl(var(--primary-7))' radius={4} />
-              <Bar dataKey='expenses' fill='hsl(var(--primary-4))' radius={4} />
-            </BarChart>
-          </ChartContainer>
-        ) : (
-          <NoChartDataPlaceholder 
-            image={NoCashFlowData} 
-            message={'AnalyticsPage.charts.noDataMessages.cashFlow'} 
-          />
-        )}
-      </div>
-      <div className='space-y-4 overflow-x-auto'>
-        <h4 className='text-lg text-center font-semibold'>
-          {t('AnalyticsPage.charts.income')}
-        </h4>
-        {income.length > 0 ? (
-          <ChartContainer config={incomeLineChartConfig} className='h-96 min-w-full'>
-            <BarChart accessibilityLayer data={income}>
-              <CartesianGrid strokeDasharray='3 3' />
-              <XAxis
-                dataKey='month'
-                tickLine={false}
-                tickMargin={10}
-                axisLine={false}
-                tickFormatter={(value) => value}
-              />
-              <YAxis />
-              <ChartTooltip content={<ChartTooltipContent className='w-36' />} />
-              <ChartLegend content={<ChartLegendContent />} />
-              <Bar dataKey='value' fill='hsl(var(--primary-7))' radius={4} />
-            </BarChart>
-          </ChartContainer>
-        ) : (
-          <NoChartDataPlaceholder 
-            image={NoCashFlowData} 
-            message={'AnalyticsPage.charts.noDataMessages.income'} 
-          />
-        )}
-      </div>
-      <div className='space-y-4 overflow-x-auto'>
-        <h4 className='text-lg text-center font-semibold'>
-          {t('AnalyticsPage.charts.expenses')}
-        </h4>
-        {expenses.length > 0 ? (
-          <ChartContainer config={expensesLineChartConfig} className='h-96 min-w-full'>
-            <BarChart accessibilityLayer data={expenses}>
-              <CartesianGrid strokeDasharray='3 3' />
-              <XAxis
-                dataKey='month'
-                tickLine={false}
-                tickMargin={10}
-                axisLine={false}
-                tickFormatter={(value) => value}
-              />
-              <YAxis />
-              <ChartTooltip content={<ChartTooltipContent className='w-36' />} />
-              <ChartLegend content={<ChartLegendContent />} />
-              <Bar dataKey='value' fill='hsl(var(--primary-7))' radius={4} />
-            </BarChart>
-          </ChartContainer>
-        ) : (
-          <NoChartDataPlaceholder 
-            image={NoCashFlowData} 
-            message={'AnalyticsPage.charts.noDataMessages.expenses'} 
-          />
-        )}
-      </div>
+      <CustomBarChart 
+        title='AnalyticsPage.charts.cashFlow.title' 
+        data={cashFlow} 
+        config={cashFlowChartConfig} 
+        dataKeys={['income', 'expenses']}
+        fillColors={['hsl(var(--primary-7))', 'hsl(var(--primary-4))']}
+        noDataImage={NoCashFlowData} 
+        noDataMessage='AnalyticsPage.charts.noDataMessages.cashFlow' 
+      />
+      <CustomBarChart 
+        title='AnalyticsPage.charts.income' 
+        data={income} 
+        config={incomeLineChartConfig} 
+        dataKeys={['value']}
+        fillColors={['hsl(var(--primary-7))']}
+        noDataImage={NoCashFlowData} 
+        noDataMessage='AnalyticsPage.charts.noDataMessages.income' 
+      />
+      <CustomBarChart 
+        title='AnalyticsPage.charts.expenses' 
+        data={expenses} 
+        config={expensesLineChartConfig} 
+        dataKeys={['value']}
+        fillColors={['hsl(var(--primary-7))']}
+        noDataImage={NoCashFlowData} 
+        noDataMessage='AnalyticsPage.charts.noDataMessages.expenses' 
+      />
       <div className='w-full flex flex-col md:flex-row gap-6'>
-        <div className='flex-1 space-y-4'>
-          <h4 className='text-lg text-center font-semibold'>
-            {t('AnalyticsPage.charts.fundsStructure.income')}
-          </h4>
-          <ChartContainer config={incomeStructureConfig} className='w-full min-h-fit h-fit'>
-            <PieChart className='w-52'>
-              <Legend />
-              <ChartTooltip content={<ChartTooltipContent className='w-36' />} />
-              <Pie 
-                data={incomeStructure} 
-                dataKey='amount' 
-                nameKey='source' 
-                cx='50%' 
-                cy='50%' 
-                innerRadius={'55%'} 
-                outerRadius={'85%'} 
-                label
-              >
-                {incomeStructure.map((entry, i) => (
-                  <Cell key={`${entry}-${i}`} fill={entry.color} />
-                ))}
-              </Pie>
-            </PieChart>
-          </ChartContainer>
-        </div>
-        <div className='flex-1 space-y-4'>
-          <h4 className='text-lg text-center font-semibold'>
-            {t('AnalyticsPage.charts.fundsStructure.expenses')}
-          </h4>
-          <ChartContainer config={expensesStructureConfig} className='w-full min-h-fit h-fit'>
-            <PieChart className='w-52'>
-              <Legend />
-              <ChartTooltip content={<ChartTooltipContent className='w-36' />} />
-              <Pie 
-                data={expensesStructure} 
-                dataKey='amount' 
-                nameKey='category' 
-                cx='50%' 
-                cy='50%' 
-                innerRadius={'55%'} 
-                outerRadius={'85%'} 
-                label
-              >
-                {expensesStructure.map((entry, i) => (
-                  <Cell key={`${entry}-${i}`} fill={entry.color} />
-                ))}
-              </Pie>
-            </PieChart>
-          </ChartContainer>
-        </div>
+        <CustomPieChart 
+          data={incomeStructure}
+          config={incomeStructureConfig}
+          title='AnalyticsPage.charts.fundsStructure.income'
+          nameKey='source'
+          noDataImage={NoCashFlowData}
+          noDataMessage='AnalyticsPage.charts.noDataMessages.income'
+        />
+        <CustomPieChart 
+          data={expensesStructure}
+          config={expensesStructureConfig}
+          title='AnalyticsPage.charts.fundsStructure.expenses'
+          nameKey='category'
+          noDataImage={NoCashFlowData}
+          noDataMessage='AnalyticsPage.charts.noDataMessages.expenses'
+        />
       </div>
     </div>
   );

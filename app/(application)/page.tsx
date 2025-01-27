@@ -2,7 +2,10 @@ import { getTranslations } from 'next-intl/server';
 import { BalanceSection, KeyIndicatorsSection } from './_components';
 import { getBanks } from '@/lib/actions/bank.actions';
 import { getFunds } from '@/lib/actions/account.actions';
-import { getFundsStructureByCategories, getMonthlySavingsControlDataByYears } from '@/lib/actions/analytics.actions';
+import { 
+  getFundsStructureByCategories, 
+  getMonthlySavingsControlDataByYears 
+} from '@/lib/actions/analytics.actions';
 
 
 export default async function Home({ 

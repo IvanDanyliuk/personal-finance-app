@@ -2,18 +2,10 @@
 
 import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, XAxis, YAxis } from 'recharts';
-import { 
-  ChartConfig, 
-  ChartContainer, 
-  ChartLegend, 
-  ChartLegendContent, 
-  ChartTooltip, 
-  ChartTooltipContent 
-} from '@/components/ui/chart';
-import { NoChartDataPlaceholder } from '../analytics/_components';
+import { ChartConfig } from '@/components/ui/chart';
 import { EXPENSE_CATEGORIES, INCOME_SOURCES } from '@/lib/constants';
 import { CashFlow, ExpensesStructure, IncomeStructure } from '@/lib/types/analytics.types';
+import { CustomBarChart, CustomPieChart } from '@/components/data-rendering';
 import NoCashFlowData from '@/public/images/business-vision.svg';
 
 
@@ -64,14 +56,14 @@ export const KeyIndicatorsSection: React.FC<IKeyIndicatorsSection> = ({ data }) 
       label: t('AnalyticsPage.charts.fundsStructure.income'),
       color: 'bg-primary-7'
     }
-  };
+  } satisfies ChartConfig;
 
   const expensesStructureConfig = {
     category: {
       label: t('AnalyticsPage.charts.fundsStructure.expenses'),
       color: 'bg-primary-5'
     }
-  };
+  } satisfies ChartConfig;
 
   useMemo(() => {
     const cashFlowData = data.dynamic.map(dataItem => ({ 
@@ -97,86 +89,32 @@ export const KeyIndicatorsSection: React.FC<IKeyIndicatorsSection> = ({ data }) 
 
   return (
     <div className='space-y-10'>
-      <div className='overflow-x-auto'>
-        <h4 className='text-lg text-center font-semibold'>
-          {t('AnalyticsPage.charts.cashFlow.title')}
-        </h4>
-        {cashFlow.length > 0 ? (
-          <ChartContainer config={cashFlowChartConfig} className='h-96 min-w-full'>
-            <BarChart accessibilityLayer data={cashFlow}>
-              <CartesianGrid strokeDasharray='3 3' />
-              <XAxis
-                dataKey='month'
-                tickLine={false}
-                tickMargin={10}
-                axisLine={false}
-                tickFormatter={(value) => value}
-              />
-              <YAxis />
-              <ChartTooltip content={<ChartTooltipContent className='w-36' />} />
-              <ChartLegend content={<ChartLegendContent />} />
-              <Bar dataKey='income' fill='hsl(var(--primary-7))' radius={4} />
-              <Bar dataKey='expenses' fill='hsl(var(--primary-4))' radius={4} />
-            </BarChart>
-          </ChartContainer>
-        ) : (
-          <NoChartDataPlaceholder 
-            image={NoCashFlowData} 
-            message={'AnalyticsPage.charts.noDataMessages.cashFlow'} 
-          />
-        )}
-      </div>
+      <CustomBarChart 
+        title='AnalyticsPage.charts.cashFlow.title' 
+        data={cashFlow} 
+        config={cashFlowChartConfig} 
+        dataKeys={['income', 'expenses']}
+        fillColors={['hsl(var(--primary-7))', 'hsl(var(--primary-4))']}
+        noDataImage={NoCashFlowData} 
+        noDataMessage='AnalyticsPage.charts.noDataMessages.cashFlow' 
+      />
       <div className='w-full flex flex-col md:flex-row gap-6'>
-        <div className='flex-1 space-y-4'>
-          <h4 className='text-lg text-center font-semibold'>
-            {t('AnalyticsPage.charts.fundsStructure.income')}
-          </h4>
-          <ChartContainer config={incomeStructureConfig} className='w-full min-h-fit h-fit'>
-            <PieChart className='w-52'>
-              <Legend />
-              <ChartTooltip content={<ChartTooltipContent className='w-36' />} />
-              <Pie 
-                data={incomeStructure} 
-                dataKey='amount' 
-                nameKey='source' 
-                cx='50%' 
-                cy='50%' 
-                innerRadius={'55%'} 
-                outerRadius={'85%'} 
-                label
-              >
-                {incomeStructure.map((entry, i) => (
-                  <Cell key={`${entry}-${i}`} fill={entry.color} />
-                ))}
-              </Pie>
-            </PieChart>
-          </ChartContainer>
-        </div>
-        <div className='flex-1 space-y-4'>
-          <h4 className='text-lg text-center font-semibold'>
-            {t('AnalyticsPage.charts.fundsStructure.expenses')}
-          </h4>
-          <ChartContainer config={expensesStructureConfig} className='w-full min-h-fit h-fit'>
-            <PieChart className='w-52'>
-              <Legend />
-              <ChartTooltip content={<ChartTooltipContent className='w-36' />} />
-              <Pie 
-                data={expensesStructure} 
-                dataKey='amount' 
-                nameKey='category' 
-                cx='50%' 
-                cy='50%' 
-                innerRadius={'55%'} 
-                outerRadius={'85%'} 
-                label
-              >
-                {expensesStructure.map((entry, i) => (
-                  <Cell key={`${entry}-${i}`} fill={entry.color} />
-                ))}
-              </Pie>
-            </PieChart>
-          </ChartContainer>
-        </div>
+        <CustomPieChart 
+          data={incomeStructure}
+          config={incomeStructureConfig}
+          title='AnalyticsPage.charts.fundsStructure.income'
+          nameKey='source'
+          noDataImage={NoCashFlowData}
+          noDataMessage='AnalyticsPage.charts.noDataMessages.income'
+        />
+        <CustomPieChart 
+          data={expensesStructure}
+          config={expensesStructureConfig}
+          title='AnalyticsPage.charts.fundsStructure.expenses'
+          nameKey='category'
+          noDataImage={NoCashFlowData}
+          noDataMessage='AnalyticsPage.charts.noDataMessages.expenses'
+        />
       </div>
     </div>
   );
