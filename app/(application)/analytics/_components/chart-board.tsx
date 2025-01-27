@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { 
   CustomBarChart, 
+  CustomLineChart, 
   CustomPieChart, 
   DateFilters 
 } from '@/components/data-rendering';
@@ -180,21 +181,21 @@ export const ChartBoard: React.FC<IChartBoard> = ({ data, currentCurrency }) => 
         noDataImage={NoCashFlowData} 
         noDataMessage='AnalyticsPage.charts.noDataMessages.cashFlow' 
       />
-      <CustomBarChart 
+      <CustomLineChart 
         title='AnalyticsPage.charts.income' 
         data={income} 
         config={incomeLineChartConfig} 
         dataKeys={['value']}
-        fillColors={['hsl(var(--primary-7))']}
+        fillColors={['hsl(var(--primary-8))']}
         noDataImage={NoCashFlowData} 
         noDataMessage='AnalyticsPage.charts.noDataMessages.income' 
       />
-      <CustomBarChart 
+      <CustomLineChart 
         title='AnalyticsPage.charts.expenses' 
         data={expenses} 
         config={expensesLineChartConfig} 
         dataKeys={['value']}
-        fillColors={['hsl(var(--primary-7))']}
+        fillColors={['hsl(var(--primary-8))']}
         noDataImage={NoCashFlowData} 
         noDataMessage='AnalyticsPage.charts.noDataMessages.expenses' 
       />
