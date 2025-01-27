@@ -42,7 +42,10 @@ export const SavingsData: React.FC<ISavingsData> = ({ years, data }) => {
   const [currentYear, setCurrentYear] = useState<number>(years[0]);
 
   const handleSetYear = (yearValue: number) => {
-    params.set('year', yearValue.toString());
+    const fromValue = new Date(`${yearValue}-01-01T00:00:00.000Z`);
+    const toValue = new Date(`${yearValue}-12-31T23:59:59.999Z`);
+    params.set('dateFrom', fromValue.toString());
+    params.set('dateTo', toValue.toString());
     replace(`${pathname}?${params.toString()}`);
     setCurrentYear(yearValue);
   };

@@ -58,7 +58,7 @@ export const getMonthlySavingsControlDataByYears = async ({
   dateFrom, 
   dateTo,
   currency
-}: { 
+}: {  
   dateFrom?: string; 
   dateTo?: string;
   currency?: string; 

@@ -3,13 +3,24 @@ import { SavingsData } from './_components';
 
 
 export default async function AnalyticsPage({ 
-  searchParams: { year } 
+  searchParams: { 
+    dateFrom, 
+    dateTo 
+  } 
 }: { 
-  searchParams: { year: string } 
+  searchParams: { 
+    dateFrom: string; 
+    dateTo: string; 
+  } 
 }) {
   const years = await getYearsOfSavings();
+
+  const period = {
+    dateFrom: dateFrom || new Date(`${years.data[0]}-01-01T00:00:00.000Z`).toString(),
+    dateTo: dateTo || new Date(`${years.data[0]}-12-31T23:59:59.999Z`).toString(),
+  }
   const analyticsData = years.data.length > 0 
-    ? await getMonthlySavingsControlDataByYears(year ? { year: +year } : { year: years.data[0] }) 
+    ? await getMonthlySavingsControlDataByYears(period) 
     : null;
 
   return (
