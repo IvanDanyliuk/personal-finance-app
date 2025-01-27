@@ -239,11 +239,11 @@ export const getFundsStructureByCategories = async ({
       data: {
         incomes: groupedIncomes.map(item => ({ 
           source: item.source, 
-          amount: item._sum.amount 
+          amount: item._sum.amount || 0
         })),
         expenses: groupedExpenses.map(item => ({ 
           category: item.category, 
-          amount: item._sum.amount 
+          amount: item._sum.amount || 0
         })),
       },
       error: null,

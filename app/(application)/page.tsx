@@ -1,5 +1,5 @@
 import { getTranslations } from 'next-intl/server';
-import { BalanceSection } from './_components';
+import { BalanceSection, KeyIndicatorsSection } from './_components';
 import { getBanks } from '@/lib/actions/bank.actions';
 import { getFunds } from '@/lib/actions/account.actions';
 
@@ -21,8 +21,11 @@ export default async function Home({
       <div className='w-full flex flex-col gap-3'>
         <BalanceSection 
           banks={banksByCountry.data} 
-          funds={funds.data || []} 
-        />      
+          funds={funds.data} 
+        />  
+        <KeyIndicatorsSection
+          data={funds.data}
+        />    
       </div>
     </div>
   );
