@@ -4,6 +4,7 @@ import { auth } from '@/auth';
 import { ActionStatus } from '../types/common.types';
 import { db } from '@/db';
 import { removeFalseyFields } from '../helpers';
+import { getUser } from './user.actions';
 
 
 export const getYearsOfSavings = async () => {
@@ -54,12 +55,10 @@ export const getYearsOfSavings = async () => {
 };
 
 export const getMonthlySavingsControlDataByYears = async ({ 
-  year, 
   dateFrom, 
   dateTo,
   currency
 }: { 
-  year?: number; 
   dateFrom?: string; 
   dateTo?: string;
   currency?: string; 
@@ -71,24 +70,23 @@ export const getMonthlySavingsControlDataByYears = async ({
       throw new Error('AnalyticsPage.errors.wrongUserId');
     }
 
-    if(!year && !dateFrom && !dateTo) {
-      throw new Error('Pass a period or a period value');
-    } 
+    const currentUser = await getUser(session!.user!.email!);
 
-    const query = year 
+    const currentYear = new Date().getFullYear();
+    const query = !dateFrom && !dateTo 
       ? removeFalseyFields({
           date: removeFalseyFields({
-            gte: new Date(`${year}-01-01T00:00:00.000Z`),
-            lt: new Date(`${year + 1}-01-01T00:00:00.000Z`),
+            gte: new Date(`${currentYear}-01-01T00:00:00.000Z`),
+            lt: new Date(`${currentYear + 1}-01-01T00:00:00.000Z`),
           }),
-          currency
+          currency: currency || currentUser?.currency,
         }) 
       : removeFalseyFields({ 
           date: removeFalseyFields({
             gte: dateFrom ? new Date(dateFrom) : null, 
             lte: dateTo ? new Date(dateTo) : null,
           }),
-          currency
+          currency: currency || currentUser?.currency,
         });
 
     const incomes = await db.income.findMany({
@@ -160,6 +158,16 @@ export const getMonthlySavingsControlDataByYears = async ({
       });
     }
 
+    if(!dateFrom && !dateTo) {
+      console.log('NO DATE PERIOD FOUND')
+      for(let month = lastMonth + 1; month <= 12; month++) {
+        data.push({
+          month,
+          data: monthMap.get(month) || [{ totalIncomes: 0, totalExpenses: 0, currency: 'empty' }],
+        });
+      }
+    }
+
     return {
       status: ActionStatus.Success,
       data,
@@ -181,7 +189,7 @@ export const getFundsStructureByCategories = async ({
 }: {
   dateFrom?: string; 
   dateTo?: string;
-  currency: string;
+  currency?: string;
 }) => {
   try {
     const session = await auth();
@@ -190,26 +198,23 @@ export const getFundsStructureByCategories = async ({
       throw new Error('AnalyticsPage.errors.wrongUserId');
     }
 
-    if(!currency) {
-      throw new Error('Pass a currency value');
-    } 
+    const currentUser = await getUser(session!.user!.email!);
 
     const currentYear = new Date().getFullYear();
-
     const query = !dateFrom && !dateTo 
       ? removeFalseyFields({
           date: removeFalseyFields({
             gte: new Date(`${currentYear}-01-01T00:00:00.000Z`),
             lt: new Date(`${currentYear + 1}-01-01T00:00:00.000Z`),
           }),
-          currency
+          currency: currency || currentUser?.currency,
         }) 
       : removeFalseyFields({ 
           date: removeFalseyFields({
             gte: dateFrom ? new Date(dateFrom) : null, 
             lte: dateTo ? new Date(dateTo) : null,
           }),
-          currency
+          currency: currency || currentUser?.currency,
         });
 
     const groupedIncomes = await db.income.groupBy({
