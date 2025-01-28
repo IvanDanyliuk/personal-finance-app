@@ -6,13 +6,13 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '@/hooks/use-toast';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { SelectField, TextField } from '@/components/inputs';
+import { SubmitButton } from '@/components/common';
+import { Button } from '@/components/ui/button';
 import { transferFunds } from '@/lib/actions/account.actions';
 import { IBankAccount } from '@/lib/types/bank';
 import { ActionStatus } from '@/lib/types/common.types';
 import { TransferFundsSchema, transferFundsSchema } from '@/lib/types/form-schemas/transfer-funds';
-import { SelectField, TextField } from '@/components/inputs';
-import { SubmitButton } from '@/components/common';
-import { Button } from '@/components/ui/button';
 
 
 interface ITransferFundsDialog {

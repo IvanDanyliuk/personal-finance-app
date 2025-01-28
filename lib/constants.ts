@@ -132,7 +132,7 @@ export const INCOME_SOURCES = [
   {
     value: 'replenishment',
     label: 'IncomesPage.income_sources.replenishment',
-    color: 'hsl(var(--primary-1))'
+    color: 'hsl(var(--secondary-3))'
   },
 ];
 

@@ -8,9 +8,9 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { AccountCardActions } from './';
 import { AccountType, IBankAccount } from '@/lib/types/bank';
 import { formatNumber } from '@/lib/helpers';
-import { AccountCardActions } from './';
 
 
 interface IAccountCard {

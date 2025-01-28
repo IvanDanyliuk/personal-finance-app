@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { format } from 'date-fns';
 import { ChartConfig } from '@/components/ui/chart';
 import { EXPENSE_CATEGORIES, INCOME_SOURCES } from '@/lib/constants';
 import { CashFlow, ExpensesStructure, IncomeStructure } from '@/lib/types/analytics.types';
@@ -29,6 +30,7 @@ interface IKeyIndicatorsSection {
         amount: number;
       }[];
     };
+    latestTransactions: any[];
   };
 };
 
@@ -96,15 +98,26 @@ export const KeyIndicatorsSection: React.FC<IKeyIndicatorsSection> = ({ data }) 
         {t('HomePage.keyIndicatorsSection.note')}
       </p>
       <div className='mt-5 space-y-10'>
-        <CustomBarChart 
-          title='AnalyticsPage.charts.cashFlow.title' 
-          data={cashFlow} 
-          config={cashFlowChartConfig} 
-          dataKeys={['income', 'expenses']}
-          fillColors={['hsl(var(--primary-7))', 'hsl(var(--primary-4))']}
-          noDataImage={NoCashFlowData} 
-          noDataMessage='AnalyticsPage.charts.noDataMessages.cashFlow' 
-        />
+        <div className='w-full flex flex-col md:flex-row gap-10'>
+          <CustomBarChart 
+            title='AnalyticsPage.charts.cashFlow.title' 
+            data={cashFlow} 
+            config={cashFlowChartConfig} 
+            dataKeys={['income', 'expenses']}
+            fillColors={['hsl(var(--primary-7))', 'hsl(var(--primary-4))']}
+            noDataImage={NoCashFlowData} 
+            noDataMessage='AnalyticsPage.charts.noDataMessages.cashFlow' 
+          />
+          <div className='w-fit px-3'>
+            <ul>
+              {data.latestTransactions.map(item => (
+                <li key={crypto.randomUUID()}>
+                  {`${item.amount} ${format(item.date, 'dd.MM.yyyy')}`}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
         <div className='w-full flex flex-col md:flex-row gap-6'>
           <CustomPieChart 
             data={incomeStructure}

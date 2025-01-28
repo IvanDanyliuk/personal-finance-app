@@ -44,7 +44,7 @@ export const CustomBarChart: React.FC<IBarChart> = ({
   const t = useTranslations();
 
   return (
-    <div className='overflow-x-auto'>
+    <div className='flex-1 overflow-x-auto'>
       <h4 className='text-lg text-center font-semibold'>
         {t(title)}
       </h4>

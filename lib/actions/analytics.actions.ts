@@ -1,7 +1,7 @@
 'use server';
 
 import { auth } from '@/auth';
-import { ActionStatus } from '../types/common.types';
+import { ActionStatus, SortOrder } from '../types/common.types';
 import { db } from '@/db';
 import { removeFalseyFields } from '../helpers';
 import { getUser } from './user.actions';
@@ -260,6 +260,101 @@ export const getFundsStructureByCategories = async ({
         expenses: [],
       },
       error: error.message
+    };
+  }
+};
+
+export const getLatestActivity = async ({
+  dateFrom, 
+  dateTo,
+  currency
+}: {
+  dateFrom?: string; 
+  dateTo?: string;
+  currency?: string;
+}) => {
+  try {
+    const session = await auth();
+
+    if(!session || !session.user) {
+      throw new Error('AnalyticsPage.errors.wrongUserId');
+    }
+
+    const currentUser = await getUser(session!.user!.email!);
+
+    const currentYear = new Date().getFullYear();
+    const query = !dateFrom && !dateTo 
+      ? removeFalseyFields({
+          date: removeFalseyFields({
+            gte: new Date(`${currentYear}-01-01T00:00:00.000Z`),
+            lt: new Date(`${currentYear + 1}-01-01T00:00:00.000Z`),
+          }),
+          currency: currency || currentUser?.currency,
+        }) 
+      : removeFalseyFields({ 
+          date: removeFalseyFields({
+            gte: dateFrom ? new Date(dateFrom) : null, 
+            lte: dateTo ? new Date(dateTo) : null,
+          }),
+          currency: currency || currentUser?.currency,
+        });
+
+    const latestIncomes = await db.income.findMany({
+      where: {
+        userId: currentUser?.id,
+        ...query
+      },
+      orderBy: {
+        date: SortOrder.Desc
+      },
+      take: 10
+    });
+
+    const latestExpenses = await db.expense.findMany({
+      where: {
+        userId: currentUser?.id,
+        ...query
+      },
+      orderBy: {
+        date: SortOrder.Desc
+      },
+      take: 10
+    });
+
+    const latestTransactions = [...latestIncomes, ...latestExpenses]
+      .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+      .slice(0, 10);
+
+    const topIncome = await db.income.findFirst({
+      orderBy: {
+        amount: SortOrder.Desc
+      }
+    });
+
+    const topExpense = await db.expense.findFirst({
+      orderBy: {
+        amount: SortOrder.Desc
+      }
+    });
+
+    return {
+      status: ActionStatus.Success,
+      data: {
+        latestTransactions,
+        topIncome,
+        topExpense,
+      },
+      error: null,
+    };
+  } catch (error: any) {
+    return {
+      status: ActionStatus.Failed,
+      data: {
+        latestTransactions: [],
+        topIncome: {},
+        topExpense: {}
+      },
+      error: error.message,
     };
   }
 };

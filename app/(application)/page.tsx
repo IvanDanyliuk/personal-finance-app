@@ -4,6 +4,7 @@ import { getBanks } from '@/lib/actions/bank.actions';
 import { getFunds } from '@/lib/actions/account.actions';
 import { 
   getFundsStructureByCategories, 
+  getLatestActivity, 
   getMonthlySavingsControlDataByYears 
 } from '@/lib/actions/analytics.actions';
 
@@ -18,6 +19,7 @@ export default async function Home({
   const funds = await getFunds();
   const fundsDynamicData = await getMonthlySavingsControlDataByYears({});
   const fundsStructureData = await getFundsStructureByCategories({})
+  const latestTransactions = await getLatestActivity({})
 
   return (
     <div className='p-3 w-full h-fit border border-background-secondary rounded-3xl'>
@@ -32,7 +34,8 @@ export default async function Home({
         <KeyIndicatorsSection
           data={{
             dynamic: fundsDynamicData.data,
-            structure: fundsStructureData.data
+            structure: fundsStructureData.data,
+            latestTransactions: latestTransactions.data.latestTransactions
           }}
         />    
       </div>
