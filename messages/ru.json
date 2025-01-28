@@ -5,7 +5,8 @@
       "eur": "Евро",
       "rub": "Рубль",
       "uah": "Гривна",
-      "pln": "Злотый"
+      "pln": "Злотый",
+      "empty": "-"
     },
     "weekDays": {
       "sunday": "Воскресенье",
@@ -15,6 +16,20 @@
       "thursday": "Четверг",
       "friday": "Пятница",
       "saturday": "Суббота"
+    },
+    "months": {
+      "0": "Январь",
+      "1": "Февраль",
+      "2": "Март",
+      "3": "Апрель",
+      "4": "Май",
+      "5": "Июнь",
+      "6": "Июль",
+      "7": "Август",
+      "8": "Сентябрь",
+      "9": "Октябрь",
+      "10": "Ноябрь",
+      "11": "Декабрь"
     },
     "languages": {
       "en": "Английский",
@@ -315,6 +330,7 @@
     "noData": "Вы еще не добавили никакой информации о Ваших доходах",
     "createIncomeForm": {
       "triggerBtnLabel": "Добавить",
+      "triggerBtnTooltip": "Добавить новую статью дохода",
       "title": "Создать статью дохода",
       "titleUpdate": "Обновить статью дохода",
       "dateFieldLabel": "Дата",
@@ -345,7 +361,8 @@
       "money_transfer": "Денежный перевод",
       "rent": "Арендная плата",
       "refund": "Компенсации",
-      "cashback": "Кешбэк"
+      "cashback": "Кешбэк",
+      "replenishment": "Пополнение счета"
     },
     "filters": {
       "date": {
@@ -353,7 +370,7 @@
         "dateFromLabel": "Период с",
         "dateToLabel": "Период до",
         "submitBtnLabel": "OK",
-        "cancelBtnLabel": "Очистить период",
+        "cancelBtnLabel": "Сбросить",
         "noFiltersMessage": "За все время",
         "noDateFromMessage": "С начала",
         "noDateToMessage": "Сейчас"
@@ -392,6 +409,7 @@
     "noData": "Вы еще не добавили никакой информации о Ваших расходах",
     "createExpenseForm": {
       "triggerBtnLabel": "Добавить",
+      "triggerBtnTooltip": "Добавить новую статью затрат",
       "title": "Создать статью расхода",
       "titleUpdate": "Обновить статью расхода",
       "dateFieldLabel": "Дата",
@@ -491,7 +509,8 @@
     "title": "Главная",
     "createAccountForm": {
       "triggerBtnLabel": "Добавить",
-      "title": "Создать новый счет",
+      "triggerBtnTooltip": "Добавить новый счет",
+      "title": "Добавить новый счет",
       "typeFieldLabel": "Тип",
       "bankFieldLabel": "Банк",
       "countryFieldLabel": "Страна",
@@ -537,6 +556,12 @@
         "balance": "Остаток",
         "additionalInfo": "Дополнительная информация"
       },
+      "replenishAccountForm": {
+        "title": "Поплнение счета",
+        "amountFieldLabel": "Сумма",
+        "submitBtnLabel": "Подтвердить",
+        "cancelBtnLabel": "Отмена"
+      },
       "deleteAccount": {
         "submitBtnLabel": "OK",
         "cancelBtnLabel": "Отмена",
@@ -551,10 +576,15 @@
         "cancelBtnLabel": "Отмена"
       }
     },
+    "keyIndicatorsSection": {
+      "title": "Ключевые показатели",
+      "note": "* Данные в диаграммах ниже приведены за текущий год"
+    },
     "actionMessages": {
       "createBankAccountSuccess": "Новый счет успешно создан",
       "deleteAccountSuccess": "Счет успешно удален",
-      "transferFundSuccess": "Перевод средств выполнен успешно"
+      "transferFundSuccess": "Перевод средств выполнен успешно",
+      "accountReplenishmentSuccess": "Счет успешно пополнен"
     },
     "errors": {
       "general": "Что-то пошло не так!",
@@ -577,8 +607,63 @@
       },
       "transferFunds": {
         "differentCurrencies": "Вы не можете переводить средства на счет в другой валюте",
-        "notEnoughFunds": "У Вас недостаточно средств"
+        "notEnoughFunds": "У Вас недостаточно средств",
+        "accountNotFound": "Счет с таким ID не найден",
+        "fieldsValidation": {
+          "requiredAmount": "Вкажіть суму",
+          "requiredAccountFrom": "Вкажіть рахунок з якого здійснюється переказ",
+          "requiredAccountTo": "Вкажіть рахунок призначення",
+          "requireCurrency": "Вкажіть валюту"
+        }
       }
+    }
+  },
+  "AnalyticsPage": {
+    "navbar": {
+      "main": "Контроль сбережений",
+      "charts": "Инфографика"
+    },
+    "savingsData": {
+      "monthTableCol": "Месяц",
+      "currencyTableCol": "Валюта",
+      "totalIncomeTableCol": "Итого дохода",
+      "totalExpenseTableCol": "Итого затрат",
+      "savingsTableCol": "Сбережения",
+      "limitCovarageTableCol": "Исполнение бюджета"
+    },
+    "charts": {
+      "cashFlow": {
+        "title": "Денежный поток",
+        "income": "Доходы",
+        "expenses": "Расходы"
+      },
+      "income": "Доходы",
+      "expenses": "Расходы",
+      "fundsStructure": {
+        "income": "Структура доходов",
+        "expenses": "Структура затрат"
+      },
+      "noDataMessages": {
+        "cashFlow": "Данные о денежном потоке не найдены",
+        "income": "Данные о доходах не найдены",
+        "expenses": "Данные о затратах не найдены"
+      }
+    },
+    "latestActivity": {
+      "latestActivityTable": {
+        "title": "Последние транзакции",
+        "dateColLabel": "Дата",
+        "amountColLabel": "Сумма",
+        "currencyColLabel": "Валюта",
+        "categoryColLabel": "Категория",
+        "accountColLabel": "Счет"
+      },
+      "topIncome": "Наибольший доход",
+      "topExpense": "Наибольшая трата"
+    },
+    "errors": {
+      "general": "Что-то пошло не так!",
+      "wrongUserId": "Вы не авторзованы или ID Вашего профиля неверный"
     }
   }
 }

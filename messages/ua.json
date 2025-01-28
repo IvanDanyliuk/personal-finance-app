@@ -5,7 +5,8 @@
       "eur": "Євро",
       "rub": "Рубль",
       "uah": "Гривня",
-      "pln": "Злотий"
+      "pln": "Злотий",
+      "empty": "-"
     },
     "weekDays": {
       "sunday": "Неділя",
@@ -15,6 +16,20 @@
       "thursday": "Четвер",
       "friday": "П'ятниця",
       "saturday": "Субота"
+    },
+    "months": {
+      "0": "Січень",
+      "1": "Лютий",
+      "2": "Березень",
+      "3": "Квітень",
+      "4": "Травень",
+      "5": "Червень",
+      "6": "Липень",
+      "7": "Серпень",
+      "8": "Вересень",
+      "9": "Жовтень",
+      "10": "Листопад",
+      "11": "Грудень"
     },
     "languages": {
       "en": "Англійська",
@@ -315,6 +330,7 @@
     "noData": "Ви ще не додали ніякої інформації про Ваші доходи",
     "createIncomeForm": {
       "triggerBtnLabel": "Додати",
+      "triggerBtnTooltip": "Додати нову статтю доходу",
       "title": "Створити статтю доходу",
       "titleUpdate": "Оновити статтю доходу",
       "dateFieldLabel": "Дата",
@@ -345,7 +361,8 @@
       "money_transfer": "Грошовий переказ",
       "rent": "Орендна плата",
       "refund": "Відшкодування",
-      "cashback": "Кешбек"
+      "cashback": "Кешбек",
+      "replenishment": "Поповнення рахунку"
     },
     "filters": {
       "date": {
@@ -353,7 +370,7 @@
         "dateFromLabel": "Період з",
         "dateToLabel": "Період до",
         "submitBtnLabel": "OK",
-        "cancelBtnLabel": "Очистити період",
+        "cancelBtnLabel": "Скинути",
         "noFiltersMessage": "За весь час",
         "noDateFromMessage": "З початку",
         "noDateToMessage": "Зараз"
@@ -392,6 +409,7 @@
     "noData": "Ви ще не додали ніякої інформації про Ваші витрати",
     "createExpenseForm": {
       "triggerBtnLabel": "Додати",
+      "triggerBtnTooltip": "Додати нову статтю витрат",
       "title": "Створити статтю витрат",
       "titleUpdate": "Оновити статтю витрат",
       "dateFieldLabel": "Дата",
@@ -491,6 +509,7 @@
     "title": "Головна",
     "createAccountForm": {
       "triggerBtnLabel": "Додати",
+      "triggerBtnTooltip": "Додати новий рахунок",
       "title": "Створити новий рахунок",
       "typeFieldLabel": "Тип",
       "typeFieldPlaceholder": "Оберіть тип",
@@ -539,6 +558,12 @@
         "balance": "Баланс",
         "additionalInfo": "Додаткова інформація"
       },
+      "replenishAccountForm": {
+        "title": "Поповнення рахунку",
+        "amountFieldLabel": "Сума",
+        "submitBtnLabel": "Підтвердити",
+        "cancelBtnLabel": "Відхилити"
+      },
       "deleteAccount": {
         "submitBtnLabel": "OK",
         "cancelBtnLabel": "Відхилити",
@@ -553,10 +578,15 @@
         "cancelBtnLabel": "Відхилити"
       }
     },
+    "keyIndicatorsSection": {
+      "title": "Ключові показники",
+      "note": "* Дані у діаграмах нижче наведені за поточний рік"
+    },
     "actionMessages": {
       "createBankAccountSuccess": "Новий рахунок успішно створено",
       "deleteAccountSuccess": "Рахунок успішно видалено",
-      "transferFundSuccess": "Переказ коштів успішно виконано"
+      "transferFundSuccess": "Переказ коштів успішно виконано",
+      "accountReplenishmentSuccess": "Рахунок успішно поповнено"
     },
     "errors": {
       "general": "Щось пішло не так!",
@@ -579,8 +609,63 @@
       },
       "transferFunds": {
         "differentCurrencies": "Ви не можете виконати переказ на рахунок в іншій валюті",
-        "notEnoughFunds": "У Вас недостатньо коштів"
+        "notEnoughFunds": "У Вас недостатньо коштів",
+        "accountNotFound": "Рахунок з таким ID не знайдено",
+        "fieldsValidation": {
+          "requiredAmount": "Вкажіть суму",
+          "requiredAccountFrom": "Вкажіть рахунок з якого здійснюється переказ",
+          "requiredAccountTo": "Вкажіть рахунок призначення",
+          "requireCurrency": "Вкажіть валюту"
+        }
       }
+    }
+  },
+  "AnalyticsPage": {
+    "navbar": {
+      "main": "Контроль заощаджень",
+      "charts": "Інфографіка"
+    },
+    "savingsData": {
+      "monthTableCol": "Місяць",
+      "currencyTableCol": "Валюта",
+      "totalIncomeTableCol": "Всього доходів",
+      "totalExpenseTableCol": "Всього витрат",
+      "savingsTableCol": "Заощаджено",
+      "limitCovarageTableCol": "Виконання бюджету"
+    },
+    "charts": {
+      "cashFlow": {
+        "title": "Грошовий потік",
+        "income": "Доходи",
+        "expenses": "Витрати"
+      },
+      "income": "Доходи",
+      "expenses": "Витрати",
+      "fundsStructure": {
+        "income": "Структура доходів",
+        "expenses": "Структура витрат"
+      },
+      "noDataMessages": {
+        "cashFlow": "Дані про грошовий потік не знайдені",
+        "income": "Дані про доходи не знайдені",
+        "expenses": "Дані про витрати не знайдені"
+      }
+    },
+    "latestActivity": {
+      "latestActivityTable": {
+        "title": "Останні транзакції",
+        "dateColLabel": "Дата",
+        "amountColLabel": "Сума",
+        "currencyColLabel": "Валюта",
+        "categoryColLabel": "Категорія",
+        "accountColLabel": "Account"
+      },
+      "topIncome": "Найбільший дохід",
+      "topExpense": "Найбільша витрата"
+    },
+    "errors": {
+      "general": "Щось пішло не так!",
+      "wrongUserId": "Ви не авторизовані або ID Вашого облікового запису некоректний"
     }
   }
 }

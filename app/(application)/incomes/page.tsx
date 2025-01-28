@@ -84,10 +84,7 @@ export default async function IncomesPage({ searchParams: {
       <div className='w-full flex flex-col gap-3'>
         <div className='w-full flex justify-between items-center'>
           <IncomeFilters />
-          <div className='flex items-center gap-3'>
-            <div>Export to PDF</div>
-            <CreateIncomeModal funds={funds.data} />
-          </div>
+          <CreateIncomeModal funds={funds.data} />
         </div>
         {incomes.data.length > 0 ? (
           <DataTable 

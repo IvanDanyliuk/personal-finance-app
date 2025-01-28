@@ -17,6 +17,7 @@ import useBankAccountsStore from '@/lib/store/bank-accounts-slice';
 import { TransferFundsDialog } from './transfer-funds-dialog';
 import { AccountDetailsDialog } from './account-details-dialog';
 import { DeleteAccountDialog } from './delete-account-dialog';
+import { ReplenishAccountDialog } from './replenish-account-dialog';
 
 
 interface IAccountCardActions {
@@ -33,6 +34,7 @@ export const AccountCardActions: React.FC<IAccountCardActions> = ({ account }) =
   const availableToTransferBankAccounts = bankAccounts.filter(item => item.currency === account.currency);
 
   const [isDetailsOpen, setDetailsOpen] = useState<boolean>(false);
+  const [isReplenishOpen, setReplenishOpen] = useState<boolean>(false);
   const [isTransferOpen, setTransferOpen] = useState<boolean>(false);
   const [isDeleteOpen, setDeleteOpen] = useState<boolean>(false);
 
@@ -76,6 +78,7 @@ export const AccountCardActions: React.FC<IAccountCardActions> = ({ account }) =
             {t('HomePage.balanceSection.accountCard.detailsMenuItemLabel')}
           </DropdownMenuItem>
           <DropdownMenuItem 
+            onClick={() => setReplenishOpen(true)}
             className='cursor-pointer px-3 hover:bg-primary-1 rounded-full'
           >
             {t('HomePage.balanceSection.accountCard.replenishAccountMenuItemLabel')}
@@ -99,6 +102,12 @@ export const AccountCardActions: React.FC<IAccountCardActions> = ({ account }) =
         open={isDetailsOpen}
         onOpenChange={setDetailsOpen}
         data={account}
+      />
+
+      <ReplenishAccountDialog 
+        open={isReplenishOpen}
+        onOpenChange={setReplenishOpen}
+        currentAccountId={account.id}
       />
 
       <TransferFundsDialog 

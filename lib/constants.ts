@@ -91,35 +91,48 @@ export const LANGUAGES = [
 export const INCOME_SOURCES = [
   {
     value: 'cash',
-    label: 'IncomesPage.income_sources.cash'
+    label: 'IncomesPage.income_sources.cash',
+    color: 'hsl(var(--primary-9))'
   },
   {
     value: 'investment',
-    label: 'IncomesPage.income_sources.investment'
+    label: 'IncomesPage.income_sources.investment',
+    color: 'hsl(var(--primary-8))'
   },
   {
     value: 'salary',
-    label: 'IncomesPage.income_sources.salary'
+    label: 'IncomesPage.income_sources.salary',
+    color: 'hsl(var(--primary-7))'
   },
   {
     value: 'pension',
-    label: 'IncomesPage.income_sources.pension'
+    label: 'IncomesPage.income_sources.pension',
+    color: 'hsl(var(--primary-6))'
   },
   {
     value: 'money_transfer',
-    label: 'IncomesPage.income_sources.money_transfer'
+    label: 'IncomesPage.income_sources.money_transfer',
+    color: 'hsl(var(--primary-5))'
   },
   {
     value: 'rent',
-    label: 'IncomesPage.income_sources.rent'
+    label: 'IncomesPage.income_sources.rent',
+    color: 'hsl(var(--primary-4))'
   },
   {
     value: 'refund',
-    label: 'IncomesPage.income_sources.refund'
+    label: 'IncomesPage.income_sources.refund',
+    color: 'hsl(var(--primary-3))'
   },
   {
     value: 'cashback',
-    label: 'IncomesPage.income_sources.cashback'
+    label: 'IncomesPage.income_sources.cashback',
+    color: 'hsl(var(--primary-2))'
+  },
+  {
+    value: 'replenishment',
+    label: 'IncomesPage.income_sources.replenishment',
+    color: 'hsl(var(--secondary-3))'
   },
 ];
 
@@ -176,72 +189,86 @@ export const EXPENSE_CATEGORIES = [
   {
     value: 'utilities',
     label: 'ExpensesPage.expense_destinations.utilities',
-    icon: Utilities
+    icon: Utilities,
+    color: 'hsl(var(--primary-9))'
   },
   {
     value: 'food',
     label: 'ExpensesPage.expense_destinations.food',
-    icon: Food
+    icon: Food,
+    color: 'hsl(var(--primary-8))'
   },
   {
     value: 'household',
     label: 'ExpensesPage.expense_destinations.household',
-    icon: Household
+    icon: Household,
+    color: 'hsl(var(--primary-7))'
   },
   {
     value: 'medicament',
     label: 'ExpensesPage.expense_destinations.medicament',
-    icon: Medicament
+    icon: Medicament,
+    color: 'hsl(var(--primary-6))'
   },
   {
     value: 'rent',
     label: 'ExpensesPage.expense_destinations.rent',
-    icon: Rent
+    icon: Rent,
+    color: 'hsl(var(--primary-5))'
   },
   {
     value: 'clothes',
     label: 'ExpensesPage.expense_destinations.clothes',
-    icon: Clothes
+    icon: Clothes,
+    color: 'hsl(var(--primary-4))'
   },
   {
     value: 'self_care',
     label: 'ExpensesPage.expense_destinations.self_care',
-    icon: SelfCare
+    icon: SelfCare,
+    color: 'hsl(var(--primary-3))'
   },
   {
     value: 'charity',
     label: 'ExpensesPage.expense_destinations.charity',
-    icon: Charity
+    icon: Charity,
+    color: 'hsl(var(--primary-2))'
   },
   {
     value: 'education',
     label: 'ExpensesPage.expense_destinations.education',
-    icon: Education
+    icon: Education,
+    color: 'hsl(var(--primary-1))'
   },
   {
     value: 'entertainment',
     label: 'ExpensesPage.expense_destinations.entertainment',
-    icon: Entertainment
+    icon: Entertainment,
+    color: 'hsl(var(--primary-9))'
   },
   {
     value: 'auto',
     label: 'ExpensesPage.expense_destinations.auto',
-    icon: Auto
+    icon: Auto,
+    color: 'hsl(var(--primary-8))'
   },
   {
     value: 'public_transport',
     label: 'ExpensesPage.expense_destinations.public_transport',
-    icon: PublicTransport
+    icon: PublicTransport,
+    color: 'hsl(var(--primary-7))'
   },
   {
     value: 'repair',
     label: 'ExpensesPage.expense_destinations.repair',
-    icon: Repair
+    icon: Repair,
+    color: 'hsl(var(--primary-6))'
   },
   {
     value: 'other',
     label: 'ExpensesPage.expense_destinations.other',
-    icon: Other
+    icon: Other,
+    color: 'hsl(var(--primary-5))'
   },
 ];
 
@@ -525,3 +552,20 @@ export const ACCOUNT_TYPES = [
     label: 'General.accountTypes.jug'
   },
 ];
+
+export const MONTHS = [
+  'january', 
+  'february', 
+  'march', 
+  'april', 
+  'may', 
+  'june', 
+  'july', 
+  'august', 
+  'september', 
+  'october', 
+  'november', 
+  'december'
+];
+
+

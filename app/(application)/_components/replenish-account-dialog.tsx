@@ -5,68 +5,51 @@ import { useTranslations } from 'next-intl';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '@/hooks/use-toast';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
-import { SelectField, TextField } from '@/components/inputs';
 import { SubmitButton } from '@/components/common';
+import { TextField } from '@/components/inputs';
 import { Button } from '@/components/ui/button';
-import { transferFunds } from '@/lib/actions/account.actions';
-import { IBankAccount } from '@/lib/types/bank';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { replenishAccount } from '@/lib/actions/account.actions';
 import { ActionStatus } from '@/lib/types/common.types';
-import { TransferFundsSchema, transferFundsSchema } from '@/lib/types/form-schemas/transfer-funds';
+import { replenishAccountSchema, ReplenishAccountSchema } from '@/lib/types/form-schemas/transfer-funds';
 
 
-interface ITransferFundsDialog {
+interface IReplenishAccountDialog {
   open: boolean;
   onOpenChange: (isOpen: boolean) => void;
-  bankAccounts: IBankAccount[];
   currentAccountId?: string;
-  currency?: string;
 };
 
 
-export const TransferFundsDialog: React.FC<ITransferFundsDialog> = ({ 
+export const ReplenishAccountDialog: React.FC<IReplenishAccountDialog> = ({ 
   open, 
   onOpenChange, 
-  bankAccounts,
-  currentAccountId,
-  currency
+  currentAccountId
 }) => {
   const t = useTranslations();
-  const session = useSession();
   const { toast } = useToast();
-
-  const options = bankAccounts
-    .filter(item => item.currency === currency && item.id !== currentAccountId)
-    .map(item => ({
-      value: item.id,
-      label: `${item.accountNumber || ''} ${item.currency.toUpperCase()}${item.balance}`,
-      icon: item.bank ? item.bank.logo : undefined,
-  }));
+  const session = useSession();
 
   const {
     control,
     handleSubmit,
     formState: { errors, isSubmitting }
-  } = useForm<TransferFundsSchema>({
-    resolver: zodResolver(transferFundsSchema),
+  } = useForm<ReplenishAccountSchema>({
+    resolver: zodResolver(replenishAccountSchema),
     defaultValues: {
       userId: session.data!.user!.id,
-      accountFromId: currentAccountId,
-      accountToId: '',
+      accountId: currentAccountId,
       amount: 0,
-      currency,
     },
   });
 
-  const onFormSubmit: SubmitHandler<TransferFundsSchema> = async (data) => {
+  const onFormSubmit: SubmitHandler<ReplenishAccountSchema> = async (data) => {
     const formData = new FormData();
     formData.append('userId', data.userId);
-    formData.append('accountFromId', data.accountFromId);
-    formData.append('accountToId', data.accountToId);
+    formData.append('accountId', data.accountId);
     formData.append('amount', data.amount.toString());
-    formData.append('currency', data.currency);
 
-    const { status, error } = await transferFunds(formData);
+    const { status, error } = await replenishAccount(formData);
 
     if(status === ActionStatus.Success && !error) {
       toast({
@@ -90,34 +73,19 @@ export const TransferFundsDialog: React.FC<ITransferFundsDialog> = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <h2 className='text-lg font-semibold'>
-          {t('HomePage.balanceSection.transferFundsForm.title')}
+          {t('HomePage.balanceSection.replenishAccountForm.title')}
         </h2>
         <form 
           onSubmit={handleSubmit(onFormSubmit)} 
           className='space-y-3'
         >
           <Controller 
-            name='accountToId'
-            control={control}
-            render={({ field }) => (
-              <SelectField 
-                name='accountToId' 
-                label={t('HomePage.balanceSection.transferFundsForm.accountToIdFieldLabel')}
-                field={field} 
-                options={options} 
-                disabled={isSubmitting}
-                variant='vertical'
-                error={errors['accountToId']?.message}
-              />
-            )}
-          />
-          <Controller 
             name='amount'
             control={control}
             render={({ field }) => (
               <TextField 
                 name='amount'
-                label={t('HomePage.balanceSection.transferFundsForm.amountFieldLabel')}
+                label={t('HomePage.balanceSection.replenishAccountForm.amountFieldLabel')}
                 type='number'
                 field={field}
                 error={errors['amount']?.message}
@@ -126,14 +94,14 @@ export const TransferFundsDialog: React.FC<ITransferFundsDialog> = ({
           />
           <div className='w-full flex items-center gap-3'>
             <SubmitButton isSubmitting={isSubmitting} className='flex-1'>
-              {t('HomePage.balanceSection.transferFundsForm.submitBtnLabel')}
+              {t('HomePage.balanceSection.replenishAccountForm.submitBtnLabel')}
             </SubmitButton>
             <Button 
               type='button' 
               onClick={() => onOpenChange(false)} 
               className='mt-3 py-6 flex-1 rounded-full bg-secondary-2 hover:bg-secondary-1 text-white font-semibold'
             >
-              {t('HomePage.balanceSection.transferFundsForm.cancelBtnLabel')}
+              {t('HomePage.balanceSection.replenishAccountForm.cancelBtnLabel')}
             </Button>
           </div>
         </form>

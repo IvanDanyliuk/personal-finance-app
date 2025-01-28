@@ -70,10 +70,10 @@ export const MainFilters: React.FC = () => {
       <DialogTrigger>
         <TooltipProvider key={crypto.randomUUID()}>
           <Tooltip>
-            <TooltipTrigger className='w-10 h-10 flex justify-center items-center bg-primary-7 text-white border-none rounded-full'>
+            <TooltipTrigger className='w-12 h-12 flex justify-center items-center bg-primary-7 text-white border-none rounded-full'>
               <SlidersHorizontal className='w-5 h-5' />
             </TooltipTrigger>
-            <TooltipContent className='px-3 py-1 bg-primary-7 text-white rounded-full'>
+            <TooltipContent className='px-3 py-1 max-w-44 text-center bg-primary-2 text-secondary-8 rounded-xl'>
               <p>
                 {t('ExpensesPage.filters.general.title')}
               </p>
@@ -81,7 +81,7 @@ export const MainFilters: React.FC = () => {
           </Tooltip>
         </TooltipProvider>
       </DialogTrigger>
-      <DialogContent className='min-h-fit'>
+      <DialogContent className='min-w-fit max-w-[calc(100%-3rem)] md:max-w-fit max-h-[calc(100vh-3rem)] overflow-y-auto rounded-xl'>
         <DialogHeader>
           <DialogTitle>
             {t('IncomesPage.filters.general.title')}

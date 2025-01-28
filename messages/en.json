@@ -5,7 +5,8 @@
       "eur": "Euro",
       "rub": "Ruble",
       "uah": "Hryvnia",
-      "pln": "Zloty"
+      "pln": "Zloty",
+      "empty": "-"
     },
     "weekDays": {
       "sunday": "Sunday",
@@ -15,6 +16,20 @@
       "thursday": "Thursday",
       "friday": "Friday",
       "saturday": "Saturday"
+    },
+    "months": {
+      "0": "January",
+      "1": "February",
+      "2": "March",
+      "3": "April",
+      "4": "May",
+      "5": "June",
+      "6": "July",
+      "7": "August",
+      "8": "September",
+      "9": "October",
+      "10": "November",
+      "11": "December"
     },
     "languages": {
       "en": "English",
@@ -315,6 +330,7 @@
     "noData": "You haven't added any information about your incomes",
     "createIncomeForm": {
       "triggerBtnLabel": "Add",
+      "triggerBtnTooltip": "Add a new income item",
       "title": "Create a new income",
       "titleUpdate": "Update an income",
       "dateFieldLabel": "Date",
@@ -345,7 +361,8 @@
       "money_transfer": "Money transfer",
       "rent": "Rent",
       "refund": "Refund",
-      "cashback": "Cashback"
+      "cashback": "Cashback",
+      "replenishment": "Replenishment"
     },
     "filters": {
       "date": {
@@ -353,7 +370,7 @@
         "dateFromLabel": "Period from",
         "dateToLabel": "Period to",
         "submitBtnLabel": "OK",
-        "cancelBtnLabel": "Clear period",
+        "cancelBtnLabel": "Clear",
         "noFiltersMessage": "All time",
         "noDateFromMessage": "From beginning",
         "noDateToMessage": "Now"
@@ -392,6 +409,7 @@
     "noData": "You haven't added any information about your expenses",
     "createExpenseForm": {
       "triggerBtnLabel": "Add",
+      "triggerBtnTooltip": "Add a new expense item",
       "title": "Create a new expense",
       "titleUpdate": "Update an expense",
       "dateFieldLabel": "Date",
@@ -491,6 +509,7 @@
     "title": "Home",
     "createAccountForm": {
       "triggerBtnLabel": "Add",
+      "triggerBtnTooltip": "Add a new account",
       "title": "Create a new account",
       "typeFieldLabel": "Type",
       "bankFieldLabel": "Bank",
@@ -537,6 +556,12 @@
         "balance": "Balance",
         "additionalInfo": "Additional information"
       },
+      "replenishAccountForm": {
+        "title": "Replenish an account",
+        "amountFieldLabel": "Amount",
+        "submitBtnLabel": "Submit",
+        "cancelBtnLabel": "Cancel"
+      },
       "deleteAccount": {
         "submitBtnLabel": "OK",
         "cancelBtnLabel": "Cancel",
@@ -551,10 +576,15 @@
         "cancelBtnLabel": "Cancel"
       }
     },
+    "keyIndicatorsSection": {
+      "title": "Key indicators",
+      "note": "* Data in the charts below is for the current year"
+    },
     "actionMessages": {
       "createBankAccountSuccess": "New bank account successfully created",
       "deleteAccountSuccess": "Account successfully deleted",
-      "transferFundSuccess": "Funds successfully transfered"
+      "transferFundSuccess": "Funds successfully transfered",
+      "accountReplenishmentSuccess": "The account successfully replenished"
     },
     "errors": {
       "general": "Something went wrong!",
@@ -578,8 +608,63 @@
       },
       "transferFunds": {
         "differentCurrencies": "You cannot send funds to an account in a different currency",
-        "notEnoughFunds": "You do not have enough funds"
+        "notEnoughFunds": "You do not have enough funds",
+        "accountNotFound": "Cannot find an account with such ID",
+        "fieldsValidation": {
+          "requiredAmount": "Amount is required",
+          "requiredAccountFrom": "Specify the account from which the transfer is made.",
+          "requiredAccountTo": "Specify a destination account",
+          "requireCurrency": "Select a currency"
+        }
       }
+    }
+  },
+  "AnalyticsPage": {
+    "navbar": {
+      "main": "Savings control",
+      "charts": "Charts"
+    },
+    "savingsData": {
+      "monthTableCol": "Month",
+      "currencyTableCol": "Currency",
+      "totalIncomeTableCol": "Total income",
+      "totalExpenseTableCol": "Total expense",
+      "savingsTableCol": "Savings",
+      "limitCovarageTableCol": "Monthly funds limit coverage"
+    },
+    "charts": {
+      "cashFlow": {
+        "title": "Cash Flow",
+        "income": "Income",
+        "expenses": "Expenses"
+      },
+      "income": "Income",
+      "expenses": "Expenses",
+      "fundsStructure": {
+        "income": "Income structure",
+        "expenses": "Expenses structure"
+      },
+      "noDataMessages": {
+        "cashFlow": "Cash Flow data not found",
+        "income": "Income data not found",
+        "expenses": "Expenses data not found"
+      }
+    },
+    "latestActivity": {
+      "latestActivityTable": {
+        "title": "Recent transactions",
+        "dateColLabel": "Date",
+        "amountColLabel": "Amount",
+        "currencyColLabel": "Currency",
+        "categoryColLabel": "Category",
+        "accountColLabel": "Account"
+      },
+      "topIncome": "Top income",
+      "topExpense": "Top expense"
+    },
+    "errors": {
+      "general": "Something went wrong!",
+      "wrongUserId": "You're not authenticated or your user ID is incorrect"
     }
   }
 }

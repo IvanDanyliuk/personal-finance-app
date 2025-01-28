@@ -60,7 +60,7 @@ export const DateFilters: React.FC = () => {
   };
 
   return (
-    <>
+    <div className='flex gap-2'>
       <Dialog 
         open={isFiltersOpen} 
         onOpenChange={setFiltersOpen}
@@ -68,10 +68,10 @@ export const DateFilters: React.FC = () => {
         <DialogTrigger>
           <TooltipProvider key={crypto.randomUUID()}>
             <Tooltip>
-              <TooltipTrigger className='w-10 h-10 flex justify-center items-center bg-primary-7 text-white border-none rounded-full'>
+              <TooltipTrigger className='w-12 h-12 flex justify-center items-center bg-primary-7 text-white border-none rounded-full'>
                 <CalendarDays className='w-5 h-5' />
               </TooltipTrigger>
-              <TooltipContent className='px-3 py-1 bg-primary-7 text-white rounded-full'>
+              <TooltipContent className='px-3 py-1 max-w-44 text-center bg-primary-2 text-secondary-8 rounded-xl'>
                 <p>
                   {t('IncomesPage.filters.date.title')}
                 </p>
@@ -79,7 +79,7 @@ export const DateFilters: React.FC = () => {
             </Tooltip>
           </TooltipProvider>
         </DialogTrigger>
-        <DialogContent className='p-3'>
+        <DialogContent className='p-6 md:p-3 min-w-fit max-w-[calc(100%-3rem)] md:max-w-fit max-h-[calc(100vh-3rem)] overflow-y-auto rounded-xl'>
           <DialogHeader>
             <DialogTitle>
               {t('IncomesPage.filters.date.title')}
@@ -89,14 +89,14 @@ export const DateFilters: React.FC = () => {
             onSubmit={handleSubmit(onFiltersSubmit )}
             className='w-full space-y-3'
           >
-            <div className='w-full flex flex-col md:flex-row gap-3'>
-              <div className='flex-1 text-center'>
+            <div className='w-full flex flex-col md:flex-row gap-6'>
+              <div className='p-6 flex-1 text-center border rounded-xl'>
                 <Controller 
                   name='dateFrom'
                   control={control}
                   render={({ field }) => (
                     <>
-                      <Label htmlFor='dateFrom' className='text-primary-9'>
+                      <Label htmlFor='dateFrom' className='text-lg text-primary-9 font-semibold'>
                         {t('IncomesPage.filters.date.dateFromLabel')}
                         {field.value && `: ${format(field.value, 'dd.MM.yyyy')}`}
                       </Label>
@@ -111,13 +111,13 @@ export const DateFilters: React.FC = () => {
                   )}
                 />
               </div>
-              <div className='flex-1 text-center'>
+              <div className='p-6 flex-1 text-center border rounded-xl'>
                 <Controller 
                   name='dateTo'
                   control={control}
                   render={({ field }) => (
                     <>
-                      <Label htmlFor='dateTo' className='text-primary-9'>
+                      <Label htmlFor='dateTo' className='text-lg text-primary-9 font-semibold'>
                         {t('IncomesPage.filters.date.dateToLabel')}
                         {field.value && `: ${format(field.value, 'dd.MM.yyyy')}`}
                       </Label>
@@ -148,7 +148,7 @@ export const DateFilters: React.FC = () => {
           </form>
         </DialogContent>
       </Dialog>
-      <div className='px-4 w-fit h-10 flex justify-center items-center text-sm border border-background-neutral rounded-full'>
+      <div className='px-4 w-fit h-12 flex justify-center items-center text-sm border border-background-neutral rounded-full'>
         {formatDateFilterValues({ 
           from: params.get('dateFrom'), 
           to: params.get('dateTo'), 
@@ -157,6 +157,6 @@ export const DateFilters: React.FC = () => {
           noDateToMessage: t('IncomesPage.filters.date.noDateToMessage')
         })}
       </div>
-    </>
+    </div>
   );
 };
