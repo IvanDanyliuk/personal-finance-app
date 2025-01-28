@@ -650,6 +650,18 @@
         "expenses": "Expenses data not found"
       }
     },
+    "latestActivity": {
+      "latestActivityTable": {
+        "title": "Recent transactions",
+        "dateColLabel": "Date",
+        "amountColLabel": "Amount",
+        "currencyColLabel": "Currency",
+        "categoryColLabel": "Category",
+        "accountColLabel": "Account"
+      },
+      "topIncome": "Top income",
+      "topExpense": "Top expense"
+    },
     "errors": {
       "general": "Something went wrong!",
       "wrongUserId": "You're not authenticated or your user ID is incorrect"

@@ -649,6 +649,18 @@
         "expenses": "Данные о затратах не найдены"
       }
     },
+    "latestActivity": {
+      "latestActivityTable": {
+        "title": "Последние транзакции",
+        "dateColLabel": "Дата",
+        "amountColLabel": "Сумма",
+        "currencyColLabel": "Валюта",
+        "categoryColLabel": "Категория",
+        "accountColLabel": "Счет"
+      },
+      "topIncome": "Наибольший доход",
+      "topExpense": "Наибольшая трата"
+    },
     "errors": {
       "general": "Что-то пошло не так!",
       "wrongUserId": "Вы не авторзованы или ID Вашего профиля неверный"

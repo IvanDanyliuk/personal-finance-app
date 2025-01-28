@@ -30,9 +30,9 @@ export const CustomPieChart: React.FC<ICustomPieChart> = ({
   
   return (
     <div className='flex-1 space-y-4'>
-      <h4 className='text-lg text-center font-semibold'>
+      <h2 className='mb-3 text-base text-center font-semibold'>
         {t(title)}
-      </h4>
+      </h2>
       {data.length > 0 ? (
         <ChartContainer config={config} className='w-full min-h-fit h-fit'>
           <PieChart className='w-52'>

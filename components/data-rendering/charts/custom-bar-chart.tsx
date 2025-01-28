@@ -45,9 +45,9 @@ export const CustomBarChart: React.FC<IBarChart> = ({
 
   return (
     <div className='flex-1 overflow-x-auto'>
-      <h4 className='text-lg text-center font-semibold'>
+      <h2 className='mb-3 text-base text-center font-semibold'>
         {t(title)}
-      </h4>
+      </h2>
       {data.length > 0 ? (
         <ChartContainer config={config} className='h-96 min-w-full'>
           <BarChart accessibilityLayer data={data}>

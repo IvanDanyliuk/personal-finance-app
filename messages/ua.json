@@ -651,6 +651,18 @@
         "expenses": "Дані про витрати не знайдені"
       }
     },
+    "latestActivity": {
+      "latestActivityTable": {
+        "title": "Останні транзакції",
+        "dateColLabel": "Дата",
+        "amountColLabel": "Сума",
+        "currencyColLabel": "Валюта",
+        "categoryColLabel": "Категорія",
+        "accountColLabel": "Account"
+      },
+      "topIncome": "Найбільший дохід",
+      "topExpense": "Найбільша витрата"
+    },
     "errors": {
       "general": "Щось пішло не так!",
       "wrongUserId": "Ви не авторизовані або ID Вашого облікового запису некоректний"

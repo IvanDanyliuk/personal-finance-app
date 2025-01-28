@@ -2,10 +2,12 @@ import { auth } from '@/auth';
 import { ChartBoard } from '../_components';
 import { 
   getFundsStructureByCategories, 
+  getLatestActivity, 
   getMonthlySavingsControlDataByYears 
 } from '@/lib/actions/analytics.actions';
 import { getUser } from '@/lib/actions/user.actions';
 import { CURRENCIES } from '@/lib/constants';
+import { LatestActivity } from '@/components/data-rendering';
 
 
 export default async function AnalyticCharts({ 
@@ -36,15 +38,22 @@ export default async function AnalyticCharts({
     currency
   });
 
+  const latestActivity = await getLatestActivity({
+    dateFrom,
+    dateTo, 
+    currency
+  });
+
   return (
-    <div>
+    <div className='space-y-10'>
       <ChartBoard 
         data={{
           dynamic: monthlyFunds.data,
-          structure: fundsPerCategories.data
+          structure: fundsPerCategories.data,
         }} 
         currentCurrency={user!.currency || CURRENCIES[0].value} 
       />
+      <LatestActivity data={latestActivity.data} />
     </div>
   );
 };

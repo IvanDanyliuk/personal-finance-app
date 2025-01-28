@@ -307,7 +307,10 @@ export const getLatestActivity = async ({
       orderBy: {
         date: SortOrder.Desc
       },
-      take: 10
+      take: 10,
+      include: {
+        bankAccount: true,
+      },
     });
 
     const latestExpenses = await db.expense.findMany({
@@ -318,7 +321,10 @@ export const getLatestActivity = async ({
       orderBy: {
         date: SortOrder.Desc
       },
-      take: 10
+      take: 10,
+      include: {
+        bankAccount: true
+      }
     });
 
     const latestTransactions = [...latestIncomes, ...latestExpenses]

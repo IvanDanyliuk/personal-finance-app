@@ -2,11 +2,10 @@
 
 import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { format } from 'date-fns';
 import { ChartConfig } from '@/components/ui/chart';
 import { EXPENSE_CATEGORIES, INCOME_SOURCES } from '@/lib/constants';
 import { CashFlow, ExpensesStructure, IncomeStructure } from '@/lib/types/analytics.types';
-import { CustomBarChart, CustomPieChart } from '@/components/data-rendering';
+import { CustomBarChart, CustomPieChart, LatestActivity } from '@/components/data-rendering';
 import NoCashFlowData from '@/public/images/business-vision.svg';
 
 
@@ -36,6 +35,8 @@ interface IKeyIndicatorsSection {
 
 
 export const KeyIndicatorsSection: React.FC<IKeyIndicatorsSection> = ({ data }) => {
+  const { dynamic, structure, latestTransactions } = data;
+
   const t = useTranslations();
 
   const [cashFlow, setCashFlow] = useState<CashFlow[]>([]);
@@ -68,20 +69,20 @@ export const KeyIndicatorsSection: React.FC<IKeyIndicatorsSection> = ({ data }) 
   } satisfies ChartConfig;
 
   useMemo(() => {
-    const cashFlowData = data.dynamic.map(dataItem => ({ 
+    const cashFlowData = dynamic.map(dataItem => ({ 
       month: t(`General.months.${dataItem.month - 1}`), 
       income: dataItem.data[0].totalIncomes, 
       expenses: dataItem.data[0].totalExpenses,
     }));
     setCashFlow(cashFlowData);
-    const incomeStructureData = data.structure.incomes.map(dataItem => ({
+    const incomeStructureData = structure.incomes.map(dataItem => ({
       source: t(`IncomesPage.income_sources.${dataItem.source}`),
       amount: dataItem.amount,
       color: INCOME_SOURCES.find(item => item.value === dataItem.source)?.color || 'bg-primary-7'
     }));
     setIncomeStructure(incomeStructureData);
 
-    const expensesStructureData = data.structure.expenses.map(dataItem => ({
+    const expensesStructureData = structure.expenses.map(dataItem => ({
       category: t(`ExpensesPage.expense_destinations.${dataItem.category}`),
       amount: dataItem.amount,
       color: EXPENSE_CATEGORIES.find(item => item.value === dataItem.category)?.color || 'bg-primary-7'
@@ -108,15 +109,7 @@ export const KeyIndicatorsSection: React.FC<IKeyIndicatorsSection> = ({ data }) 
             noDataImage={NoCashFlowData} 
             noDataMessage='AnalyticsPage.charts.noDataMessages.cashFlow' 
           />
-          <div className='w-fit px-3'>
-            <ul>
-              {data.latestTransactions.map(item => (
-                <li key={crypto.randomUUID()}>
-                  {`${item.amount} ${format(item.date, 'dd.MM.yyyy')}`}
-                </li>
-              ))}
-            </ul>
-          </div>
+          <LatestActivity data={{ latestTransactions }} />
         </div>
         <div className='w-full flex flex-col md:flex-row gap-6'>
           <CustomPieChart 
