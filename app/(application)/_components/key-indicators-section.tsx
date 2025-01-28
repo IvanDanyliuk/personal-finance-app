@@ -5,7 +5,7 @@ import { useTranslations } from 'next-intl';
 import { ChartConfig } from '@/components/ui/chart';
 import { EXPENSE_CATEGORIES, INCOME_SOURCES } from '@/lib/constants';
 import { CashFlow, ExpensesStructure, IncomeStructure } from '@/lib/types/analytics.types';
-import { CustomBarChart, CustomPieChart, LatestActivity } from '@/components/data-rendering';
+import { CustomBarChart, CustomPieChart, RecentActivity } from '@/components/data-rendering';
 import NoCashFlowData from '@/public/images/business-vision.svg';
 
 
@@ -29,13 +29,13 @@ interface IKeyIndicatorsSection {
         amount: number;
       }[];
     };
-    latestTransactions: any[];
+    recentTransactions: any[];
   };
 };
 
 
 export const KeyIndicatorsSection: React.FC<IKeyIndicatorsSection> = ({ data }) => {
-  const { dynamic, structure, latestTransactions } = data;
+  const { dynamic, structure, recentTransactions } = data;
 
   const t = useTranslations();
 
@@ -109,7 +109,7 @@ export const KeyIndicatorsSection: React.FC<IKeyIndicatorsSection> = ({ data }) 
             noDataImage={NoCashFlowData} 
             noDataMessage='AnalyticsPage.charts.noDataMessages.cashFlow' 
           />
-          <LatestActivity data={{ latestTransactions }} />
+          <RecentActivity data={{ recentTransactions }} />
         </div>
         <div className='w-full flex flex-col md:flex-row gap-6'>
           <CustomPieChart 

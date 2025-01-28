@@ -2,12 +2,12 @@ import { auth } from '@/auth';
 import { ChartBoard } from '../_components';
 import { 
   getFundsStructureByCategories, 
-  getLatestActivity, 
-  getMonthlySavingsControlDataByYears 
+  getMonthlySavingsControlDataByYears, 
+  getRecentActivity
 } from '@/lib/actions/analytics.actions';
 import { getUser } from '@/lib/actions/user.actions';
 import { CURRENCIES } from '@/lib/constants';
-import { LatestActivity } from '@/components/data-rendering';
+import { RecentActivity } from '@/components/data-rendering';
 
 
 export default async function AnalyticCharts({ 
@@ -38,7 +38,7 @@ export default async function AnalyticCharts({
     currency
   });
 
-  const latestActivity = await getLatestActivity({
+  const recentActivity = await getRecentActivity({
     dateFrom,
     dateTo, 
     currency
@@ -53,7 +53,7 @@ export default async function AnalyticCharts({
         }} 
         currentCurrency={user!.currency || CURRENCIES[0].value} 
       />
-      <LatestActivity data={latestActivity.data} />
+      <RecentActivity data={recentActivity.data} />
     </div>
   );
 };

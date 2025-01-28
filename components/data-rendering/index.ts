@@ -3,7 +3,7 @@ import { CustomLineChart } from './charts/custom-line-chart';
 import { CustomPieChart } from './charts/custom-pie-chart';
 import { DataTable } from '../data-rendering/data-table';
 import { DateFilters } from '../data-rendering/date-filters';
-import { LatestActivity } from './latest-activity';
+import { RecentActivity } from './recent-activity';
 
 export { 
   CustomBarChart, 
@@ -11,5 +11,5 @@ export {
   CustomPieChart, 
   DateFilters, 
   DataTable, 
-  LatestActivity
+  RecentActivity
 };

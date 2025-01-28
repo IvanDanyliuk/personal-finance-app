@@ -649,8 +649,8 @@
         "expenses": "Данные о затратах не найдены"
       }
     },
-    "latestActivity": {
-      "latestActivityTable": {
+    "recentActivity": {
+      "recentActivityTable": {
         "title": "Последние транзакции",
         "dateColLabel": "Дата",
         "amountColLabel": "Сумма",

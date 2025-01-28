@@ -651,14 +651,14 @@
         "expenses": "Дані про витрати не знайдені"
       }
     },
-    "latestActivity": {
-      "latestActivityTable": {
+    "recentActivity": {
+      "recentActivityTable": {
         "title": "Останні транзакції",
         "dateColLabel": "Дата",
         "amountColLabel": "Сума",
         "currencyColLabel": "Валюта",
         "categoryColLabel": "Категорія",
-        "accountColLabel": "Account"
+        "accountColLabel": "Рахунок"
       },
       "topIncome": "Найбільший дохід",
       "topExpense": "Найбільша витрата"

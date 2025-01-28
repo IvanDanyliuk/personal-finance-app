@@ -13,17 +13,17 @@ import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
 
 
-interface ILatestActivity {
+interface IRecentActivity {
   data: {
-    latestTransactions: any[];
+    recentTransactions: any[];
     topIncome?: any;
     topExpense?: any;
   };
 };
 
 
-export const LatestActivity: React.FC<ILatestActivity> = ({ data }) => {
-  const { latestTransactions, topIncome, topExpense } = data;
+export const RecentActivity: React.FC<IRecentActivity> = ({ data }) => {
+  const { recentTransactions, topIncome, topExpense } = data;
 
   const t = useTranslations();
 
@@ -31,30 +31,30 @@ export const LatestActivity: React.FC<ILatestActivity> = ({ data }) => {
     <div className='relative w-fit px-3 flex flex-col md:flex-row items-center gap-6'>
       <div className='flex-1'>
         <h2 className='mb-3 text-base text-center font-semibold'>
-          {t('AnalyticsPage.latestActivity.latestActivityTable.title')}
+          {t('AnalyticsPage.recentActivity.recentActivityTable.title')}
         </h2>
         <Table>
           <TableHeader>
             <TableRow className='text-sm border-none'>
               <TableHead className='px-5 bg-background-normal rounded-l-full'>
-                {t('AnalyticsPage.latestActivity.latestActivityTable.dateColLabel')}
+                {t('AnalyticsPage.recentActivity.recentActivityTable.dateColLabel')}
               </TableHead>
               <TableHead className='px-5 bg-background-normal'>
-                {t('AnalyticsPage.latestActivity.latestActivityTable.amountColLabel')}
+                {t('AnalyticsPage.recentActivity.recentActivityTable.amountColLabel')}
               </TableHead>
               <TableHead className='px-5 bg-background-normal'>
-                {t('AnalyticsPage.latestActivity.latestActivityTable.currencyColLabel')}
+                {t('AnalyticsPage.recentActivity.recentActivityTable.currencyColLabel')}
               </TableHead>
               <TableHead className='px-5 bg-background-normal'>
-                {t('AnalyticsPage.latestActivity.latestActivityTable.categoryColLabel')}
+                {t('AnalyticsPage.recentActivity.recentActivityTable.categoryColLabel')}
               </TableHead>
               <TableHead className='px-5 bg-background-normal rounded-r-full'>
-                {t('AnalyticsPage.latestActivity.latestActivityTable.accountColLabel')}
+                {t('AnalyticsPage.recentActivity.recentActivityTable.accountColLabel')}
               </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {latestTransactions.map((transaction, ) => (
+            {recentTransactions.map((transaction, ) => (
               <TableRow key={crypto.randomUUID()} className='text-xs'>
                 <TableCell className='px-5 font-medium'>
                   {format(transaction.date, 'dd.MM.yyyy')}
@@ -97,7 +97,7 @@ export const LatestActivity: React.FC<ILatestActivity> = ({ data }) => {
         {topIncome && (
           <div className='flex items-center gap-3 font-semibold'>
             <h3 className='text-lg text-primary-7'>
-              {t('AnalyticsPage.latestActivity.topIncome')}
+              {t('AnalyticsPage.recentActivity.topIncome')}
             </h3>
             <p>
               {`${topIncome.currency.toUpperCase()} ${topIncome.amount}`}
@@ -107,7 +107,7 @@ export const LatestActivity: React.FC<ILatestActivity> = ({ data }) => {
         {topExpense && (
           <div className='flex items-center gap-3 font-semibold'>
             <h3 className='text-lg text-primary-7'>
-              {t('AnalyticsPage.latestActivity.topExpense')}
+              {t('AnalyticsPage.recentActivity.topExpense')}
             </h3>
             <p>
               {`${topExpense.currency.toUpperCase()} ${topExpense.amount}`}

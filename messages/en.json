@@ -650,8 +650,8 @@
         "expenses": "Expenses data not found"
       }
     },
-    "latestActivity": {
-      "latestActivityTable": {
+    "recentActivity": {
+      "recentActivityTable": {
         "title": "Recent transactions",
         "dateColLabel": "Date",
         "amountColLabel": "Amount",

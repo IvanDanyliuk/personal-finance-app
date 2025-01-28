@@ -264,7 +264,7 @@ export const getFundsStructureByCategories = async ({
   }
 };
 
-export const getLatestActivity = async ({
+export const getRecentActivity = async ({
   dateFrom, 
   dateTo,
   currency
@@ -299,7 +299,7 @@ export const getLatestActivity = async ({
           currency: currency || currentUser?.currency,
         });
 
-    const latestIncomes = await db.income.findMany({
+    const recentIncomes = await db.income.findMany({
       where: {
         userId: currentUser?.id,
         ...query
@@ -313,7 +313,7 @@ export const getLatestActivity = async ({
       },
     });
 
-    const latestExpenses = await db.expense.findMany({
+    const recentExpenses = await db.expense.findMany({
       where: {
         userId: currentUser?.id,
         ...query
@@ -327,7 +327,7 @@ export const getLatestActivity = async ({
       }
     });
 
-    const latestTransactions = [...latestIncomes, ...latestExpenses]
+    const recentTransactions = [...recentIncomes, ...recentExpenses]
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
       .slice(0, 10);
 
@@ -346,7 +346,7 @@ export const getLatestActivity = async ({
     return {
       status: ActionStatus.Success,
       data: {
-        latestTransactions,
+        recentTransactions,
         topIncome,
         topExpense,
       },
@@ -356,7 +356,7 @@ export const getLatestActivity = async ({
     return {
       status: ActionStatus.Failed,
       data: {
-        latestTransactions: [],
+        recentTransactions: [],
         topIncome: {},
         topExpense: {}
       },
