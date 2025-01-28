@@ -569,6 +569,10 @@
         "cancelBtnLabel": "Cancel"
       }
     },
+    "keyIndicatorsSection": {
+      "title": "Key indicators",
+      "note": "* Data in the charts below is for the current year"
+    },
     "actionMessages": {
       "createBankAccountSuccess": "New bank account successfully created",
       "deleteAccountSuccess": "Account successfully deleted",

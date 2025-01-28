@@ -88,33 +88,41 @@ export const KeyIndicatorsSection: React.FC<IKeyIndicatorsSection> = ({ data }) 
   }, [data]);
 
   return (
-    <div className='space-y-10'>
-      <CustomBarChart 
-        title='AnalyticsPage.charts.cashFlow.title' 
-        data={cashFlow} 
-        config={cashFlowChartConfig} 
-        dataKeys={['income', 'expenses']}
-        fillColors={['hsl(var(--primary-7))', 'hsl(var(--primary-4))']}
-        noDataImage={NoCashFlowData} 
-        noDataMessage='AnalyticsPage.charts.noDataMessages.cashFlow' 
-      />
-      <div className='w-full flex flex-col md:flex-row gap-6'>
-        <CustomPieChart 
-          data={incomeStructure}
-          config={incomeStructureConfig}
-          title='AnalyticsPage.charts.fundsStructure.income'
-          nameKey='source'
-          noDataImage={NoCashFlowData}
-          noDataMessage='AnalyticsPage.charts.noDataMessages.income'
+    <div>
+      <h1 className='text-xl text-center font-semibold'>
+        {t('HomePage.keyIndicatorsSection.title')}
+      </h1>
+      <p className='text-center md:text-right text-xs text-primary-6'>
+        {t('HomePage.keyIndicatorsSection.note')}
+      </p>
+      <div className='mt-5 space-y-10'>
+        <CustomBarChart 
+          title='AnalyticsPage.charts.cashFlow.title' 
+          data={cashFlow} 
+          config={cashFlowChartConfig} 
+          dataKeys={['income', 'expenses']}
+          fillColors={['hsl(var(--primary-7))', 'hsl(var(--primary-4))']}
+          noDataImage={NoCashFlowData} 
+          noDataMessage='AnalyticsPage.charts.noDataMessages.cashFlow' 
         />
-        <CustomPieChart 
-          data={expensesStructure}
-          config={expensesStructureConfig}
-          title='AnalyticsPage.charts.fundsStructure.expenses'
-          nameKey='category'
-          noDataImage={NoCashFlowData}
-          noDataMessage='AnalyticsPage.charts.noDataMessages.expenses'
-        />
+        <div className='w-full flex flex-col md:flex-row gap-6'>
+          <CustomPieChart 
+            data={incomeStructure}
+            config={incomeStructureConfig}
+            title='AnalyticsPage.charts.fundsStructure.income'
+            nameKey='source'
+            noDataImage={NoCashFlowData}
+            noDataMessage='AnalyticsPage.charts.noDataMessages.income'
+          />
+          <CustomPieChart 
+            data={expensesStructure}
+            config={expensesStructureConfig}
+            title='AnalyticsPage.charts.fundsStructure.expenses'
+            nameKey='category'
+            noDataImage={NoCashFlowData}
+            noDataMessage='AnalyticsPage.charts.noDataMessages.expenses'
+          />
+        </div>
       </div>
     </div>
   );

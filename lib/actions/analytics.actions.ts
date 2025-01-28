@@ -159,7 +159,6 @@ export const getMonthlySavingsControlDataByYears = async ({
     }
 
     if(!dateFrom && !dateTo) {
-      console.log('NO DATE PERIOD FOUND')
       for(let month = lastMonth + 1; month <= 12; month++) {
         data.push({
           month,

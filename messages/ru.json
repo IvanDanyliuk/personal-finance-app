@@ -569,6 +569,10 @@
         "cancelBtnLabel": "Отмена"
       }
     },
+    "keyIndicatorsSection": {
+      "title": "Ключевые показатели",
+      "note": "* Данные в диаграммах ниже приведены за текущий год"
+    },
     "actionMessages": {
       "createBankAccountSuccess": "Новый счет успешно создан",
       "deleteAccountSuccess": "Счет успешно удален",
