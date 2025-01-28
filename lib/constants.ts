@@ -129,6 +129,11 @@ export const INCOME_SOURCES = [
     label: 'IncomesPage.income_sources.cashback',
     color: 'hsl(var(--primary-2))'
   },
+  {
+    value: 'replenishment',
+    label: 'IncomesPage.income_sources.replenishment',
+    color: 'hsl(var(--primary-1))'
+  },
 ];
 
 export const ITEMS_PER_PAGE = [

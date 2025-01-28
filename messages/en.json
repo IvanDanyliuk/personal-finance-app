@@ -361,7 +361,8 @@
       "money_transfer": "Money transfer",
       "rent": "Rent",
       "refund": "Refund",
-      "cashback": "Cashback"
+      "cashback": "Cashback",
+      "replenishment": "Replenishment"
     },
     "filters": {
       "date": {
@@ -555,6 +556,12 @@
         "balance": "Balance",
         "additionalInfo": "Additional information"
       },
+      "replenishAccountForm": {
+        "title": "Replenish an account",
+        "amountFieldLabel": "Amount",
+        "submitBtnLabel": "Submit",
+        "cancelBtnLabel": "Cancel"
+      },
       "deleteAccount": {
         "submitBtnLabel": "OK",
         "cancelBtnLabel": "Cancel",
@@ -576,7 +583,8 @@
     "actionMessages": {
       "createBankAccountSuccess": "New bank account successfully created",
       "deleteAccountSuccess": "Account successfully deleted",
-      "transferFundSuccess": "Funds successfully transfered"
+      "transferFundSuccess": "Funds successfully transfered",
+      "accountReplenishmentSuccess": "The account successfully replenished"
     },
     "errors": {
       "general": "Something went wrong!",
@@ -600,7 +608,14 @@
       },
       "transferFunds": {
         "differentCurrencies": "You cannot send funds to an account in a different currency",
-        "notEnoughFunds": "You do not have enough funds"
+        "notEnoughFunds": "You do not have enough funds",
+        "accountNotFound": "Cannot find an account with such ID",
+        "fieldsValidation": {
+          "requiredAmount": "Amount is required",
+          "requiredAccountFrom": "Specify the account from which the transfer is made.",
+          "requiredAccountTo": "Specify a destination account",
+          "requireCurrency": "Select a currency"
+        }
       }
     }
   },

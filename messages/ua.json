@@ -361,7 +361,8 @@
       "money_transfer": "Грошовий переказ",
       "rent": "Орендна плата",
       "refund": "Відшкодування",
-      "cashback": "Кешбек"
+      "cashback": "Кешбек",
+      "replenishment": "Поповнення рахунку"
     },
     "filters": {
       "date": {
@@ -557,6 +558,12 @@
         "balance": "Баланс",
         "additionalInfo": "Додаткова інформація"
       },
+      "replenishAccountForm": {
+        "title": "Поповнення рахунку",
+        "amountFieldLabel": "Сума",
+        "submitBtnLabel": "Підтвердити",
+        "cancelBtnLabel": "Відхилити"
+      },
       "deleteAccount": {
         "submitBtnLabel": "OK",
         "cancelBtnLabel": "Відхилити",
@@ -578,7 +585,8 @@
     "actionMessages": {
       "createBankAccountSuccess": "Новий рахунок успішно створено",
       "deleteAccountSuccess": "Рахунок успішно видалено",
-      "transferFundSuccess": "Переказ коштів успішно виконано"
+      "transferFundSuccess": "Переказ коштів успішно виконано",
+      "accountReplenishmentSuccess": "Рахунок успішно поповнено"
     },
     "errors": {
       "general": "Щось пішло не так!",
@@ -601,7 +609,14 @@
       },
       "transferFunds": {
         "differentCurrencies": "Ви не можете виконати переказ на рахунок в іншій валюті",
-        "notEnoughFunds": "У Вас недостатньо коштів"
+        "notEnoughFunds": "У Вас недостатньо коштів",
+        "accountNotFound": "Рахунок з таким ID не знайдено",
+        "fieldsValidation": {
+          "requiredAmount": "Вкажіть суму",
+          "requiredAccountFrom": "Вкажіть рахунок з якого здійснюється переказ",
+          "requiredAccountTo": "Вкажіть рахунок призначення",
+          "requireCurrency": "Вкажіть валюту"
+        }
       }
     }
   },

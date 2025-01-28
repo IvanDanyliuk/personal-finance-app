@@ -7,7 +7,7 @@ import { BankAccountSchema, bankAccountSchema } from '../types/form-schemas/bank
 import { db } from '@/db';
 import { removeFalseyFields } from '../helpers';
 import { AccountType } from '../types/bank';
-import { transferFundsSchema } from '../types/form-schemas/transfer-funds';
+import { replenishAccountSchema, transferFundsSchema } from '../types/form-schemas/transfer-funds';
 
 
 export const getFunds = async () => {
@@ -197,6 +197,79 @@ export const transferFunds = async (formData: FormData) => {
       data: { 
         balance: destinationAccount!.balance + +validatedFields.data.amount 
       } 
+    });
+
+    revalidatePath('/');
+
+    return {
+      status: ActionStatus.Success,
+      error: null,
+    };
+  } catch (error: any) {
+    return {
+      status: ActionStatus.Failed,
+      error: error.message,
+    };
+  }
+};
+
+export const replenishAccount = async (formData: FormData) => {
+  try {
+    const session = await auth();
+
+    const validatedFields = replenishAccountSchema.safeParse({
+      userId: formData.get('userId'),
+      accountId: formData.get('accountId'),
+      amount: formData.get('amount') ? +formData.get('amount')! : undefined,
+    });
+
+    if(!validatedFields.success) {
+      return {
+        status: ActionStatus.Failed,
+        fieldError: validatedFields.error.flatten().fieldErrors,
+      };
+    }
+
+    if(session && session.user && session.user.id !== validatedFields.data.userId) {
+      throw new Error('HomePage.errors.wrongUserId');
+    }
+
+    const account = await db.bankAccount.findFirst({
+      where: {
+        id: validatedFields.data.accountId,
+        userId: validatedFields.data.userId
+      },
+      include: {
+        bank: true,
+      },
+    });
+
+    if(!account) {
+      throw new Error('HomePage.errors.transferFunds.accountNotFound');
+    }
+
+    await db.bankAccount.update({
+      where: {
+        id: validatedFields.data.accountId,
+        userId: validatedFields.data.userId
+      },
+      data: {
+        balance: account.balance + +validatedFields.data.amount,
+      },
+    });
+
+    await db.income.create({
+      data: {
+        userId: validatedFields.data.userId, 
+        date: new Date(), 
+        amount: +validatedFields.data.amount, 
+        currency: account.currency, 
+        bankAccountId: account.id, 
+        source: 'replenishment', 
+        comment: account.type === AccountType.BankAccount 
+          ? `№${account.accountNumber} (${account.bank?.name})` 
+          : '-',
+      }
     });
 
     revalidatePath('/');
