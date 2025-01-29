@@ -283,19 +283,24 @@ export const getRecentActivity = async ({
     const currentUser = await getUser(session!.user!.email!);
 
     const currentYear = new Date().getFullYear();
+    
+    const dateQuery = !dateFrom && !dateTo 
+    ? removeFalseyFields({
+        gte: new Date(`${currentYear}-01-01T00:00:00.000Z`),
+        lt: new Date(`${currentYear + 1}-01-01T00:00:00.000Z`),
+      }) 
+    : removeFalseyFields({
+      gte: dateFrom ? new Date(dateFrom) : null, 
+      lte: dateTo ? new Date(dateTo) : null,
+    });
+
     const query = !dateFrom && !dateTo 
       ? removeFalseyFields({
-          date: removeFalseyFields({
-            gte: new Date(`${currentYear}-01-01T00:00:00.000Z`),
-            lt: new Date(`${currentYear + 1}-01-01T00:00:00.000Z`),
-          }),
+          date: dateQuery,
           currency: currency || currentUser?.currency,
         }) 
       : removeFalseyFields({ 
-          date: removeFalseyFields({
-            gte: dateFrom ? new Date(dateFrom) : null, 
-            lte: dateTo ? new Date(dateTo) : null,
-          }),
+          date: dateQuery,
           currency: currency || currentUser?.currency,
         });
 
@@ -331,24 +336,43 @@ export const getRecentActivity = async ({
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
       .slice(0, 10);
 
-    const topIncome = await db.income.findFirst({
-      orderBy: {
-        amount: SortOrder.Desc
+    const allIncomes = await db.income.findMany({
+      where: {
+        userId: currentUser?.id,
+        date: dateQuery
+      }
+    });
+    const allExpenses = await db.expense.findMany({
+      where: {
+        userId: currentUser?.id,
+        date: dateQuery
       }
     });
 
-    const topExpense = await db.expense.findFirst({
-      orderBy: {
-        amount: SortOrder.Desc
+    function getTopByCurrency<T extends { currency: string; amount: number }>(
+      items: T[]
+    ): T[] {
+      const topItemsMap = new Map<string, T>();
+
+      for (const item of items) {
+        const existing = topItemsMap.get(item.currency);
+        if (!existing || item.amount > existing.amount) {
+          topItemsMap.set(item.currency, item);
+        }
       }
-    });
+
+      return Array.from(topItemsMap.values());
+    }
+
+    const topIncomes = getTopByCurrency(allIncomes);
+    const topExpenses = getTopByCurrency(allExpenses);
 
     return {
       status: ActionStatus.Success,
       data: {
         recentTransactions,
-        topIncome,
-        topExpense,
+        topIncomes,
+        topExpenses,
       },
       error: null,
     };
@@ -357,8 +381,8 @@ export const getRecentActivity = async ({
       status: ActionStatus.Failed,
       data: {
         recentTransactions: [],
-        topIncome: {},
-        topExpense: {}
+        topIncome: [],
+        topExpense: []
       },
       error: error.message,
     };

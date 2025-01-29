@@ -11,24 +11,33 @@ import {
 } from '@/components/ui/table';
 import { useTranslations } from 'next-intl';
 import { cn } from '@/lib/utils';
+import { IncomeSchema } from '@/lib/types/form-schemas/incomes';
+import { ExpenseSchema } from '@/lib/types/form-schemas/expenses';
 
+interface Income extends IncomeSchema {
+  id: string;
+};
+
+interface Expense extends ExpenseSchema {
+  id: string;
+};
 
 interface IRecentActivity {
   data: {
     recentTransactions: any[];
-    topIncome?: any;
-    topExpense?: any;
+    topIncomes?: Income[];
+    topExpenses?: Expense[];
   };
 };
 
 
 export const RecentActivity: React.FC<IRecentActivity> = ({ data }) => {
-  const { recentTransactions, topIncome, topExpense } = data;
+  const { recentTransactions, topIncomes, topExpenses } = data;
 
   const t = useTranslations();
 
   return (
-    <div className='relative w-fit px-3 flex flex-col md:flex-row items-center gap-6'>
+    <div className='relative w-fit px-3 flex flex-col md:flex-row gap-6'>
       <div className='flex-1'>
         <h2 className='mb-3 text-base text-center font-semibold'>
           {t('AnalyticsPage.recentActivity.recentActivityTable.title')}
@@ -93,25 +102,91 @@ export const RecentActivity: React.FC<IRecentActivity> = ({ data }) => {
           </TableBody>
         </Table>
       </div>
-      <div>
-        {topIncome && (
-          <div className='flex items-center gap-3 font-semibold'>
-            <h3 className='text-lg text-primary-7'>
+      <div className='relative flex flex-1 flex-col md:flex-row gap-6'>
+        {topIncomes && (
+          <div className='flex-1'>
+            <h2 className='mb-3 text-base text-center font-semibold'>
               {t('AnalyticsPage.recentActivity.topIncome')}
-            </h3>
-            <p>
-              {`${topIncome.currency.toUpperCase()} ${topIncome.amount}`}
-            </p>
+            </h2>
+            <Table>
+              <TableHeader className='text-sm border-none'>
+                <TableRow className='text-sm border-none'>
+                  <TableHead className='px-5 bg-background-normal rounded-l-full'>
+                    {t('AnalyticsPage.recentActivity.recentActivityTable.dateColLabel')}
+                  </TableHead>
+                  <TableHead className='px-5 bg-background-normal'>
+                    {t('AnalyticsPage.recentActivity.recentActivityTable.amountColLabel')}
+                  </TableHead>
+                  <TableHead className='px-5 bg-background-normal'>
+                    {t('AnalyticsPage.recentActivity.recentActivityTable.currencyColLabel')}
+                  </TableHead>
+                  <TableHead className='px-5 bg-background-normal rounded-r-full'>
+                    {t('AnalyticsPage.recentActivity.recentActivityTable.categoryColLabel')}
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {topIncomes.map(income => (
+                  <TableRow key={crypto.randomUUID()} className='text-xs'>
+                    <TableCell className='px-5 font-medium'>
+                      {format(income.date, 'dd.MM.yyyy')}
+                    </TableCell>
+                    <TableCell className='px-5 font-medium'>
+                      {income.amount}
+                    </TableCell>
+                    <TableCell className='px-5'>
+                      {t(`General.currencies.${income.currency}`)}
+                    </TableCell>
+                    <TableCell className='px-5'>
+                      {t(`IncomesPage.income_sources.${income.source}`)}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </div>
         )}
-        {topExpense && (
-          <div className='flex items-center gap-3 font-semibold'>
-            <h3 className='text-lg text-primary-7'>
+        {topExpenses && (
+          <div className='flex-1'>
+            <h2 className='mb-3 text-base text-center font-semibold'>
               {t('AnalyticsPage.recentActivity.topExpense')}
-            </h3>
-            <p>
-              {`${topExpense.currency.toUpperCase()} ${topExpense.amount}`}
-            </p>
+            </h2>
+            <Table>
+              <TableHeader className='text-sm border-none'>
+                <TableRow className='text-sm border-none'>
+                  <TableHead className='px-5 bg-background-normal rounded-l-full'>
+                    {t('AnalyticsPage.recentActivity.recentActivityTable.dateColLabel')}
+                  </TableHead>
+                  <TableHead className='px-5 bg-background-normal'>
+                    {t('AnalyticsPage.recentActivity.recentActivityTable.amountColLabel')}
+                  </TableHead>
+                  <TableHead className='px-5 bg-background-normal'>
+                    {t('AnalyticsPage.recentActivity.recentActivityTable.currencyColLabel')}
+                  </TableHead>
+                  <TableHead className='px-5 bg-background-normal rounded-r-full'>
+                    {t('AnalyticsPage.recentActivity.recentActivityTable.categoryColLabel')}
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {topExpenses.map(expense => (
+                  <TableRow key={crypto.randomUUID()} className='text-xs'>
+                    <TableCell className='px-5 font-medium'>
+                      {format(expense.date, 'dd.MM.yyyy')}
+                    </TableCell>
+                    <TableCell className='px-5 font-medium'>
+                      {expense.amount}
+                    </TableCell>
+                    <TableCell className='px-5'>
+                      {t(`General.currencies.${expense.currency}`)}
+                    </TableCell>
+                    <TableCell className='px-5'>
+                      {t(`ExpensesPage.expense_destinations.${expense.category}`)}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </div>
         )}
       </div>
