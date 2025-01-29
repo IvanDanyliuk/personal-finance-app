@@ -144,6 +144,13 @@
       "termsAndPrivacyLink": "условия политики и приватности",
       "googleBtnTooltip": "Зарегистрироваться через Google"
     },
+    "authChips": {
+      "manageFinances": "Управляйте Вашими финансами",
+      "trackTransactions": "Отслеживайте транзакции",
+      "createBudgets": "Создавайте бюджеты",
+      "achieveGoals": "Достигайте цели",
+      "viewAnalytics": "Смотрите аналитику"
+    },
     "actionMessages": {
       "signInSuccess": "Добро пожаловать!",
       "signUpSuccess": "Добро пожаловать!"

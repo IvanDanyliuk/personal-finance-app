@@ -144,6 +144,13 @@
       "termsAndPrivacyLink": "умовами політики приватності",
       "googleBtnTooltip": "Заруєструватися через Google"
     },
+    "authChips": {
+      "manageFinances": "Керуйте Вашими фінансами",
+      "trackTransactions": "Відслідковуйте транзакції",
+      "createBudgets": "Створюйте бюджети",
+      "achieveGoals": "Досягайте цілі",
+      "viewAnalytics": "Дивіться аналітику"
+    },
     "actionMessages": {
       "signInSuccess": "Ласкаво просимо!",
       "signUpSuccess": "Ласкаво просимо!"

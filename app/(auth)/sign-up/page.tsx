@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { Separator } from '@/components/ui/separator';
-import { SignInWithProvider, SignUpForm } from '../_components';
-import GoogleIcon from '../../../public/images/google.svg';
 import { useTranslations } from 'next-intl';
+import { Separator } from '@/components/ui/separator';
+import { DecorChips, SignInWithProvider, SignUpForm } from '../_components';
+import GoogleIcon from '../../../public/images/google.svg';
 
 
 export default function SignUpPage() {
@@ -44,8 +44,8 @@ export default function SignUpPage() {
           </Link>
         </div>
       </div>
-      <div className='w-1/2 h-full hidden md:flex bg-slate-400'>
-
+      <div className='w-1/2 h-full hidden md:flex bg-background'>
+        <DecorChips />
       </div>
     </div>
   );

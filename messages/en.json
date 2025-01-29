@@ -144,6 +144,13 @@
       "termsAndPrivacyLink": "Terms & Privacy",
       "googleBtnTooltip": "Sign up with Google"
     },
+    "authChips": {
+      "manageFinances": "Manage your finances",
+      "trackTransactions": "Track transactions",
+      "createBudgets": "Create budgets",
+      "achieveGoals": "Achieve saving goals",
+      "viewAnalytics": "View analytics"
+    },
     "actionMessages": {
       "signInSuccess": "Welcome!",
       "signUpSuccess": "Welcome!"
