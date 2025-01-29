@@ -72,7 +72,10 @@ export const SignUpForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmitForm)}>
+    <form 
+      onSubmit={handleSubmit(onSubmitForm)} 
+      className='space-y-3'
+    >
       <Controller 
         name='name'
         control={control}

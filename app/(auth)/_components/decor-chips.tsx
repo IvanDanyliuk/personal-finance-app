@@ -21,22 +21,22 @@ export const DecorChips: React.FC = () => {
       <Chip 
         icon={<ArrowRightLeft />} 
         label='Auth.authChips.trackTransactions' 
-        className='absolute top-20 right-6'
+        className='absolute top-24 right-6'
       />
       <Chip 
         icon={<ArrowRightLeft />} 
         label='Auth.authChips.createBudgets' 
-        className='absolute top-16 left-22'
+        className='absolute bottom-16 right-16'
       />
       <Chip 
         icon={<Goal />} 
         label='Auth.authChips.achieveGoals' 
-        className='absolute top-28 left-28'
+        className='absolute bottom-36 left-28'
       />
       <Chip 
         icon={<ChartNoAxesCombined />} 
         label='Auth.authChips.viewAnalytics' 
-        className='absolute top-36 right-56'
+        className='absolute top-44 left-56'
       />
     </div>
   );

@@ -55,7 +55,10 @@ export const SignInForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmitForm)}>
+    <form 
+      onSubmit={handleSubmit(onSubmitForm)} 
+      className='space-y-3'
+    >
       <Controller 
         name='email'
         control={control}
@@ -91,7 +94,7 @@ export const SignInForm = () => {
         />
         <Link 
           href='/' 
-          className='text-sm text-primary-8 font-semibold'
+          className='ml-3 text-sm text-primary-8 font-semibold'
         >
           {t('signinPage.forgotPasswordLinkLabel')}
         </Link>
