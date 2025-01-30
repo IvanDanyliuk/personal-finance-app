@@ -18,7 +18,7 @@ export const getYearsOfSavings = async () => {
     const incomeYears = await db.income.groupBy({
       by: ['date'],
       where: {
-        userId: session.user.id
+        userId: session.user!.id!
       },
       _count: {
         id: true,
@@ -31,7 +31,7 @@ export const getYearsOfSavings = async () => {
     const expenseYears = await db.expense.groupBy({
       by: ['date'],
       where: {
-        userId: session.user.id
+        userId: session.user!.id!
       },
       _count: {
         id: true,
@@ -97,7 +97,7 @@ export const getMonthlySavingsControlDataByYears = async ({
 
     const incomes = await db.income.findMany({
       where: {
-        userId: session.user.id,
+        userId: currentUser!.id!,
         ...query,
       },
       select: {
@@ -109,7 +109,7 @@ export const getMonthlySavingsControlDataByYears = async ({
 
     const expenses = await db.expense.findMany({
       where: {
-        userId: session.user.id,
+        userId: currentUser!.id!,
         ...query,
       },
       select: {
@@ -466,8 +466,6 @@ export const getFundsSummary = async ({
       currency,
       value: _sum.amount || 0,
     }));
-
-    console.log('SUMMARY DATA', { incomeSummary, expensesSummary })
 
     return {
       status: ActionStatus.Success,

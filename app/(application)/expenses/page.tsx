@@ -1,10 +1,8 @@
-import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { deleteExpense, getExpenses, updateExpense } from '@/lib/actions/expense.actions';
 import { removeFalseyFields } from '@/lib/helpers';
 import { ColType } from '@/lib/types/common.types';
 import { DataTable } from '@/components/data-rendering';
-import NoDataPlaceholder from '@/public/images/investment.svg';
 import { CreateExpenseModal, ExpenseFilters } from './_components';
 import { getBankAccountCount, getFunds } from '@/lib/actions/account.actions';
 import { NoAccountsDataPlaceholder, NoFundsDataPlaceholder } from '@/components/common';

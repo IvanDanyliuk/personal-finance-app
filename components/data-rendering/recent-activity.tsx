@@ -48,9 +48,7 @@ export const RecentActivity: React.FC<IRecentActivity> = ({ data }) => {
     incomeSummary, 
     expensesSummary 
   } = data;
-
-  console.log('RECENT ACTIVITY', data)
-
+  
   const t = useTranslations();
 
   return (
