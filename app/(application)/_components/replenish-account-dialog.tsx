@@ -37,7 +37,7 @@ export const ReplenishAccountDialog: React.FC<IReplenishAccountDialog> = ({
   } = useForm<ReplenishAccountSchema>({
     resolver: zodResolver(replenishAccountSchema),
     defaultValues: {
-      userId: session.data!.user!.id,
+      userId: '',
       accountId: currentAccountId,
       amount: 0,
     },
@@ -45,7 +45,7 @@ export const ReplenishAccountDialog: React.FC<IReplenishAccountDialog> = ({
 
   const onFormSubmit: SubmitHandler<ReplenishAccountSchema> = async (data) => {
     const formData = new FormData();
-    formData.append('userId', data.userId);
+    formData.append('userId', session.data!.user!.id!);
     formData.append('accountId', data.accountId);
     formData.append('amount', data.amount.toString());
 

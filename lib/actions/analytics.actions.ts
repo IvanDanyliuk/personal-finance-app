@@ -17,6 +17,9 @@ export const getYearsOfSavings = async () => {
 
     const incomeYears = await db.income.groupBy({
       by: ['date'],
+      where: {
+        userId: session.user.id
+      },
       _count: {
         id: true,
       },
@@ -27,6 +30,9 @@ export const getYearsOfSavings = async () => {
     
     const expenseYears = await db.expense.groupBy({
       by: ['date'],
+      where: {
+        userId: session.user.id
+      },
       _count: {
         id: true,
       },

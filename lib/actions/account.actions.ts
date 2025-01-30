@@ -107,6 +107,34 @@ export const createBankAccount = async (formData: FormData) => {
   }
 };
 
+export const getBankAccountCount = async () => {
+  try {
+    const session = await auth();
+
+    if(!session || !session.user) {
+      throw new Error('AnalyticsPage.errors.wrongUserId');
+    }
+
+    const count = await db.bankAccount.count({
+      where: {
+        userId: session.user.id!,
+      }
+    });
+
+    return {
+      status: ActionStatus.Success,
+      count,
+      error: null,
+    };
+  } catch (error: any) {
+    return {
+      status: ActionStatus.Failed,
+      count: 0,
+      error: error.message,
+    };
+  }
+}
+
 export const deleteAccount = async (id: string) => {
   try {
     const session = await auth();

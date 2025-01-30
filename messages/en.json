@@ -335,6 +335,8 @@
   "IncomesPage": {
     "title": "Incomes",
     "noData": "You haven't added any information about your incomes",
+    "noBankAccounts": "Add information about your funds. Create your first bank account",
+    "backHomeLinkLabel": "Go back to Home page",
     "createIncomeForm": {
       "triggerBtnLabel": "Add",
       "triggerBtnTooltip": "Add a new income item",
@@ -414,6 +416,8 @@
   "ExpensesPage": {
     "title": "Expenses",
     "noData": "You haven't added any information about your expenses",
+    "noBankAccounts": "Add information about your funds. Create your first bank account",
+    "backHomeLinkLabel": "Go back to Home page",
     "createExpenseForm": {
       "triggerBtnLabel": "Add",
       "triggerBtnTooltip": "Add a new expense item",
@@ -652,6 +656,8 @@
         "expenses": "Expenses structure"
       },
       "noDataMessages": {
+        "noDataFoundTitle": "No data found",
+        "noDataFoundMessage": "Add information about your income and expenses",
         "cashFlow": "Cash Flow data not found",
         "income": "Income data not found",
         "expenses": "Expenses data not found"

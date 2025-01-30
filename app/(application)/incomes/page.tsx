@@ -1,13 +1,12 @@
 import { getTranslations } from 'next-intl/server';
 import { CreateIncomeModal } from './_components';
 import { deleteIncome, getIncomes, updateIncome } from '@/lib/actions/income.actions';
-import NoDataPlaceholder from '@/public/images/investment.svg';
-import Image from 'next/image';
 import { removeFalseyFields } from '@/lib/helpers';
 import { IncomeFilters } from './_components/income-filters';
 import { ColType } from '@/lib/types/common.types';
 import { DataTable } from '@/components/data-rendering';
-import { getFunds } from '@/lib/actions/account.actions';
+import { getBankAccountCount, getFunds } from '@/lib/actions/account.actions';
+import { NoAccountsDataPlaceholder, NoFundsDataPlaceholder } from '@/components/common';
 
 
 const columns: ColType[] = [
@@ -73,6 +72,8 @@ export default async function IncomesPage({ searchParams: {
   const additionalParams = removeFalseyFields({
     sortBy, order, dateFrom, dateTo, amountFrom, amountTo, source, currency
   });
+
+  const { count } = await getBankAccountCount();
   const incomes = await getIncomes({ page, items, ...additionalParams });
   const funds = await getFunds();
 
@@ -84,7 +85,9 @@ export default async function IncomesPage({ searchParams: {
       <div className='w-full flex flex-col gap-3'>
         <div className='w-full flex justify-between items-center'>
           <IncomeFilters />
-          <CreateIncomeModal funds={funds.data} />
+          {count > 0 && (
+            <CreateIncomeModal funds={funds.data} />
+          )}
         </div>
         {incomes.data.length > 0 ? (
           <DataTable 
@@ -97,18 +100,18 @@ export default async function IncomesPage({ searchParams: {
             error={incomes.error} 
           />
         ) : (
-          <div className='w-full flex flex-col justify-center items-center gap-8'>
-            <Image 
-              src={NoDataPlaceholder} 
-              alt='No data' 
-              width={500} 
-              height={500} 
-            />
-            <p className='text-lg'>
-              {t('IncomesPage.noData')}
-            </p>
-            <CreateIncomeModal funds={funds.data} />
-          </div>
+          <>
+            {count === 0 ? (
+              <NoAccountsDataPlaceholder 
+                title='IncomesPage.noBankAccounts' 
+                linkLabel='IncomesPage.backHomeLinkLabel' 
+              />
+            ) : (
+              <NoFundsDataPlaceholder title='IncomesPage.noData'>
+                <CreateIncomeModal funds={funds.data} />
+              </NoFundsDataPlaceholder>
+            )}
+          </>
         )}
       </div>
     </div>

@@ -1,5 +1,8 @@
+import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 import { getMonthlySavingsControlDataByYears, getYearsOfSavings } from '@/lib/actions/analytics.actions';
 import { SavingsData } from './_components';
+import NoDataPlaceholder from '@/public/images/banknote.svg';
 
 
 export default async function AnalyticsPage({ 
@@ -13,6 +16,7 @@ export default async function AnalyticsPage({
     dateTo: string; 
   } 
 }) {
+  const t = await getTranslations();
   const years = await getYearsOfSavings();
 
   const period = {
@@ -32,7 +36,15 @@ export default async function AnalyticsPage({
             data={analyticsData.data} 
           />
         ) : (
-          <div>No data found</div>
+          <div className='w-full h-full flex flex-col justify-center items-center gap-3'>
+            <Image src={NoDataPlaceholder} alt='No data' width={500} height={500} />
+            <h2 className='text-xl text-primary-7 font-bold'>
+              {t('AnalyticsPage.charts.noDataMessages.noDataFoundTitle')}
+            </h2>
+            <p className='text-secondary-4'>
+              {t('AnalyticsPage.charts.noDataMessages.noDataFoundMessage')}
+            </p>
+          </div>
         )
       }
     </>

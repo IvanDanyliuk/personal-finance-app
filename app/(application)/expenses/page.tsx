@@ -6,7 +6,8 @@ import { ColType } from '@/lib/types/common.types';
 import { DataTable } from '@/components/data-rendering';
 import NoDataPlaceholder from '@/public/images/investment.svg';
 import { CreateExpenseModal, ExpenseFilters } from './_components';
-import { getFunds } from '@/lib/actions/account.actions';
+import { getBankAccountCount, getFunds } from '@/lib/actions/account.actions';
+import { NoAccountsDataPlaceholder, NoFundsDataPlaceholder } from '@/components/common';
 
 
 const columns: ColType[] = [
@@ -101,6 +102,7 @@ export default async function ExpensesPage({ searchParams: {
     items, 
     ...additionalParams 
   });
+  const { count } = await getBankAccountCount();
   const funds = await getFunds();
 
   return (
@@ -111,7 +113,9 @@ export default async function ExpensesPage({ searchParams: {
       <div className='w-full flex flex-col gap-3'>
         <div className='w-full flex justify-between items-center'>
           <ExpenseFilters />
-          <CreateExpenseModal funds={funds.data} />
+          {count > 0 && (
+            <CreateExpenseModal funds={funds.data} />
+          )}
         </div>
         {expenses.data.length > 0 ? (
           <DataTable 
@@ -124,18 +128,18 @@ export default async function ExpensesPage({ searchParams: {
             error={expenses.error} 
           />
         ) : (
-          <div className='w-full flex flex-col justify-center items-center gap-8'>
-            <Image 
-              src={NoDataPlaceholder} 
-              alt='No data' 
-              width={500} 
-              height={500} 
-            />
-            <p className='text-lg'>
-              {t('ExpensesPage.noData')}
-            </p>
-            <CreateExpenseModal funds={funds.data} />
-          </div>
+          <>
+            {count === 0 ? (
+              <NoAccountsDataPlaceholder 
+                title='ExpensesPage.noBankAccounts' 
+                linkLabel='ExpensesPage.backHomeLinkLabel' 
+              />
+            ) : (
+              <NoFundsDataPlaceholder title='ExpensesPage.noData'>
+                <CreateExpenseModal funds={funds.data} />
+              </NoFundsDataPlaceholder>
+            )}
+          </>
         )}
       </div>
     </div>

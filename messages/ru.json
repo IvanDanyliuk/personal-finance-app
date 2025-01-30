@@ -335,6 +335,8 @@
   "IncomesPage": {
     "title": "Доходы",
     "noData": "Вы еще не добавили никакой информации о Ваших доходах",
+    "noBankAccounts": "Добавьте информацию о Ваших средствах. Создайте свой первый счет",
+    "backHomeLinkLabel": "Вернуться на главную",
     "createIncomeForm": {
       "triggerBtnLabel": "Добавить",
       "triggerBtnTooltip": "Добавить новую статью дохода",
@@ -414,6 +416,8 @@
   "ExpensesPage": {
     "title": "Расходы",
     "noData": "Вы еще не добавили никакой информации о Ваших расходах",
+    "noBankAccounts": "Добавьте информацию о Ваших средствах. Создайте свой первый счет",
+    "backHomeLinkLabel": "Вернуться на главную",
     "createExpenseForm": {
       "triggerBtnLabel": "Добавить",
       "triggerBtnTooltip": "Добавить новую статью затрат",
@@ -651,6 +655,8 @@
         "expenses": "Структура затрат"
       },
       "noDataMessages": {
+        "noDataFoundTitle": "Данные не найдены",
+        "noDataFoundMessage": "Добавьте информацию Ваших доходах и затратах",
         "cashFlow": "Данные о денежном потоке не найдены",
         "income": "Данные о доходах не найдены",
         "expenses": "Данные о затратах не найдены"
