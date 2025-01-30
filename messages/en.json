@@ -667,7 +667,9 @@
         "accountColLabel": "Account"
       },
       "topIncome": "Top income",
-      "topExpense": "Top expense"
+      "topExpense": "Top expense",
+      "totalIncome": "Total income",
+      "totalExpenses": "Total expenses"
     },
     "errors": {
       "general": "Something went wrong!",

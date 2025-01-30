@@ -666,7 +666,9 @@
         "accountColLabel": "Счет"
       },
       "topIncome": "Наибольший доход",
-      "topExpense": "Наибольшая трата"
+      "topExpense": "Наибольшая трата",
+      "totalIncome": "Итого доходы",
+      "totalExpenses": "Итого расходы"
     },
     "errors": {
       "general": "Что-то пошло не так!",

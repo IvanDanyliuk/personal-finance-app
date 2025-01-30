@@ -388,3 +388,97 @@ export const getRecentActivity = async ({
     };
   }
 };
+
+export const getFundsSummary = async ({
+  dateFrom, 
+  dateTo,
+  currency
+}: {
+  dateFrom?: string; 
+  dateTo?: string;
+  currency?: string;
+}) => {
+  try {
+    const session = await auth();
+
+    if(!session || !session.user) {
+      throw new Error('AnalyticsPage.errors.wrongUserId');
+    }
+
+    const currentUser = await getUser(session!.user!.email!);
+
+    const currentYear = new Date().getFullYear();
+    
+    const dateQuery = !dateFrom && !dateTo 
+      ? removeFalseyFields({
+          gte: new Date(`${currentYear}-01-01T00:00:00.000Z`),
+          lt: new Date(`${currentYear + 1}-01-01T00:00:00.000Z`),
+        }) 
+      : removeFalseyFields({
+        gte: dateFrom ? new Date(dateFrom) : null, 
+        lte: dateTo ? new Date(dateTo) : null,
+      });
+
+    const query = !dateFrom && !dateTo 
+      ? removeFalseyFields({
+          date: dateQuery,
+          currency: currency || currentUser?.currency,
+        }) 
+      : removeFalseyFields({ 
+          date: dateQuery,
+          currency: currency || currentUser?.currency,
+        });
+
+    const groupedIncomes = await db.income.groupBy({
+      by: ['currency'],
+      where: {
+        userId: session.user.id, 
+        ...query
+      },
+      _sum: {
+        amount: true,
+      },
+    });
+
+    const groupedExpenses = await db.expense.groupBy({
+      by: ['currency'],
+      where: {
+        userId: session.user.id, 
+        ...query
+      },
+      _sum: {
+        amount: true,
+      },
+    });
+  
+    const incomeSummary = groupedIncomes.map(({ currency, _sum }) => ({
+      currency,
+      value: _sum.amount || 0,
+    }));
+
+    const expensesSummary = groupedExpenses.map(({ currency, _sum }) => ({
+      currency,
+      value: _sum.amount || 0,
+    }));
+
+    console.log('SUMMARY DATA', { incomeSummary, expensesSummary })
+
+    return {
+      status: ActionStatus.Success,
+      data: {
+        incomeSummary,
+        expensesSummary
+      },
+      error: null,
+    };
+  } catch (error: any) {
+    return {
+      status: ActionStatus.Failed,
+      data: {
+        incomeSummary: [],
+        expensesSummary: []
+      },
+      error: error.message,
+    };
+  }
+};

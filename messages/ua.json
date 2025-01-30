@@ -668,7 +668,9 @@
         "accountColLabel": "Рахунок"
       },
       "topIncome": "Найбільший дохід",
-      "topExpense": "Найбільша витрата"
+      "topExpense": "Найбільша витрата",
+      "totalIncome": "Всього доходів",
+      "totalExpenses": "Всього витрат"
     },
     "errors": {
       "general": "Щось пішло не так!",
