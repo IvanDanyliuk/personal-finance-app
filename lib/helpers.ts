@@ -80,3 +80,11 @@ export const formatNumber = (num: number, numsPerSection: number) => {
   const regex = new RegExp(`(\\d)(?=(\\d{${numsPerSection}})+(?!\\d))`, "g");
   return stringifiedNum.toString().replace(regex, '$1 ');
 };
+
+export const getCurrentDate = () => {
+  const currentDate = new Date();
+      const currentDay = currentDate.getDate();
+      const currentMonth = currentDate.getMonth() + 1;
+      const currentYear = currentDate.getFullYear();
+      return new Date(`${currentYear}-${currentMonth < 10 ? '0' + currentMonth : currentMonth}-${currentDay < 10 ? '0' + currentDay : currentDay}T00:00:00.000Z`);
+};

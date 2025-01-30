@@ -53,7 +53,7 @@ export const ReplenishAccountDialog: React.FC<IReplenishAccountDialog> = ({
 
     if(status === ActionStatus.Success && !error) {
       toast({
-        description: t(('HomePage.actionMessages.transferFundSuccess')),
+        description: t(('HomePage.actionMessages.accountReplenishmentSuccess')),
         variant: 'default',
         className: 'bg-success-1 text-success-2'
       });

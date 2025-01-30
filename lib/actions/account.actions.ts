@@ -5,7 +5,7 @@ import { ActionStatus } from '../types/common.types';
 import { revalidatePath } from 'next/cache';
 import { BankAccountSchema, bankAccountSchema } from '../types/form-schemas/bank-account';
 import { db } from '@/db';
-import { removeFalseyFields } from '../helpers';
+import { getCurrentDate, removeFalseyFields } from '../helpers';
 import { AccountType } from '../types/bank';
 import { replenishAccountSchema, transferFundsSchema } from '../types/form-schemas/transfer-funds';
 
@@ -261,7 +261,7 @@ export const replenishAccount = async (formData: FormData) => {
     await db.income.create({
       data: {
         userId: validatedFields.data.userId, 
-        date: new Date(), 
+        date: getCurrentDate(), 
         amount: +validatedFields.data.amount, 
         currency: account.currency, 
         bankAccountId: account.id, 

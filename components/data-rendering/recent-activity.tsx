@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils';
 import { IncomeSchema } from '@/lib/types/form-schemas/incomes';
 import { ExpenseSchema } from '@/lib/types/form-schemas/expenses';
 
+
 interface Income extends IncomeSchema {
   id: string;
 };
