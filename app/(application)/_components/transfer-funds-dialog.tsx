@@ -50,7 +50,7 @@ export const TransferFundsDialog: React.FC<ITransferFundsDialog> = ({
   } = useForm<TransferFundsSchema>({
     resolver: zodResolver(transferFundsSchema),
     defaultValues: {
-      userId: session.data!.user!.id,
+      userId: '',
       accountFromId: currentAccountId,
       accountToId: '',
       amount: 0,
@@ -60,7 +60,7 @@ export const TransferFundsDialog: React.FC<ITransferFundsDialog> = ({
 
   const onFormSubmit: SubmitHandler<TransferFundsSchema> = async (data) => {
     const formData = new FormData();
-    formData.append('userId', data.userId);
+    formData.append('userId', session.data!.user!.id!);
     formData.append('accountFromId', data.accountFromId);
     formData.append('accountToId', data.accountToId);
     formData.append('amount', data.amount.toString());
