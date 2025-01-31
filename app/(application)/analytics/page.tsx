@@ -1,7 +1,10 @@
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
-import { getMonthlySavingsControlDataByYears, getYearsOfSavings } from '@/lib/actions/analytics.actions';
 import { SavingsData } from './_components';
+import { 
+  getMonthlySavingsControlDataByYears, 
+  getYearsOfSavings 
+} from '@/lib/actions/analytics.actions';
 import NoDataPlaceholder from '@/public/images/banknote.svg';
 
 

@@ -5,9 +5,9 @@ import { ActionStatus } from '../types/common.types';
 import { revalidatePath } from 'next/cache';
 import { BankAccountSchema, bankAccountSchema } from '../types/form-schemas/bank-account';
 import { db } from '@/db';
-import { getCurrentDate, removeFalseyFields } from '../helpers';
 import { AccountType } from '../types/bank';
 import { replenishAccountSchema, transferFundsSchema } from '../types/form-schemas/transfer-funds';
+import { getCurrentDate, removeFalseyFields } from '../helpers';
 
 
 export const getFunds = async () => {

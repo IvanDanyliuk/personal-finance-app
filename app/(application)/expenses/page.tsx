@@ -1,11 +1,11 @@
 import { getTranslations } from 'next-intl/server';
 import { deleteExpense, getExpenses, updateExpense } from '@/lib/actions/expense.actions';
-import { removeFalseyFields } from '@/lib/helpers';
-import { ColType } from '@/lib/types/common.types';
 import { DataTable } from '@/components/data-rendering';
+import { NoAccountsDataPlaceholder, NoFundsDataPlaceholder } from '@/components/common';
 import { CreateExpenseModal, ExpenseFilters } from './_components';
 import { getBankAccountCount, getFunds } from '@/lib/actions/account.actions';
-import { NoAccountsDataPlaceholder, NoFundsDataPlaceholder } from '@/components/common';
+import { ColType } from '@/lib/types/common.types';
+import { removeFalseyFields } from '@/lib/helpers';
 
 
 const columns: ColType[] = [

@@ -273,11 +273,11 @@ export const getFundsStructureByCategories = async ({
 export const getRecentActivity = async ({
   dateFrom, 
   dateTo,
-  currency
+  // currency
 }: {
   dateFrom?: string; 
   dateTo?: string;
-  currency?: string;
+  // currency?: string;
 }) => {
   try {
     const session = await auth();
@@ -291,29 +291,29 @@ export const getRecentActivity = async ({
     const currentYear = new Date().getFullYear();
     
     const dateQuery = !dateFrom && !dateTo 
-    ? removeFalseyFields({
-        gte: new Date(`${currentYear}-01-01T00:00:00.000Z`),
-        lt: new Date(`${currentYear + 1}-01-01T00:00:00.000Z`),
-      }) 
-    : removeFalseyFields({
-      gte: dateFrom ? new Date(dateFrom) : null, 
-      lte: dateTo ? new Date(dateTo) : null,
-    });
-
-    const query = !dateFrom && !dateTo 
       ? removeFalseyFields({
-          date: dateQuery,
-          currency: currency || currentUser?.currency,
+          gte: new Date(`${currentYear}-01-01T00:00:00.000Z`),
+          lt: new Date(`${currentYear + 1}-01-01T00:00:00.000Z`),
         }) 
-      : removeFalseyFields({ 
-          date: dateQuery,
-          currency: currency || currentUser?.currency,
-        });
+      : removeFalseyFields({
+        gte: dateFrom ? new Date(dateFrom) : null, 
+        lte: dateTo ? new Date(dateTo) : null,
+      });
+
+    // const query = !dateFrom && !dateTo 
+    //   ? removeFalseyFields({
+    //       date: dateQuery,
+    //       currency: currency || currentUser?.currency,
+    //     }) 
+    //   : removeFalseyFields({ 
+    //       date: dateQuery,
+    //       currency: currency || currentUser?.currency,
+    //     });
 
     const recentIncomes = await db.income.findMany({
       where: {
         userId: currentUser?.id,
-        ...query
+        date: dateQuery
       },
       orderBy: {
         date: SortOrder.Desc
@@ -327,7 +327,7 @@ export const getRecentActivity = async ({
     const recentExpenses = await db.expense.findMany({
       where: {
         userId: currentUser?.id,
-        ...query
+        date: dateQuery
       },
       orderBy: {
         date: SortOrder.Desc

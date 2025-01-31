@@ -78,113 +78,118 @@ export const ExpenseForm: React.FC<IExpenseForm> = ({ expenseToUpdate, action })
   }, [watchedCurrency, bankAccounts]);
 
   return (
-    <form onSubmit={handleSubmit(action)} className='flex flex-col gap-3'>
-      <div className='flex flex-col justify-between items-center gap-1'>
-        <Label htmlFor='date' className='w-full text-sm font-semibold'>
-          {t('ExpensesPage.createExpenseForm.dateFieldLabel')}
-        </Label>
+    <form onSubmit={handleSubmit(action)} className='w-full flex flex-col md:flex-row md:flex-wrap gap-3'>
+      <fieldset className='flex-1 space-y-3'>
+        <div className='flex flex-col justify-between items-center gap-1'>
+          <Label htmlFor='date' className='w-full text-sm font-semibold'>
+            {t('ExpensesPage.createExpenseForm.dateFieldLabel')}
+          </Label>
+          <Controller 
+            name='date'
+            control={control}
+            defaultValue={new Date()}
+            render={({ field }) => (
+              <DatePicker 
+                mode='single'
+                selected={field.value}
+                onSelect={field.onChange}
+                initialFocus
+                className='z-[1000]'
+              />
+            )}
+          />
+        </div>
         <Controller 
-          name='date'
+          name='amount'
           control={control}
-          defaultValue={new Date()}
           render={({ field }) => (
-            <DatePicker 
-              mode='single'
-              selected={field.value}
-              onSelect={field.onChange}
-              initialFocus
-              className='z-[1000]'
+            <TextField 
+              name='amount'
+              label={t('ExpensesPage.createExpenseForm.amountFieldLabel')}
+              type='number'
+              field={field}
+              disabled={isEditMode}
+              error={errors['amount']?.message}
             />
           )}
         />
-      </div>
-      <Controller 
-        name='amount'
-        control={control}
-        render={({ field }) => (
-          <TextField 
-            name='amount'
-            label={t('ExpensesPage.createExpenseForm.amountFieldLabel')}
-            type='number'
-            field={field}
-            disabled={isEditMode}
-            error={errors['amount']?.message}
-          />
-        )}
-      />
-      <Controller 
-        name='destination'
-        control={control}
-        render={({ field }) => (
-          <TextField 
-            name='destination'
-            label={t('ExpensesPage.createExpenseForm.destinationFieldLabel')}
-            field={field}
-            error={errors['destination']?.message}
-          />
-        )}
-      />
-      <Controller 
-        name='category'
-        control={control}
-        render={({ field }) => (
-          <SelectField 
-            name='category'
-            label={t('ExpensesPage.createExpenseForm.categoryFieldLabel')}
-            variant='vertical'
-            field={field}
-            placeholder={t('ExpensesPage.createExpenseForm.categoryPlaceholder')}
-            options={EXPENSE_CATEGORIES}
-            error={errors['category']?.message}
-          />
-        )}
-      />
-      <Controller 
-        name='currency'
-        control={control}
-        render={({ field }) => (
-          <SelectField 
-            name='currency'
-            label={t('ExpensesPage.createExpenseForm.currencyFieldLabel')}
-            variant='vertical'
-            field={field}
-            onHandleChange={handleCurrencyChange}
-            placeholder={t('ExpensesPage.createExpenseForm.currencyPlaceholder')}
-            options={CURRENCIES}
-            disabled={isEditMode}
-            error={errors['currency']?.message}
-          />
-        )}
-      />
-      <Controller 
-        name='bankAccountId'
-        control={control}
-        render={({ field }) => (
-          <SelectField 
-            name='bankAccountId'
-            label={t('IncomesPage.createIncomeForm.bankAccountFieldLabel')}
-            placeholder={t('IncomesPage.createIncomeForm.bankAccountPlaceholder')}
-            variant='vertical'
-            field={field}
-            disabled={(watchedCurrency && isEditMode) || !watchedCurrency}
-            options={accounts}
-            isLocalesActive={false}
-            error={errors['bankAccountId']?.message}
-          />
-        )}
-      />
-      <Controller 
-        name='comment'
-        control={control}
-        render={({ field }) => (
-          <TextAreaField 
-            name='comment'
-            label={t('ExpensesPage.createExpenseForm.commentFieldLabel')}
-            field={field}
-            error={errors['comment']?.message}
-          />
-        )}
-      />
+        <Controller 
+          name='category'
+          control={control}
+          render={({ field }) => (
+            <SelectField 
+              name='category'
+              label={t('ExpensesPage.createExpenseForm.categoryFieldLabel')}
+              variant='vertical'
+              field={field}
+              placeholder={t('ExpensesPage.createExpenseForm.categoryPlaceholder')}
+              options={EXPENSE_CATEGORIES}
+              error={errors['category']?.message}
+            />
+          )}
+        />
+        <Controller 
+          name='currency'
+          control={control}
+          render={({ field }) => (
+            <SelectField 
+              name='currency'
+              label={t('ExpensesPage.createExpenseForm.currencyFieldLabel')}
+              variant='vertical'
+              field={field}
+              onHandleChange={handleCurrencyChange}
+              placeholder={t('ExpensesPage.createExpenseForm.currencyPlaceholder')}
+              options={CURRENCIES}
+              disabled={isEditMode}
+              error={errors['currency']?.message}
+            />
+          )}
+        />
+        <Controller 
+          name='bankAccountId'
+          control={control}
+          render={({ field }) => (
+            <SelectField 
+              name='bankAccountId'
+              label={t('IncomesPage.createIncomeForm.bankAccountFieldLabel')}
+              placeholder={t('IncomesPage.createIncomeForm.bankAccountPlaceholder')}
+              variant='vertical'
+              field={field}
+              disabled={(watchedCurrency && isEditMode) || !watchedCurrency}
+              options={accounts}
+              isLocalesActive={false}
+              error={errors['bankAccountId']?.message}
+            />
+          )}
+        />
+      </fieldset>
+      <fieldset className='flex-1 space-y-3'>
+        <Controller 
+          name='destination'
+          control={control}
+          render={({ field }) => (
+            <TextField 
+              name='destination'
+              label={t('ExpensesPage.createExpenseForm.destinationFieldLabel')}
+              field={field}
+              error={errors['destination']?.message}
+            />
+          )}
+        />
+        <Controller 
+          name='comment'
+          control={control}
+          render={({ field }) => (
+            <TextAreaField 
+              name='comment'
+              label={t('ExpensesPage.createExpenseForm.commentFieldLabel')}
+              field={field}
+              rows={12}
+              error={errors['comment']?.message}
+            />
+          )}
+        />
+      </fieldset>
       <SubmitButton isSubmitting={isSubmitting}>
         {t('ExpensesPage.createExpenseForm.submitBtnLabel')}
       </SubmitButton>

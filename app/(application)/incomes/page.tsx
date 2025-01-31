@@ -1,12 +1,12 @@
 import { getTranslations } from 'next-intl/server';
 import { CreateIncomeModal } from './_components';
 import { deleteIncome, getIncomes, updateIncome } from '@/lib/actions/income.actions';
-import { removeFalseyFields } from '@/lib/helpers';
+import { DataTable } from '@/components/data-rendering';
+import { NoAccountsDataPlaceholder, NoFundsDataPlaceholder } from '@/components/common';
 import { IncomeFilters } from './_components/income-filters';
 import { ColType } from '@/lib/types/common.types';
-import { DataTable } from '@/components/data-rendering';
 import { getBankAccountCount, getFunds } from '@/lib/actions/account.actions';
-import { NoAccountsDataPlaceholder, NoFundsDataPlaceholder } from '@/components/common';
+import { removeFalseyFields } from '@/lib/helpers';
 
 
 const columns: ColType[] = [
