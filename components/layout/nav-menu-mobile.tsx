@@ -52,17 +52,17 @@ export const NavMenuMobile: React.FC = () => {
               <div className='mt-3 flex items-center gap-3'>
                 <Image 
                   src={userImage} 
-                  alt={session?.user?.name!} 
+                  alt={session!.user!.name!} 
                   width={40} 
                   height={40} 
                   className='rounded-full' 
                 />
                 <div>
                   <p className='text-foreground text-sm font-semibold'>
-                    {session?.user?.name!}
+                    {session!.user!.name!}
                   </p>
                   <p className='text-secondary-3 text-xs'>
-                    {session?.user?.email!}
+                    {session!.user!.email!}
                   </p>
                 </div>
               </div>
