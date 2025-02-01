@@ -75,7 +75,6 @@ export const ExpenseForm: React.FC<IExpenseForm> = ({ expenseToUpdate, action })
         label: `${t(`General.accountTypes.${item.type}`)} ${item.currency.toUpperCase()}${item.balance}` 
       }))
     setAccounts(bankAccountOptions);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watchedCurrency, bankAccounts]);
 
   return (

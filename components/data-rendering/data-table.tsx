@@ -227,7 +227,6 @@ export const DataTable: React.FC<IDataTable> = ({
     } else {
       setCurrentPage(+page);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

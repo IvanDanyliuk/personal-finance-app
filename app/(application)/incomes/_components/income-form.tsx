@@ -73,7 +73,6 @@ export const IncomeForm: React.FC<IIncomeForm> = ({ incomeToUpdate, action }) =>
         label: `${t(`General.accountTypes.${item.type}`)} ${item.currency.toUpperCase()}${item.balance}` 
       }))
     setAccounts(bankAccountOptions);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watchedCurrency, bankAccounts]);
 
   return (
