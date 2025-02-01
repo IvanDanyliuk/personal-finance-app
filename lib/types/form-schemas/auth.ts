@@ -9,8 +9,15 @@ export const signUpSchema = zod.object({
   confirmPassword: zod.string().min(1, 'Auth.errors.auth.fieldsValidation.requiredConfirmPassword').min(6, 'Auth.errors.auth.fieldsValidation.invalidConfirmPassword'),
   image: zod
     .any()
-    .refine((file) => file.size <= MAX_IMAGE_FILE_SIZE, 'Auth.errors.auth.fieldsValidation.maxImageSizeLimit')
-    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file.type), 'Auth.errors.auth.fieldsValidation.invalidImageType'),
+    .optional()
+    .refine(
+      (file) => !file || (file.size && file.size <= MAX_IMAGE_FILE_SIZE), 
+      'Image size is outside the limit!'
+    )
+    .refine(
+      (file) => !file || (file.type && ACCEPTED_IMAGE_TYPES.includes(file.type)), 
+      'Unaccepted image type'
+    ),
 }).refine((data) => data.password === data.confirmPassword, {
   path: ['confirmPassword'],
   message: 'Auth.errors.auth.fieldsValidation.passwordNotMatch',

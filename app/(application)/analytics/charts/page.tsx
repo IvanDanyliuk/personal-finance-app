@@ -36,13 +36,11 @@ export default async function AnalyticCharts({
   const fundsPerCategories = await getFundsStructureByCategories({
     dateFrom,
     dateTo, 
-    currency
   });
 
   const recentActivity = await getRecentActivity({
     dateFrom,
     dateTo, 
-    currency
   });
 
   const fundsSummary = await getFundsSummary({

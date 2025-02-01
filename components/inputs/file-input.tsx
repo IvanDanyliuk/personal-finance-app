@@ -32,7 +32,7 @@ export const FileInput: React.FC<IFileInput> = ({
 }) => {
   const t = useTranslations();
   const hiddenFileInputRef = useRef<HTMLInputElement | null>(null);
-  const [preview, setPreview] = useState<any | null>(null);
+  const [preview, setPreview] = useState<any | null>(undefined);
 
   const convertFileToString = (file: any) => {
     return new Promise((resolve, reject) => {
@@ -59,7 +59,7 @@ export const FileInput: React.FC<IFileInput> = ({
       if(field) field.onChange(file);
       setValue(name, file);
     } else {
-      setPreview(null);
+      setPreview(undefined);
     }
   };
 

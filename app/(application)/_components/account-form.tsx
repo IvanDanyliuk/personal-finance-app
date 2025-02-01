@@ -2,7 +2,10 @@
 
 import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Plus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useToast } from '@/hooks/use-toast';
 import {
   Dialog,
   DialogContent,
@@ -10,18 +13,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { SelectField, TextField } from '@/components/inputs';
-import { ACCOUNT_TYPES, COUNTRIES, CURRENCIES, PAYMENT_SYSTEMS } from '@/lib/constants';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { BankAccountSchema, bankAccountSchema } from '@/lib/types/form-schemas/bank-account';
 import { SubmitButton } from '@/components/common';
 import { TextAreaField } from '@/components/inputs/text-area-field';
 import { createBankAccount } from '@/lib/actions/account.actions';
 import { ActionStatus } from '@/lib/types/common.types';
-import { useToast } from '@/hooks/use-toast';
+import { ACCOUNT_TYPES, COUNTRIES, CURRENCIES, PAYMENT_SYSTEMS } from '@/lib/constants';
 import { AccountType } from '@/lib/types/bank';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Plus } from 'lucide-react';
 
 
 interface IAccountForm {

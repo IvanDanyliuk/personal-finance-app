@@ -4,14 +4,14 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useToast } from '@/hooks/use-toast';
 import { CheckboxField, FileInput, TextField } from '@/components/inputs';
 import { SubmitButton } from '@/components/common';
 import { signup } from '@/lib/actions/auth.actions';
 import { signUpSchema, SignUpSchema } from '@/lib/types/form-schemas/auth';
 import { ActionStatus } from '@/lib/types/common.types';
-import { useToast } from '@/hooks/use-toast';
 
 
 export const SignUpForm = () => {
@@ -27,7 +27,7 @@ export const SignUpForm = () => {
       email: '', 
       password: '', 
       confirmPassword: '', 
-      image: '' 
+      image: undefined 
     },
   });
 
@@ -44,7 +44,7 @@ export const SignUpForm = () => {
     formData.append('email', data.email);
     formData.append('password', data.password);
     formData.append('confirmPassword', data.confirmPassword);
-    formData.append('image', data.image);
+    if(data.image) formData.append('image', data.image);
 
     const { status, error } = await signup(formData);
 

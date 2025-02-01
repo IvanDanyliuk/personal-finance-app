@@ -112,7 +112,7 @@ export const signup = async (formData: FormData) => {
       email: formData.get('email'),
       password: formData.get('password'),
       confirmPassword: formData.get('confirmPassword'),
-      image: formData.get('image'),
+      image: formData.get('image') || null,
     });
 
     if(!validatedFields.success) {
@@ -132,9 +132,9 @@ export const signup = async (formData: FormData) => {
 
     const hashedPassword = await bcrypt.hash(validatedFields.data.password, 10);
     
-    const image = validatedFields.data.image.size > 0 ? 
-      (await utapi.uploadFiles([validatedFields.data.image]))[0].data?.url : 
-      '';
+    const image = validatedFields.data.image && typeof validatedFields.data.image === 'object' && 'size' in validatedFields.data.image
+      ? (await utapi.uploadFiles([validatedFields.data.image]))[0].data?.url
+      : '';
 
     await db.user.create({
       data: {
