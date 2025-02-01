@@ -145,6 +145,7 @@ export const ChartBoard: React.FC<IChartBoard> = ({ data, currentCurrency }) => 
       color: EXPENSE_CATEGORIES.find(item => item.value === dataItem.category)?.color || 'bg-primary-7'
     }));
     setExpensesStructure(expensesStructureData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   useEffect(() => {
