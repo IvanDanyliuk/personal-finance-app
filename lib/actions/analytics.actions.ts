@@ -273,11 +273,9 @@ export const getFundsStructureByCategories = async ({
 export const getRecentActivity = async ({
   dateFrom, 
   dateTo,
-  // currency
 }: {
   dateFrom?: string; 
   dateTo?: string;
-  // currency?: string;
 }) => {
   try {
     const session = await auth();
@@ -299,16 +297,6 @@ export const getRecentActivity = async ({
         gte: dateFrom ? new Date(dateFrom) : null, 
         lte: dateTo ? new Date(dateTo) : null,
       });
-
-    // const query = !dateFrom && !dateTo 
-    //   ? removeFalseyFields({
-    //       date: dateQuery,
-    //       currency: currency || currentUser?.currency,
-    //     }) 
-    //   : removeFalseyFields({ 
-    //       date: dateQuery,
-    //       currency: currency || currentUser?.currency,
-    //     });
 
     const recentIncomes = await db.income.findMany({
       where: {
