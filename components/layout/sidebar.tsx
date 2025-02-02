@@ -10,7 +10,7 @@ import {
 import { cn } from '@/lib/utils';
 import { logout } from '@/lib/actions/auth.actions';
 import { Button } from '../ui/button';
-import { MenuLinks } from './';
+import { Logo, MenuLinks } from './';
 import { ModeToggle } from '../theme/mode-toggle';
 
 
@@ -37,7 +37,7 @@ export const Sidebar = () => {
       'relative p-3 h-screen border-r transition-all duration-300 ease-in-out transform hidden md:flex flex-col justify-between bg-background-secondary'
     )}>
       <div>
-        <div>LOGO</div>
+        <Logo />
         <Button 
           type='button' 
           onClick={handleSidebarExpand} 
