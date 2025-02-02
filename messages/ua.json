@@ -112,6 +112,36 @@
     "accountTypes": {
       "bank_account": "Банківський рахунок",
       "jug": "Готівка"
+    },
+    "metadata": {
+      "home": {
+        "title": "Easy Finance | Головна",
+        "description": "Easy Finance - це Ваш персональний фінансовий асистент. Плануйте свій бюджет, контролюйте власні сбереження, керуйте своїми фінансами з Easy Finance"
+      },
+      "income": {
+        "title": "Easy Finance | Доходи",
+        "description": "Контролюйте свої доходи з Easy Finance"
+      },
+      "expenses": {
+        "title": "Easy Finance | Витрати",
+        "description": "Контролюйте свої витрати з Easy Finance"
+      },
+      "analytics": {
+        "title": "Easy Finance | Аналітика",
+        "description": "Дивіться аналітику про Ваші доходи, витрати та грошові кошти"
+      },
+      "savings": {
+        "title": "Easy Finance | Збереження",
+        "description": "Керуйте своїми збереженнями з Easy Finance"
+      },
+      "settings": {
+        "title": "Easy Finance | Налаштування",
+        "description": "Налаштування Easy Finance"
+      }
+    },
+    "inDevelopment": {
+      "title": "Ця сторінка наразі в розробці",
+      "message": "Функціонал даної сторінки буде доступний пізніше"
     }
   },
   "Auth": {

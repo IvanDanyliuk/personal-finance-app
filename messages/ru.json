@@ -112,6 +112,36 @@
     "accountTypes": {
       "bank_account": "Банковский счет",
       "jug": "Наличные"
+    },
+    "metadata": {
+      "home": {
+        "title": "Easy Finance | Главная",
+        "description": "Easy Finance - это Ваш персональный финансовый ассистент. Планируйте свой бюджет, контролируйте свои сбережения, управляйте Вашими финансами с Easy Finance"
+      },
+      "income": {
+        "title": "Easy Finance | Доходы",
+        "description": "Управляйте своими доходами с Easy Finance"
+      },
+      "expenses": {
+        "title": "Easy Finance | Расходы",
+        "description": "Управляйте своими расходами с Easy Finance"
+      },
+      "analytics": {
+        "title": "Easy Finance | Аналитика",
+        "description": "Смотрите аналитику о Ваших доходах, расходах и средствах"
+      },
+      "savings": {
+        "title": "Easy Finance | Сбережения",
+        "description": "Управляйте своими сбережениями с Easy Finance"
+      },
+      "settings": {
+        "title": "Easy Finance | Настройки",
+        "description": "Настройки Easy Finance"
+      }
+    },
+    "inDevelopment": {
+      "title": "Эта страница находится в разработке",
+      "message": "Функционал данной страницы будет доступень позже"
     }
   },
   "Auth": {

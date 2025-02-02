@@ -112,6 +112,36 @@
     "accountTypes": {
       "bank_account": "Bank account",
       "jug": "Cash jug"
+    },
+    "metadata": {
+      "home": {
+        "title": "Easy Finance | Home",
+        "description": "Easy Finance is your personal finance assistant. Plan you budget, control your savings, manage your funds with Easy Finance"
+      },
+      "income": {
+        "title": "Easy Finance | Income",
+        "description": "Manage your incomes with Easy Finance"
+      },
+      "expenses": {
+        "title": "Easy Finance | Expenses",
+        "description": "Manage your expenses with Easy Finance"
+      },
+      "analytics": {
+        "title": "Easy Finance | Analytics",
+        "description": "View analytics about your income, expenses, and funds"
+      },
+      "savings": {
+        "title": "Easy Finance | Savings",
+        "description": "Manage your savings with Easy Finance"
+      },
+      "settings": {
+        "title": "Easy Finance | Settings",
+        "description": "Easy Finance settings"
+      }
+    },
+    "inDevelopment": {
+      "title": "This page is currently under development",
+      "message": "It will be available shortly."
     }
   },
   "Auth": {
