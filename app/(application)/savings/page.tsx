@@ -6,6 +6,7 @@ import ImagePlaceholder from '@/public/images/app-monetization.svg';
 
 export const metadata = generateMetadata('General.metadata.savings');
 
+
 export default function SavingsPage() {
   const t = useTranslations();
 

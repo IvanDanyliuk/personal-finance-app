@@ -7,7 +7,7 @@ import LogoImageShort from '@/public/images/logo_short.png';
 
 export const Logo: React.FC = () => {
   const isSidebarExpanded = localStorage.getItem('isSidebarExpanded');
-  console.log('IS EXPANDED', typeof isSidebarExpanded)
+  
   return (
     <div className='py-3 w-full'>
       {isSidebarExpanded && !JSON.parse(isSidebarExpanded) ? (
