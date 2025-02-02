@@ -6,11 +6,22 @@ import { CreateExpenseModal, ExpenseFilters } from './_components';
 import { getBankAccountCount, getFunds } from '@/lib/actions/account.actions';
 import { ColType } from '@/lib/types/common.types';
 import { removeFalseyFields } from '@/lib/helpers';
-// import { generateMetadata } from '@/lib/utils';
+import { Metadata } from 'next';
 
 
-// export const dynamic = 'force-dynamic';
-// export const metadata = generateMetadata('General.metadata.expenses');
+export const dynamic = 'force-dynamic';
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('General.metadata.expenses');
+  return {
+    title: t('title'),
+    description: t('description'),
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      type: 'website',
+    },
+  };
+};
 
 
 const columns: ColType[] = [

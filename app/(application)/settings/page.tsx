@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { auth } from '@/auth';
@@ -13,10 +14,21 @@ import {
 } from './_components';
 import UserImagePlaceholder from '@/public/images/user-placeholder.png';
 import { CURRENCIES, LANGUAGES, WEEK_STARTS_FROM } from '@/lib/constants';
-// import { generateMetadata } from '@/lib/utils';
 
-// export const dynamic = 'force-dynamic';
-// export const metadata = generateMetadata('General.metadata.settings');
+
+export const dynamic = 'force-dynamic';
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('General.metadata.settings');
+  return {
+    title: t('title'),
+    description: t('description'),
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      type: 'website',
+    },
+  };
+};
 
 
 export default async function SettingsPage() {

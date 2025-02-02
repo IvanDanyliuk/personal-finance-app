@@ -1,11 +1,23 @@
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-// import { generateMetadata } from '@/lib/utils';
 import ImagePlaceholder from '@/public/images/app-monetization.svg';
 
 
-// export const dynamic = 'force-dynamic';
-// export const metadata = generateMetadata('General.metadata.savings');
+export const dynamic = 'force-dynamic';
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('General.metadata.savings');
+  return {
+    title: t('title'),
+    description: t('description'),
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      type: 'website',
+    },
+  };
+};
 
 
 export default function SavingsPage() {

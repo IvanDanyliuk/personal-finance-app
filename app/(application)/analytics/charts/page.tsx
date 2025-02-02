@@ -1,3 +1,5 @@
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 import { auth } from '@/auth';
 import { ChartBoard } from '../_components';
 import { 
@@ -9,11 +11,21 @@ import {
 import { getUser } from '@/lib/actions/user.actions';
 import { CURRENCIES } from '@/lib/constants';
 import { RecentActivity } from '@/components/data-rendering';
-// import { generateMetadata } from '@/lib/utils';
 
 
-// export const dynamic = 'force-dynamic';
-// export const metadata = generateMetadata('General.metadata.analytics');
+export const dynamic = 'force-dynamic';
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('General.metadata.analytics');
+  return {
+    title: t('title'),
+    description: t('description'),
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      type: 'website',
+    },
+  };
+};
 
 
 export default async function AnalyticCharts({ 

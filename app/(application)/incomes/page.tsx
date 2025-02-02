@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { CreateIncomeModal } from './_components';
 import { deleteIncome, getIncomes, updateIncome } from '@/lib/actions/income.actions';
@@ -7,11 +8,21 @@ import { IncomeFilters } from './_components/income-filters';
 import { ColType } from '@/lib/types/common.types';
 import { getBankAccountCount, getFunds } from '@/lib/actions/account.actions';
 import { removeFalseyFields } from '@/lib/helpers';
-// import { generateMetadata } from '@/lib/utils';
 
 
-// export const dynamic = 'force-dynamic';
-// export const metadata = generateMetadata('General.metadata.income');
+export const dynamic = 'force-dynamic';
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('General.metadata.income');
+  return {
+    title: t('title'),
+    description: t('description'),
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      type: 'website',
+    },
+  };
+};
 
 
 const columns: ColType[] = [

@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { BalanceSection, KeyIndicatorsSection } from './_components';
 import { getBanks } from '@/lib/actions/bank.actions';
@@ -7,11 +8,21 @@ import {
   getRecentActivity, 
   getMonthlySavingsControlDataByYears 
 } from '@/lib/actions/analytics.actions';
-// import { generateMetadata } from '@/lib/utils';
 
 
-// export const dynamic = 'force-dynamic';
-// export const metadata = generateMetadata('General.metadata.home');
+export const dynamic = 'force-dynamic';
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('General.metadata.home');
+  return {
+    title: t('title'),
+    description: t('description'),
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      type: 'website',
+    },
+  };
+};
 
 
 export default async function Home({ 

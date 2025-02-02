@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { SavingsData } from './_components';
@@ -6,11 +7,21 @@ import {
   getYearsOfSavings 
 } from '@/lib/actions/analytics.actions';
 import NoDataPlaceholder from '@/public/images/banknote.svg';
-// import { generateMetadata } from '@/lib/utils';
 
 
-// export const dynamic = 'force-dynamic';
-// export const metadata = generateMetadata('General.metadata.analytics');
+export const dynamic = 'force-dynamic';
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('General.metadata.analytics');
+  return {
+    title: t('title'),
+    description: t('description'),
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      type: 'website',
+    },
+  };
+};
 
 
 export default async function AnalyticsPage({ 
