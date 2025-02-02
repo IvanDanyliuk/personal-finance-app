@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-// import { generateMetadata } from '@/lib/utils';
+import { generateMetadata } from '@/lib/utils';
 import ImagePlaceholder from '@/public/images/app-monetization.svg';
 
 
-// export const metadata = generateMetadata('General.metadata.savings');
+export const dynamic = 'force-dynamic';
+export const metadata = generateMetadata('General.metadata.savings');
 
 
 export default function SavingsPage() {

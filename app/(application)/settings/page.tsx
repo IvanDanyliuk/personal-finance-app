@@ -13,10 +13,10 @@ import {
 } from './_components';
 import UserImagePlaceholder from '@/public/images/user-placeholder.png';
 import { CURRENCIES, LANGUAGES, WEEK_STARTS_FROM } from '@/lib/constants';
-// import { generateMetadata } from '@/lib/utils';
+import { generateMetadata } from '@/lib/utils';
 
-
-// export const metadata = generateMetadata('General.metadata.settings');
+export const dynamic = 'force-dynamic';
+export const metadata = generateMetadata('General.metadata.settings');
 
 
 export default async function SettingsPage() {

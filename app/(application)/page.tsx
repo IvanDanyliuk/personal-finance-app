@@ -7,10 +7,11 @@ import {
   getRecentActivity, 
   getMonthlySavingsControlDataByYears 
 } from '@/lib/actions/analytics.actions';
-// import { generateMetadata } from '@/lib/utils';
+import { generateMetadata } from '@/lib/utils';
 
 
-// export const metadata = generateMetadata('General.metadata.home');
+export const dynamic = 'force-dynamic';
+export const metadata = generateMetadata('General.metadata.home');
 
 
 export default async function Home({ 
