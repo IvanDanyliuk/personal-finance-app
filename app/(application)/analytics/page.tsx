@@ -6,10 +6,10 @@ import {
   getYearsOfSavings 
 } from '@/lib/actions/analytics.actions';
 import NoDataPlaceholder from '@/public/images/banknote.svg';
-import { generateMetadata } from '@/lib/utils';
+// import { generateMetadata } from '@/lib/utils';
 
 
-export const metadata = generateMetadata('General.metadata.analytics');
+// export const metadata = generateMetadata('General.metadata.analytics');
 
 
 export default async function AnalyticsPage({ 

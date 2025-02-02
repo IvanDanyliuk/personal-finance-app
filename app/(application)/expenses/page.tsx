@@ -6,10 +6,10 @@ import { CreateExpenseModal, ExpenseFilters } from './_components';
 import { getBankAccountCount, getFunds } from '@/lib/actions/account.actions';
 import { ColType } from '@/lib/types/common.types';
 import { removeFalseyFields } from '@/lib/helpers';
-import { generateMetadata } from '@/lib/utils';
+// import { generateMetadata } from '@/lib/utils';
 
 
-export const metadata = generateMetadata('General.metadata.expenses');
+// export const metadata = generateMetadata('General.metadata.expenses');
 
 
 const columns: ColType[] = [

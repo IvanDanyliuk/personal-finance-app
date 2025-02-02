@@ -154,7 +154,7 @@ export const signup = async (formData: FormData) => {
       redirect: false
     });
 
-    cookies().set('language', 'en')
+    cookies().set('language', 'en');
 
     return {
       status: ActionStatus.Success,
