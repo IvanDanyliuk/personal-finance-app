@@ -1,7 +1,7 @@
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { generateMetadata } from '@/lib/utils';
 import ImagePlaceholder from '@/public/images/app-monetization.svg';
-import { useTranslations } from 'next-intl';
 
 
 export const metadata = generateMetadata('General.metadata.savings');
