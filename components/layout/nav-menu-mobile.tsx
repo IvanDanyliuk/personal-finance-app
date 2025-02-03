@@ -43,7 +43,7 @@ export const NavMenuMobile: React.FC = () => {
             <Menu className='size-8' />
           </button>
         </SheetTrigger>
-        <SheetContent className='py-10'>
+        <SheetContent className='py-14'>
           <SheetTitle>
             <Logo />
           </SheetTitle>
@@ -74,7 +74,7 @@ export const NavMenuMobile: React.FC = () => {
                 <button 
                   type='button' 
                   onClick={handleSignOut} 
-                  className='w-fit flex items-center gap-1 bg-transparent p-0 border-none shadow-none text-foreground text-md'
+                  className='w-fit flex items-center gap-1 bg-transparent p-0 border-none shadow-none text-foreground text-sm md:text-base'
                 >
                   <LogOut className='w-5 h-5' />
                   <span>

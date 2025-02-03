@@ -8,6 +8,7 @@ import {
   getRecentActivity, 
   getMonthlySavingsControlDataByYears 
 } from '@/lib/actions/analytics.actions';
+import { Separator } from '@/components/ui/separator';
 
 
 export const dynamic = 'force-dynamic';
@@ -47,6 +48,7 @@ export default async function Home({
           banks={banksByCountry.data} 
           funds={funds.data} 
         />  
+        <Separator className='md:hidden' />
         <KeyIndicatorsSection
           data={{
             dynamic: fundsDynamicData.data,

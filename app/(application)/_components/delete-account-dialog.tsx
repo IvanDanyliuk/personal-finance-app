@@ -33,7 +33,7 @@ export const DeleteAccountDialog: React.FC<IDeleteAccountDialog> = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className='pt-10'>
+      <DialogContent className='pt-10 min-w-fit md:min-w-[32rem] max-w-[calc(100%-3rem)] md:max-w-fit max-h-[calc(100vh-3rem)] overflow-y-auto rounded-xl'>
         <DialogHeader>
           <DialogTitle className='text-center'>
             {t('HomePage.balanceSection.deleteAccount.submitAccountDeletingTitle')}

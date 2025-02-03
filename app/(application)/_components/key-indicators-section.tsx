@@ -7,6 +7,7 @@ import { EXPENSE_CATEGORIES, INCOME_SOURCES } from '@/lib/constants';
 import { CashFlow, ExpensesStructure, IncomeStructure } from '@/lib/types/analytics.types';
 import { CustomBarChart, CustomPieChart, RecentActivity } from '@/components/data-rendering';
 import NoCashFlowData from '@/public/images/business-vision.svg';
+import { Separator } from '@/components/ui/separator';
 
 
 interface IKeyIndicatorsSection {
@@ -99,7 +100,7 @@ export const KeyIndicatorsSection: React.FC<IKeyIndicatorsSection> = ({ data }) 
         {t('HomePage.keyIndicatorsSection.note')}
       </p>
       <div className='mt-5 space-y-10'>
-        <div className='w-full flex flex-col md:flex-row gap-10'>
+        <div className='relative w-full flex flex-col gap-10'>
           <CustomBarChart 
             title='AnalyticsPage.charts.cashFlow.title' 
             data={cashFlow} 
@@ -109,7 +110,9 @@ export const KeyIndicatorsSection: React.FC<IKeyIndicatorsSection> = ({ data }) 
             noDataImage={NoCashFlowData} 
             noDataMessage='AnalyticsPage.charts.noDataMessages.cashFlow' 
           />
+          <Separator className='md:hidden' />
           <RecentActivity data={{ recentTransactions }} />
+          <Separator className='md:hidden' />
         </div>
         <div className='w-full flex flex-col md:flex-row gap-6'>
           <CustomPieChart 
@@ -120,6 +123,7 @@ export const KeyIndicatorsSection: React.FC<IKeyIndicatorsSection> = ({ data }) 
             noDataImage={NoCashFlowData}
             noDataMessage='AnalyticsPage.charts.noDataMessages.income'
           />
+          <Separator className='md:hidden' />
           <CustomPieChart 
             data={expensesStructure}
             config={expensesStructureConfig}

@@ -33,10 +33,10 @@ export const AccountDetailsDialog: React.FC<IAccountDetailsDialog> = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className='min-w-fit flex flex-col items-center'>
+      <DialogContent className='min-w-fit md:min-w-[32rem] max-w-[calc(100%-3rem)] md:max-w-fit max-h-[calc(100vh-3rem)] flex flex-col items-center overflow-y-auto rounded-xl'>
         {data.bank && data.bank.logo && data.cardNumber && data.paymentSystem && (
           <>
-            <div className='relative w-80 h-44 p-3 flex flex-col justify-center items-center bg-gradient-to-r from-primary-2 via-primary-3 to-primary-2 rounded-xl'>
+            <div className='relative w-full md:w-80 h-44 p-3 flex flex-col justify-center items-center bg-gradient-to-r from-primary-2 via-primary-3 to-primary-2 rounded-xl'>
               <Avatar className='absolute top-3 right-3 h-10'>
                 <AvatarImage src={data!.bank!.logo!} />
               </Avatar>

@@ -36,7 +36,7 @@ export const BalanceSection: React.FC<IBalanceSection> = ({ banks, funds }) => {
   }, [funds]);
 
   return (
-    <div className='max-w-full space-y-3'>
+    <div className='max-w-full space-y-3 text-sm md:text-base'>
       <div className='w-full flex justify-between items-center'>
         <h2 className='text-xl font-semibold'>
           {t('HomePage.balanceSection.totalFunds.title')}

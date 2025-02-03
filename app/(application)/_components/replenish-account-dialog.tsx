@@ -71,7 +71,7 @@ export const ReplenishAccountDialog: React.FC<IReplenishAccountDialog> = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent className='min-w-fit md:min-w-[32rem] max-w-[calc(100%-3rem)] md:max-w-fit max-h-[calc(100vh-3rem)] overflow-y-auto rounded-xl'>
         <h2 className='text-lg font-semibold'>
           {t('HomePage.balanceSection.replenishAccountForm.title')}
         </h2>

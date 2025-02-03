@@ -56,7 +56,10 @@ export const MenuLinks = ({ isExpanded }: { isExpanded?: boolean }) => {
   ];
 
   return (
-    <nav className={cn(isExpanded ? 'items-start' : 'items-center', 'w-full flex flex-col gap-3')}>
+    <nav className={cn(
+      isExpanded ? 'items-start' : 'items-center', 
+      'w-full flex flex-col gap-3 text-sm md:text-base'
+    )}>
       {links.map(link => (
         <NavbarItem 
           key={crypto.randomUUID()} 

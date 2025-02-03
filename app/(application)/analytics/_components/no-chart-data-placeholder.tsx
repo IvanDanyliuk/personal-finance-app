@@ -23,7 +23,7 @@ export const NoChartDataPlaceholder: React.FC<INoChartDataPlaceholder> = ({
         width={300}
         height={300}
       />
-      <p className='text-center font-semibold text-primary-7'>
+      <p className='text-center text-sm md:text-base font-semibold text-primary-7'>
         {t(message)}
       </p>
     </div>
