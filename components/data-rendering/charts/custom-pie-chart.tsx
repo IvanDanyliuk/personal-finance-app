@@ -57,7 +57,7 @@ export const CustomPieChart: React.FC<ICustomPieChart> = ({
       ) : (
         <NoChartDataPlaceholder 
           image={noDataImage} 
-          message={noDataMessage} 
+          title={noDataMessage} 
         />
       )}
     </div>

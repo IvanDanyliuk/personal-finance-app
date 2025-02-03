@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
-import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
-import { SavingsData } from './_components';
+import { NoChartDataPlaceholder, SavingsData } from './_components';
 import { 
   getMonthlySavingsControlDataByYears, 
   getYearsOfSavings 
@@ -55,15 +54,11 @@ export default async function AnalyticsPage({
             data={analyticsData.data} 
           />
         ) : (
-          <div className='w-full h-full flex flex-col justify-center items-center gap-3'>
-            <Image src={NoDataPlaceholder} alt='No data' width={500} height={500} />
-            <h2 className='text-xl text-primary-7 font-bold'>
-              {t('AnalyticsPage.charts.noDataMessages.noDataFoundTitle')}
-            </h2>
-            <p className='text-secondary-4'>
-              {t('AnalyticsPage.charts.noDataMessages.noDataFoundMessage')}
-            </p>
-          </div>
+          <NoChartDataPlaceholder 
+            image={NoDataPlaceholder} 
+            title='AnalyticsPage.charts.noDataMessages.noDataFoundTitle' 
+            message='AnalyticsPage.charts.noDataMessages.noDataFoundMessage' 
+          />
         )
       }
     </>

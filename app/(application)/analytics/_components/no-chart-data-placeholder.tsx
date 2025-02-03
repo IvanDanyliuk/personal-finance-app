@@ -5,12 +5,14 @@ import { useTranslations } from 'next-intl';
 
 interface INoChartDataPlaceholder {
   image: StaticImport | string;
-  message: string;
+  title: string;
+  message?: string;
 };
 
 
 export const NoChartDataPlaceholder: React.FC<INoChartDataPlaceholder> = ({ 
   image, 
+  title, 
   message 
 }) => {
   const t = useTranslations();
@@ -23,9 +25,14 @@ export const NoChartDataPlaceholder: React.FC<INoChartDataPlaceholder> = ({
         width={300}
         height={300}
       />
-      <p className='text-center text-sm md:text-base font-semibold text-primary-7'>
-        {t(message)}
-      </p>
+      <h2 className='text-sm md:text-xl text-primary-7 text-center font-semibold'>
+        {t(title)}
+      </h2>
+      {message && (
+        <p className='text-center text-xs md:text-base font-semibold text-secondary-5'>
+          {t(message)}
+        </p>
+      )}
     </div>
   );
 };

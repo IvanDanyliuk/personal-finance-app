@@ -75,7 +75,7 @@ export const CustomBarChart: React.FC<IBarChart> = ({
       ) : (
         <NoChartDataPlaceholder 
           image={noDataImage} 
-          message={noDataMessage} 
+          title={noDataMessage} 
         />
       )}
     </div>

@@ -66,7 +66,7 @@ export const CustomLineChart: React.FC<ICustomLineChart> = ({
       ) : (
         <NoChartDataPlaceholder 
           image={noDataImage} 
-          message={noDataMessage} 
+          title={noDataMessage} 
         />
       )}
     </div>
