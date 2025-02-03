@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
@@ -5,6 +6,21 @@ import GoogleIcon from '../../../public/images/google.svg';
 import { Separator } from '@/components/ui/separator';
 import { DecorChips, SignInForm, SignInWithProvider } from '../_components';
 import { auth } from '@/auth';
+
+
+export const dynamic = 'force-dynamic';
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('General.metadata.signIn');
+  return {
+    title: t('title'),
+    description: t('description'),
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      type: 'website',
+    },
+  };
+};
 
 
 export default async function SignInPage() {

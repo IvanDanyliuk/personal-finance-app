@@ -114,6 +114,14 @@
       "jug": "Cash jug"
     },
     "metadata": {
+      "signIn": {
+        "title": "Easy Finance | Sign In",
+        "description": "Easy Finance is your personal finance assistant. Plan you budget, control your savings, manage your funds with Easy Finance"
+      },
+      "signUp": {
+        "title": "Easy Finance | Sign Up",
+        "description": "Easy Finance is your personal finance assistant. Plan you budget, control your savings, manage your funds with Easy Finance"
+      },
       "home": {
         "title": "Easy Finance | Home",
         "description": "Easy Finance is your personal finance assistant. Plan you budget, control your savings, manage your funds with Easy Finance"

@@ -1,8 +1,25 @@
+import { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Separator } from '@/components/ui/separator';
 import { DecorChips, SignInWithProvider, SignUpForm } from '../_components';
 import GoogleIcon from '../../../public/images/google.svg';
+
+
+export const dynamic = 'force-dynamic';
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('General.metadata.signUp');
+  return {
+    title: t('title'),
+    description: t('description'),
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      type: 'website',
+    },
+  };
+};
 
 
 export default function SignUpPage() {
