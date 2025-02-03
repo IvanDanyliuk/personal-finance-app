@@ -43,7 +43,7 @@ export const NavMenuMobile: React.FC = () => {
             <Menu className='size-8' />
           </button>
         </SheetTrigger>
-        <SheetContent className='py-14'>
+        <SheetContent className='pb-20'>
           <SheetTitle>
             <Logo />
           </SheetTitle>
