@@ -33,12 +33,12 @@ export default async function SignInPage() {
 
   return (
     <div className='relative w-full h-screen flex bg-background'>
-      <div className='px-6 md:px-72 w-full md:w-1/2 h-full flex flex-col justify-center items-center gap-8 bg-background'>
+      <div className='px-6 w-full md:w-1/2 h-full flex flex-col justify-center items-center gap-8 bg-background'>
         <div className='mb-4'>
           <h1 className='mb-3 text-center text-3xl text-foreground font-semibold'>
             {t('Auth.signinPage.title')}
           </h1>
-          <p className='text-center text-base text-foreground'>
+          <p className='px-10 text-center text-base text-foreground'>
             {t('Auth.signinPage.titleMessage')}
           </p>
         </div>
