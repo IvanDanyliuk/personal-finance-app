@@ -117,156 +117,158 @@ export const RecentActivity: React.FC<IRecentActivity> = ({ data }) => {
           </TableBody>
         </Table>
       </div>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-        {topIncomes && (
-          <div>
-            <h2 className='mb-3 text-base text-center font-semibold'>
-              {t('AnalyticsPage.recentActivity.topIncome')}
-            </h2>
-            <Table>
-              <TableHeader className='text-sm border-none'>
-                <TableRow className='text-sm border-none'>
-                  <TableHead className='px-5 bg-background-normal rounded-l-full'>
-                    {t('AnalyticsPage.recentActivity.recentActivityTable.dateColLabel')}
-                  </TableHead>
-                  <TableHead className='px-5 bg-background-normal'>
-                    {t('AnalyticsPage.recentActivity.recentActivityTable.amountColLabel')}
-                  </TableHead>
-                  <TableHead className='px-5 bg-background-normal'>
-                    {t('AnalyticsPage.recentActivity.recentActivityTable.currencyColLabel')}
-                  </TableHead>
-                  <TableHead className='px-5 bg-background-normal rounded-r-full'>
-                    {t('AnalyticsPage.recentActivity.recentActivityTable.categoryColLabel')}
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {topIncomes.map(income => (
-                  <TableRow key={crypto.randomUUID()} className='text-xs'>
-                    <TableCell className='px-5 font-medium'>
-                      {format(income.date, 'dd.MM.yyyy')}
-                    </TableCell>
-                    <TableCell className='px-5 font-medium'>
-                      {income.amount}
-                    </TableCell>
-                    <TableCell className='px-5'>
-                      {t(`General.currencies.${income.currency}`)}
-                    </TableCell>
-                    <TableCell className='px-5'>
-                      {t(`IncomesPage.income_sources.${income.source}`)}
-                    </TableCell>
+      {(topIncomes || topExpenses || incomeSummary || expensesSummary) && (
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+          {topIncomes && (
+            <div>
+              <h2 className='mb-3 text-base text-center font-semibold'>
+                {t('AnalyticsPage.recentActivity.topIncome')}
+              </h2>
+              <Table>
+                <TableHeader className='text-sm border-none'>
+                  <TableRow className='text-sm border-none'>
+                    <TableHead className='px-5 bg-background-normal rounded-l-full'>
+                      {t('AnalyticsPage.recentActivity.recentActivityTable.dateColLabel')}
+                    </TableHead>
+                    <TableHead className='px-5 bg-background-normal'>
+                      {t('AnalyticsPage.recentActivity.recentActivityTable.amountColLabel')}
+                    </TableHead>
+                    <TableHead className='px-5 bg-background-normal'>
+                      {t('AnalyticsPage.recentActivity.recentActivityTable.currencyColLabel')}
+                    </TableHead>
+                    <TableHead className='px-5 bg-background-normal rounded-r-full'>
+                      {t('AnalyticsPage.recentActivity.recentActivityTable.categoryColLabel')}
+                    </TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        )}
-        {topExpenses && (
-          <div>
-            <h2 className='mb-3 text-base text-center font-semibold'>
-              {t('AnalyticsPage.recentActivity.topExpense')}
-            </h2>
-            <Table>
-              <TableHeader className='text-sm border-none'>
-                <TableRow className='text-sm border-none'>
-                  <TableHead className='px-5 bg-background-normal rounded-l-full'>
-                    {t('AnalyticsPage.recentActivity.recentActivityTable.dateColLabel')}
-                  </TableHead>
-                  <TableHead className='px-5 bg-background-normal'>
-                    {t('AnalyticsPage.recentActivity.recentActivityTable.amountColLabel')}
-                  </TableHead>
-                  <TableHead className='px-5 bg-background-normal'>
-                    {t('AnalyticsPage.recentActivity.recentActivityTable.currencyColLabel')}
-                  </TableHead>
-                  <TableHead className='px-5 bg-background-normal rounded-r-full'>
-                    {t('AnalyticsPage.recentActivity.recentActivityTable.categoryColLabel')}
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {topExpenses.map(expense => (
-                  <TableRow key={crypto.randomUUID()} className='text-xs'>
-                    <TableCell className='px-5 font-medium'>
-                      {format(expense.date, 'dd.MM.yyyy')}
-                    </TableCell>
-                    <TableCell className='px-5 font-medium'>
-                      {expense.amount}
-                    </TableCell>
-                    <TableCell className='px-5'>
-                      {t(`General.currencies.${expense.currency}`)}
-                    </TableCell>
-                    <TableCell className='px-5'>
-                      {t(`ExpensesPage.expense_destinations.${expense.category}`)}
-                    </TableCell>
+                </TableHeader>
+                <TableBody>
+                  {topIncomes.map(income => (
+                    <TableRow key={crypto.randomUUID()} className='text-xs'>
+                      <TableCell className='px-5 font-medium'>
+                        {format(income.date, 'dd.MM.yyyy')}
+                      </TableCell>
+                      <TableCell className='px-5 font-medium'>
+                        {income.amount}
+                      </TableCell>
+                      <TableCell className='px-5'>
+                        {t(`General.currencies.${income.currency}`)}
+                      </TableCell>
+                      <TableCell className='px-5'>
+                        {t(`IncomesPage.income_sources.${income.source}`)}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          )}
+          {topExpenses && (
+            <div>
+              <h2 className='mb-3 text-base text-center font-semibold'>
+                {t('AnalyticsPage.recentActivity.topExpense')}
+              </h2>
+              <Table>
+                <TableHeader className='text-sm border-none'>
+                  <TableRow className='text-sm border-none'>
+                    <TableHead className='px-5 bg-background-normal rounded-l-full'>
+                      {t('AnalyticsPage.recentActivity.recentActivityTable.dateColLabel')}
+                    </TableHead>
+                    <TableHead className='px-5 bg-background-normal'>
+                      {t('AnalyticsPage.recentActivity.recentActivityTable.amountColLabel')}
+                    </TableHead>
+                    <TableHead className='px-5 bg-background-normal'>
+                      {t('AnalyticsPage.recentActivity.recentActivityTable.currencyColLabel')}
+                    </TableHead>
+                    <TableHead className='px-5 bg-background-normal rounded-r-full'>
+                      {t('AnalyticsPage.recentActivity.recentActivityTable.categoryColLabel')}
+                    </TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        )}
-        {incomeSummary && (
-          <div>
-            <h2 className='mb-3 text-base text-center font-semibold'>
-              {t('AnalyticsPage.recentActivity.totalIncome')}
-            </h2>
-            <Table>
-              <TableHeader className='text-sm border-none'>
-                <TableRow className='text-sm border-none'>
-                  <TableHead className='px-5 bg-background-normal rounded-l-full'>
-                    {t('AnalyticsPage.recentActivity.recentActivityTable.currencyColLabel')}
-                  </TableHead>
-                  <TableHead className='px-5 bg-background-normal rounded-r-full'>
-                    {t('AnalyticsPage.recentActivity.recentActivityTable.amountColLabel')}
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {incomeSummary.map(item => (
-                  <TableRow key={crypto.randomUUID()} className='text-xs'>
-                    <TableCell className='px-5'>
-                      {t(`General.currencies.${item.currency}`)}
-                    </TableCell>
-                    <TableCell className='px-5 font-medium'>
-                      {item.value}
-                    </TableCell>
+                </TableHeader>
+                <TableBody>
+                  {topExpenses.map(expense => (
+                    <TableRow key={crypto.randomUUID()} className='text-xs'>
+                      <TableCell className='px-5 font-medium'>
+                        {format(expense.date, 'dd.MM.yyyy')}
+                      </TableCell>
+                      <TableCell className='px-5 font-medium'>
+                        {expense.amount}
+                      </TableCell>
+                      <TableCell className='px-5'>
+                        {t(`General.currencies.${expense.currency}`)}
+                      </TableCell>
+                      <TableCell className='px-5'>
+                        {t(`ExpensesPage.expense_destinations.${expense.category}`)}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          )}
+          {incomeSummary && (
+            <div>
+              <h2 className='mb-3 text-base text-center font-semibold'>
+                {t('AnalyticsPage.recentActivity.totalIncome')}
+              </h2>
+              <Table>
+                <TableHeader className='text-sm border-none'>
+                  <TableRow className='text-sm border-none'>
+                    <TableHead className='px-5 bg-background-normal rounded-l-full'>
+                      {t('AnalyticsPage.recentActivity.recentActivityTable.currencyColLabel')}
+                    </TableHead>
+                    <TableHead className='px-5 bg-background-normal rounded-r-full'>
+                      {t('AnalyticsPage.recentActivity.recentActivityTable.amountColLabel')}
+                    </TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        )}
-        {expensesSummary && (
-          <div>
-            <h2 className='mb-3 text-base text-center font-semibold'>
-              {t('AnalyticsPage.recentActivity.totalExpenses')}
-            </h2>
-            <Table>
-              <TableHeader className='text-sm border-none'>
-                <TableRow className='text-sm border-none'>
-                  <TableHead className='px-5 bg-background-normal rounded-l-full'>
-                    {t('AnalyticsPage.recentActivity.recentActivityTable.currencyColLabel')}
-                  </TableHead>
-                  <TableHead className='px-5 bg-background-normal rounded-r-full'>
-                    {t('AnalyticsPage.recentActivity.recentActivityTable.amountColLabel')}
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {expensesSummary.map(item => (
-                  <TableRow key={crypto.randomUUID()} className='text-xs'>
-                    <TableCell className='px-5'>
-                      {t(`General.currencies.${item.currency}`)}
-                    </TableCell>
-                    <TableCell className='px-5 font-medium'>
-                      {item.value}
-                    </TableCell>
+                </TableHeader>
+                <TableBody>
+                  {incomeSummary.map(item => (
+                    <TableRow key={crypto.randomUUID()} className='text-xs'>
+                      <TableCell className='px-5'>
+                        {t(`General.currencies.${item.currency}`)}
+                      </TableCell>
+                      <TableCell className='px-5 font-medium'>
+                        {item.value}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          )}
+          {expensesSummary && (
+            <div>
+              <h2 className='mb-3 text-base text-center font-semibold'>
+                {t('AnalyticsPage.recentActivity.totalExpenses')}
+              </h2>
+              <Table>
+                <TableHeader className='text-sm border-none'>
+                  <TableRow className='text-sm border-none'>
+                    <TableHead className='px-5 bg-background-normal rounded-l-full'>
+                      {t('AnalyticsPage.recentActivity.recentActivityTable.currencyColLabel')}
+                    </TableHead>
+                    <TableHead className='px-5 bg-background-normal rounded-r-full'>
+                      {t('AnalyticsPage.recentActivity.recentActivityTable.amountColLabel')}
+                    </TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        )}
-      </div>
+                </TableHeader>
+                <TableBody>
+                  {expensesSummary.map(item => (
+                    <TableRow key={crypto.randomUUID()} className='text-xs'>
+                      <TableCell className='px-5'>
+                        {t(`General.currencies.${item.currency}`)}
+                      </TableCell>
+                      <TableCell className='px-5 font-medium'>
+                        {item.value}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
