@@ -17,7 +17,7 @@ const basicBankAccountSchema = zod.object({
       }
     ),
   paymentSystem: zod.string().optional(),
-  balance: zod.number().min(1, 'HomePage.errors.createBankAccount.fieldsValidation.requiredBalance'),
+  balance: zod.number(),
   currency: zod.string().min(1, 'HomePage.errors.createBankAccount.fieldsValidation.requiredCurrency'),
   additionalInfo: zod.string()
 });

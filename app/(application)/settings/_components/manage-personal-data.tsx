@@ -98,7 +98,7 @@ export const ManagePersonalData: React.FC<IManagePersonalData> = ({
       <p className='text-sm md:text-base font-semibold'>
         {t(variant === 'name' ? 'managePersonalData.editNameFormLabel' : 'managePersonalData.editEmailFormLabel')}
       </p>
-      <div className='md:min-w-[400px] flex justify-between items-center gap-3'>
+      <div className='flex justify-between items-center gap-3'>
         <p className='text-sm md:text-base font-semibold'>
           {variant === 'name' ? currentUserName : currentUserEmail}
         </p>
@@ -119,7 +119,7 @@ export const ManagePersonalData: React.FC<IManagePersonalData> = ({
                 )}
               </DialogTitle>
             </DialogHeader>
-            <form onSubmit={handleSubmit(onSubmitForm)}>
+            <form onSubmit={handleSubmit(onSubmitForm)} className='relative'>
               <TextField 
                 name={variant === 'name' ? 'name' : 'email'} 
                 type={variant === 'email' ? 'email' : 'text'}
