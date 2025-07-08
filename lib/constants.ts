@@ -1,3 +1,4 @@
+import Savings from '@/public/images/expense-categories/savings.svg';
 import Utilities from '@/public/images/expense-categories/utilities.svg';
 import Food from '@/public/images/expense-categories/groceries.svg';
 import Household from '@/public/images/expense-categories/household.svg';
@@ -186,6 +187,12 @@ export const PAYMENT_SYSTEMS = [
 ];
 
 export const EXPENSE_CATEGORIES = [
+  {
+    value: 'for_savings',
+    label: 'ExpensesPage.expense_destinations.for_savings',
+    icon: Savings,
+    color: 'hsl(var(--primary-7))'
+  },
   {
     value: 'utilities',
     label: 'ExpensesPage.expense_destinations.utilities',
