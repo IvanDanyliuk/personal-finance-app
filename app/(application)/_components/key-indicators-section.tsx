@@ -114,7 +114,7 @@ export const KeyIndicatorsSection: React.FC<IKeyIndicatorsSection> = ({ data }) 
           <RecentActivity data={{ recentTransactions }} />
           <Separator className='md:hidden' />
         </div>
-        <div className='w-full flex flex-col md:flex-row gap-6'>
+        <div className='w-full flex flex-col xl:flex-row gap-6'>
           <CustomPieChart 
             data={incomeStructure}
             config={incomeStructureConfig}
