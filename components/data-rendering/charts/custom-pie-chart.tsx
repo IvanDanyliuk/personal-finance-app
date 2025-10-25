@@ -41,7 +41,7 @@ export const CustomPieChart: React.FC<ICustomPieChart> = ({
       </h2>
       {data.length > 0 ? (
         <ChartContainer config={config} className='w-full min-h-fit h-fit'>
-          <PieChart className='w-52'>
+          <PieChart margin={{ top: 50, left: 30, bottom: 50, right: 30 }} className='w-52'>
             <ChartTooltip content={<ChartTooltipContent className='w-36' />} />
             <Pie 
               data={data} 
