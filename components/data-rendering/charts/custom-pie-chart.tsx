@@ -1,6 +1,6 @@
 'use client';
 
-import { Cell, Legend, Pie, PieChart } from 'recharts';
+import { Cell, Pie, PieChart } from 'recharts';
 import { useTranslations } from 'next-intl';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import { NoChartDataPlaceholder } from '@/app/(application)/analytics/_components';
@@ -27,6 +27,12 @@ export const CustomPieChart: React.FC<ICustomPieChart> = ({
   noDataMessage
 }) => {
   const t = useTranslations();
+
+  const renderCustomLabel = (entry: any) => {
+    const name = entry[nameKey];
+    const value = entry['amount'];
+    return `${name}: ${value}`;
+  }
   
   return (
     <div className='flex-1 space-y-4'>
@@ -36,7 +42,6 @@ export const CustomPieChart: React.FC<ICustomPieChart> = ({
       {data.length > 0 ? (
         <ChartContainer config={config} className='w-full min-h-fit h-fit'>
           <PieChart className='w-52'>
-            <Legend />
             <ChartTooltip content={<ChartTooltipContent className='w-36' />} />
             <Pie 
               data={data} 
@@ -46,7 +51,7 @@ export const CustomPieChart: React.FC<ICustomPieChart> = ({
               cy='50%' 
               innerRadius={'55%'} 
               outerRadius={'85%'} 
-              label
+              label={renderCustomLabel}
             >
               {data.map((entry, i) => (
                 <Cell key={`${entry}-${i}`} fill={entry.color} />
