@@ -106,7 +106,6 @@ export const IncomeForm: React.FC<IIncomeForm> = ({ incomeToUpdate, action }) =>
               label={t('IncomesPage.createIncomeForm.amountFieldLabel')}
               type='number'
               field={field}
-              disabled={isEditMode}
               error={errors['amount']?.message}
             />
           )}

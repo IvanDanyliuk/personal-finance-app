@@ -108,7 +108,6 @@ export const ExpenseForm: React.FC<IExpenseForm> = ({ expenseToUpdate, action })
               label={t('ExpensesPage.createExpenseForm.amountFieldLabel')}
               type='number'
               field={field}
-              disabled={isEditMode}
               error={errors['amount']?.message}
             />
           )}

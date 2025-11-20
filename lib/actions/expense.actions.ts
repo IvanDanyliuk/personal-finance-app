@@ -211,6 +211,25 @@ export const updateExpense = async (formData: FormData) => {
       };
     }
 
+    const expenseToUpdate = await db.expense.findFirst({ where: { id } });
+    if(!expenseToUpdate) {
+      throw new Error('Item not found!');
+    }
+    
+    const diffAmount = expenseToUpdate?.amount - +amount;
+    
+    const bankAccount = await db.bankAccount.findFirst({ where: { id: bankAccountId  } });
+    if(!bankAccount) {
+      throw new Error('Bank Account not found!');
+    }
+
+    if(diffAmount !== 0) {
+      await db.bankAccount.update({ 
+        where: { id: bankAccountId }, 
+        data: { balance: bankAccount.balance + diffAmount },
+      });
+    }
+
     await db.expense.update({ 
       where: { id }, 
       data: {
