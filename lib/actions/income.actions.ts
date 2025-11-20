@@ -220,6 +220,25 @@ export const deleteIncome = async (id: string) => {
       throw new Error('IncomesPage.errors.wrongUserId');
     }
 
+    const incomeToDelete = await db.income.findFirst({ where: { id } });
+
+    if(!incomeToDelete) {
+      throw new Error('Item not found!');
+    }
+
+    const bankAccount = await db.bankAccount.findFirst({ where: { id: incomeToDelete.bankAccountId } });
+
+    if(!bankAccount) {
+      throw new Error('Bank Account not found!');
+    }
+
+    await db.bankAccount.update({ 
+      where: { id: bankAccount!.id! }, 
+      data: { 
+        balance: bankAccount!.balance - incomeToDelete.amount 
+      } 
+    });
+
     await db.income.delete({ where: { id } });
 
     revalidatePath('/incomes');
